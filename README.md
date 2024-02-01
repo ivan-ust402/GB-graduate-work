@@ -1,4 +1,7 @@
-# online-store-shop.co
+# Shop.Co - online store
+
+ This project is considered to be my graduate diploma work embracing technologies studied and skills acquired during the course on the Geekbrains educational platform.
+
 
 ## Project setup
 ```
