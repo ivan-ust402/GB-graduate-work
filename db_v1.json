@@ -1,0 +1,356 @@
+{ 
+  "genders": [
+    {
+      "id": 0,
+      "name": "For men",
+      "typeIds": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    },
+    {
+      "id": 1,
+      "name": "For women",
+      "typeIds": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    }
+  ],
+  "types": [
+    {
+      "id": 0,
+      "name": "Jeans"
+    },
+    {
+      "id": 1,
+      "name": "Trousers"
+    },
+    {
+      "id": 2,
+      "name": "T-shirts"
+    },
+    {
+      "id": 3,
+      "name": "Shirts"
+    },
+    {
+      "id": 4,
+      "name": "Sweaters"
+    },
+    {
+      "id": 5,
+      "name": "Jackets"
+    },
+    {
+      "id": 6,
+      "name": "Coats"
+    }, 
+    {
+      "id": 7,
+      "name": "Vets"
+    },
+    {
+      "id": 8,
+      "name": "Shorts"
+    }, 
+    {
+      "id": 9,
+      "name": "Skirts"
+    },
+    {
+      "id": 10,
+      "name": "Dresses"
+    },
+    {
+      "id": 11,
+      "name": "Tops"
+    },
+    {
+      "id": 12,
+      "name": "Blouses"
+    }
+  ],
+  "priceRange": {
+    "start": 0,
+    "end": 100000
+  }, 
+  "colors": [
+    {
+      "id": 0,
+      "name": "orange",
+      "code": "#F57906"
+    },
+    {
+      "id": 1,
+      "name": "grey",
+      "code": "#4D4A52"
+    },
+    {
+      "id": 2,
+      "name": "blue",
+      "code": "#294FA4"
+    },
+    {
+      "id": 3,
+      "name": "green",
+      "code": "#787E62"
+    },
+    {
+      "id": 4,
+      "name": "red",
+      "code": "#C8031C"
+    },
+    {
+      "id": 5,
+      "name": "black",
+      "code": "#141316"
+    },
+    {
+      "id": 6,
+      "name": "light blue",
+      "code": "#7395AE"
+    },
+    {
+      "id": 7,
+      "name": "light brown",
+      "code": "#CABCA3"
+    },
+    {
+      "id": 8,
+      "name": "dark green",
+      "code": "#255449"
+    },
+    {
+      "id": 9,
+      "name": "white",
+      "code": "#F0EDF5"
+    },
+    {
+      "id": 10,
+      "name": "dark blue",
+      "code": "#102E4F"
+    },
+    {
+      "id": 11,
+      "name": "light grey",
+      "code": "#A5A7AB"
+    },
+    {
+      "id": 12,
+      "name": "brown",
+      "code": "#57402C"
+    },
+    {
+      "id": 13,
+      "name": "light green",
+      "code": "#779284"
+    },
+    {
+      "id": 14,
+      "name": "colorful",
+      "code": "#F50606 #00C12B #063AF5"
+    },
+    {
+      "id": 15,
+      "name": "light pink",
+      "code": "#D6C7DC"
+    },
+    {
+      "id": 16,
+      "name": "burgundy",
+      "code": "#35171A"
+    },
+    {
+      "id": 17,
+      "name": "emerald",
+      "code": "#193849"
+    },
+    {
+      "id": 18,
+      "name": "violet",
+      "code": "#7147A2"
+    },
+    {
+      "id": 19,
+      "name": "silver",
+      "code": "#D1CFD0"
+    },
+    {
+      "id": 20,
+      "name": "gold",
+      "code": "#E99C00"
+    },
+    {
+      "id": 21,
+      "name": "coral/orange",
+      "code": "#F8584B"
+    },
+    {
+      "id": 22,
+      "name": "beige",
+      "code": "#F7EBE1"
+    },
+    {
+      "id": 23,
+      "name": "yellow",
+      "code": "#D6B41A"
+    },
+    {
+      "id": 24,
+      "name": "graphite",
+      "code": "#73667A"
+    },
+    {
+      "id": 25,
+      "name": "pink",
+      "code": "#FD377E"
+    },
+    {
+      "id": 26,
+      "name": "dark beige",
+      "code": "#CEB2A7"
+    },
+    {
+      "id": 27,
+      "name": "dark grey",
+      "code": "#524755"
+    },
+    {
+      "id": 28,
+      "name": "purple",
+      "code": "#602446"
+    },
+    {
+      "id": 29,
+      "name": "turquoise",
+      "code": "#55E1B9"
+    }
+  ],
+  
+  "products": [
+    {
+      "id": "0",
+      "sku": "132826911",
+      "title": "T-SHIRT WITH TAPE DETAILS",
+      "price": 260,
+      "discount": 40,
+      "sales": 50,
+      "type": {"id": 0, "name": "t-shirts"},
+      "dressStyle": {"id": 0, "name": "casual"},
+      "gender": {"id": 0, "name": "man"},
+      "size": [
+        {
+          "size": "XXS",
+          "qty": "0"
+        },
+        {
+          "size": "XS",
+          "qty": "0"
+        },
+        {
+          "sizeEU": "S",
+          "qty": "2"
+        },
+        {
+          "size": "M",
+          "qty": "1"
+        },
+        {
+          "size": "L",
+          "qty": "4"
+        },
+        {
+          "size": "XL",
+          "qty": "4"
+        },
+        {
+          "size": "XXL",
+          "qty": "0"
+        },
+        {
+          "size": "XXXL",
+          "qty": "0"
+        }
+      ],
+      "colorId": {"id": 0, "name": "khaki"},
+      "added": "2022-01-15",
+      "newArrivals": false,
+      "topSelling": false,
+      "image": "@/src/assets/products/:id_product/icon-1.jpg",
+      "images": ["@/src/assets/products/man/t-shirt/casual/1.1_slider.jpg", "@/src/assets/products/man/t-shirt/casual/1.2_slider.jpg"],
+      "icons": ["@/src/assets/products/man/t-shirt/casual/1.1_slider.jpg", "@/src/assets/products/man/t-shirt/casual/1.2_slider.jpg"],
+      "URL": "удалить",
+      "availability": "true",
+      "shortDescription": "This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.",
+      "details": {
+        "description": "Born from two hikers’ love for adventure, brand has become one of the best-known brands for outdoor clothing and equipment. Look to our thing edit to cop cult streetwear pieces, including T-shirts, joggers and hoodies, or unlock new levels of warmth with the label’s covetable waterproof coats, windbreakers, ski jackets and snug fleeces. Hitting the trail? Scroll everything from hard-wearing trainers to super-strong bags and backpacks.",
+        "productCode": "132826911",
+        "features": [
+          "Branded design", "Crew neck", "Short sleeves", "Regular fit", "Unisex style"
+        ]
+      },
+      "reviews": [
+        {
+          "id": 0,
+          "grade": 4.5,
+          "userId": 0,
+          "userName": "Samantha D.",
+          "text": "I absolutely love this t-shirt! The design is unique and the fabric feels so comfortable. As a fellow designer, I appreciate the attention to detail. It's become my favorite go-to shirt.",
+          "date": "14.08.2023"  
+        },
+        {
+          "id": 1,
+          "grade": 4,
+          "userName": "Alex M.",
+          "text": "The t-shirt exceeded my expectations! The colors are vibrant and the print quality is top-notch. Being a UI/UX designer myself, I'm quite picky about aesthetics, and this t-shirt definitely gets a thumbs up from me.",
+          "date": "15.08.2023" 
+        },
+        {
+          "id": 2,
+          "grade": 3.5,
+          "userName": "Ethan R.",
+          "text": "This t-shirt is a must-have for anyone who appreciates good design. The minimalistic yet stylish pattern caught my eye, and the fit is perfect. I can see the designer's touch in every aspect of this shirt.",
+          "date": "16.08.2023" 
+        },
+        {
+          "id": 3,
+          "grade": 5,
+          "userName": "Ethan O.",
+          "text": "Cool. I'm very happy",
+          "date": "16.08.2023" 
+        }
+      ]
+    }
+  ],
+  "shopReviews": [
+    {
+      "id": 0,
+      "grade": 4.5,
+      "userName": "Samantha D.",
+      "text": "I absolutely love this t-shirt! The design is unique and the fabric feels so comfortable. As a fellow designer, I appreciate the attention to detail. It's become my favorite go-to shirt."
+    },
+    {
+      "id": 1,
+      "grade": 4,
+      "userName": "Alex M.",
+      "text": "The t-shirt exceeded my expectations! The colors are vibrant and the print quality is top-notch. Being a UI/UX designer myself, I'm quite picky about aesthetics, and this t-shirt definitely gets a thumbs up from me.",
+      "date": "15.08.2023" 
+    },
+    {
+      "id": 2,
+      "grade": 3.5,
+      "userName": "Ethan R.",
+      "text": "This t-shirt is a must-have for anyone who appreciates good design. The minimalistic yet stylish pattern caught my eye, and the fit is perfect. I can see the designer's touch in every aspect of this shirt.",
+      "date": "16.08.2023" 
+    },
+    {
+      "id": 3,
+      "grade": 5,
+      "userName": "Ethan O.",
+      "text": "Cool. I'm very happy",
+      "date": "16.08.2023" 
+    },
+    {
+      "id": 4,
+      "grade": 4.5,
+      "userName": "Ethan O.",
+      "text": "Cool. I'm very happy",
+      "date": "16.08.2023" 
+    }
+  ]
+}
