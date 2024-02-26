@@ -221,7 +221,71 @@
       "code": "#55E1B9"
     }
   ],
-  
+  "dressStyles": [
+    {
+      "id": 0,
+      "name": "Casual"
+    },
+    {
+      "id": 1,
+      "name": "Formal"
+    },
+    {
+      "id": 2,
+      "name": "Party"
+    },
+    {
+      "id": 3,
+      "name": "Gym"
+    }
+  ],
+  "sizes": [
+    {
+      "id": 0,
+      "name": "XX-Small",
+      "shortName": "xxs"
+    },
+    {
+      "id": 1,
+      "name": "X-Small",
+      "shortName": "xs"
+    },
+    {
+      "id": 2,
+      "name": "Small",
+      "shortName": "s"
+    },
+    {
+      "id": 3,
+      "name": "Medium",
+      "shortName": "m"
+    },
+    {
+      "id": 4,
+      "name": "Large",
+      "shortName": "l"
+    },
+    {
+      "id": 5,
+      "name": "X-Large",
+      "shortName": "xxs"
+    },
+    {
+      "id": 6,
+      "name": "XX-Large",
+      "shortName": "xxl"
+    }, 
+    {
+      "id": 7,
+      "name": "3X-Large",
+      "shortName": "xxxl"
+    },
+    {
+      "id": 8,
+      "name": "4X-Large",
+      "shortName": "xxxxl"
+    }
+  ],
   "products": [
     {
       "id": "0",
@@ -230,8 +294,8 @@
       "price": 260,
       "discount": 40,
       "sales": 50,
-      "type": {"id": 0, "name": "t-shirts"},
-      "dressStyle": {"id": 0, "name": "casual"},
+      "type": {"id": 0, "name": "T-shirts"},
+      "dressStyle": {"id": 0, "name": "Casual"},
       "gender": {"id": 0, "name": "man"},
       "size": [
         {
