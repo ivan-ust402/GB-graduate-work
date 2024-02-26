@@ -143,7 +143,7 @@
     {
       "id": 14,
       "name": "colorful",
-      "code": "#F50606 #00C12B #063AF5"
+      "code": null
     },
     {
       "id": 15,
@@ -289,68 +289,121 @@
   "products": [
     {
       "id": "0",
-      "sku": "132826911",
-      "title": "T-SHIRT WITH TAPE DETAILS",
-      "price": 260,
-      "discount": 40,
+      "sku": "937023680",
+      "title": "Jeans D13",
+      "price": 20.63,
+      "currency": "USD",
+      "discount": 0,
       "sales": 50,
-      "type": {"id": 0, "name": "T-shirts"},
+      "type": {"id": 0, "name": "Jeans"},
       "dressStyle": {"id": 0, "name": "Casual"},
       "gender": {"id": 0, "name": "man"},
-      "size": [
+      "sizesInfo": [
         {
-          "size": "XXS",
-          "qty": "0"
+          "size": {
+            "id": 0,
+            "name": "XX-Small",
+            "shortName":"xxs"
+          },
+          "amount": "0"
         },
         {
-          "size": "XS",
-          "qty": "0"
+          "size": {
+            "id": 1,
+            "name": "X-Small",
+            "shortName": "xs"
+          },
+          "amount": "0"
         },
         {
-          "sizeEU": "S",
-          "qty": "2"
+          "size": {
+            "id": 2,
+            "name": "Small",
+            "shortName": "s"
+          },
+          "amount": "2"
         },
         {
-          "size": "M",
-          "qty": "1"
+          "size": {
+            "id": 3,
+            "name": "Medium",
+            "shortName": "m"
+          },
+          "amount": "1"
         },
         {
-          "size": "L",
-          "qty": "4"
+          "size": {
+            "id": 4,
+            "name": "Large",
+            "shortName": "l"
+          },
+          "amount": "4"
         },
         {
-          "size": "XL",
-          "qty": "4"
+          "size": {
+            "id": 5,
+            "name": "X-Large",
+            "shortName": "xxs"
+          },
+          "amount": "4"
         },
         {
-          "size": "XXL",
-          "qty": "0"
+          "size": {
+            "id": 6,
+            "name": "XX-Large",
+            "shortName": "xxl"
+          },
+          "amount": "0"
         },
         {
-          "size": "XXXL",
-          "qty": "0"
+          "size": {
+            "id": 7,
+            "name": "3X-Large",
+            "shortName": "xxxl"
+          },
+          "amount": "0"
+        },
+        {
+          "size": {
+            "id": 8,
+            "name": "4X-Large",
+            "shortName": "xxxxl"
+          },
+          "amount": "0"
         }
       ],
-      "colorId": {"id": 0, "name": "khaki"},
-      "added": "2022-01-15",
+      "color": {
+        "id": 1,
+        "name": "grey",
+        "code": "#4D4A52"
+      },
+      "otherColors": [
+        {
+          "productId": 2,
+          "color": {
+            "id": 1,
+            "name": "grey",
+            "code": "#4D4A52"
+          }
+        }
+      ],
+      "added": "2023-02-26",
       "newArrivals": false,
       "topSelling": false,
-      "image": "@/src/assets/products/:id_product/icon-1.jpg",
-      "images": ["@/src/assets/products/man/t-shirt/casual/1.1_slider.jpg", "@/src/assets/products/man/t-shirt/casual/1.2_slider.jpg"],
-      "icons": ["@/src/assets/products/man/t-shirt/casual/1.1_slider.jpg", "@/src/assets/products/man/t-shirt/casual/1.2_slider.jpg"],
-      "URL": "удалить",
+      "image": "@/src/assets/products/0/card-0.jpg",
+      "images": ["@/src/assets/products/0/slider-0.jpg", "@/src/assets/products/0/slider-1.jpg", "@/src/assets/products/0/slider-2.jpg"],
+      "icons": ["@/src/assets/products/0/icon-0.jpg", "@/src/assets/products/0/icon-1.jpg", "@/src/assets/products/0/icon-2.jpg"],
       "availability": "true",
-      "shortDescription": "This graphic t-shirt which is perfect for any occasion. Crafted from a soft and breathable fabric, it offers superior comfort and style.",
+      "shortDescription": "Men's banana jeans, like classic ones, are a basic item in any man's wardrobe.",
       "details": {
-        "description": "Born from two hikers’ love for adventure, brand has become one of the best-known brands for outdoor clothing and equipment. Look to our thing edit to cop cult streetwear pieces, including T-shirts, joggers and hoodies, or unlock new levels of warmth with the label’s covetable waterproof coats, windbreakers, ski jackets and snug fleeces. Hitting the trail? Scroll everything from hard-wearing trainers to super-strong bags and backpacks.",
-        "productCode": "132826911",
-        "features": [
-          "Branded design", "Crew neck", "Short sleeves", "Regular fit", "Unisex style"
+        "description": "Men's banana jeans, like classic ones, are a basic item in any man's wardrobe. The trousers are wide, slightly tapered at the bottom, it is possible to roll up the bottom of the legs. The jeans are NOT insulated, NOT with elastic, NOT with laces, the model has a zipper and a button on the front, and there are belt loops on the waistband. There are comfortable deep welt pockets at the front and patch pockets at the back. A high rise, unlike low or mid rise pants, is versatile and will look like stylish pants in any situation. Straight-fit trousers are made of 100% cotton. Standard denim pants are suitable for men, boys, youth, boys and teenagers of any shape and height.",
+        "composition": [
+          "cotton 90%", "elastane 10%"
         ]
       },
       "reviews": [
         {
-          "id": 0,
+          "reviewId": 0,
           "grade": 4.5,
           "userId": 0,
           "userName": "Samantha D.",
@@ -358,22 +411,25 @@
           "date": "14.08.2023"  
         },
         {
-          "id": 1,
+          "reviewId": 1,
           "grade": 4,
+          "userId": 1,
           "userName": "Alex M.",
           "text": "The t-shirt exceeded my expectations! The colors are vibrant and the print quality is top-notch. Being a UI/UX designer myself, I'm quite picky about aesthetics, and this t-shirt definitely gets a thumbs up from me.",
           "date": "15.08.2023" 
         },
         {
-          "id": 2,
+          "reviewId": 2,
           "grade": 3.5,
+          "userId": 2,
           "userName": "Ethan R.",
           "text": "This t-shirt is a must-have for anyone who appreciates good design. The minimalistic yet stylish pattern caught my eye, and the fit is perfect. I can see the designer's touch in every aspect of this shirt.",
           "date": "16.08.2023" 
         },
         {
-          "id": 3,
+          "reviewId": 3,
           "grade": 5,
+          "userId": 3,
           "userName": "Ethan O.",
           "text": "Cool. I'm very happy",
           "date": "16.08.2023" 
@@ -411,10 +467,59 @@
     },
     {
       "id": 4,
+      "grade": 5,
+      "userName": "Helena P.",
+      "text": "Many thanks to the online consultants in the store. They treat customers with attention and love! Careful packaging in branded bags.In general, I am immensely glad that we have such a store.",
+      "date": "21.09.2022" 
+    },
+    {
+      "id": 5,
+      "grade": 5,
+      "userName": "Julia K.",
+      "text": "I liked everything. Fast, high quality, beautiful!",
+      "date": "02.01.2024" 
+    },
+    {
+      "id": 6,
       "grade": 4.5,
-      "userName": "Ethan O.",
-      "text": "Cool. I'm very happy",
-      "date": "16.08.2023" 
+      "userName": "Kate M.",
+      "text": "I received my order from this store! The items are excellent, very high quality tailoring, bright colors, everything is carefully and securely packaged. The size is right and I look as beautiful in these outfits as the store models on Instagram!",
+      "date": "07.03.2023" 
+    },
+    {
+      "id": 7,
+      "grade": 5,
+      "userName": "Nicole S.",
+      "text": "Today I received my order. The quality of the jacket and skirt is very good. Everything was beautifully packed with love. The jacket didn't even wrinkle. There was also a sweet surprise. Thank you for the good mood and quality items!",
+      "date": "09.05.2023" 
+    },
+    {
+      "id": 8,
+      "grade": 4.5,
+      "userName": "Angelika R.",
+      "text": "Very good selection and excellent service. Thanks a lot.",
+      "date": "17.06.2023" 
+    },
+    {
+      "id": 9,
+      "grade": 5,
+      "userName": "Kim K.",
+      "text": "Cool store, quality items, large assortment and very pleasant consultants.",
+      "date": "04.07.2023" 
+    },
+    {
+      "id": 10,
+      "grade": 4.5,
+      "userName": "Lessy O.",
+      "text": "I'll definitely come back again. Thank you very much.",
+      "date": "11.08.2023" 
+    },
+    {
+      "id": 11,
+      "grade": 5,
+      "userName": "Jessy M.",
+      "text": "I'm already placing my third order!!! All orders through the online store. Very pleased with the quality!!!!! The models are gorgeous, I’m simply in love! All dresses are perfect! I wear it with pleasure!",
+      "date": "23.07.2023" 
     }
   ]
 }
