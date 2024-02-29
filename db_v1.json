@@ -390,9 +390,9 @@
       "added": "2023-02-26",
       "newArrivals": false,
       "topSelling": false,
-      "image": "@/src/assets/products/0/card-0.jpg",
-      "images": ["@/src/assets/products/0/slider-0.jpg", "@/src/assets/products/0/slider-1.jpg", "@/src/assets/products/0/slider-2.jpg"],
-      "icons": ["@/src/assets/products/0/icon-0.jpg", "@/src/assets/products/0/icon-1.jpg", "@/src/assets/products/0/icon-2.jpg"],
+      "image": "@/src/assets/img/products/0/card.jpg",
+      "images": ["@/src/assets/img/products/0/slider-0.jpg", "@/src/assets/img/products/0/slider-1.jpg", "@/src/assets/img/products/0/slider-2.jpg"],
+      "icons": ["@/src/assets/img/products/0/icon-0.jpg", "@/src/assets/img/products/0/icon-1.jpg", "@/src/assets/img/products/0/icon-2.jpg"],
       "availability": "true",
       "shortDescription": "Men's banana jeans, like classic ones, are a basic item in any man's wardrobe.",
       "details": {
@@ -400,126 +400,196 @@
         "composition": [
           "cotton 90%", "elastane 10%"
         ]
-      },
-      "reviews": [
-        {
-          "reviewId": 0,
-          "grade": 4.5,
-          "userId": 0,
-          "userName": "Samantha D.",
-          "text": "I absolutely love this t-shirt! The design is unique and the fabric feels so comfortable. As a fellow designer, I appreciate the attention to detail. It's become my favorite go-to shirt.",
-          "date": "14.08.2023"  
-        },
-        {
-          "reviewId": 1,
-          "grade": 4,
-          "userId": 1,
-          "userName": "Alex M.",
-          "text": "The t-shirt exceeded my expectations! The colors are vibrant and the print quality is top-notch. Being a UI/UX designer myself, I'm quite picky about aesthetics, and this t-shirt definitely gets a thumbs up from me.",
-          "date": "15.08.2023" 
-        },
-        {
-          "reviewId": 2,
-          "grade": 3.5,
-          "userId": 2,
-          "userName": "Ethan R.",
-          "text": "This t-shirt is a must-have for anyone who appreciates good design. The minimalistic yet stylish pattern caught my eye, and the fit is perfect. I can see the designer's touch in every aspect of this shirt.",
-          "date": "16.08.2023" 
-        },
-        {
-          "reviewId": 3,
-          "grade": 5,
-          "userId": 3,
-          "userName": "Ethan O.",
-          "text": "Cool. I'm very happy",
-          "date": "16.08.2023" 
-        }
-      ]
+      }
+    }
+  ],
+  "productReviews": [
+    {
+      "reviewId": 0,
+      "productId": 0,
+      "userId": 0,
+      "userName": "Samantha D.",
+      "grade": 4.5,
+      "text": "I absolutely love this t-shirt! The design is unique and the fabric feels so comfortable. As a fellow designer, I appreciate the attention to detail. It's become my favorite go-to shirt.",
+      "date": "2023-08-14T01:30:00.000-05:00"
+    },
+    {
+      "reviewId": 1,
+      "productId": 0,
+      "userId": 1,
+      "userName": "Alex M.",
+      "grade": 4,
+      "text": "The t-shirt exceeded my expectations! The colors are vibrant and the print quality is top-notch. Being a UI/UX designer myself, I'm quite picky about aesthetics, and this t-shirt definitely gets a thumbs up from me.",
+      "date": "2023-08-15T01:30:00.000-05:00" 
+    },
+    {
+      "reviewId": 2,
+      "productId": 0,
+      "userId": 2,
+      "userName": "Ethan R.",
+      "grade": 3.5,
+      "text": "This t-shirt is a must-have for anyone who appreciates good design. The minimalistic yet stylish pattern caught my eye, and the fit is perfect. I can see the designer's touch in every aspect of this shirt.",
+      "date": "2023-08-16T01:30:00.000-05:00"
+    },
+    {
+      "reviewId": 3,
+      "productId": 0,
+      "userId": 3,
+      "userName": "Ethan O.",
+      "grade": 5,
+      "text": "Cool. I'm very happy",
+      "date": "2023-08-16T01:30:00.000-05:00"
+    },
+    {
+      "reviewId": 4,
+      "productId": 0,
+      "userId": 12,
+      "userName": "Olivia P.",
+      "grade": 4,
+      "text": "As a UI/UX enthusiast, I value simplicity and functionality. This t-shirt not only represents those principles but also feels great to wear. It's evident that the designer poured their creativity into making this t-shirt stand out.",
+      "date": "2023-08-16T01:30:00.000-05:00"
+    },
+    {
+      "reviewId": 5,
+      "productId": 0,
+      "userId": 13,
+      "userName": "Liam K.",
+      "grade": 4,
+      "text": "This t-shirt is a fusion of comfort and creativity. The fabric is soft, and the design speaks volumes about the designer's skill. It's like wearing a piece of art that reflects my passion for both design and fashion.",
+      "date": "2023-08-16T01:30:00.000-05:00"
+    },
+    {
+      "reviewId": 6,
+      "productId": 0,
+      "userId": 14,
+      "userName": "Ava H.",
+      "grade": 5,
+      "text": "I'm not just wearing a t-shirt; I'm wearing a piece of design philosophy. The intricate details and thoughtful layout of the design make this shirt a conversation starter.",
+      "date": "2023-08-16T01:30:00.000-05:00"
+    },
+    {
+      "reviewId": 7,
+      "productId": 0,
+      "userId": 6,
+      "userName": "Kate M.",
+      "grade": 5,
+      "text": "I received my order from this store! The items are excellent, very high quality tailoring, bright colors, everything is carefully and securely packaged. The size is right and I look as beautiful in these outfits as the store models on Instagram!",
+      "date": "2023-08-16T01:30:00.000-05:00"
+    },
+    {
+      "reviewId": 8,
+      "productId": 0,
+      "userId": 3,
+      "userName": "Julia K.",
+      "grade": 5,
+      "text": "I liked everything. Fast, high quality, beautiful!",
+      "date": "2023-08-16T01:30:00.000-05:00"
+    },
+    {
+      "reviewId": 9,
+      "productId": 0,
+      "userId": 4,
+      "userName": "Helena P.",
+      "grade": 4.5,
+      "text": "Many thanks to the online consultants in the store. They treat customers with attention and love! Careful packaging in branded bags.In general, I am immensely glad that we have such a store.",
+      "date": "2023-08-16T01:30:00.000-05:00"
     }
   ],
   "shopReviews": [
     {
       "id": 0,
+      "userId": 0,
       "grade": 4.5,
       "userName": "Samantha D.",
-      "text": "I absolutely love this t-shirt! The design is unique and the fabric feels so comfortable. As a fellow designer, I appreciate the attention to detail. It's become my favorite go-to shirt."
+      "text": "I absolutely love this t-shirt! The design is unique and the fabric feels so comfortable. As a fellow designer, I appreciate the attention to detail. It's become my favorite go-to shirt.",
+      "date": "2023-08-16T01:30:00.000-05:00"
     },
     {
       "id": 1,
+      "userId": 1,
       "grade": 4,
       "userName": "Alex M.",
       "text": "The t-shirt exceeded my expectations! The colors are vibrant and the print quality is top-notch. Being a UI/UX designer myself, I'm quite picky about aesthetics, and this t-shirt definitely gets a thumbs up from me.",
-      "date": "15.08.2023" 
+      "date": "2022-09-21T01:30:00.000-05:00" 
     },
     {
       "id": 2,
+      "userId": 2,
       "grade": 3.5,
       "userName": "Ethan R.",
       "text": "This t-shirt is a must-have for anyone who appreciates good design. The minimalistic yet stylish pattern caught my eye, and the fit is perfect. I can see the designer's touch in every aspect of this shirt.",
-      "date": "16.08.2023" 
+      "date": "2022-09-21T01:30:00.000-05:00" 
     },
     {
       "id": 3,
+      "userId": 3,
       "grade": 5,
       "userName": "Ethan O.",
       "text": "Cool. I'm very happy",
-      "date": "16.08.2023" 
+      "date": "2022-09-21T01:30:00.000-05:00" 
     },
     {
       "id": 4,
+      "userId": 4,
       "grade": 5,
       "userName": "Helena P.",
       "text": "Many thanks to the online consultants in the store. They treat customers with attention and love! Careful packaging in branded bags.In general, I am immensely glad that we have such a store.",
-      "date": "21.09.2022" 
+      "date": "2022-09-21T01:30:00.000-05:00" 
     },
     {
       "id": 5,
+      "userId": 5,
       "grade": 5,
       "userName": "Julia K.",
-      "text": "I liked everything. Fast, high quality, beautiful!",
-      "date": "02.01.2024" 
+      "text": "I liked everything. Fast, high quality, beautiful!","date": "2024-01-02T01:30:00.000-05:00"
     },
     {
       "id": 6,
+      "userId": 6,
       "grade": 4.5,
       "userName": "Kate M.",
       "text": "I received my order from this store! The items are excellent, very high quality tailoring, bright colors, everything is carefully and securely packaged. The size is right and I look as beautiful in these outfits as the store models on Instagram!",
-      "date": "07.03.2023" 
+      "date": "2023-03-07T01:30:00.000-05:00"
     },
     {
       "id": 7,
+      "userId": 7,
       "grade": 5,
       "userName": "Nicole S.",
       "text": "Today I received my order. The quality of the jacket and skirt is very good. Everything was beautifully packed with love. The jacket didn't even wrinkle. There was also a sweet surprise. Thank you for the good mood and quality items!",
-      "date": "09.05.2023" 
+      "date": "2022-09-21T01:30:00.000-05:00" 
     },
     {
       "id": 8,
+      "userId": 8,
       "grade": 4.5,
       "userName": "Angelika R.",
       "text": "Very good selection and excellent service. Thanks a lot.",
-      "date": "17.06.2023" 
+      "date": "2022-09-21T01:30:00.000-05:00" 
     },
     {
       "id": 9,
+      "userId": 9,
       "grade": 5,
       "userName": "Kim K.",
       "text": "Cool store, quality items, large assortment and very pleasant consultants.",
-      "date": "04.07.2023" 
+      "date": "2022-09-21T01:30:00.000-05:00" 
     },
     {
       "id": 10,
+      "userId": 10,
       "grade": 4.5,
       "userName": "Lessy O.",
       "text": "I'll definitely come back again. Thank you very much.",
-      "date": "11.08.2023" 
+      "date": "2022-09-21T01:30:00.000-05:00" 
     },
     {
       "id": 11,
+      "userId": 11,
       "grade": 5,
       "userName": "Jessy M.",
       "text": "I'm already placing my third order!!! All orders through the online store. Very pleased with the quality!!!!! The models are gorgeous, I’m simply in love! All dresses are perfect! I wear it with pleasure!",
-      "date": "23.07.2023" 
+      "date": "2022-09-21T01:30:00.000-05:00" 
     }
   ]
 }
