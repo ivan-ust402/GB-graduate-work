@@ -1,7 +1,12 @@
 <template>
   <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link to="/">Home</router-link> | 
+    <router-link to="/login">Login</router-link> |
+    <router-link to="/register">Registration</router-link> |
+    <router-link to="/product-details/0">Product Details</router-link> |
+    <router-link to="/catalog/0">Catalog</router-link> |
+    <router-link to="/cart">Cart</router-link> |
+    <router-link to="/notfound">404</router-link> |
   </nav>
   <router-view/>
 </template>
