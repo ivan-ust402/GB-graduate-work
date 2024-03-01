@@ -5,7 +5,7 @@ import RegistrationPage from '@/pages/RegistrationPage'
 import ProductDetailsPage from '@/pages/ProductDetailsPage'
 import CatalogPage from '@/pages/CatalogPage'
 import CartPage from '@/pages/CartPage'
-import ErrorPage from '@/pages/ErrorPage'
+// import ErrorPage from '@/pages/ErrorPage'
 
 const routes = [
   {
@@ -24,12 +24,12 @@ const routes = [
     component: RegistrationPage
   },
   {
-    path: '/product-details/:id',
+    path: '/product-details/:id(\\d+)',
     name: 'ProductDetailsPage',
     component: ProductDetailsPage
   },
   {
-    path: '/catalog/:page?',
+    path: '/catalog/:page(\\d+)',
     name: 'CatalogPage',
     component: CatalogPage
   },  
@@ -41,7 +41,8 @@ const routes = [
   {
     path: '/notfound',
     name: 'NotfoundPage',
-    component: ErrorPage
+    // Динамический путь (подгрузка страницы с сервера)
+    component: () => import('@/pages/ErrorPage')
   },
   {
     path: '/:CatchAll(.*)',
