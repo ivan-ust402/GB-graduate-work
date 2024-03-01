@@ -10,37 +10,37 @@ import ErrorPage from '@/pages/ErrorPage'
 const routes = [
   {
     path: '/',
-    name: 'homepage',
+    name: 'Homepage',
     component: HomePage
   },
   {
     path: '/login',
-    name: 'loginPage',
+    name: 'LoginPage',
     component: LoginPage
   },
   {
     path: '/register',
-    name: 'registrationPage',
+    name: 'RegistrationPage',
     component: RegistrationPage
   },
   {
     path: '/product-details/:id',
-    name: 'productDetailsPage',
+    name: 'ProductDetailsPage',
     component: ProductDetailsPage
   },
   {
     path: '/catalog/:page?',
-    name: 'catalogPage',
+    name: 'CatalogPage',
     component: CatalogPage
   },  
   {
     path: '/cart',
-    name: 'cartPage',
+    name: 'CartPage',
     component: CartPage
   }, 
   {
     path: '/notfound',
-    name: 'notfoundPage',
+    name: 'NotfoundPage',
     component: ErrorPage
   },
   {
