@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <section class="notfound center">
         <h1>Error</h1>
-    </div>
+    </section>
 </template>
 
 <script>

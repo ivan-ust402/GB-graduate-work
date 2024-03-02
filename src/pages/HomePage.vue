@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <section class="homepage center">
         <h1>Homepage</h1>
-    </div>
+    </section>
 </template>
 
 <script>

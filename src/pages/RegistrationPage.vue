@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <section class="signup center">
         <h1>Registration</h1>
-    </div>
+    </section>
 </template>
 
 <script>
