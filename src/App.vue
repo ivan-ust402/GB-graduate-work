@@ -1,6 +1,6 @@
 <template>
   <AppHeader/>
-  <nav>
+  <nav class="center">
     <router-link to="/">Home</router-link> | 
     <router-link to="/login">Login</router-link> |
     <router-link to="/register">Registration</router-link> |
@@ -27,20 +27,86 @@ export default {
 </script>
 
 <style lang="scss">
-#app {
+
+
+
+// #app {
+//   font-family: Avenir, Helvetica, Arial, sans-serif;
+//   -webkit-font-smoothing: antialiased;
+//   -moz-osx-font-smoothing: grayscale;
+// }
+
+* {
   margin: 0;
   padding: 0;
   scroll-behavior: smooth;
-
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   color: #121212;
+  font-size: 14px;
+}
+
+body {
+  font-family: "Satoshi", sans-serif;
+}
+
+h1,
+h2,
+h4 {
+  font-family: "Integral CF", sans-serif;
+  color: #121212;
+}
+
+h3,
+h5,
+h6 {
+  font-family: "Satoshi", sans-serif;
+}
+
+h1 {
+  font-size: 64px;
+}
+
+h2 {
+  font-size: 48px;
+}
+
+h3 {
+  font-size: 40px;
+}
+
+h4 {
+  font-size: 36px;
+}
+
+h5 {
+  font-size: 32px;
+}
+
+h6 {
+  font-size: 20px;
+}
+
+a,
+button {
+  font-family: "Satoshi", sans-serif;
+  text-decoration: none;
+}
+
+a:hover,
+button:hover {
+  cursor: pointer;
+}
+
+input {
+  font-family: "Satoshi", sans-serif;
 }
 
 .center {
   padding-left: calc(50% - 620px);
   padding-right: calc(50% - 620px);
+}
+
+ul {
+  list-style-type: none;
 }
 
 nav {
