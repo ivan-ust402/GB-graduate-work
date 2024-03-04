@@ -1,5 +1,5 @@
 <template>
-  <AppHeader/>
+  <AppHeader />
   <nav class="center">
     <router-link to="/">Home</router-link> | 
     <router-link to="/login">Login</router-link> |
@@ -10,32 +10,27 @@
     <router-link to="/notfound">404</router-link>&nbsp;|
   </nav>
   <router-view />
+  <ButtonTopOfPage />
   <AppFooter />
 </template>
 
 <script>
 import AppHeader from "@/blocks/AppHeader";
 import AppFooter from "@/blocks/AppFooter";
+import ButtonTopOfPage from "./components/ButtonTopOfPage.vue";
 
 export default {
   name: "App",
   components: {
     AppHeader,
     AppFooter,
+    ButtonTopOfPage
   },
+
 }
 </script>
 
 <style lang="scss">
-
-
-
-// #app {
-//   font-family: Avenir, Helvetica, Arial, sans-serif;
-//   -webkit-font-smoothing: antialiased;
-//   -moz-osx-font-smoothing: grayscale;
-// }
-
 * {
   margin: 0;
   padding: 0;
@@ -109,16 +104,35 @@ ul {
   list-style-type: none;
 }
 
-nav {
-  padding: 30px;
+svg {
+  pointer-events: none;
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+// nav {
+//   padding: 30px;
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+//   a {
+//     font-weight: bold;
+//     color: #2c3e50;
+
+//     &.router-link-exact-active {
+//       color: #42b983;
+//     }
+//   }
+// }
+
+@media (max-width: 1024px) {
+  .center {
+    padding-left: calc(50% - 352px);
+    padding-right: calc(50% - 352px);
   }
 }
+
+@media (max-width: 768px) {
+  .center {
+    padding-left: calc(50% - 178px);
+    padding-right: calc(50% - 178px);
+  }
+}
+
 </style>
