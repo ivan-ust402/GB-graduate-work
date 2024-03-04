@@ -122,7 +122,7 @@ export default {
       gap: 4px;
       position: relative;
       &:hover path {
-        fill: white;
+        fill: #555;
       }
     }
     &:hover {
@@ -162,7 +162,8 @@ export default {
       justify-content: space-between;
       &_drop-button {
         &:hover path {
-          fill: #555;
+          fill: none;
+          stroke: #555;
         }
       }
       &:hover {
