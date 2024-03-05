@@ -18,6 +18,7 @@ export default {}
 
 <style lang="scss" scoped>
 .search {
+  box-sizing: border-box;
   display: flex;
   padding: 12px 16px;
   align-items: center;
@@ -29,6 +30,8 @@ export default {}
   &__label {
     opacity: 0.4;
     transition: all 0.3s ease-in;
+    width: 24px;
+    height: 24px;
     &:hover {
       opacity: 0.8;
     }

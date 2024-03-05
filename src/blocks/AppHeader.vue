@@ -28,13 +28,14 @@ export default {
     AppHeaderNavigation,
     AppHeaderBurgerMenu,
     FormForSearching,
-    AppHeaderControls
+    AppHeaderControls,
   },
 }
 </script>
 
 <style lang="scss" scoped>
 .header {
+  box-sizing: border-box;
   display: flex;
   flex-direction: row;
   padding-top: 32px;
@@ -44,11 +45,16 @@ export default {
   align-items: center;
   color: #121212;
   position: relative;
+  background: white;
   &__left {
     display: flex;
     flex-direction: row;
     gap: 32px;
     align-items: center;
+  }
+  &__logo {
+    box-sizing: border-box;
+    display: flex;
   }
 }
 
@@ -63,6 +69,9 @@ export default {
 @media (max-width: 768px) {
   .header {
     justify-content: space-between;
+    align-items: center;
+    padding-top: 24px;
+    padding-bottom: 24px;
     &__logo img {
       height: 16px;
     }
@@ -70,9 +79,13 @@ export default {
       display: none;
     }
     &__right {
+      box-sizing: border-box;
+      height: 24px;
       gap: 24px;
     }
     &__left {
+      box-sizing: border-box;
+      height: 24px;
       gap: 24px;
     }
   }

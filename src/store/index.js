@@ -8,6 +8,7 @@ export default createStore({
       {
         id: 0,
         name: "For men",
+        showClothesTypes: false,
         clothesTypes: [
           {
             id: 0,
@@ -50,6 +51,7 @@ export default createStore({
       {
         id: 1,
         name: "For women",
+        showClothesTypes: false,
         clothesTypes: [
           {
             id: 0,

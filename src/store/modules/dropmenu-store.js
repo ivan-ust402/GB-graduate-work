@@ -22,7 +22,7 @@ export default {
     },
     TOGGLE_IS_ACTIVE(state) {
       state.isActive = !state.isActive
-    }
+    },
   },
   actions: {
     changeDropMenuIsActive(context, value) {

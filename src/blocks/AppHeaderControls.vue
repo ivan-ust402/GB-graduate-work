@@ -44,6 +44,8 @@ export default {}
 }
 .search-control {
   display: none;
+  width: 24px;
+  height: 24px;
 }
 
 @media (max-width: 1024px) {
