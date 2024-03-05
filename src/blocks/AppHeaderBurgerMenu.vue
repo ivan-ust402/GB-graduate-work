@@ -49,7 +49,19 @@ export default {
     AppHeaderNavigation,
   },
   mounted() {
-    document.addEventListener("click", (e) => {
+    window.addEventListener("resize", this.closeBurgerMenu);
+    document.addEventListener("click", this.checkClickAreaOutOfBurgerMenu);
+  },
+  unmounted() {
+    window.removeEventListener("resize", this.closeBurgerMenu);
+    document.removeEventListener("click", this.checkClickAreaOutOfBurgerMenu);
+  },
+  computed: {
+    ...mapGetters(["getBurgerMenuIsActive"]),
+  },
+  methods: {
+    ...mapActions(["toggleBurgerMenuIsActive", "changeBurgerMenuIsActive"]),
+    checkClickAreaOutOfBurgerMenu(e){
       const tempArray = e.target.classList
       if (
         !(
@@ -61,13 +73,11 @@ export default {
       ) {
         this.changeBurgerMenuIsActive(false)
       }
-    })
-  },
-  computed: {
-    ...mapGetters(["getBurgerMenuIsActive"]),
-  },
-  methods: {
-    ...mapActions(["toggleBurgerMenuIsActive", "changeBurgerMenuIsActive"]),
+    },
+    closeBurgerMenu() {
+      console.log(1)
+      this.changeBurgerMenuIsActive(false)
+    }
   },
 }
 </script>

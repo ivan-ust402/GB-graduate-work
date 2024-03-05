@@ -66,10 +66,10 @@ export default {
     align-items: center;
     justify-content: center;
     width: 48px;
-    opacity: 0.6;
+    opacity: 1;
     transition: opacity .3s ease-in;
     &:hover {
-        opacity: 1;
+        opacity: 0.5;
     }
 }
 </style>

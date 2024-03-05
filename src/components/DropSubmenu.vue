@@ -26,22 +26,32 @@ export default {
     return {}
   },
   mounted() {
-    document.addEventListener("click", (e) => {
-      if (
-        !(
-          e.target.classList.contains("subdropdown__link") ||
-          e.target.classList.contains("dropdown__info")
-        )
-      ) {
-        this.changeDropMenuIsHover(false)
-      }
-    })
+    window.addEventListener("resize", this.closeSubMenu);
+    document.addEventListener("click", this.checkClickAreaOutOfDropSubmenu)
+  },
+  unmounted () {
+    window.removeEventListener("resize", this.closeSubMenu);
+    document.removeEventListener("click", this.checkClickAreaOutOfDropSubenu)
   },
   computed: {
     ...mapGetters(["getDropMenuIsHover"]),
   },
   methods: {
     ...mapActions(["changeDropMenuIsHover"]),
+    checkClickAreaOutOfDropSubmenu(e) {
+      const tempArr = e.target.classList
+      if (
+        !(
+          tempArr.contains("subdropdown__link") ||
+          tempArr.contains("dropdown__info")
+        )
+      ) {
+        this.changeDropMenuIsHover(false)
+      }
+    },
+    closeSubMenu(){
+      this.changeDropMenuIsHover(false)
+    }
   },
 }
 </script>

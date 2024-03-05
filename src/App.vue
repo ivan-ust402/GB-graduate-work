@@ -108,6 +108,10 @@ svg {
   pointer-events: none;
 }
 
+a svg {
+  pointer-events: none;
+}
+
 // nav {
 //   padding: 30px;
 

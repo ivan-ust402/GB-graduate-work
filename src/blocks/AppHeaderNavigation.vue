@@ -74,7 +74,19 @@ import { mapActions, mapGetters } from "vuex"
 
 export default {
   mounted() {
-    document.addEventListener("click", (e) => {
+    window.addEventListener("resize", this.closeDropMenu);
+    document.addEventListener("click", this.checkClickAreaOutOfDropMenu)
+  },
+  unmounted() {
+    window.removeEventListener("resize", this.closeDropMenu);
+    document.removeEventListener("click", this.checkClickAreaOutOfDropMenu)
+  },
+  computed: {
+    ...mapGetters(["getGenders", "getTypes", "getDropMenuIsActive"]),
+  },
+  methods: {
+    ...mapActions(["changeDropMenuIsActive", "toggleDropMenuIsActive"]),
+    checkClickAreaOutOfDropMenu(e) {
       const tempArr = e.target.classList
       if (
         !(
@@ -84,13 +96,10 @@ export default {
       ) {
         this.changeDropMenuIsActive(false)
       }
-    })
-  },
-  computed: {
-    ...mapGetters(["getGenders", "getTypes", "getDropMenuIsActive"]),
-  },
-  methods: {
-    ...mapActions(["changeDropMenuIsActive", "toggleDropMenuIsActive"]),
+    },
+    closeDropMenu() {
+      this.changeDropMenuIsActive(false)
+    }
   },
   components: { DropMenu },
 }
@@ -147,8 +156,10 @@ export default {
 .img-box {
   &__arrow-right {
     display: none;
+
   }
 }
+
 
 @media (max-width: 1024px) {
   .nav {
