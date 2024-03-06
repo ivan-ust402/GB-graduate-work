@@ -17,9 +17,10 @@
         />
       </svg>
     </a>
-    <router-link to="/cart" class="controls__control"
-      ><img src="@/assets\img\header\cart-icon.svg" alt="cart"
-    /></router-link>
+    <router-link to="/cart" class="controls__control">
+      <img src="@/assets\img\header\cart-icon.svg" alt="cart" />
+      <NotificationAmount class="controls__notification"/>
+    </router-link>
     <a href="#" class="controls__control user-control">
       <img src="@/assets\img\header\user-icon.svg" alt="personal area" />
     </a>
@@ -27,7 +28,13 @@
 </template>
 
 <script>
-export default {}
+import NotificationAmount from '@/components/NotificationAmount.vue';
+
+export default {
+  components: {
+    NotificationAmount
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -36,10 +43,15 @@ export default {}
   flex-direction: row;
   gap: 14px;
   &__control {
-    transition: opacity .3s ease-in;
+    display: flex;
+    flex-direction: row;
+    transition: opacity 0.3s ease-in;
     &:hover {
       opacity: 0.5;
     }
+  }
+  &__notification {
+    margin-left: -2px;
   }
 }
 .search-control {
@@ -49,14 +61,14 @@ export default {}
 }
 
 @media (max-width: 1024px) {
-    .user-control {
-      display: none;
-    }
+  .user-control {
+    display: none;
+  }
 }
 
 @media (max-width: 768px) {
-    .search-control {
-      display: block;
-    }
+  .search-control {
+    display: block;
+  }
 }
 </style>
