@@ -82,7 +82,6 @@ export default {
       this.isShowUserMenu = !this.isShowUserMenu
     },
     changeShowStatus() {
-      console.log(1)
       this.isShowUserMenu = false
     },
   },

@@ -46,6 +46,7 @@ export default {
   color: #121212;
   position: relative;
   background: white;
+  border-bottom: 1px solid #b3b3b3 ;
   &__left {
     display: flex;
     flex-direction: row;
