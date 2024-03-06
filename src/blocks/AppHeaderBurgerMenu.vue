@@ -73,7 +73,8 @@ export default {
           tempArray.contains("burgermenu__wrapper") ||
           tempArray.contains("nav") ||
           tempArray.contains("dropmenu__window") ||
-          tempArray.contains("subdropdown")
+          tempArray.contains("subdropdown") ||
+          tempArray.contains("burgermenu__overlay-for-wrapper")
         )
       ) {
         this.changeBurgerMenuIsActive(false)
@@ -131,23 +132,30 @@ export default {
       display: flex;
       flex-direction: column;
       gap: 32px;
+      
     }
     &__navigation {
+      z-index: 1;
       box-sizing: border-box;
       border-bottom: 1px solid white;
       padding-bottom: 32px;
     }
     &__user {
+      z-index: 1;
       display: flex;
       gap: 10px;
       align-items: center;
     }
     &__icon {
+      z-index: 1;
       cursor: pointer;
       transition: opacity 0.3s ease-in;
       &:hover {
         opacity: 0.5;
       }
+    }
+    &__logout-btn {
+      z-index: 1;
     }
     &__overlay-for-wrapper{
       position: absolute;
@@ -156,7 +164,7 @@ export default {
       left: -200px;
       width: 100%;
       height: 100%;
-      z-index: -1;
+      z-index: 0;
       background: #F0EEED;
     }
     &__overlay {
@@ -169,7 +177,7 @@ export default {
       justify-content: center;
       align-items: center;
       background: rgba(18, 18, 18, 0.5);
-      z-index: -1000;
+      z-index: -1;
     }
   }
 }

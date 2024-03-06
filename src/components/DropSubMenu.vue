@@ -1,10 +1,13 @@
 <template>
   <ul class="subdropdown">
     <li class="subdropdown__item" v-for="(item, index) in items" :key="index">
+      <!-- <a class="subdropdown__link" v-on:click="hideAllSubItems()">
+        {{ type.name }}
+      </a> -->
       <router-link
         :to="link"
         class="subdropdown__link"
-        v-on:click="hideMenu()"
+        v-on:click="hideAllSubItems()"
       >
         {{ item.name }}
       </router-link>
@@ -27,37 +30,33 @@ export default {
       type: String,
       default: () => "/notfound",
     },
-    triggerClass: {
-      type: String,
-      default: () => "",
-    },
   },
   emits: ["changeShowStatus"],
   data() {
     return {}
   },
   mounted() {
-    window.addEventListener("resize", this.hideMenu)
-    document.addEventListener("click", this.checkClickAreaOutOfMenu)
+    window.addEventListener("resize", this.hideAllSubItems)
+    document.addEventListener("click", this.checkClickAreaOutOfDropSubmenu)
   },
   unmounted() {
-    window.removeEventListener("resize", this.hideMenu)
-    document.removeEventListener("click", this.checkClickAreaOutOfMenu)
+    window.removeEventListener("resize", this.hideAllSubItems)
+    document.removeEventListener("click", this.checkClickAreaOutOfDropSubenu)
   },
   computed: {},
   methods: {
-    checkClickAreaOutOfMenu(e) {
+    checkClickAreaOutOfDropSubmenu(e) {
       const tempArr = e.target.classList
       if (
         !(
           tempArr.contains("subdropdown__link") ||
-          tempArr.contains(`${this.triggerClass}`)
+          tempArr.contains("dropdown__info")
         )
       ) {
-        this.hideMenu()
+        this.hideAllSubItems()
       }
     },
-    hideMenu() {
+    hideAllSubItems() {
       this.$emit("changeShowStatus")
     },
   },
@@ -66,6 +65,9 @@ export default {
 
 <style lang="scss" scoped>
 .subdropdown {
+  position: absolute;
+  left: 168px;
+  top: 0;
   box-shadow: 0px 4px 15px 0px #d4d4d4;
   border-radius: 12px;
   list-style-type: none;
@@ -102,5 +104,44 @@ export default {
 }
 .hover {
   visibility: visible;
+}
+
+@media (max-width: 1024px) {
+  .subdropdown {
+    padding-top: 32px;
+    position: static;
+    box-shadow: none;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    & :last-child .subdropdown__link {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    & :first-child .subdropdown__link {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+
+    &__link {
+      width: 100%;
+      padding: 0;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: none;
+      transition: none;
+      background: #f0eeed;
+      transition: opacity 0.3s ease-in;
+      position: static;
+      color: #222;
+      font-size: 16px;
+      &:hover {
+        border-bottom: none;
+        background: none;
+        opacity: 0.5;
+      }
+    }
+  }
 }
 </style>

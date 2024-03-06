@@ -103,7 +103,7 @@ export default {
   }
   &__window {
     position: absolute;
-    top: 32px;
+    top: 36px;
     left: 0px;
   }
   &__arrow-right {

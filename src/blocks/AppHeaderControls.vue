@@ -17,23 +17,75 @@
         />
       </svg>
     </a>
-    <router-link to="/cart" class="controls__control">
-      <img src="@/assets\img\header\cart-icon.svg" alt="cart" />
-      <NotificationAmount class="controls__notification"/>
+    <router-link to="/cart" class="controls__control controls__control_box">
+      <img
+        class="controls__icon"
+        src="@/assets\img\header\cart-icon.svg"
+        alt="cart"
+      />
+      <NotificationAmount class="controls__notification" />
     </router-link>
-    <a href="#" class="controls__control user-control">
-      <img src="@/assets\img\header\user-icon.svg" alt="personal area" />
-    </a>
+    <div class="controls__control-box">
+      <a
+        href="#"
+        class="controls__control user-control"
+        @click="toggleIsShowUserMenu"
+      >
+        <img
+          class="controls__icon"
+          src="@/assets\img\header\user-icon.svg"
+          alt="personal area"
+        />
+      </a>
+      <DropSimpleMenu
+        class="controls__usermenu"
+        v-if="getIsShowUserMenu"
+        :items="items"
+        @changeShowStatus="changeShowStatus"
+        trigger-class="controls__icon"
+      />
+    </div>
   </div>
 </template>
 
 <script>
-import NotificationAmount from '@/components/NotificationAmount.vue';
+import DropSimpleMenu from "@/components/DropSimpleMenu.vue"
+import NotificationAmount from "@/components/NotificationAmount.vue"
 
 export default {
+  data() {
+    return {
+      isShowUserMenu: false,
+      items: [
+        {
+          id: 0,
+          name: "Doe Smith",
+        },
+        {
+          id: 1,
+          name: "Log out",
+        },
+      ],
+    }
+  },
   components: {
-    NotificationAmount
-  }
+    NotificationAmount,
+    DropSimpleMenu,
+  },
+  computed: {
+    getIsShowUserMenu() {
+      return this.isShowUserMenu
+    },
+  },
+  methods: {
+    toggleIsShowUserMenu() {
+      this.isShowUserMenu = !this.isShowUserMenu
+    },
+    changeShowStatus() {
+      console.log(1)
+      this.isShowUserMenu = false
+    },
+  },
 }
 </script>
 
@@ -42,22 +94,38 @@ export default {
   display: flex;
   flex-direction: row;
   gap: 14px;
+  &__control-box {
+    position: relative;
+  }
   &__control {
     display: flex;
     flex-direction: row;
     transition: opacity 0.3s ease-in;
-    &:hover {
+    &_box:hover {
       opacity: 0.5;
     }
   }
   &__notification {
     margin-left: -2px;
   }
+  &__usermenu {
+    position: absolute;
+    top: 36px;
+    right: 0px;
+  }
 }
 .search-control {
   display: none;
   width: 24px;
   height: 24px;
+}
+.user-control {
+  & img {
+    transition: opacity 0.3s ease-in;
+  }
+  & img:hover {
+    opacity: 0.5;
+  }
 }
 
 @media (max-width: 1024px) {

@@ -24,7 +24,7 @@
           />
         </svg>
       </div>
-      <DropSimpleMenu
+      <DropSubMenu
         v-if="gender.showClothesTypes"
         :parameters="gender"
         :items="gender.clothesTypes"
@@ -36,16 +36,22 @@
 </template>
 
 <script>
-import DropSimpleMenu from "@/components/DropSimpleMenu"
+import DropSubMenu from "@/components/DropSubMenu"
 export default {
   components: {
-    DropSimpleMenu,
+    DropSubMenu,
   },
   props: {
     genders: {
       type: Array,
       default: () => [],
     },
+  },
+  mounted() {
+    document.addEventListener("click", this.checkClickAreaOutOfDropSubmenu)
+  },
+  unmounted() {
+    document.removeEventListener("click", this.checkClickAreaOutOfDropSubmenu)
   },
   computed: {
     // ...mapGetters(["getDropMenuIsHover"])
@@ -77,7 +83,7 @@ export default {
   visibility: hidden;
   box-shadow: 0px 4px 15px 0px #d4d4d4;
   border-radius: 12px;
-  z-index: 101;
+  z-index: 1;
   & :last-child .dropdown__info {
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
@@ -99,6 +105,9 @@ export default {
     transition: background 0.3s ease-in;
     background: #fff;
     position: relative;
+    color: #222;
+    font-size: 16px;
+    font-weight: 400;
     &:hover {
       border-bottom: 1px solid #f0eeed;
       background: #f0eeed;
@@ -176,4 +185,3 @@ export default {
   }
 }
 </style>
-@/components/DropSimpleMenu.vue
