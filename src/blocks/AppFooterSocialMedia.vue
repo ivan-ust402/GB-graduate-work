@@ -29,7 +29,7 @@
         </g>
       </svg>
     </a>
-    <a href="#" class="media__icon_reverse">
+    <a href="#" class="media__icon media__icon_reverse">
       <svg
         width="28"
         height="29"
@@ -130,33 +130,34 @@ export default {}
 
 <style lang="scss" scoped>
 .media {
+  box-sizing: border-box;
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 12px;
   &__icon {
     transition: opacity 0.3s ease-in;
-    &_reverse {
-      &:hover circle {
-        fill: #fff;
-        stroke: #e8e8e8;
-      }
-      &:hover path {
-        fill: #121212;
-      }
-      &:hover path {
-        fill: #121212;
-      }
-    }
+    // &_reverse {
+    //   &:hover circle {
+    //     fill: #fff;
+    //     stroke: #e8e8e8;
+    //   }
+    //   &:hover path {
+    //     fill: #121212;
+    //   }
+    //   &:hover path {
+    //     fill: #121212;
+    //   }
+    // }
     &:hover circle {
       fill: #121212;
     }
     &:hover path {
       fill: #fff;
     }
-    // &:hover {
-    //     opacity: 0.8;
-    // }
+    &:hover {
+        opacity: 0.6;
+    }
   }
 }
 path {

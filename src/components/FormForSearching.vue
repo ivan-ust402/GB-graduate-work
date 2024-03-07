@@ -27,16 +27,19 @@ export default {}
   flex: 1 0 0;
   border-radius: 62px;
   background: #f0eeed;
+  cursor: pointer;
   &__label {
     opacity: 0.4;
     transition: all 0.3s ease-in;
     width: 24px;
     height: 24px;
+    cursor: pointer;
     &:hover {
       opacity: 0.8;
     }
   }
   &__input {
+    cursor: pointer;
     background: #f0eeed;
     color: #222;
     border: none;

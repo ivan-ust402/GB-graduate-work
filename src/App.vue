@@ -1,7 +1,7 @@
 <template>
   <AppHeader />
   <nav class="center">
-    <router-link to="/">Home</router-link> | 
+    <router-link to="/">Home</router-link> |
     <router-link to="/login">Login</router-link> |
     <router-link to="/register">Registration</router-link> |
     <router-link to="/product-details/0">Product Details</router-link> |
@@ -9,24 +9,22 @@
     <router-link to="/cart">Cart</router-link> |
     <router-link to="/notfound">404</router-link>&nbsp;|
   </nav>
-  <router-view />
+  <router-view class="main-wrapper" />
   <ButtonTopOfPage />
   <AppFooter />
 </template>
-
 <script>
-import AppHeader from "@/blocks/AppHeader";
-import AppFooter from "@/blocks/AppFooter";
-import ButtonTopOfPage from "./components/ButtonTopOfPage.vue";
+import AppHeader from "@/blocks/AppHeader"
+import AppFooter from "@/blocks/AppFooter"
+import ButtonTopOfPage from "./components/ButtonTopOfPage.vue"
 
 export default {
   name: "App",
   components: {
     AppHeader,
     AppFooter,
-    ButtonTopOfPage
+    ButtonTopOfPage,
   },
-
 }
 </script>
 
@@ -37,6 +35,9 @@ export default {
   scroll-behavior: smooth;
   color: #121212;
   font-size: 14px;
+}
+.main-wrapper {
+  // min-height: 50vh;
 }
 
 body {
@@ -74,6 +75,7 @@ h4 {
 
 h5 {
   font-size: 32px;
+  color: #fff;
 }
 
 h6 {
@@ -93,6 +95,7 @@ button:hover {
 
 input {
   font-family: "Satoshi", sans-serif;
+  outline: none;
 }
 
 .center {
@@ -138,5 +141,4 @@ a svg {
     padding-right: calc(50% - 178px);
   }
 }
-
 </style>

@@ -56,6 +56,7 @@ export default {
   &__logo {
     box-sizing: border-box;
     display: flex;
+    height: 25px;
   }
 }
 
