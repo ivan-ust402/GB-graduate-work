@@ -10,13 +10,14 @@
     <router-link to="/notfound">404</router-link>&nbsp;|
   </nav>
   <router-view class="main-wrapper" />
-  <ButtonTopOfPage />
+  <ButtonTopOfPage :class="{hideButtonToUp: getBurgerMenuIsActive}"/>
   <AppFooter />
 </template>
 <script>
 import AppHeader from "@/blocks/AppHeader"
 import AppFooter from "@/blocks/AppFooter"
 import ButtonTopOfPage from "./components/ButtonTopOfPage.vue"
+import { mapGetters } from "vuex";
 
 export default {
   name: "App",
@@ -25,10 +26,17 @@ export default {
     AppFooter,
     ButtonTopOfPage,
   },
+  computed: {
+    ...mapGetters(["getBurgerMenuIsActive"])
+  }
 }
 </script>
 
 <style lang="scss">
+
+.hideButtonToUp {
+  visibility: hidden;
+}
 * {
   margin: 0;
   padding: 0;
@@ -141,4 +149,5 @@ a svg {
     padding-right: calc(50% - 178px);
   }
 }
+
 </style>

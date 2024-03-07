@@ -35,7 +35,10 @@
         DOE SMITH
       </a>
       <a href="#" class="logout-btn burgermenu__logout-btn">Log out</a>
-      <div v-if="getBurgerMenuIsActive" class="burgermenu__overlay-for-wrapper"></div>
+      <div
+        v-if="getBurgerMenuIsActive"
+        class="burgermenu__overlay-for-wrapper"
+      ></div>
     </div>
     <div v-if="getBurgerMenuIsActive" class="burgermenu__overlay"></div>
   </div>
@@ -132,7 +135,6 @@ export default {
       display: flex;
       flex-direction: column;
       gap: 32px;
-      
     }
     &__navigation {
       z-index: 1;
@@ -150,14 +152,21 @@ export default {
       z-index: 1;
       cursor: pointer;
       transition: opacity 0.3s ease-in;
-      &:hover {
-        opacity: 0.5;
+      @media (hover: hover) {
+        &:hover {
+          opacity: 0.5;
+        }
+      }
+      @media (hover: none) {
+        &:active {
+          opacity: 0.5;
+        }
       }
     }
     &__logout-btn {
       z-index: 1;
     }
-    &__overlay-for-wrapper{
+    &__overlay-for-wrapper {
       position: absolute;
       display: flex;
       top: 0;
@@ -165,7 +174,7 @@ export default {
       width: 100%;
       height: 100%;
       z-index: 0;
-      background: #F0EEED;
+      background: #f0eeed;
     }
     &__overlay {
       position: fixed;

@@ -18,7 +18,7 @@
         >
           <path
             d="M0.999999 15L6.33061 8.78095C6.7158 8.33156 6.7158 7.66844 6.33061 7.21905L0.999999 1"
-            stroke="#4F4F4F"
+            stroke="#121212"
             stroke-width="1.5"
             stroke-linecap="round"
           />
@@ -149,39 +149,65 @@ export default {
       opacity: 1;
       transition: opacity 0.3s ease-in;
       font-size: 16px;
-      &:hover {
-        border-bottom: none;
-        background: none;
-        opacity: 0.8;
+      @media (hover: hover) {
+        &:hover {
+          border-bottom: none;
+          background: none;
+          opacity: 0.8;
+        }
+        &:hover path {
+          fill: none;
+          stroke: #555;
+        }
+      }
+      @media (hover: none) {
+        &:active {
+          border-bottom: none;
+          background: none;
+          opacity: 0.8;
+        }
+        &:active path {
+          fill: none;
+          stroke: #555;
+        }
       }
     }
 
     &__item {
       position: relative;
     }
-    .dropmenu {
-      &__button {
-        font-weight: 700;
-        line-height: normal;
-        text-transform: uppercase;
-        display: flex;
-        justify-content: space-between;
-        &:hover path {
-          fill: none;
-          stroke: #555;
-        }
-      }
-      &__arrow-right {
-        display: flex;
-      }
 
-      &__arrow-down {
-        display: none;
-      }
-    }
+  }
+  // .dropmenu {
+  //     &__button {
+  //       font-weight: 700;
+  //       line-height: normal;
+  //       text-transform: uppercase;
+  //       display: flex;
+  //       justify-content: space-between;
+  //       @media (hover: hover) {
+  //         &:hover path {
+  //           fill: none;
+  //           stroke: #555;
+  //         }
+  //       }
+  //       @media (hover: none) {
+  //         &:active path {
+  //           fill: none;
+  //           stroke: #555;
+  //         }
+  //       }
+  //     }
+  //     &__arrow-right {
+  //       display: flex;
+  //     }
+
+  //     &__arrow-down {
+  //       display: none;
+  //     }
+  //   }
     .rotate {
       transform: rotate(90deg);
     }
-  }
 }
 </style>

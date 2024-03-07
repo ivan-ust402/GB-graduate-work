@@ -74,8 +74,12 @@ export default {
     align-items: center;
     padding-top: 24px;
     padding-bottom: 24px;
-    &__logo img {
+    &__logo {
       height: 16px;
+      & img {
+        height: 16px;
+      }
+      
     }
     &__search {
       display: none;

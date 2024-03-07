@@ -149,14 +149,28 @@ export default {}
     //     fill: #121212;
     //   }
     // }
-    &:hover circle {
-      fill: #121212;
-    }
-    &:hover path {
-      fill: #fff;
-    }
-    &:hover {
+
+    @media (hover: hover) {
+      &:hover circle {
+        fill: #121212;
+      }
+      &:hover path {
+        fill: #fff;
+      }
+      &:hover {
         opacity: 0.6;
+      }
+    }
+    @media (hover: none) {
+      &:active circle {
+        fill: #121212;
+      }
+      &:active path {
+        fill: #fff;
+      }
+      &:active {
+        opacity: 0.6;
+      }
     }
   }
 }

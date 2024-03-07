@@ -30,6 +30,9 @@ export default {}
     align-items: center;
     gap: 40px;
   }
+  &__title {
+    text-align: center;
+  }
   &__text {
     color: #222;
     // font-family: Satoshi;
@@ -69,6 +72,9 @@ export default {}
   padding-bottom: 60px;
   &__description {
     gap: 24px;
+  }
+  &__title {
+    font-size: 36px;
   }
   &__text {
     font-size: 14px;

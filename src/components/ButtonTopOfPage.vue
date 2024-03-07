@@ -1,8 +1,10 @@
 <template>
-  <a 
-    href="#" 
+  <a
+    href="#"
     class="topOfPageButton"
-    v-if="showScrollToTopBtn" @click="scrollToTop" id="scrollToTopBtn"
+    v-if="showScrollToTopBtn"
+    @click="scrollToTop"
+    id="scrollToTopBtn"
   >
     <svg
       width="48"
@@ -21,34 +23,36 @@
 
 <script>
 export default {
-  
   data() {
     return {
-      showScrollToTopBtn: false
-    };
+      showScrollToTopBtn: false,
+    }
   },
   mounted() {
-    window.addEventListener('scroll', this.scrollFunction);
+    window.addEventListener("scroll", this.scrollFunction)
   },
-  unmounted () {
-    window.removeEventListener('scroll', this.scrollFunction);
+  unmounted() {
+    window.removeEventListener("scroll", this.scrollFunction)
   },
   methods: {
     scrollFunction() {
-      const header = document.querySelector('#header');
-      if (document.body.scrollTop > header.clientHeight || document.documentElement.scrollTop > header.clientHeight) {
-        this.showScrollToTopBtn = true;
+      const header = document.querySelector("#header")
+      if (
+        document.body.scrollTop > header.clientHeight ||
+        document.documentElement.scrollTop > header.clientHeight
+      ) {
+        this.showScrollToTopBtn = true
       } else {
-        this.showScrollToTopBtn = false;
+        this.showScrollToTopBtn = false
       }
     },
     scrollToTop() {
       window.scrollTo({
         top: 0,
-        behavior: 'smooth'
-      });
-    }
-  }
+        behavior: "smooth",
+      })
+    },
+  },
 }
 </script>
 
@@ -59,18 +63,25 @@ export default {
   right: 40px;
 }
 .topOfPageButton {
-    border: 5px solid #121212;
-    border-radius: 50%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width: 48px;
-    opacity: 1;
-    transition: opacity .3s ease-in;
-    z-index: 2;
+  border: 5px solid #121212;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  opacity: 1;
+  transition: opacity 0.3s ease-in;
+  z-index: 2;
+  @media (hover: hover) {
     &:hover {
-        opacity: 0.5;
+      opacity: 0.5;
     }
+  }
+  @media (hover: none) {
+    &:active {
+      opacity: 0.5;
+    }
+  }
 }
 </style>

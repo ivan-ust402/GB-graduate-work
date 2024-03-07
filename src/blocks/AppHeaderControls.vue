@@ -100,8 +100,17 @@ export default {
     display: flex;
     flex-direction: row;
     transition: opacity 0.3s ease-in;
-    &_box:hover {
-      opacity: 0.5;
+    &_box {
+      @media (hover: hover) {
+        &:hover {
+          opacity: 0.5;
+        }
+      }
+      @media (hover: none) {
+        &:active {
+          opacity: 0.5;
+        }
+      }
     }
   }
   &__notification {
@@ -117,13 +126,37 @@ export default {
   display: none;
   width: 24px;
   height: 24px;
+  transition: opacity 0.3s ease-in;
+  // &:hover {
+  //   opacity: 0.5;
+  // }
+  @media (hover: hover) {
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+  @media (hover: none) {
+    &:active {
+      opacity: 0.5;
+    }
+  }
 }
 .user-control {
   & img {
     transition: opacity 0.3s ease-in;
   }
-  & img:hover {
-    opacity: 0.5;
+  // & img:hover {
+  //   opacity: 0.5;
+  // }
+  @media (hover: hover) {
+    & img:hover {
+      opacity: 0.5;
+    }
+  }
+  @media (hover: none) {
+    & img:active {
+      opacity: 0.5;
+    }
   }
 }
 
