@@ -59,7 +59,7 @@ export default {
 <style lang="scss" scoped>
 #scrollToTopBtn {
   position: fixed;
-  top: 100px;
+  top: 40px;
   right: 40px;
 }
 .topOfPageButton {
