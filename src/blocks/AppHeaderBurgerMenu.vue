@@ -132,7 +132,7 @@ export default {
       display: flex;
       flex-direction: column;
       gap: 32px;
-      
+      z-index: 2;
     }
     &__navigation {
       z-index: 1;
@@ -177,7 +177,7 @@ export default {
       justify-content: center;
       align-items: center;
       background: rgba(18, 18, 18, 0.5);
-      z-index: -1;
+      z-index: 1;
     }
   }
 }
@@ -203,6 +203,8 @@ export default {
       display: flex;
       gap: 10px;
       align-items: center;
+    }
+    &__overlay {
     }
   }
 }

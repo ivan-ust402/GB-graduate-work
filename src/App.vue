@@ -36,9 +36,9 @@ export default {
   color: #121212;
   font-size: 14px;
 }
-.main-wrapper {
-  // min-height: 50vh;
-}
+// .main-wrapper {
+//   min-height: 50vh;
+// }
 
 body {
   font-family: "Satoshi", sans-serif;

@@ -1,18 +1,85 @@
 <template>
-    <section class="notfound center">
-        <h1>Error</h1>
-        <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga mollitia facere, non sunt odio possimus! Ad iure odit error velit. Ipsa tenetur quibusdam sequi ab saepe maxime quidem molestias architecto totam, velit minus distinctio natus consectetur amet labore provident, non sunt laboriosam corrupti blanditiis? Iure ipsam in repudiandae sapiente quasi eum. Reprehenderit, assumenda, adipisci sapiente a beatae et, mollitia rem dolore sint asperiores earum veniam repellendus facere laborum perferendis error culpa perspiciatis. Placeat voluptates voluptatum quis eveniet quam sunt repellat accusantium nemo excepturi rem cupiditate molestiae iusto laboriosam minima odit reprehenderit distinctio, illum, porro voluptate vitae. Optio ab eveniet earum harum molestias fuga tenetur est magnam at! Quae adipisci repudiandae perferendis ad, nisi fugiat sit odit. Aperiam, incidunt. Debitis harum quod recusandae aut ex culpa est laborum tenetur ducimus, quam ea cum, qui delectus mollitia distinctio. Aperiam, ad sequi. Officiis labore ea aliquam rerum modi, molestiae laudantium aspernatur repellendus magni. Pariatur eius, voluptatum dicta architecto voluptate quis ad? Vel earum corrupti excepturi. Tempora fuga animi recusandae quis, iusto, quam dolor sequi reprehenderit nulla libero aliquam excepturi at laudantium a! Incidunt delectus adipisci ipsam enim dolores consequuntur, earum voluptate vel porro, corporis recusandae quasi repellendus consectetur excepturi odio dolorem atque facilis minus omnis necessitatibus reprehenderit placeat totam blanditiis corrupti. Dolores, libero tempore nobis labore perferendis rerum odio provident, in, doloremque quae reiciendis aperiam repellendus vel eveniet aliquam voluptatum distinctio rem recusandae ipsa dignissimos itaque accusamus debitis adipisci. Nam obcaecati suscipit eum illo repellendus quibusdam pariatur accusantium! Pariatur aliquid eligendi expedita nisi, laborum facilis cum autem deserunt ab necessitatibus incidunt consequuntur fugiat dolorum, odit vel amet. Omnis reprehenderit accusamus, ex doloremque officia eum officiis recusandae maiores esse animi quo eligendi sapiente numquam nulla ad earum aspernatur, quis asperiores ratione voluptatum aut illum. Impedit possimus harum quasi a ea nesciunt sint voluptatem perspiciatis maxime. Ex excepturi sit blanditiis odio id doloremque vel illum sunt pariatur iste omnis, repellendus rerum possimus a impedit. Illum vitae quaerat mollitia explicabo doloremque nihil est sed quia sunt. Itaque, odio voluptas. Adipisci, fuga a! Consequatur excepturi veniam quasi. Commodi et ullam architecto voluptas soluta ad nostrum eius enim maxime, possimus, velit nulla est ut voluptatum hic a, explicabo reiciendis porro unde in? Blanditiis vitae officia quam, temporibus eos alias quod pariatur harum similique amet id. Quibusdam tempora laudantium ratione. Est quaerat amet eligendi, placeat et voluptates unde vel earum tenetur, id ipsam officia recusandae optio perferendis dolore, cumque dolor necessitatibus velit aspernatur nobis quod eum fugiat? Numquam natus quidem perferendis, expedita vero saepe sit quae dignissimos voluptas omnis id quibusdam temporibus fugiat est veniam neque incidunt facilis ipsa quos. Aliquam natus ipsam ipsa quos assumenda odio hic quasi architecto cupiditate est repellat deserunt nisi ex non facilis veniam unde, eos quidem, corporis consequatur eveniet? Maxime ducimus culpa omnis ipsa quo earum cum perspiciatis, assumenda quia delectus quam! Eos officiis, modi omnis perspiciatis qui voluptatum veniam corrupti recusandae saepe fugit aut ducimus. Voluptatibus quos sequi reprehenderit suscipit rerum, eius culpa! Iste ad, est aliquid velit illum voluptate maiores reprehenderit repudiandae, ipsa earum saepe laboriosam esse ut non voluptatibus modi, nesciunt quisquam nihil accusamus inventore laborum. Officia, tempore expedita. Quaerat, quisquam! Suscipit voluptatibus tempora aspernatur sequi in exercitationem quos eaque, sed deleniti. Sunt voluptatum quae repudiandae id, necessitatibus repellat tempora unde non a pariatur cumque. Ipsum architecto possimus ratione aperiam accusantium nulla perspiciatis doloribus placeat, ipsam qui omnis eos repellat laudantium, voluptatibus officiis, labore totam? Aperiam quis porro at architecto unde assumenda dolorem quae, iusto repellendus a, nobis consectetur ut provident explicabo doloremque eos voluptatibus ratione excepturi. Velit minus quidem aut nihil quibusdam molestiae vitae corrupti quas facere. Eius alias corrupti, officiis culpa asperiores, vitae quisquam molestias quam consectetur odio necessitatibus nihil harum illum id sint labore possimus architecto non cumque maiores consequatur. Nobis inventore dicta quis sit necessitatibus nam autem exercitationem? Aliquid vero voluptatum aperiam voluptas expedita suscipit magni accusamus, dolorem qui tempore aliquam dolores deleniti perspiciatis quas dolorum porro facere, voluptates doloremque. Doloribus architecto nulla ipsum debitis nihil minima illum veritatis soluta quis facere molestiae sit suscipit, quaerat natus nemo minus praesentium dicta iusto modi maiores corporis odio dolor! Magni et harum eius fuga error officiis quidem vero molestiae. Quis corporis veniam aperiam maiores laborum repellat repellendus tempora perspiciatis saepe perferendis, dolorem neque sed incidunt? Error maiores recusandae quod architecto? Fugit dignissimos vitae, saepe placeat eos est iure! Ex voluptate hic, debitis unde magnam ea eaque cumque, a saepe alias mollitia non repellendus voluptatem? Molestiae, voluptates veniam quam nostrum asperiores at, adipisci accusamus debitis vero praesentium ullam et accusantium sed dolorem. Officia facilis quam mollitia tempore impedit minus esse accusamus quae quidem ab excepturi dolorum aut, magni ex sequi sed. Iusto obcaecati tenetur possimus ipsa at iure debitis consequatur nesciunt reiciendis. Eum aut atque, ut dignissimos fugiat inventore nam repudiandae, distinctio sequi cupiditate accusamus, iure rerum esse rem molestiae sed soluta deleniti quibusdam assumenda ipsum! Fuga, in alias modi, provident molestiae ex magnam voluptates reiciendis tenetur cupiditate nam pariatur excepturi, commodi amet doloribus dolorum doloremque veniam. Officia sit, reprehenderit expedita soluta possimus eveniet, dolorem, in iusto dignissimos quia porro perferendis fuga repudiandae voluptate ab recusandae similique. Vitae sequi et eaque quasi est explicabo dolor quaerat asperiores impedit autem nobis magnam tempore vel, dignissimos quibusdam laboriosam debitis accusantium molestiae consequuntur in ab quos possimus itaque? Inventore nihil aliquid adipisci reiciendis accusamus maxime sint, laborum ducimus obcaecati harum. Repudiandae asperiores cumque optio molestiae quis dolore velit neque ratione eaque placeat itaque blanditiis error voluptate, tempora unde facilis recusandae consequuntur inventore? Consequuntur voluptatibus recusandae magnam. Et eaque doloribus, molestias quisquam error, nostrum delectus quae rem obcaecati quas adipisci quaerat fugiat ducimus. Sapiente, quas adipisci quo magni, odio velit porro amet, obcaecati quos ratione rerum at voluptatum eos dolorum perspiciatis aspernatur architecto tempore molestias incidunt? Voluptates ullam explicabo itaque beatae sint voluptatem placeat esse, ipsa expedita labore autem perspiciatis assumenda, iste quaerat earum! Sed nesciunt iste at tempore, unde qui numquam expedita. A quibusdam, fuga beatae quaerat atque laudantium aspernatur ipsum quod iste voluptate ratione perferendis. Quibusdam repellendus voluptates perspiciatis illum eaque.
-        </p>
-    </section>
+  <section class="notfound center">
+    <div class="notfound__description">
+      <h1 class="notfound__title">404 NOT FOUND</h1>
+      <p class="notfound__text">
+        Your visited page not found. You may go home page.
+      </p>
+    </div>
+    <router-link to="/" class="notfound__button">
+      Back to main page
+    </router-link>
+  </section>
 </template>
 
 <script>
-    export default {
-        
-    }
+export default {}
 </script>
 
 <style lang="scss" scoped>
+.notfound {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+  padding-top: 112px;
+  padding-bottom: 80px;
+  &__description {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+  &__text {
+    color: #222;
+    // font-family: Satoshi;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  &__button {
+    box-sizing: border-box;
+    display: flex;
+    width: 400px;
+    height: 52px;
+    padding: 16px 54px;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+    border-radius: 62px;
+    background: #121212;
+    color: #fff;
+    /* Desktop/Text/Paragraphs/Medium bold */
+    // font-family: Satoshi;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    transition: all .3s ease-in;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+@media (max-width: 1024px) {
+  .notfound {
+  padding-top: 80px;
+  padding-bottom: 60px;
+  &__description {
+    gap: 24px;
+  }
+  &__text {
+    font-size: 14px;
+  }
+  &__button {
+    width: 100%;
+  }
+}
+}
 
+@media (max-width: 768px) {
+
+}
 </style>

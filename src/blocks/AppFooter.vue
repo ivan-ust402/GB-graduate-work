@@ -104,7 +104,7 @@ export default {
   background: #f0f0f0;
   color: #222;
   font-size: 14px;
-  z-index: -2;
+  z-index: 0;
   &__description {
     display: flex;
     flex-direction: column;

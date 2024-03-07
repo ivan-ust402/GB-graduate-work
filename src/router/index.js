@@ -39,7 +39,7 @@ const routes = [
     component: CartPage
   }, 
   {
-    path: '/notfound',
+    path: '/404',
     name: 'NotfoundPage',
     // Динамический путь (подгрузка страницы с сервера)
     component: () => import('@/pages/ErrorPage')
