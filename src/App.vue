@@ -1,5 +1,5 @@
 <template>
-  <AppHeader />
+  <AppHeader class="test"/>
   <nav class="center">
     <router-link to="/">Home</router-link> |
     <router-link to="/login">Login</router-link> |

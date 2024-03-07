@@ -1,5 +1,8 @@
 <template>
-  <footer class="footer center">
+  <footer 
+    class="footer center"
+    :class="{ hide: getBurgerMenuIsActive}"
+  >
     <div class="footer__box-1">
       <div class="footer__description">
         <router-link class="footer__logo" to="/">
@@ -82,14 +85,21 @@
 
 <script>
 import AppFooterSocialMedia from "@/blocks/AppFooterSocialMedia.vue"
+import { mapGetters } from "vuex";
 export default {
   components: {
     AppFooterSocialMedia,
+  },
+  computed: {
+    ...mapGetters(['getBurgerMenuIsActive'])
   },
 }
 </script>
 
 <style lang="scss" scoped>
+.hide {
+  z-index: -2;
+}
 .footer {
   // box-sizing: border-box;
   position: relative;
@@ -104,7 +114,6 @@ export default {
   background: #f0f0f0;
   color: #222;
   font-size: 14px;
-  z-index: 0;
   &__description {
     display: flex;
     flex-direction: column;
