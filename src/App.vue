@@ -9,7 +9,7 @@
     <router-link to="/cart">Cart</router-link> |
     <router-link to="/notfound">404</router-link>&nbsp;|
   </nav> -->
-  <router-view class="main-wrapper" />
+  <router-view />
   <ButtonTopOfPage :class="{hideButtonToUp: getBurgerMenuIsActive}"/>
   <AppFooter />
 </template>

@@ -25,10 +25,10 @@
       />
       <NotificationAmount class="controls__notification" />
     </router-link>
-    <div class="controls__control-box">
+    <div class="controls__control-box user-control">
       <a
         href="#"
-        class="controls__control user-control"
+        class="controls__control"
         @click="toggleIsShowUserMenu"
       >
         <img
@@ -162,7 +162,9 @@ export default {
 
 @media (max-width: 1024px) {
   .user-control {
+    visibility: hidden;
     display: none;
+    right: 100000px;
   }
 }
 
