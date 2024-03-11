@@ -3,7 +3,11 @@
     <div class="offer">
       <h2 class="offer__title">{{ title.toUpperCase() }}</h2>
       <div class="offer__cards">
-        <div class="offer__card card" v-for="(product, index) in products" :key="index">
+        <div
+          class="offer__card card"
+          v-for="(product, index) in products"
+          :key="index"
+        >
           <!-- <div class="offer__card card"> -->
           <div class="card__content">
             <div class="card__img-box">
@@ -19,25 +23,7 @@
                 {{ product.title.toUpperCase() }}
               </h6>
               <div class="card__rating rating">
-                <div class="rating__stars stars">
-                  <div
-                    class="stars__item"
-                    v-for="item in Math.floor(product.grade)"
-                  >
-                    <img
-                      src="@/assets/img/common/full-star-icon.svg"
-                      alt="star"
-                      class="stars__fullstar"
-                    />
-                  </div>
-                  <div class="stars__item" v-if="product.grade % 1">
-                    <img
-                      src="@/assets/img/common/half-star-icon.svg"
-                      alt="half star"
-                      class="stars__halfstar"
-                    />
-                  </div>
-                </div>
+                <StarsComponent class="rating__stars" :grade="product.grade"/>
                 <div class="rating__block">
                   <p class="rating__text">
                     <span class="rating__grade">{{ product.grade }}</span
@@ -68,7 +54,7 @@
                     ).toFixed(2)
                   }}
                 </div>
-                <div 
+                <div
                   class="price__discount"
                   v-if="Number(product.discount) !== 0"
                 >
@@ -80,23 +66,24 @@
         </div>
       </div>
     </div>
-    <a
-      href="#"
-      class="offer-with-button__button button-secondary-color"
-      text="View All"
-    >
-      {{ text }}
-    </a>
+    <ButtonSecondaryColor class="offer-with-button__button" text="View more"/>
   </div>
 </template>
 
 <script>
+import ButtonSecondaryColor from '@/components/ButtonSecondaryColor.vue';
+import StarsComponent from '@/components/StarsComponent.vue';
+
 export default {
   props: {
     title: {
       type: String,
       default: () => "Loremka",
     },
+  },
+  components: {
+    ButtonSecondaryColor,
+    StarsComponent,
   },
   data() {
     return {
@@ -198,16 +185,8 @@ export default {
           newArrivals: false,
           topSelling: false,
           image: "0/card.jpg",
-          images: [
-            "0/slider-0.jpg",
-            "0/slider-1.jpg",
-            "0/slider-2.jpg",
-          ],
-          icons: [
-            "0/icon-0.jpg",
-            "0/icon-1.jpg",
-            "0/icon-2.jpg",
-          ],
+          images: ["0/slider-0.jpg", "0/slider-1.jpg", "0/slider-2.jpg"],
+          icons: ["0/icon-0.jpg", "0/icon-1.jpg", "0/icon-2.jpg"],
           availability: "true",
           shortDescription:
             "Men's banana jeans, like classic ones, are a basic item in any man's wardrobe.",
@@ -218,113 +197,112 @@ export default {
           },
         },
         {
-        id: "2",
-        sku: "1063766882",
-        title: "Jeans Omaqlo",
-        price: 24.79,
-        currency: "USD",
-        currencyCode: "&#36;",
-        grade: 5.0,
-        discount: 10,
-        sales: 150,
-        type: {id: 0, name: "Jeans"},
-        dressStyle: {id: 2, name: "Party"},
-        gender: {id: 0, name: "man"},
-        sizesInfo: [
-          {
-            size: {
-              id: 0,
-              name: "XX-Small",
-              shortName:"xxs"
+          id: "2",
+          sku: "1063766882",
+          title: "Jeans Omaqlo",
+          price: 24.79,
+          currency: "USD",
+          currencyCode: "&#36;",
+          grade: 5.0,
+          discount: 10,
+          sales: 150,
+          type: { id: 0, name: "Jeans" },
+          dressStyle: { id: 2, name: "Party" },
+          gender: { id: 0, name: "man" },
+          sizesInfo: [
+            {
+              size: {
+                id: 0,
+                name: "XX-Small",
+                shortName: "xxs",
+              },
+              amount: "10",
             },
-            amount: "10"
+            {
+              size: {
+                id: 1,
+                name: "X-Small",
+                shortName: "xs",
+              },
+              amount: "10",
+            },
+            {
+              size: {
+                id: 2,
+                name: "Small",
+                shortName: "s",
+              },
+              amount: "20",
+            },
+            {
+              size: {
+                id: 3,
+                name: "Medium",
+                shortName: "m",
+              },
+              amount: "1",
+            },
+            {
+              size: {
+                id: 4,
+                name: "Large",
+                shortName: "l",
+              },
+              amount: "4",
+            },
+            {
+              size: {
+                id: 5,
+                name: "X-Large",
+                shortName: "xxs",
+              },
+              amount: "4",
+            },
+            {
+              size: {
+                id: 6,
+                name: "XX-Large",
+                shortName: "xxl",
+              },
+              amount: "10",
+            },
+            {
+              size: {
+                id: 7,
+                name: "3X-Large",
+                shortName: "xxxl",
+              },
+              amount: "10",
+            },
+            {
+              size: {
+                id: 8,
+                name: "4X-Large",
+                shortName: "xxxxl",
+              },
+              amount: "10",
+            },
+          ],
+          color: {
+            id: 6,
+            name: "light blue",
+            code: "#7395AE",
           },
-          {
-            size: {
-              id: 1,
-              name: "X-Small",
-              shortName: "xs"
-            },
-            amount: "10"
+          allColors: [],
+          added: "2023-02-26T12:30:00.000-05:00",
+          newArrivals: false,
+          topSelling: true,
+          image: "2/card.jpg",
+          images: ["2/slider-0.jpg", "2/slider-1.jpg", "2/slider-2.jpg"],
+          icons: ["2/icon-0.jpg", "2/icon-1.jpg", "2/icon-2.jpg"],
+          availability: "true",
+          shortDescription:
+            "High quality. Thick and durable jeans do not hinder movement; due to elastane, they create a slight “stretch effect”.",
+          details: {
+            description:
+              "Breathable cotton fabric makes them suitable for year-round wear. Men's jeans are suitable for both teenagers and older men. High-quality accessoriesTurkish-made items have proven themselves to be high-quality and durable clothing. Our gins are designed in Turkey and made from premium cotton, they do not wash out, and keep their shape and color for a long time. Tapered legs Straight and tapered legs look stylish and fashionable. Classic blue jeans 'varenki' are an integral part of the modern man's wardrobe and will perfectly complement your cargo or joggers. Universal fit The universal MOM pattern and small oversize fit will suit any body type.",
+            composition: ["cotton 98%", "elastane 2%"],
           },
-          {
-            size: {
-              id: 2,
-              name: "Small",
-              shortName: "s"
-            },
-            amount: "20"
-          },
-          {
-            size: {
-              id: 3,
-              name: "Medium",
-              shortName: "m"
-            },
-            amount: "1"
-          },
-          {
-            size: {
-              id: 4,
-              name: "Large",
-              shortName: "l"
-            },
-            amount: "4"
-          },
-          {
-            size: {
-              id: 5,
-              name: "X-Large",
-              shortName: "xxs"
-            },
-            amount: "4"
-          },
-          {
-            size: {
-              id: 6,
-              name: "XX-Large",
-              shortName: "xxl"
-            },
-            amount: "10"
-          },
-          {
-            size: {
-              id: 7,
-              name: "3X-Large",
-              shortName: "xxxl"
-            },
-            amount: "10"
-          },
-          {
-            size: {
-              id: 8,
-              name: "4X-Large",
-              shortName: "xxxxl"
-            },
-            amount: "10"
-          }
-        ],
-        color:     {
-          id: 6,
-          name: "light blue",
-          code: "#7395AE"
-        },
-        allColors: [
-        ],
-        added: "2023-02-26T12:30:00.000-05:00",
-        newArrivals: false,
-        topSelling: true,
-        image: "2/card.jpg",
-        images: ["2/slider-0.jpg", "2/slider-1.jpg", "2/slider-2.jpg"],
-        icons: ["2/icon-0.jpg", "2/icon-1.jpg", "2/icon-2.jpg"],
-        availability: "true",
-        shortDescription: "High quality. Thick and durable jeans do not hinder movement; due to elastane, they create a slight “stretch effect”.",
-        details: {
-          description: "Breathable cotton fabric makes them suitable for year-round wear. Men's jeans are suitable for both teenagers and older men. High-quality accessoriesTurkish-made items have proven themselves to be high-quality and durable clothing. Our gins are designed in Turkey and made from premium cotton, they do not wash out, and keep their shape and color for a long time. Tapered legs Straight and tapered legs look stylish and fashionable. Classic blue jeans 'varenki' are an integral part of the modern man's wardrobe and will perfectly complement your cargo or joggers. Universal fit The universal MOM pattern and small oversize fit will suit any body type.",
-          composition: [
-            "cotton 98%", "elastane 2%"
-          ]
-        }
         },
         {
           id: "3",
@@ -333,90 +311,90 @@ export default {
           price: 13.32,
           currency: "USD",
           currencyCode: "&#36;",
-          grade: 5.0, 
+          grade: 5.0,
           discount: 0,
           sales: 50,
-          type: {id: 1, name: "Trousers"},
-          dressStyle: {id: 3, name: "Gym"},
-          gender: {id: 0, name: "man"},
+          type: { id: 1, name: "Trousers" },
+          dressStyle: { id: 3, name: "Gym" },
+          gender: { id: 0, name: "man" },
           sizesInfo: [
             {
               size: {
                 id: 0,
                 name: "XX-Small",
-                shortName:"xxs"
+                shortName: "xxs",
               },
-              amount: "0"
+              amount: "0",
             },
             {
               size: {
                 id: 1,
                 name: "X-Small",
-                shortName: "xs"
+                shortName: "xs",
               },
-              amount: "0"
+              amount: "0",
             },
             {
               size: {
                 id: 2,
                 name: "Small",
-                shortName: "s"
+                shortName: "s",
               },
-              amount: "2"
+              amount: "2",
             },
             {
               size: {
                 id: 3,
                 name: "Medium",
-                shortName: "m"
+                shortName: "m",
               },
-              amount: "1"
+              amount: "1",
             },
             {
               size: {
                 id: 4,
                 name: "Large",
-                shortName: "l"
+                shortName: "l",
               },
-              amount: "4"
+              amount: "4",
             },
             {
               size: {
                 id: 5,
                 name: "X-Large",
-                shortName: "xxs"
+                shortName: "xxs",
               },
-              amount: "4"
+              amount: "4",
             },
             {
               size: {
                 id: 6,
                 name: "XX-Large",
-                shortName: "xxl"
+                shortName: "xxl",
               },
-              amount: "0"
+              amount: "0",
             },
             {
               size: {
                 id: 7,
                 name: "3X-Large",
-                shortName: "xxxl"
+                shortName: "xxxl",
               },
-              amount: "0"
+              amount: "0",
             },
             {
               size: {
                 id: 8,
                 name: "4X-Large",
-                shortName: "xxxxl"
+                shortName: "xxxxl",
               },
-              amount: "0"
-            }
+              amount: "0",
+            },
           ],
           color: {
             id: 3,
             name: "green",
-            code: "#787E62"
+            code: "#787E62",
           },
           allColors: [
             {
@@ -424,33 +402,33 @@ export default {
               color: {
                 id: 3,
                 name: "green",
-                code: "#787E62"
-              }
+                code: "#787E62",
+              },
             },
             {
               productId: 4,
               color: {
                 id: 10,
                 name: "dark blue",
-                code: "#102E4F"
-              }
+                code: "#102E4F",
+              },
             },
             {
               productId: 5,
               color: {
                 id: 4,
                 name: "red",
-                code: "#C8031C"
-              }
+                code: "#C8031C",
+              },
             },
             {
               productId: 6,
               color: {
                 id: 5,
                 name: "black",
-                code: "#141316"
-              }
-            }
+                code: "#141316",
+              },
+            },
           ],
           added: "2023-02-26T12:30:00.000-05:00",
           newArrivals: true,
@@ -459,13 +437,13 @@ export default {
           images: ["3/slider-0.jpg", "3/slider-1.jpg", "3/slider-2.jpg"],
           icons: ["3/icon-0.jpg", "3/icon-1.jpg", "3/icon-2.jpg"],
           availability: "true",
-          shortDescription: "An excellent choice for creating a sporty look - joggers from the Russian brand LAINA.",
+          shortDescription:
+            "An excellent choice for creating a sporty look - joggers from the Russian brand LAINA.",
           details: {
-            description: "An excellent choice for creating a sporty look are joggers from the Russian brand LAINA. The tapered jogger pants are a unique style for comfort in any weather.",
-            composition: [
-              "cotton 80%", "elastane 20%"
-            ]
-          }
+            description:
+              "An excellent choice for creating a sporty look are joggers from the Russian brand LAINA. The tapered jogger pants are a unique style for comfort in any weather.",
+            composition: ["cotton 80%", "elastane 20%"],
+          },
         },
         {
           id: "4",
@@ -477,87 +455,87 @@ export default {
           grade: 5.0,
           discount: 0,
           sales: 50,
-          type: {id: 1, name: "Trousers"},
-          dressStyle: {id: 3, name: "Gym"},
-          gender: {id: 0, name: "man"},
+          type: { id: 1, name: "Trousers" },
+          dressStyle: { id: 3, name: "Gym" },
+          gender: { id: 0, name: "man" },
           sizesInfo: [
             {
               size: {
                 id: 0,
                 name: "XX-Small",
-                shortName:"xxs"
+                shortName: "xxs",
               },
-              amount: "0"
+              amount: "0",
             },
             {
               size: {
                 id: 1,
                 name: "X-Small",
-                shortName: "xs"
+                shortName: "xs",
               },
-              amount: "0"
+              amount: "0",
             },
             {
               size: {
                 id: 2,
                 name: "Small",
-                shortName: "s"
+                shortName: "s",
               },
-              amount: "2"
+              amount: "2",
             },
             {
               size: {
                 id: 3,
                 name: "Medium",
-                shortName: "m"
+                shortName: "m",
               },
-              amount: "1"
+              amount: "1",
             },
             {
               size: {
                 id: 4,
                 name: "Large",
-                shortName: "l"
+                shortName: "l",
               },
-              amount: "4"
+              amount: "4",
             },
             {
               size: {
                 id: 5,
                 name: "X-Large",
-                shortName: "xxs"
+                shortName: "xxs",
               },
-              amount: "4"
+              amount: "4",
             },
             {
               size: {
                 id: 6,
                 name: "XX-Large",
-                shortName: "xxl"
+                shortName: "xxl",
               },
-              amount: "0"
+              amount: "0",
             },
             {
               size: {
                 id: 7,
                 name: "3X-Large",
-                shortName: "xxxl"
+                shortName: "xxxl",
               },
-              amount: "0"
+              amount: "0",
             },
             {
               size: {
                 id: 8,
                 name: "4X-Large",
-                shortName: "xxxxl"
+                shortName: "xxxxl",
               },
-              amount: "0"
-            }
+              amount: "0",
+            },
           ],
           color: {
             id: 10,
             name: "dark blue",
-            code: "#102E4F"
+            code: "#102E4F",
           },
           allColors: [
             {
@@ -565,33 +543,33 @@ export default {
               color: {
                 id: 3,
                 name: "green",
-                code: "#787E62"
-              }
+                code: "#787E62",
+              },
             },
             {
               productId: 4,
               color: {
                 id: 10,
                 name: "dark blue",
-                code: "#102E4F"
-              }
+                code: "#102E4F",
+              },
             },
             {
               productId: 5,
               color: {
                 id: 4,
                 name: "red",
-                code: "#C8031C"
-              }
+                code: "#C8031C",
+              },
             },
             {
               productId: 6,
               color: {
                 id: 5,
                 name: "black",
-                code: "#141316"
-              }
-            }
+                code: "#141316",
+              },
+            },
           ],
           added: "2023-02-26T12:30:00.000-05:00",
           newArrivals: true,
@@ -600,49 +578,21 @@ export default {
           images: ["4/slider-0.jpg", "4/slider-1.jpg", "4/slider-2.jpg"],
           icons: ["4/icon-0.jpg", "4/icon-1.jpg", "4/icon-2.jpg"],
           availability: "true",
-          shortDescription: "An excellent choice for creating a sporty look - joggers from the Russian brand LAINA.",
+          shortDescription:
+            "An excellent choice for creating a sporty look - joggers from the Russian brand LAINA.",
           details: {
-            description: "An excellent choice for creating a sporty look are joggers from the Russian brand LAINA. The tapered jogger pants are a unique style for comfort in any weather.",
-            composition: [
-              "cotton 80%", "elastane 20%"
-            ]
-          }
+            description:
+              "An excellent choice for creating a sporty look are joggers from the Russian brand LAINA. The tapered jogger pants are a unique style for comfort in any weather.",
+            composition: ["cotton 80%", "elastane 20%"],
+          },
         },
-      ]
+      ],
     }
   },
 }
 </script>
 
 <style lang="scss" scoped>
-.button-secondary-color {
-  box-sizing: border-box;
-  display: flex;
-  min-width: 218px;
-  height: 52px;
-  padding: 16px 54px;
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 0;
-  border-radius: 62px;
-  border: 1px solid #e8e8e8;
-  color: #121212;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  transition: all 0.3s ease-in;
-  @media (hover: hover) {
-    &:hover {
-      background: #e8e8e8;
-    }
-  }
-  @media (hover: none) {
-    &:active {
-      background: #e8e8e8;
-    }
-  }
-}
 .offer-with-button {
   display: flex;
   flex-direction: column;
@@ -802,23 +752,9 @@ export default {
     line-height: normal;
   }
 }
-.stars {
-  display: flex;
-  flex-direction: row;
-  gap: 5px;
-  height: 17px;
-  &__item {
-    height: 17px;
-  }
-}
+
 
 @media (max-width: 1024px) {
-  .button-secondary-color {
-    width: 100%;
-    height: 46px;
-    font-size: 14px;
-    font-weight: 400;
-  }
   .offer-with-button {
     padding-top: 40px;
     padding-bottom: 40px;
@@ -894,26 +830,13 @@ export default {
       font-size: 10px;
     }
   }
-  .stars {
-    gap: 4px;
-    height: 14px;
-    &__item {
-      height: 14px;
-      & img {
-        height: 14px;
-      }
-    }
-  }
+
 }
 
 @media (max-width: 768px) {
-  .button-secondary-color {
-  }
   .offer-with-button {
     padding-top: 41px;
     padding-bottom: 20px;
-    &__button {
-    }
   }
   .offer {
     &__title {
@@ -926,9 +849,13 @@ export default {
       row-gap: 24px;
       justify-content: center;
     }
+    &__card {
+      height: 309px;
+    }
   }
   .card {
     width: 173px;
+    height: 309px;
     // &__content {
     //   gap: 12px;
     // }
@@ -991,16 +918,6 @@ export default {
       border-radius: 62px;
       font-size: 10px;
       font-weight: 500;
-    }
-  }
-  .stars {
-    gap: 5px;
-    height: 16px;
-    &__item {
-      height: 16px;
-      & img {
-        height: 16px;
-      }
     }
   }
 }

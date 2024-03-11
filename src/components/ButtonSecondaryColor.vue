@@ -22,7 +22,7 @@ export default {
 .button-secondary-color {
   box-sizing: border-box;
   display: flex;
-  width: 218px;
+  min-width: 218px;
   height: 52px;
   padding: 16px 54px;
   justify-content: center;
@@ -35,18 +35,26 @@ export default {
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  transition: all .3s ease-in;
+  transition: all 0.3s ease-in;
   @media (hover: hover) {
     &:hover {
-      background: #E8E8E8;
+      background: #e8e8e8;
     }
   }
   @media (hover: none) {
     &:active {
-      background: #E8E8E8;
+      background: #e8e8e8;
     }
   }
 }
 
+@media (max-width: 1024px) {
+  .button-secondary-color {
+    width: 100%;
+    height: 46px;
+    font-size: 14px;
+    font-weight: 400;
+  }
+}
 
 </style>
