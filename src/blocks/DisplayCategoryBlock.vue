@@ -3,46 +3,33 @@
     <div class="offer">
       <h2 class="offer__title">{{ title.toUpperCase() }}</h2>
       <div class="offer__cards">
-        <div
-          class="offer__card card"
-          v-for="(product, index) in products"
-          :key="index"
-        >
-          <!-- <div class="offer__card card"> -->
-          <div class="card__content">
-            <div class="card__img-box">
-              <img
-                :src="require(`@/assets/img/products/${product.image}`)"
-                :alt="product.title"
-                class="card__img"
-              />
-              <div class="card__img-box-hover"></div>
-            </div>
-            <div class="card__description">
-              <h6 class="card__title">
-                {{ product.title.toUpperCase() }}
-              </h6>
-              <RatingComponent class="card__rating" :grade="product.grade" />
-              <PriceComponent 
-                class="card__price"
-                :price="product.price" 
-                :discount="product.discount"
-                :currencyHTMLCode="product.currencyCode"
-              />
-            </div>
-          </div>
-        </div>
+        <CardProductMainComponent
+          class="offer__card"
+          v-for="product in products"
+          :key="product.id"
+          :product="product"
+        />
+      </div>
+      <div class="offer__more-cards" v-for="page in getExtraPages">
+        <CardProductMainComponent
+          class="offer__card"
+          v-for="product in moreProducts"
+          :key="product.id"
+          :product="product"
+        />
       </div>
     </div>
-    <ButtonSecondaryColor class="offer-with-button__button" text="View more" />
+    <ButtonSecondaryColor
+      class="offer-with-button__button"
+      text="View more"
+      @click.prevent="downloadMoreProducts"
+    />
   </div>
 </template>
 
 <script>
 import ButtonSecondaryColor from "@/components/ButtonSecondaryColor.vue"
-import PriceComponent from "@/components/PriceComponent.vue"
-import RatingComponent from "@/components/RatingComponent.vue"
-import StarsComponent from "@/components/StarsComponent.vue"
+import CardProductMainComponent from "@/components/CardProductMainComponent.vue"
 
 export default {
   props: {
@@ -50,16 +37,9 @@ export default {
       type: String,
       default: () => "Loremka",
     },
-  },
-  components: {
-    ButtonSecondaryColor,
-    StarsComponent,
-    RatingComponent,
-    PriceComponent
-  },
-  data() {
-    return {
-      products: [
+    products: {
+      type: Array,
+      default: () => [
         {
           id: "0",
           sku: "937023680",
@@ -559,7 +539,592 @@ export default {
           },
         },
       ],
+    },
+  },
+  components: {
+    CardProductMainComponent,
+    ButtonSecondaryColor,
+  },
+  data() {
+    return {
+      extraPages: 0,
+      moreProducts: [
+        {
+          id: "95",
+          sku: "933469103",
+          title: "Leggings MAECO Sport",
+          price: 10.95,
+          currency: "USD",
+          currencyCode: "&#36;",
+          grade: 5.0,
+          discount: 0,
+          sales: 1000,
+          type: { id: 1, name: "Trousers" },
+          dressStyle: { id: 3, name: "Gym" },
+          gender: { id: 1, name: "woman" },
+          sizesInfo: [
+            {
+              size: {
+                id: 0,
+                name: "XX-Small",
+                shortName: "xxs",
+              },
+              amount: "10",
+            },
+            {
+              size: {
+                id: 1,
+                name: "X-Small",
+                shortName: "xs",
+              },
+              amount: "10",
+            },
+            {
+              size: {
+                id: 2,
+                name: "Small",
+                shortName: "s",
+              },
+              amount: "200",
+            },
+            {
+              size: {
+                id: 3,
+                name: "Medium",
+                shortName: "m",
+              },
+              amount: "10",
+            },
+            {
+              size: {
+                id: 4,
+                name: "Large",
+                shortName: "l",
+              },
+              amount: "40",
+            },
+            {
+              size: {
+                id: 5,
+                name: "X-Large",
+                shortName: "xxs",
+              },
+              amount: "40",
+            },
+            {
+              size: {
+                id: 6,
+                name: "XX-Large",
+                shortName: "xxl",
+              },
+              amount: "0",
+            },
+            {
+              size: {
+                id: 7,
+                name: "3X-Large",
+                shortName: "xxxl",
+              },
+              amount: "0",
+            },
+            {
+              size: {
+                id: 8,
+                name: "4X-Large",
+                shortName: "xxxxl",
+              },
+              amount: "0",
+            },
+          ],
+          color: {
+            id: 22,
+            name: "beige",
+            code: "#F7EBE1",
+          },
+          allColors: [
+            {
+              productId: 95,
+              color: {
+                id: 22,
+                name: "beige",
+                code: "#F7EBE1",
+              },
+            },
+            {
+              productId: 96,
+              color: {
+                id: 7,
+                name: "light brown",
+                code: "#CABCA3",
+              },
+            },
+            {
+              productId: 97,
+              color: {
+                id: 1,
+                name: "grey",
+                code: "#4D4A52",
+              },
+            },
+            {
+              productId: 98,
+              color: {
+                id: 5,
+                name: "black",
+                code: "#141316",
+              },
+            },
+          ],
+          added: "2023-02-26T12:30:00.000-05:00",
+          newArrivals: true,
+          topSelling: true,
+          image: "95/card.jpg",
+          images: ["95/slider-0.jpg", "95/slider-1.jpg", "95/slider-2.jpg"],
+          icons: ["95/icon-0.jpg", "95/icon-1.jpg", "95/icon-2.jpg"],
+          availability: "true",
+          shortDescription:
+            "Ribbed leggings are the perfect choice for active and stylish girls! These women's leggings are a real find for those who value comfort and fashion.",
+          details: {
+            description:
+              "Seamless leggings are created for those who value comfort and quality. Ribbed leggings are the perfect choice for active and stylish girls! These women's leggings are a real find for those who value comfort and fashion. Thanks to their high rise and seamless design, they are perfect for fitness classes or everyday wear. The high waist makes leggings an excellent choice for girls who want to hide some figure flaws and highlight their beauty. Thanks to the slimming effect and elastic fabric, they are suitable for an adult woman or teenage girl. Black ribbed high-waisted leggings pair perfectly with any other item for a stylish and elegant look. High quality materials guarantee a long service life of the product, and the absence of pilling and fading after washing preserves its original appearance.",
+            composition: ["polyester 34%", "nylon 54%", "spandex 12%"],
+          },
+        },
+        {
+          id: "96",
+          sku: "953618383",
+          title: "Leggings MAECO Sport",
+          price: 11.06,
+          currency: "USD",
+          currencyCode: "&#36;",
+          grade: 4.5,
+          discount: 0,
+          sales: 1005,
+          type: { id: 1, name: "Trousers" },
+          dressStyle: { id: 3, name: "Gym" },
+          gender: { id: 1, name: "woman" },
+          sizesInfo: [
+            {
+              size: {
+                id: 0,
+                name: "XX-Small",
+                shortName: "xxs",
+              },
+              amount: "10",
+            },
+            {
+              size: {
+                id: 1,
+                name: "X-Small",
+                shortName: "xs",
+              },
+              amount: "10",
+            },
+            {
+              size: {
+                id: 2,
+                name: "Small",
+                shortName: "s",
+              },
+              amount: "200",
+            },
+            {
+              size: {
+                id: 3,
+                name: "Medium",
+                shortName: "m",
+              },
+              amount: "10",
+            },
+            {
+              size: {
+                id: 4,
+                name: "Large",
+                shortName: "l",
+              },
+              amount: "40",
+            },
+            {
+              size: {
+                id: 5,
+                name: "X-Large",
+                shortName: "xxs",
+              },
+              amount: "40",
+            },
+            {
+              size: {
+                id: 6,
+                name: "XX-Large",
+                shortName: "xxl",
+              },
+              amount: "0",
+            },
+            {
+              size: {
+                id: 7,
+                name: "3X-Large",
+                shortName: "xxxl",
+              },
+              amount: "0",
+            },
+            {
+              size: {
+                id: 8,
+                name: "4X-Large",
+                shortName: "xxxxl",
+              },
+              amount: "0",
+            },
+          ],
+          color: {
+            id: 7,
+            name: "light brown",
+            code: "#CABCA3",
+          },
+          allColors: [
+            {
+              productId: 95,
+              color: {
+                id: 22,
+                name: "beige",
+                code: "#F7EBE1",
+              },
+            },
+            {
+              productId: 96,
+              color: {
+                id: 7,
+                name: "light brown",
+                code: "#CABCA3",
+              },
+            },
+            {
+              productId: 97,
+              color: {
+                id: 1,
+                name: "grey",
+                code: "#4D4A52",
+              },
+            },
+            {
+              productId: 98,
+              color: {
+                id: 5,
+                name: "black",
+                code: "#141316",
+              },
+            },
+          ],
+          added: "2023-02-26T12:30:00.000-05:00",
+          newArrivals: true,
+          topSelling: true,
+          image: "96/card.jpg",
+          images: ["96/slider-0.jpg", "96/slider-1.jpg", "96/slider-2.jpg"],
+          icons: ["96/icon-0.jpg", "96/icon-1.jpg", "96/icon-2.jpg"],
+          availability: "true",
+          shortDescription:
+            "Ribbed leggings are the perfect choice for active and stylish girls! These women's leggings are a real find for those who value comfort and fashion.",
+          details: {
+            description:
+              "Seamless leggings are created for those who value comfort and quality. Ribbed leggings are the perfect choice for active and stylish girls! These women's leggings are a real find for those who value comfort and fashion. Thanks to their high rise and seamless design, they are perfect for fitness classes or everyday wear. The high waist makes leggings an excellent choice for girls who want to hide some figure flaws and highlight their beauty. Thanks to the slimming effect and elastic fabric, they are suitable for an adult woman or teenage girl. Black ribbed high-waisted leggings pair perfectly with any other item for a stylish and elegant look. High quality materials guarantee a long service life of the product, and the absence of pilling and fading after washing preserves its original appearance.",
+            composition: ["polyester 34%", "nylon 54%", "spandex 12%"],
+          },
+        },
+        {
+          id: "97",
+          sku: "1413135363 ",
+          title: "Leggings MAECO Sport",
+          price: 11.98,
+          currency: "USD",
+          currencyCode: "&#36;",
+          grade: 5.0,
+          discount: 0,
+          sales: 500,
+          type: { id: 1, name: "Trousers" },
+          dressStyle: { id: 3, name: "Gym" },
+          gender: { id: 1, name: "woman" },
+          sizesInfo: [
+            {
+              size: {
+                id: 0,
+                name: "XX-Small",
+                shortName: "xxs",
+              },
+              amount: "10",
+            },
+            {
+              size: {
+                id: 1,
+                name: "X-Small",
+                shortName: "xs",
+              },
+              amount: "10",
+            },
+            {
+              size: {
+                id: 2,
+                name: "Small",
+                shortName: "s",
+              },
+              amount: "200",
+            },
+            {
+              size: {
+                id: 3,
+                name: "Medium",
+                shortName: "m",
+              },
+              amount: "10",
+            },
+            {
+              size: {
+                id: 4,
+                name: "Large",
+                shortName: "l",
+              },
+              amount: "40",
+            },
+            {
+              size: {
+                id: 5,
+                name: "X-Large",
+                shortName: "xxs",
+              },
+              amount: "40",
+            },
+            {
+              size: {
+                id: 6,
+                name: "XX-Large",
+                shortName: "xxl",
+              },
+              amount: "0",
+            },
+            {
+              size: {
+                id: 7,
+                name: "3X-Large",
+                shortName: "xxxl",
+              },
+              amount: "0",
+            },
+            {
+              size: {
+                id: 8,
+                name: "4X-Large",
+                shortName: "xxxxl",
+              },
+              amount: "0",
+            },
+          ],
+          color: {
+            id: 1,
+            name: "grey",
+            code: "#4D4A52",
+          },
+          allColors: [
+            {
+              productId: 95,
+              color: {
+                id: 22,
+                name: "beige",
+                code: "#F7EBE1",
+              },
+            },
+            {
+              productId: 96,
+              color: {
+                id: 7,
+                name: "light brown",
+                code: "#CABCA3",
+              },
+            },
+            {
+              productId: 97,
+              color: {
+                id: 1,
+                name: "grey",
+                code: "#4D4A52",
+              },
+            },
+            {
+              productId: 98,
+              color: {
+                id: 5,
+                name: "black",
+                code: "#141316",
+              },
+            },
+          ],
+          added: "2023-02-26T12:30:00.000-05:00",
+          newArrivals: true,
+          topSelling: true,
+          image: "97/card.jpg",
+          images: ["97/slider-0.jpg", "97/slider-1.jpg", "97/slider-2.jpg"],
+          icons: ["97/icon-0.jpg", "97/icon-1.jpg", "97/icon-2.jpg"],
+          availability: "true",
+          shortDescription:
+            "Ribbed leggings are the perfect choice for active and stylish girls! These women's leggings are a real find for those who value comfort and fashion.",
+          details: {
+            description:
+              "Seamless leggings are created for those who value comfort and quality. Ribbed leggings are the perfect choice for active and stylish girls! These women's leggings are a real find for those who value comfort and fashion. Thanks to their high rise and seamless design, they are perfect for fitness classes or everyday wear. The high waist makes leggings an excellent choice for girls who want to hide some figure flaws and highlight their beauty. Thanks to the slimming effect and elastic fabric, they are suitable for an adult woman or teenage girl. Black ribbed high-waisted leggings pair perfectly with any other item for a stylish and elegant look. High quality materials guarantee a long service life of the product, and the absence of pilling and fading after washing preserves its original appearance.",
+            composition: ["polyester 34%", "nylon 54%", "spandex 12%"],
+          },
+        },
+        {
+          id: "98",
+          sku: "1412874870",
+          title: "Leggings MAECO Sport",
+          price: 11.98,
+          currency: "USD",
+          currencyCode: "&#36;",
+          grade: 5.0,
+          discount: 0,
+          sales: 400,
+          type: { id: 1, name: "Trousers" },
+          dressStyle: { id: 3, name: "Gym" },
+          gender: { id: 1, name: "woman" },
+          sizesInfo: [
+            {
+              size: {
+                id: 0,
+                name: "XX-Small",
+                shortName: "xxs",
+              },
+              amount: "10",
+            },
+            {
+              size: {
+                id: 1,
+                name: "X-Small",
+                shortName: "xs",
+              },
+              amount: "10",
+            },
+            {
+              size: {
+                id: 2,
+                name: "Small",
+                shortName: "s",
+              },
+              amount: "200",
+            },
+            {
+              size: {
+                id: 3,
+                name: "Medium",
+                shortName: "m",
+              },
+              amount: "10",
+            },
+            {
+              size: {
+                id: 4,
+                name: "Large",
+                shortName: "l",
+              },
+              amount: "40",
+            },
+            {
+              size: {
+                id: 5,
+                name: "X-Large",
+                shortName: "xxs",
+              },
+              amount: "40",
+            },
+            {
+              size: {
+                id: 6,
+                name: "XX-Large",
+                shortName: "xxl",
+              },
+              amount: "0",
+            },
+            {
+              size: {
+                id: 7,
+                name: "3X-Large",
+                shortName: "xxxl",
+              },
+              amount: "0",
+            },
+            {
+              size: {
+                id: 8,
+                name: "4X-Large",
+                shortName: "xxxxl",
+              },
+              amount: "0",
+            },
+          ],
+          color: {
+            id: 5,
+            name: "black",
+            code: "#141316",
+          },
+          allColors: [
+            {
+              productId: 95,
+              color: {
+                id: 22,
+                name: "beige",
+                code: "#F7EBE1",
+              },
+            },
+            {
+              productId: 96,
+              color: {
+                id: 7,
+                name: "light brown",
+                code: "#CABCA3",
+              },
+            },
+            {
+              productId: 97,
+              color: {
+                id: 1,
+                name: "grey",
+                code: "#4D4A52",
+              },
+            },
+            {
+              productId: 98,
+              color: {
+                id: 5,
+                name: "black",
+                code: "#141316",
+              },
+            },
+          ],
+          added: "2023-02-26T12:30:00.000-05:00",
+          newArrivals: true,
+          topSelling: true,
+          image: "98/card.jpg",
+          images: ["98/slider-0.jpg", "98/slider-1.jpg", "98/slider-2.jpg"],
+          icons: ["98/icon-0.jpg", "98/icon-1.jpg", "98/icon-2.jpg"],
+          availability: "true",
+          shortDescription:
+            "Ribbed leggings are the perfect choice for active and stylish girls! These women's leggings are a real find for those who value comfort and fashion.",
+          details: {
+            description:
+              "Seamless leggings are created for those who value comfort and quality. Ribbed leggings are the perfect choice for active and stylish girls! These women's leggings are a real find for those who value comfort and fashion. Thanks to their high rise and seamless design, they are perfect for fitness classes or everyday wear. The high waist makes leggings an excellent choice for girls who want to hide some figure flaws and highlight their beauty. Thanks to the slimming effect and elastic fabric, they are suitable for an adult woman or teenage girl. Black ribbed high-waisted leggings pair perfectly with any other item for a stylish and elegant look. High quality materials guarantee a long service life of the product, and the absence of pilling and fading after washing preserves its original appearance.",
+            composition: ["polyester 34%", "nylon 54%", "spandex 12%"],
+          },
+        },
+      ],
     }
+  },
+  computed: {
+    getExtraPages() {
+      return this.extraPages
+    },
+  },
+  methods: {
+    downloadMoreProducts() {
+      this.extraPages += 1
+    },
   },
 }
 </script>
@@ -593,76 +1158,13 @@ export default {
     // flex-wrap: wrap;
     justify-content: center;
   }
-}
-.card {
-  cursor: pointer;
-  box-sizing: border-box;
-  display: flex;
-  width: 295px;
-  flex-direction: column;
-  position: relative;
-  transition: all 0.3s ease-in;
-  &__content {
+  &__more-cards {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  &__img-box {
-    box-sizing: border-box;
-    display: flex;
-    padding: 0px 13px 0px 14px;
+    padding-top: 52px;
+    padding-bottom: 36px;
+    column-gap: 20px;
+    row-gap: 36px;
     justify-content: center;
-    align-items: center;
-    border-radius: 20px;
-    background: #f0eeed;
-    position: relative;
-  }
-  &__img {
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 20px;
-    background: #f0eeed;
-    width: 295px;
-  }
-  &__img-box-hover {
-    transition: all 0.3s ease-in;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: #121212;
-    opacity: 0;
-    border-radius: 20px;
-  }
-  &__description {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  &__title {
-    white-space: nowrap;
-    box-sizing: border-box;
-    padding-bottom: 3px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  &__rating {
-    box-sizing: border-box;
-  }
-
-  @media (hover: hover) {
-    &:hover .card__img-box-hover {
-      background-color: #121212;
-      opacity: 0.2;
-    }
-  }
-  @media (hover: none) {
-    &:active {
-      position: absolute;
-      background-color: #121212;
-      opacity: 0.3;
-    }
   }
 }
 
@@ -687,31 +1189,13 @@ export default {
       justify-content: start;
       overflow-x: hidden;
     }
-  }
-  .card {
-    width: 224px;
-    &__content {
-      gap: 12px;
-    }
-    &__img-box {
-      border-radius: 16px;
-    }
-    &__img {
-      border-radius: 16px;
-      width: 224px;
-    }
-    &__img-box-hover {
-      border-radius: 16px;
-    }
-    &__description {
-      gap: 8px;
-    }
-    &__title {
-      padding-bottom: 0px;
-      font-size: 16px;
-    }
-    &__price {
-      padding-top: 4px;
+    &__more-cards {
+      padding-top: 32px;
+      padding-bottom: 24px;
+      column-gap: 16px;
+      row-gap: 24px;
+      justify-content: start;
+      overflow-x: hidden;
     }
   }
 }
@@ -732,35 +1216,16 @@ export default {
       row-gap: 24px;
       justify-content: start;
     }
+    &__more-cards {
+      padding-top: 24px;
+      padding-bottom: 24px;
+      column-gap: 10px;
+      row-gap: 24px;
+      justify-content: start;
+      flex-wrap: wrap;
+    }
     &__card {
       height: 309px;
-    }
-  }
-  .card {
-    width: 173px;
-    height: 309px;
-    // &__content {
-    //   gap: 12px;
-    // }
-    &__img-box {
-      border-radius: 12px;
-    }
-    &__img {
-      border-radius: 12px;
-      width: 173px;
-    }
-    &__img-box-hover {
-      border-radius: 12px;
-    }
-    &__description {
-      gap: 11px;
-    }
-    &__title {
-      padding-bottom: 0px;
-    }
-    &__price {
-      padding-top: 4px;
-      flex-wrap: wrap;
     }
   }
 }
