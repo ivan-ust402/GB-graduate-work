@@ -20,6 +20,7 @@ export default {
 
 <style lang="scss" scoped>
 .button-secondary-color {
+  // z-index: -2;
   box-sizing: border-box;
   display: flex;
   min-width: 218px;

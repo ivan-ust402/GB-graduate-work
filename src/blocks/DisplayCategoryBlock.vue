@@ -22,57 +22,27 @@
               <h6 class="card__title">
                 {{ product.title.toUpperCase() }}
               </h6>
-              <div class="card__rating rating">
-                <StarsComponent class="rating__stars" :grade="product.grade"/>
-                <div class="rating__block">
-                  <p class="rating__text">
-                    <span class="rating__grade">{{ product.grade }}</span
-                    >5
-                  </p>
-                </div>
-              </div>
-              <div class="card__price price">
-                <div class="price__price">
-                  <span
-                    v-html="product.currencyCode"
-                    class="price__price"
-                  ></span
-                  >{{ product.price }}
-                </div>
-                <div
-                  class="price__price price__price_old"
-                  v-if="Number(product.discount) !== 0"
-                >
-                  <span
-                    v-html="product.currencyCode"
-                    class="price__price price__price_old"
-                  ></span
-                  >{{
-                    (
-                      product.price -
-                      (product.price * product.discount) / 100
-                    ).toFixed(2)
-                  }}
-                </div>
-                <div
-                  class="price__discount"
-                  v-if="Number(product.discount) !== 0"
-                >
-                  -{{ product.discount }}%
-                </div>
-              </div>
+              <RatingComponent class="card__rating" :grade="product.grade" />
+              <PriceComponent 
+                class="card__price"
+                :price="product.price" 
+                :discount="product.discount"
+                :currencyHTMLCode="product.currencyCode"
+              />
             </div>
           </div>
         </div>
       </div>
     </div>
-    <ButtonSecondaryColor class="offer-with-button__button" text="View more"/>
+    <ButtonSecondaryColor class="offer-with-button__button" text="View more" />
   </div>
 </template>
 
 <script>
-import ButtonSecondaryColor from '@/components/ButtonSecondaryColor.vue';
-import StarsComponent from '@/components/StarsComponent.vue';
+import ButtonSecondaryColor from "@/components/ButtonSecondaryColor.vue"
+import PriceComponent from "@/components/PriceComponent.vue"
+import RatingComponent from "@/components/RatingComponent.vue"
+import StarsComponent from "@/components/StarsComponent.vue"
 
 export default {
   props: {
@@ -84,6 +54,8 @@ export default {
   components: {
     ButtonSecondaryColor,
     StarsComponent,
+    RatingComponent,
+    PriceComponent
   },
   data() {
     return {
@@ -693,66 +665,6 @@ export default {
     }
   }
 }
-.rating {
-  display: flex;
-  flex-direction: row;
-  gap: 13px;
-  height: 17px;
-  // &__block {
-  // }
-  &__text {
-    color: rgba(0, 0, 0, 0.6);
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-  }
-  &__grade {
-    color: var(--Black, #121212);
-    &::after {
-      content: "/";
-    }
-  }
-}
-.price {
-  display: flex;
-  font-display: row;
-  gap: 12px;
-  &__price {
-    color: #121212;
-    // font-family: Satoshi;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    &_old {
-      color: #999;
-      font-size: 24px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: normal;
-      text-decoration-line: line-through;
-    }
-  }
-  &__discount {
-    display: flex;
-    width: 58px;
-    padding: 6px 14px;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    border-radius: 62px;
-    background: rgba(255, 51, 51, 0.1);
-    color: #f33;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-  }
-}
-
 
 @media (max-width: 1024px) {
   .offer-with-button {
@@ -802,35 +714,6 @@ export default {
       padding-top: 4px;
     }
   }
-  .rating {
-    gap: 10px;
-    height: 14px;
-    &__text {
-      font-size: 11px;
-    }
-    &__grade {
-      font-size: 11px;
-      &::after {
-        content: "/";
-      }
-    }
-  }
-  .price {
-    &__price {
-      font-size: 18px;
-      &_old {
-        font-size: 18px;
-      }
-    }
-    &__discount {
-      width: 44px;
-      padding: 5px 11px;
-      gap: 9px;
-      border-radius: 47px;
-      font-size: 10px;
-    }
-  }
-
 }
 
 @media (max-width: 768px) {
@@ -847,7 +730,7 @@ export default {
       padding-bottom: 24px;
       column-gap: 10px;
       row-gap: 24px;
-      justify-content: center;
+      justify-content: start;
     }
     &__card {
       height: 309px;
@@ -878,46 +761,6 @@ export default {
     &__price {
       padding-top: 4px;
       flex-wrap: wrap;
-    }
-  }
-  .rating {
-    gap: 11px;
-    height: 16px;
-    &__block {
-      align-self: center;
-    }
-    &__text {
-      font-size: 12px;
-      font-weight: 400;
-      line-height: 22px;
-    }
-    &__grade {
-      font-size: 12px;
-      &::after {
-        content: "/";
-      }
-    }
-  }
-  .price {
-    row-gap: 4px;
-    &__price {
-      flex-wrap: wrap;
-      overflow: visible;
-      order: 3;
-      font-size: 20px;
-      &_old {
-        order: 1;
-        font-size: 20px;
-      }
-    }
-    &__discount {
-      order: 2;
-      width: 42px;
-      padding: 6px 14px;
-      gap: 12px;
-      border-radius: 62px;
-      font-size: 10px;
-      font-weight: 500;
     }
   }
 }
