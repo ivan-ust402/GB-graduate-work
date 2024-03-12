@@ -115,6 +115,7 @@ export default {
     display: flex;
     flex-direction: column;
     gap: 24px;
+    z-index: 1;
     & :last-child .subdropdown__link {
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
@@ -125,6 +126,7 @@ export default {
     }
 
     &__link {
+      z-index: 1;
       width: 100%;
       padding: 0;
       justify-content: space-between;

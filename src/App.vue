@@ -1,6 +1,10 @@
 <template>
-  <AppHeader class="test"/>
-  <!-- <nav class="center">
+  <div
+    class="mainOverlay"
+    :class="{ mainOverlay_active: getBurgerMenuIsActive }"
+  >
+    <AppHeader class="test" />
+    <!-- <nav class="center">
     <router-link to="/">Home</router-link> |
     <router-link to="/login">Login</router-link> |
     <router-link to="/register">Registration</router-link> |
@@ -9,15 +13,16 @@
     <router-link to="/cart">Cart</router-link> |
     <router-link to="/notfound">404</router-link>&nbsp;|
   </nav> -->
-  <router-view />
-  <ButtonTopOfPage :class="{hideButtonToUp: getBurgerMenuIsActive}"/>
-  <AppFooter />
+    <router-view />
+    <ButtonTopOfPage :class="{ hideButtonToUp: getBurgerMenuIsActive }" />
+    <AppFooter />
+  </div>
 </template>
 <script>
 import AppHeader from "@/blocks/AppHeader"
 import AppFooter from "@/blocks/AppFooter"
 import ButtonTopOfPage from "./components/ButtonTopOfPage.vue"
-import { mapGetters } from "vuex";
+import { mapGetters } from "vuex"
 
 export default {
   name: "App",
@@ -27,16 +32,29 @@ export default {
     ButtonTopOfPage,
   },
   computed: {
-    ...mapGetters(["getBurgerMenuIsActive"])
-  }
+    ...mapGetters(["getBurgerMenuIsActive"]),
+  },
 }
 </script>
 
 <style lang="scss">
-
+.mainOverlay {
+  position: relative;
+  &_active::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+  }
+}
 .hideButtonToUp {
   visibility: hidden;
 }
+
 * {
   margin: 0;
   padding: 0;
@@ -149,5 +167,4 @@ a svg {
     padding-right: calc(50% - 178px);
   }
 }
-
 </style>
