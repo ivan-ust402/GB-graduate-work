@@ -22,7 +22,7 @@
 import AppHeader from "@/blocks/AppHeader"
 import AppFooter from "@/blocks/AppFooter"
 import ButtonTopOfPage from "./components/ButtonTopOfPage.vue"
-import { mapGetters } from "vuex"
+import { mapActions, mapGetters } from "vuex"
 
 export default {
   name: "App",
@@ -33,6 +33,9 @@ export default {
   },
   computed: {
     ...mapGetters(["getBurgerMenuIsActive"]),
+  },
+  methods: {
+    ...mapActions(["setTopSellingProductsArray", "setNewArrivalsProductsArray"])
   },
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
   <a
     href="#"
-    class="button-secondary-color"
+    class="button-selection-color"
   >
     {{ text }}
   </a>
@@ -19,7 +19,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.button-secondary-color {
+.button-selection-color {
   // z-index: -2;
   box-sizing: border-box;
   display: flex;
@@ -32,7 +32,8 @@ export default {
   flex-shrink: 0;
   border-radius: 62px;
   border: 1px solid #e8e8e8;
-  color: #121212;
+  background: #121212;
+  color: #fff;
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
@@ -40,18 +41,22 @@ export default {
   transition: all 0.3s ease-in;
   @media (hover: hover) {
     &:hover {
-      background: #e8e8e8;
+      background: #fff;
+      border: 1px solid #222;
+      color: #222;
     }
   }
   @media (hover: none) {
     &:active {
-      background: #e8e8e8;
+      background: #fff;
+      border: 1px solid #222;
+      color: #222;
     }
   }
 }
 
 @media (max-width: 1024px) {
-  .button-secondary-color {
+  .button-selection-color {
     width: 100%;
     height: 46px;
     font-size: 14px;
