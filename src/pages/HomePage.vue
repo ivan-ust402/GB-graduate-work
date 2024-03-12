@@ -2,12 +2,15 @@
   <section class="homepage">
     <DisplayHeroBlock />
     <DisplayCategoryBlock 
+      class="center"
       id="new-arrivals"
       title="NEW ARRIVALs"
     />
     <DisplayCategoryBlock 
+      class="center"
       id="top-sellings"
       title="Top Selling"
+      borderBottom="false"
     />
   </section>
 </template>

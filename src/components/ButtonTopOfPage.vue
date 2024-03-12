@@ -59,7 +59,7 @@ export default {
 <style lang="scss" scoped>
 #scrollToTopBtn {
   position: fixed;
-  top: 40px;
+  top: 140px;
   right: 40px;
 }
 .topOfPageButton {
@@ -73,6 +73,7 @@ export default {
   opacity: 1;
   transition: opacity 0.3s ease-in;
   z-index: 2;
+  // background-color: #Fff;
   @media (hover: hover) {
     &:hover {
       opacity: 0.5;
@@ -83,5 +84,10 @@ export default {
       opacity: 0.5;
     }
   }
+}
+@media (max-width: 768px) {
+  #scrollToTopBtn {
+  top: 160px;
+}
 }
 </style>

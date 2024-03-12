@@ -1,5 +1,8 @@
 <template>
-  <div class="offer-with-button">
+  <div 
+    class="offer-with-button"
+    :class="{border_bottom: borderBottom}"
+  >
     <div class="offer">
       <h2 class="offer__title">{{ title.toUpperCase() }}</h2>
       <div class="offer__cards">
@@ -540,6 +543,10 @@ export default {
         },
       ],
     },
+    borderBottom: {
+      type: Boolean,
+      default: () => true
+    }
   },
   components: {
     CardProductMainComponent,
@@ -1130,12 +1137,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.border_bottom {
+  border-bottom: 1px solid #e8e8e8;
+}
 .offer-with-button {
   display: flex;
   flex-direction: column;
   padding-top: 62px;
   padding-bottom: 64px;
-  border-bottom: 1px solid #e8e8e8;
   &__button {
     align-self: center;
   }
