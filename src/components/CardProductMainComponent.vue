@@ -189,7 +189,7 @@ export default {
   }
   &__img-box-hover {
     transition: all 0.3s ease-in;
-    // position: absolute;
+    position: absolute;
     width: 100%;
     height: 100%;
     background-color: #121212;

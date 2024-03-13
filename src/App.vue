@@ -62,8 +62,6 @@ export default {
   margin: 0;
   padding: 0;
   scroll-behavior: smooth;
-  color: #121212;
-  font-size: 14px;
 }
 // .main-wrapper {
 //   min-height: 50vh;

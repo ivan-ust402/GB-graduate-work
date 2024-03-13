@@ -216,7 +216,7 @@ export default {
   display: flex;
   flex-direction: row;
   background: #121212;
-  gap: 106px;
+  justify-content: space-between;
   padding-top: 43px;
   padding-bottom: 43px;
 }

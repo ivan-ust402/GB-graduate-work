@@ -1,10 +1,10 @@
 <template>
   <div 
     class="offer-with-button"
-    :class="{border_bottom: borderBottom}"
+    :class="{ border_bottom: borderBottom }"
   >
     <div class="offer">
-      <h2 class="offer__title">{{ title.toUpperCase() }}</h2>
+      <h2 class="offer__title">{{ title.toUpperCase() }} </h2>
       <div class="offer__cards">
         <CardProductMainComponent
           class="offer__card"

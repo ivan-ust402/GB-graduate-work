@@ -9,8 +9,15 @@
     <DisplayCategoryBlock 
       class="center"
       id="top-sellings"
-      title="Top Selling"
-      borderBottom="false"
+      title="Top Sellings"
+      :borderBottom="false"
+    />
+    <DisplayStyleTypesBlock 
+      class="center style-type" 
+      title="Browse by dress style"
+    />
+    <DisplayReviewSliderBlock 
+      title="OUR HAPPY CUSTOMERS"
     />
   </section>
 </template>
@@ -18,12 +25,16 @@
 <script>
 import DisplayCategoryBlock from "@/blocks/DisplayCategoryBlock.vue"
 import DisplayHeroBlock from "@/blocks/DisplayHeroBlock.vue";
+import DisplayReviewSliderBlock from "@/blocks/DisplayReviewSliderBlock.vue";
+import DisplayStyleTypesBlock from "@/blocks/DisplayStyleTypesBlock.vue";
 import { mapGetters } from "vuex";
 
 export default {
   components: {
     DisplayCategoryBlock,
-    DisplayHeroBlock
+    DisplayHeroBlock,
+    DisplayStyleTypesBlock,
+    DisplayReviewSliderBlock
   },
 
   computed: {
@@ -32,4 +43,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.style-type {
+  padding-top: 16px;
+}
+</style>
