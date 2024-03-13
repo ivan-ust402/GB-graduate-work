@@ -37,8 +37,8 @@ export default {
     },
   },
   components: {
-    StarsComponent
-  }
+    StarsComponent,
+  },
 }
 </script>
 
@@ -97,7 +97,7 @@ export default {
 @media (max-width: 1024px) {
   .card {
     gap: 12px;
-    width: 356px;
+    width: 340px;
     height: 182px;
     padding: 24px;
     &__info {
@@ -125,5 +125,9 @@ export default {
 }
 
 @media (max-width: 768px) {
+  .card {
+    // gap: 12px;
+    width: 356px;
+  }
 }
 </style>
