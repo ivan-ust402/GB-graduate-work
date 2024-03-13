@@ -1,11 +1,14 @@
 <template>
-  <div 
+  <div
     class="offer-with-button"
-    :class="{ border_bottom: borderBottom }"
+    :class="{ border_bottom: borderBottom, }"
   >
     <div class="offer">
-      <h2 class="offer__title">{{ title.toUpperCase() }} </h2>
-      <div class="offer__cards">
+      <h2 class="offer__title">{{ title.toUpperCase() }}</h2>
+      <div 
+        class="offer__cards"
+        :class="{ cards_padding_bottom: button, cards_padding_bottom_without_button: !button}"
+      >
         <CardProductMainComponent
           class="offer__card"
           v-for="product in products"
@@ -23,6 +26,7 @@
       </div>
     </div>
     <ButtonSecondaryColor
+      v-if="button"
       class="offer-with-button__button"
       text="View more"
       @click.prevent="downloadMoreProducts"
@@ -545,8 +549,12 @@ export default {
     },
     borderBottom: {
       type: Boolean,
-      default: () => true
-    }
+      default: () => true,
+    },
+    button: {
+      type: Boolean,
+      default: () => true,
+    },
   },
   components: {
     CardProductMainComponent,
@@ -1137,6 +1145,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.cards_padding_bottom {
+  padding-bottom: 36px;
+}
+.cards_padding_bottom_without_button {
+  padding-bottom: 0;
+}
 .border_bottom {
   border-bottom: 1px solid #e8e8e8;
 }
@@ -1161,7 +1175,7 @@ export default {
   &__cards {
     display: flex;
     padding-top: 52px;
-    padding-bottom: 36px;
+    // padding-bottom: 36px;
     column-gap: 20px;
     row-gap: 36px;
     // flex-wrap: wrap;

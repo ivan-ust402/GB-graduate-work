@@ -128,7 +128,7 @@ export default {
     }
 
     this.sliderAutoPlayInterval = setInterval(() => {
-      this.flickLeftWithoutClearInterval()
+      this.flickRightWithoutClearInterval()
     }, 5000)
 
     updateWidth() // Вызываем функцию для первоначального получения ширины
@@ -150,7 +150,7 @@ export default {
     flickLeft() {
       clearInterval(this.sliderAutoPlayInterval)
       this.sliderAutoPlayInterval = setInterval(() => {
-        this.flickLeftWithoutClearInterval()
+        this.flickRightWithoutClearInterval()
       }, 5000)
       if (this.getReviewsArrayLength > this.slideCount) {
         if (this.currentSlideIndex <= 0) {
@@ -172,8 +172,20 @@ export default {
     flickRight() {
       clearInterval(this.sliderAutoPlayInterval)
       this.sliderAutoPlayInterval = setInterval(() => {
-        this.flickLeftWithoutClearInterval()
+        this.flickRightWithoutClearInterval()
       }, 5000)
+      if (this.getReviewsArrayLength > this.slideCount) {
+        if (
+          this.currentSlideIndex >=
+          this.getReviewsArrayLength - this.slideCount
+        ) {
+          this.currentSlideIndex = 0
+        } else {
+          this.currentSlideIndex++
+        }
+      }
+    },
+    flickRightWithoutClearInterval() {
       if (this.getReviewsArrayLength > this.slideCount) {
         if (
           this.currentSlideIndex >=

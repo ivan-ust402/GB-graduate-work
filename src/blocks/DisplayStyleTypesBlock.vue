@@ -91,7 +91,7 @@ export default {
   height: 289px;
   overflow: hidden;
   position: relative;
-  z-index: 2;
+  z-index: 0;
   border-radius: 20px;
   display: flex;
   background-color: #fff;

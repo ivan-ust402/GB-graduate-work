@@ -76,6 +76,7 @@ export default {
   scroll-behavior: smooth;
   color: #121212;
   // font-size: 14px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.2);
 }
 // .main-wrapper {
 //   min-height: 50vh;
