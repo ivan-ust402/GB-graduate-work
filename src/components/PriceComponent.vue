@@ -48,7 +48,8 @@ export default {
     // font-family: Satoshi;
     font-size: 24px;
     font-style: normal;
-    font-weight: 700;
+    // font-weight: 700;
+    font-family: "satoshibold";
     line-height: normal;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -56,7 +57,7 @@ export default {
       color: #999;
       font-size: 24px;
       font-style: normal;
-      font-weight: 700;
+      // font-weight: 700;
       line-height: normal;
       text-decoration-line: line-through;
     }
@@ -77,7 +78,8 @@ export default {
     color: #f33;
     font-size: 12px;
     font-style: normal;
-    font-weight: 500;
+    // font-weight: 500;
+    font-family: "satoshimedium";
     line-height: normal;
   }
 }
@@ -119,7 +121,6 @@ export default {
       gap: 12px;
       border-radius: 62px;
       font-size: 10px;
-      font-weight: 500;
     }
   }
 }

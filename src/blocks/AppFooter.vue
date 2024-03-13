@@ -147,12 +147,13 @@ export default {
   }
 
   &__title {
-    font-family: "Integral CF";
+    // font-family: "Integral CF";
+    font-family: "integral_cfregular";
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     font-size: 32px;
-    font-weight: 400;
+    // font-weight: 400;
     line-height: 100%; /* 32px */
   }
 
@@ -211,7 +212,7 @@ export default {
     color: #121212;
     // font-family: Satoshi;
     font-size: 16px;
-    font-weight: 500;
+    // font-weight: 500;
     background-color: white;
     justify-content: center;
     align-items: center;
@@ -285,6 +286,7 @@ export default {
     flex-direction: column;
     gap: 33px;
     padding: 24px;
+    height: 275px;
   }
   .payments {
     gap: 14px;

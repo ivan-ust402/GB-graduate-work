@@ -1187,7 +1187,8 @@ export default {
       align-self: flex-start;
       text-align: center;
       font-size: 32px;
-      font-weight: 400;
+      // font-weight: 400;
+      font-family: "integral_cfregular";
       line-height: 36px;
     }
     &__cards {

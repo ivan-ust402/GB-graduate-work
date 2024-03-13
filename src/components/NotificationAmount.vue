@@ -25,7 +25,8 @@ export default {
   color: white;
   font-feature-settings: "clig" off, "liga" off;
   font-size: 6.47px;
-  font-weight: 700;
+  // font-weight: 700;
+  font-family: "satoshibold";
   line-height: 5.392px;
   z-index: 100;
 }

@@ -46,12 +46,14 @@ export default {
   white-space: nowrap;
   font-size: 16px;
   font-style: normal;
-  font-weight: 400;
+  // font-weight: 400;
+  font-family: "satoshiregular";
   line-height: normal;
   &__link {
     font-size: 16px;
     font-style: normal;
-    font-weight: 400;
+    font-family: "satoshiregular";
+    // font-weight: 400;
     line-height: normal;
     opacity: 1;
     transition: opacity 0.3s ease-in;
@@ -67,7 +69,8 @@ export default {
     flex-direction: column;
     gap: 32px;
     &__link {
-      font-weight: 700;
+      // font-weight: 700;
+      font-family: "satoshibold";
       line-height: normal;
       text-transform: uppercase;
       display: flex;

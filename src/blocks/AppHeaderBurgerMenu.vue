@@ -129,7 +129,8 @@ export default {
   }
 
   &__user {
-    font-weight: 700;
+    // font-weight: 700;
+    font-family: "satoshibold";
     line-height: normal;
     text-transform: uppercase;
   }
@@ -138,7 +139,8 @@ export default {
 .logout-btn {
   font-size: 14px;
   font-style: normal;
-  font-weight: 400;
+  // font-weight: 400;
+  font-family: "satoshiregular";
   line-height: normal;
   color: #222;
 }

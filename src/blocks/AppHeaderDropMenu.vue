@@ -86,7 +86,8 @@ export default {
     gap: 4px;
     position: relative;
     font-size: 16px;
-    font-weight: 400;
+    // font-weight: 400;
+    font-family: "satoshiregular";
     opacity: 1;
     transition: opacity 0.3s ease-in;
     @media (hover: hover) {
@@ -134,7 +135,8 @@ export default {
 @media (max-width: 1024px) {
   .dropmenu {
     &__button {
-      font-weight: 700;
+      // font-weight: 700;
+      font-family: "satoshibold";
       line-height: normal;
       text-transform: uppercase;
       display: flex;

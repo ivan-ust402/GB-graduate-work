@@ -107,7 +107,8 @@ export default {
     position: relative;
     color: #222;
     font-size: 16px;
-    font-weight: 400;
+    // font-weight: 400;
+    font-family: "satoshiregular";
     &:hover {
       border-bottom: 1px solid #f0eeed;
       background: #f0eeed;
@@ -140,7 +141,8 @@ export default {
       width: 100%;
       padding: 0;
       text-transform: uppercase;
-      font-weight: 700;
+      // font-weight: 700;
+      font-family: "satoshibold";
       justify-content: space-between;
       align-items: center;
       border-bottom: none;

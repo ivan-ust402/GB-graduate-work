@@ -38,7 +38,7 @@ export default {}
     // font-family: Satoshi;
     font-size: 16px;
     font-style: normal;
-    font-weight: 400;
+    // font-weight: 400;
     line-height: normal;
   }
   &__button {
@@ -58,7 +58,7 @@ export default {}
     // font-family: Satoshi;
     font-size: 16px;
     font-style: normal;
-    font-weight: 500;
+    // font-weight: 500;
     line-height: normal;
     transition: all .3s ease-in;
     &:hover {

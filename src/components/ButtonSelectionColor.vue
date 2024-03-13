@@ -36,7 +36,6 @@ export default {
   color: #fff;
   font-size: 16px;
   font-style: normal;
-  font-weight: 500;
   line-height: normal;
   transition: all 0.3s ease-in;
   @media (hover: hover) {
@@ -60,7 +59,6 @@ export default {
     width: 100%;
     height: 46px;
     font-size: 14px;
-    font-weight: 400;
   }
 }
 

@@ -133,27 +133,28 @@ export default {
     // font-family: Satoshi;
     font-size: 16px;
     font-style: normal;
-    font-weight: 400;
+    // font-weight: 400;
     line-height: normal;
     width: 577px;
   }
   &__title {
     box-sizing: border-box;
     color: #121212;
+    width: 575px;
     /* Desktop/Headings/H1 */
-    font-family: "Integral CF";
+    // font-family: "Integral CF";
     font-size: 64px;
     font-style: normal;
-    font-weight: 400;
+    // font-weight: 400;
     line-height: 64px; /* 100% */
   }
   &__text {
     color: #222;
     /* Desktop/Text/Paragraphs/Regular */
-    font-family: Satoshi;
+    // font-family: Satoshi;
     font-size: 16px;
     font-style: normal;
-    font-weight: 400;
+    // font-weight: 400;
     line-height: normal;
   }
 
@@ -191,23 +192,26 @@ export default {
     display: flex;
     flex-direction: column;
     gap: 16px;
+    
   }
   &__title {
+    font-family: "satoshibold";
     color: #121212;
-    font-family: Satoshi;
+    // font-family: Satoshi;
     font-size: 36px;
     font-style: normal;
-    font-weight: 700;
+    // font-weight: 700;
     line-height: normal;
   }
   &__text {
     color: #222;
-    font-family: Satoshi;
+    // font-family: Satoshi;
     text-wrap: nowrap;
     font-size: 16px;
     font-style: normal;
-    font-weight: 400;
+    // font-weight: 400;
     line-height: normal;
+    
   }
 }
 
@@ -321,7 +325,11 @@ export default {
     }
     &__text-block {
       gap: 10px;
-      width: 100%;
+      width: 358px;
+    }
+
+    &__title {
+      width: 358px;
     }
 
     &__image-block {

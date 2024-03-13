@@ -46,7 +46,8 @@ export default {}
     outline: none;
     font-size: 16px;
     font-style: normal;
-    font-weight: 400;
+    font-family: "satoshiregular";
+    // font-weight: 400;
     line-height: normal;
     &::placeholder {
       opacity: 0.4;

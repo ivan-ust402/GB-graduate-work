@@ -36,7 +36,8 @@ export default {
     color: rgba(0, 0, 0, 0.6);
     font-size: 14px;
     font-style: normal;
-    font-weight: 400;
+    // font-weight: 400;
+    // font-family: "";
     line-height: normal;
   }
   &__grade {
@@ -72,7 +73,6 @@ export default {
     }
     &__text {
       font-size: 12px;
-      font-weight: 400;
       line-height: 22px;
     }
     &__grade {

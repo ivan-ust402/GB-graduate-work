@@ -44,6 +44,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.homepage {
+  padding-bottom: 16px;
+}
 .style-type {
   padding-top: 16px;
 }

@@ -68,11 +68,12 @@ export default {
     align-items: center;
     align-content: center;
     color: #121212;
-    font-family: "Satoshi";
+    // font-family: "Satoshi";
     font-size: 20px;
-    font-weight: 700;
+    // font-weight: 700;
     line-height: 22px; /* 110% */
     text-transform: uppercase;
+    font-family: "satoshibold";
   }
   &__verify {
     height: 24px;
@@ -87,23 +88,26 @@ export default {
     overflow: hidden;
     text-overflow: ellipsis;
     color: var(--Grey, #222);
-    font-family: "Satoshi";
+    // font-family: "Satoshi";
     font-size: 16px;
-    font-weight: 400;
+    // font-weight: 400;
+    font-family: "satoshiregular";
   }
 }
 @media (max-width: 1024px) {
   .card {
     gap: 12px;
-    width: 358px;
+    width: 356px;
     height: 182px;
     padding: 24px;
     &__info {
       gap: 9px;
+      justify-content: center;
     }
     &__title {
       font-size: 14px;
-      font-weight: 500;
+      font-family: "satoshimedium";
+      // font-weight: 500;
       line-height: 18px;
     }
     &__verify {
@@ -114,7 +118,7 @@ export default {
       max-width: 310px;
       max-height: 76px;
       font-size: 14px;
-      font-weight: 400;
+      // font-weight: 400;
       -webkit-line-clamp: 4;
     }
   }

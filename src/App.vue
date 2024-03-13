@@ -41,6 +41,18 @@ export default {
 </script>
 
 <style lang="scss">
+@import url("@/assets/fonts/stylesheet.css");
+// satoshibold - 700
+// satoshimedium - 500
+// satoshiregular - 400
+// integral_cfbold - 700
+// integral_cfmedium - 500
+// integral_cfregular - 400
+// gilroybold - 700
+// gilroymedium - 500
+// gilroyregular - 400
+
+
 .mainOverlay {
   position: relative;
   &_active::before {
@@ -62,26 +74,28 @@ export default {
   margin: 0;
   padding: 0;
   scroll-behavior: smooth;
+  color: #121212;
+  // font-size: 14px;
 }
 // .main-wrapper {
 //   min-height: 50vh;
 // }
 
 body {
-  font-family: "Satoshi", sans-serif;
+  font-family: "satoshiregular", Arial, Helvetica, sans-serif;
 }
 
 h1,
 h2,
 h4 {
-  font-family: "Integral CF", sans-serif;
+  font-family: "integral_cfregular", Arial, Helvetica, sans-serif;
   color: #121212;
 }
 
 h3,
 h5,
 h6 {
-  font-family: "Satoshi", sans-serif;
+  font-family: "satoshiregular", Arial, Helvetica, sans-serif;
 }
 
 h1 {
@@ -111,7 +125,7 @@ h6 {
 
 a,
 button {
-  font-family: "Satoshi", sans-serif;
+  font-family: "satoshimedium", Arial, Helvetica, sans-serif;
   text-decoration: none;
 }
 
@@ -121,7 +135,7 @@ button:hover {
 }
 
 input {
-  font-family: "Satoshi", sans-serif;
+  font-family: "satoshi regular", Arial, Helvetica, sans-serif;
   outline: none;
 }
 

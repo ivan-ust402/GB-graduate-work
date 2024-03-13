@@ -88,6 +88,7 @@ export default {
 @media (max-width: 768px) {
   #scrollToTopBtn {
   top: 160px;
+  right: 30px;
 }
 }
 </style>
