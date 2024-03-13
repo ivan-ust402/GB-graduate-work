@@ -119,7 +119,8 @@ export default {
       max-height: 76px;
       font-size: 14px;
       // font-weight: 400;
-      -webkit-line-clamp: 4;
+      -webkit-line-clamp: 5;
+      line-height: 110%;
     }
   }
 }
