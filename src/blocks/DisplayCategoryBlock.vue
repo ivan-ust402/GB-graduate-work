@@ -1191,7 +1191,7 @@ export default {
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1239px) {
   .offer-with-button {
     padding-top: 40px;
     padding-bottom: 40px;

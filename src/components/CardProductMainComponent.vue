@@ -227,7 +227,7 @@ export default {
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1239px) {
   .card {
     width: 224px;
     &__content {

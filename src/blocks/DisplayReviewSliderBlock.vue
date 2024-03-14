@@ -87,7 +87,7 @@ export default {
     line-height: normal;
   }
 }
-@media (max-width: 1024px) {
+@media (max-width: 1239px) {
   .reviews {
     gap: 30px;
     padding-top: 40px;

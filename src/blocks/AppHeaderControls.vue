@@ -160,7 +160,7 @@ export default {
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1239px) {
   .user-control {
     visibility: hidden;
     display: none;

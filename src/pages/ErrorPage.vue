@@ -66,7 +66,7 @@ export default {}
     }
   }
 }
-@media (max-width: 1024px) {
+@media (max-width: 1239px) {
   .notfound {
   padding-top: 80px;
   padding-bottom: 60px;

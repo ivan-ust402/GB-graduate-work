@@ -112,11 +112,11 @@ export default {
   },
   mounted() {
     const updateWidth = () => {
-      if (window.innerWidth > 1024) {
+      if (window.innerWidth > 1239) {
         this.slideWidth = 420
         this.slideCount = 3
         this.currentSlideIndex = 0
-      } else if (window.innerWidth <= 1024 && window.innerWidth > 768) {
+      } else if (window.innerWidth <= 1239 && window.innerWidth > 768) {
         this.slideWidth = 360
         this.slideCount = 2
         this.currentSlideIndex = 0
@@ -225,7 +225,7 @@ export default {
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1239px) {
   .slider {
     &__display {
       justify-content: flex-start;

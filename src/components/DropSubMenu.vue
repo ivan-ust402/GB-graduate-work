@@ -107,7 +107,7 @@ export default {
   visibility: visible;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1239px) {
   .subdropdown {
     padding-top: 32px;
     position: static;

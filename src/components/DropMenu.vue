@@ -119,7 +119,7 @@ export default {
     position: relative;
   }
 }
-@media (max-width: 1024px) {
+@media (max-width: 1239px) {
   .dropdown {
     padding-top: 32px;
     box-shadow: none;

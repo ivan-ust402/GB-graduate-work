@@ -148,7 +148,7 @@ export default {
   visibility: visible;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1239px) {
   .burgermenu {
     display: flex;
     position: relative;

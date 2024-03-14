@@ -236,7 +236,7 @@ export default {
   max-height: 275px;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1239px) {
   .footer {
     padding-top: 60px;
     padding-bottom: 60px;

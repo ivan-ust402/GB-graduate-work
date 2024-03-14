@@ -170,7 +170,7 @@ a svg {
 //   }
 // }
 
-@media (max-width: 1024px) {
+@media (max-width: 1239px) {
   .center {
     padding-left: calc(50% - 352px);
     padding-right: calc(50% - 352px);

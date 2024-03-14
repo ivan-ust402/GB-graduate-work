@@ -94,7 +94,7 @@ export default {
     font-family: "satoshiregular";
   }
 }
-@media (max-width: 1024px) {
+@media (max-width: 1239px) {
   .card {
     gap: 12px;
     width: 340px;

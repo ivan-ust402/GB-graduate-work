@@ -225,7 +225,7 @@ export default {
   padding-bottom: 43px;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1239px) {
   .hero {
     &__top {
       padding-top: 60px;

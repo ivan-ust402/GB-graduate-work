@@ -84,7 +84,7 @@ export default {
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1239px) {
   .price {
     &__price {
       font-size: 18px;

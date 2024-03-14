@@ -54,7 +54,7 @@ export default {
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1239px) {
   .button-selection-color {
     width: 100%;
     height: 46px;
