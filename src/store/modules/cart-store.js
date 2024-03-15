@@ -15,6 +15,9 @@ export default {
     getCartProductsCount(state) {
       return state.cartProducts.length
     },
+    getCartProductById(state, id) {
+      return state.cartProducts.find(product => product.id === id)
+    },
     getPurchasedProducts(state) {
       return state.purchasedProducts
     },
@@ -40,11 +43,18 @@ export default {
         )
       }, 0)
     },
+    getPromoCodeDiscountValue(state, getters) {
+      return (
+        (getters.getCartSubtotalPrice - getters.getCartProductsDiscount) *
+        getters.getPromoCodeAmount
+      )
+    },
+
     getCartTotalPrice(getters) {
       return (
         getters.getCartSubtotalPrice -
         getters.getCartProductsDiscount -
-        getters.getPromoCodeAmount +
+        getters.getPromoCodeDiscountValue +
         getters.getShippingCost
       )
     },
@@ -75,16 +85,22 @@ export default {
       }
     },
     APPLY_PROMO_CODE(state, promoCode) {
-      if (promoCode === 'DISCOUNT10') {
+      if (promoCode === "DISCOUNT10") {
         state.promoCodeApplied = true
         state.promocodeDiscount = 10
       }
     },
-    REMOVE_CART_PRODUCT(state, id) {
+    REMOVE_CART_PRODUCT(state, mutations, id) {
       const findProductIndex = state.cartProducts.findIndex(
         (el) => el.id === id
       )
       state.cartProducts.splice(findProductIndex, 1)
+    },
+    DECREASE_CART_PRODUCT_QUANTITY(state, id) {
+      const existingItem = state.cartProducts.find(
+        (product) => product.id === id
+      )
+      existingItem.quantity--
     },
     SET_PURCHASED_PRODUCTS(state, inputArray) {
       if (inputArray) {
@@ -111,12 +127,20 @@ export default {
     removeFromCart(commit, id) {
       commit("REMOVE_CART_PRODUCT", id)
     },
+    decreaseProductQuantity(commit, getters, id) {
+      const findProduct = getters.getCartProductById(id)
+      if (findProduct.quantity > 1) {
+        commit('DECREASE_CART_PRODUCT_QUANTITY', id)
+      } else {
+        commit('REMOVE_CART_PRODUCT')
+      }
+    },
     buyAllProducts(commit, getters) {
       commit("SET_PURCHASED_PRODUCTS", getters.getCartProducts)
       commit("CLEAR_CART_PRODUCTS")
     },
     applyPromoCode(commit, promoCode) {
-      commit('APPLY_PROMO_CODE', promoCode)
-    }
+      commit("APPLY_PROMO_CODE", promoCode)
+    },
   },
 }

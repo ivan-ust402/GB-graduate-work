@@ -88,13 +88,13 @@ body {
 
 h1,
 h2,
-h4 {
+h3,
+h5 {
   font-family: "integral_cfregular", Arial, Helvetica, sans-serif;
   color: #121212;
 }
 
-h3,
-h5,
+h4,
 h6 {
   font-family: "satoshiregular", Arial, Helvetica, sans-serif;
 }

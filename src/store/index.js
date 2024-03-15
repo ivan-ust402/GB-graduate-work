@@ -1,6 +1,7 @@
 import { createStore } from "vuex"
 import dropmenuStore from "./modules/dropmenu-store"
 import burgermenuStore from "./modules/burgermenu-store"
+import cartStore from "./modules/cart-store"
 
 export default createStore({
   state: {
@@ -4090,5 +4091,6 @@ export default createStore({
   modules: {
     dropmenuStore,
     burgermenuStore,
+    cartStore
   },
 })

@@ -23,7 +23,11 @@
         src="@/assets\img\header\cart-icon.svg"
         alt="cart"
       />
-      <NotificationAmount class="controls__notification" />
+      <NotificationAmount 
+        v-if="getCartProductsCount !== 0"
+        :digit="getCartProductsCount"
+        class="controls__notification" 
+      />
     </router-link>
     <div class="controls__control-box user-control">
       <a
@@ -51,6 +55,7 @@
 <script>
 import DropSimpleMenu from "@/components/DropSimpleMenu.vue"
 import NotificationAmount from "@/components/NotificationAmount.vue"
+import { mapGetters } from "vuex"
 
 export default {
   data() {
@@ -73,6 +78,7 @@ export default {
     DropSimpleMenu,
   },
   computed: {
+    ...mapGetters(['getCartProductsCount']),
     getIsShowUserMenu() {
       return this.isShowUserMenu
     },

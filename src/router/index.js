@@ -11,7 +11,10 @@ const routes = [
   {
     path: '/',
     name: 'Homepage',
-    component: HomePage
+    component: HomePage,
+    meta: {
+      breadcrumb: 'Home'
+    }
   },
   {
     path: '/login',
@@ -26,17 +29,26 @@ const routes = [
   {
     path: '/product-details/:id(\\d+)',
     name: 'ProductDetailsPage',
-    component: ProductDetailsPage
+    component: ProductDetailsPage,
+    meta: {
+      breadcrumb: 'Details'
+    }
   },
   {
     path: '/catalog/:page(\\d+)',
     name: 'CatalogPage',
-    component: CatalogPage
+    component: CatalogPage,
+    meta: {
+      breadcrumb: 'Catalog'
+    }
   },  
   {
     path: '/cart',
     name: 'CartPage',
-    component: CartPage
+    component: CartPage,
+    meta: {
+      breadcrumb: 'Cart'
+    }
   }, 
   {
     path: '/404',
