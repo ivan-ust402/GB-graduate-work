@@ -23,7 +23,7 @@ export default {
   // z-index: -2;
   box-sizing: border-box;
   display: flex;
-  min-width: 218px;
+  // min-width: 218px;
   width: fit-content;
   height: 52px;
   padding: 16px 54px;

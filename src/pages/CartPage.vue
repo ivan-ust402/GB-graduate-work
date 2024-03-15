@@ -5,32 +5,14 @@
       <h3 class="cart__title">Your cart</h3>
       <div class="cart__display">
         <div class="cart__cards">
-          <div
-            class="cart__card card"
+          <CardProductForCart
+            class="cart__card"
             v-for="product in products"
-            :key="product.id"
-          >
-            <img
-              :src="require(`@/assets/img/products/${product.image}`)"
-              :alt="product.type.name"
-            />
-            <div class="card__content">
-              <div class="card__info"></div>
-              <div class="card__controls">
-                <a href="#" class="card__delete"></a>
-                <QuantitySelector 
-                  :quantity="product.quantity"
-                  @increase="addNewProduct(product.id)"
-                  @decrease="decreaseQuantityProduct(product.id)"
-                />
-                <div class="card__amount amount">
-                  <a href="#" class="amount__decrease">-</a>
-                  <p class="amount__value">{{ product.quantity }}</p>
-                  <a href="#" class="amount__increase">+</a>
-                </div>
-              </div>
-            </div>
-          </div>
+            :product="product"
+            @increaseQuantity="increaseProductQuantity"
+            @decreaseQuantity="decreaseProductQuantity"
+            @removeProduct="removeProduct"
+          />
         </div>
         <div class="cart__order order">
           <h6 class="order__title">Order Summary</h6>
@@ -52,9 +34,8 @@
               </div>
               <div class="price__item">
                 <h6 class="price__title">
-                  Subtotal (<span class="price__title-span">{{
-                    getPromoCodeAmount
-                  }}</span
+                  Promocode (<span class="price__title_span"
+                    >{{ getPromoCodeAmount }}%</span
                   >)
                 </h6>
                 <p class="price__value price__value_discount">
@@ -62,12 +43,15 @@
                 </p>
               </div>
             </div>
-            <div class="price-box__total">
+            <div class="price__total">
               <div class="price__item">
-                <h6 class="price__title price__title_total">Subtotal</h6>
+                <h6 class="price__title price__title_total">Total</h6>
                 <p class="price__value">${{ getCartTotalPrice }}</p>
               </div>
             </div>
+          </div>
+          <div class="order__promo">
+            <FormForPromoCode />
           </div>
         </div>
       </div>
@@ -76,14 +60,16 @@
 </template>
 
 <script>
+import CardProductForCart from "@/components/CardProductForCart.vue"
+import FormForPromoCode from "@/components/FormForPromoCode.vue"
 import NavigationBreadcrumbsComponent from "@/components/NavigationBreadcrumbsComponent.vue"
-import QuantitySelector from "@/components/QuantitySelector.vue";
 import { mapActions, mapGetters } from "vuex"
 
 export default {
   components: {
+    CardProductForCart,
     NavigationBreadcrumbsComponent,
-    QuantitySelector
+    FormForPromoCode
   },
   data() {
     return {
@@ -92,8 +78,9 @@ export default {
           id: "0",
           quantity: 12,
           sku: "937023680",
-          title: "Jeans D13",
-          price: 20.63,
+          title:
+            "Jeans D13 dhfhfhfhfhfhfhfh hfhfhfhhfhfhfh fhfhfhfhfh fhfhhfhfhrf hfhfhfhhf hfhfhfhf ",
+          price: 2000000000000000000.63,
           currency: "USD",
           currencyCode: "&#36;",
           grade: 4.8,
@@ -590,7 +577,6 @@ export default {
             composition: ["cotton 80%", "elastane 20%"],
           },
         },
-        
       ],
     }
   },
@@ -607,31 +593,153 @@ export default {
   },
   methods: {
     ...mapActions([]),
-    addNewProduct(id){
-      console.log(id)
+
+    increaseProductQuantity(id) {
+      console.log("increase in cart, id: ", id)
     },
-    decreaseQuantityProduct(id) {
-      console.log(id)
-    }
+    decreaseProductQuantity(id) {
+      console.log("decrease in cart, id: ", id)
+    },
+    removeProduct(id) {
+      console.log("remove in cart, id: ", id)
+    },
   },
 }
 </script>
 
 <style lang="scss" scoped>
+.order {
+  display: flex;
+  width: 505px;
+  height: 458px;
+  padding: 20px 24px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+
+  &__title {
+    color: #121212;
+    /* Desktop/Text/Subtitle */
+    font-family: "satoshibold";
+    font-size: 20px;
+    line-height: 22px; /* 110% */
+    text-transform: uppercase;
+  }
+  &__price {
+  }
+  &__promo {
+    width: 100%;
+  }
+}
+.price {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  &__checkout {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  &__item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__title {
+    color: #222;
+    /* Desktop/Text/Subtitle */
+    font-family: "satoshibold";
+    font-size: 20px;
+    line-height: 22px; /* 110% */
+    text-transform: uppercase;
+    &_total {
+      color: #121212;
+      /* Desktop/Text/Paragraphs/Regular */
+      font-family: "satoshiregular";
+      font-size: 16px;
+      line-height: normal;
+      text-transform: lowercase;
+      &::first-letter {
+        text-transform: uppercase;
+      }
+    }
+    &_span {
+    }
+  }
+  &__value {
+    color: #121212;
+    text-align: right;
+    /* Desktop/Price/Small */
+    font-family: "satoshibold";
+    font-size: 24px;
+    line-height: normal;
+  }
+  &__value_discount {
+    color: #f33;
+  }
+
+  &__total {
+  }
+}
 .cart {
   padding-top: 46px;
   padding-bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
   &__title {
     color: #121212;
     // font-family: "integral_cfregular";
     // font-size: 40px;
     line-height: normal;
   }
+  &__display {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+  }
+  &__cards {
+    display: flex;
+    max-width: 715px;
+    width: 100%;
+    padding: 20px 24px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    border-radius: 20px;
+    border: 1px solid #e8e8e8;
+  }
+  &__card {
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    &:last-child {
+      border: none;
+      padding-bottom: 0;
+    }
+  }
+  &__order {
+    display: flex;
+    width: 505px;
+    height: 458px;
+    padding: 20px 24px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    flex-shrink: 0;
+    border-radius: 20px;
+    border: 1px solid #e8e8e8;
+  }
 }
-
 @media (max-width: 1239px) {
   .cart {
     padding-bottom: 60px;
+    &__display {
+      flex-direction: column;
+    }
   }
 }
 

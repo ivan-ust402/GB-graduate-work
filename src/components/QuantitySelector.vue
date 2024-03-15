@@ -49,25 +49,13 @@ export default {
     },
   },
   emits: ["increase", "decrease"],
-  // data() {
-  //   return {
-  //     quantity: 1
-  //   }
-  // },
-  // computed: {
-  //   setCurrentQuantity() {
-  //     quantity = this.inputQuantity
-  //   }
-  // },
   methods: {
     decrease() {
-      // this.quantity -= 1;
-      console.log("increase")
-      this.$emit("increase")
+      console.log("decrease in quantity selector ")
+      this.$emit("decrease")
     },
     increase() {
-      // this.quantity += 1;
-      console.log("decrease")
+      console.log("increase in quantity selector")
       this.$emit("increase")
     },
   },
@@ -80,7 +68,6 @@ export default {
   display: flex;
   width: 105px;
   height: 31px;
-  // padding: 14px 20px;
   gap: 10px;
   justify-content: center;
   align-items: center;
@@ -99,14 +86,12 @@ export default {
       &:hover {
         box-sizing: border-box;
         background: #fff;
-        // border: 1px solid #f0f0f0;
       }
     }
     @media (hover: none) {
       &:hover {
         box-sizing: border-box;
         background: #fff;
-        // border: 1px solid #f0f0f0;
       }
     }
     &_decrease {

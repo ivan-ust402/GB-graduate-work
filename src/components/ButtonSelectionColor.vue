@@ -23,7 +23,7 @@ export default {
   // z-index: -2;
   box-sizing: border-box;
   display: flex;
-  min-width: 218px;
+  // min-width: 218px;
   width: fit-content;
   height: 52px;
   padding: 16px 54px;
@@ -31,7 +31,7 @@ export default {
   align-items: center;
   flex-shrink: 0;
   border-radius: 62px;
-  border: 1px solid #e8e8e8;
+  border: 1px solid #222;
   background: #121212;
   color: #fff;
   font-size: 16px;
