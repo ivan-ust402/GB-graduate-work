@@ -14,7 +14,8 @@
             @removeProduct="removeProduct"
           />
         </div>
-        <div class="cart__order order">
+        <DisplayOrderBlock />
+        <!-- <div class="cart__order order">
           <h6 class="order__title">Order Summary</h6>
           <div class="order__price price">
             <div class="price__checkout">
@@ -50,18 +51,23 @@
               </div>
             </div>
           </div>
-          <div class="order__promo">
-            <FormForPromoCode />
-          </div>
-        </div>
+          <FormForPromoCode class="order__promo"/>
+          <ButtonSelectionColor 
+            class="order__apply"
+            text="Go to Checkout"
+            needArrow="true"
+          />
+        </div> -->
       </div>
     </div>
   </section>
 </template>
 
 <script>
+import DisplayOrderBlock from "@/blocks/DisplayOrderBlock.vue"
+// import ButtonSelectionColor from "@/components/ButtonSelectionColor.vue"
 import CardProductForCart from "@/components/CardProductForCart.vue"
-import FormForPromoCode from "@/components/FormForPromoCode.vue"
+// import FormForPromoCode from "@/components/FormForPromoCode.vue"
 import NavigationBreadcrumbsComponent from "@/components/NavigationBreadcrumbsComponent.vue"
 import { mapActions, mapGetters } from "vuex"
 
@@ -69,7 +75,9 @@ export default {
   components: {
     CardProductForCart,
     NavigationBreadcrumbsComponent,
-    FormForPromoCode
+    // FormForPromoCode,
+    // ButtonSelectionColor,
+    DisplayOrderBlock
   },
   data() {
     return {
@@ -608,83 +616,87 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.order {
-  display: flex;
-  width: 505px;
-  height: 458px;
-  padding: 20px 24px;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 24px;
+// .order {
+//   box-sizing: border-box;
+//   display: flex;
+//   width: 505px;
+//   height: 458px;
+//   padding: 20px 24px;
+//   flex-direction: column;
+//   align-items: flex-start;
+//   gap: 24px;
 
-  &__title {
-    color: #121212;
-    /* Desktop/Text/Subtitle */
-    font-family: "satoshibold";
-    font-size: 20px;
-    line-height: 22px; /* 110% */
-    text-transform: uppercase;
-  }
-  &__price {
-  }
-  &__promo {
-    width: 100%;
-  }
-}
-.price {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 100%;
-  &__checkout {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  }
-  &__item {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-  &__title {
-    color: #222;
-    /* Desktop/Text/Subtitle */
-    font-family: "satoshibold";
-    font-size: 20px;
-    line-height: 22px; /* 110% */
-    text-transform: uppercase;
-    &_total {
-      color: #121212;
-      /* Desktop/Text/Paragraphs/Regular */
-      font-family: "satoshiregular";
-      font-size: 16px;
-      line-height: normal;
-      text-transform: lowercase;
-      &::first-letter {
-        text-transform: uppercase;
-      }
-    }
-    &_span {
-    }
-  }
-  &__value {
-    color: #121212;
-    text-align: right;
-    /* Desktop/Price/Small */
-    font-family: "satoshibold";
-    font-size: 24px;
-    line-height: normal;
-  }
-  &__value_discount {
-    color: #f33;
-  }
+//   &__title {
+//     color: #121212;
+//     /* Desktop/Text/Subtitle */
+//     font-family: "satoshibold";
+//     font-size: 20px;
+//     line-height: 22px; /* 110% */
+//     text-transform: uppercase;
+//   }
+//   &__promo {
+//     width: 100%;
+//   }
+//   &__apply {
+//     height: 60px;
+//     font-size: 16px;
+//     width: 100%;
+//   }
+// }
+// .price {
+//   display: flex;
+//   flex-direction: column;
+//   gap: 20px;
+//   width: 100%;
+//   &__checkout {
+//     display: flex;
+//     flex-direction: column;
+//     gap: 20px;
+//     padding-bottom: 20px;
+//     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+//   }
+//   &__item {
+//     display: flex;
+//     flex-direction: row;
+//     align-items: center;
+//     justify-content: space-between;
+//   }
+//   &__title {
+//     color: #222;
+//     /* Desktop/Text/Subtitle */
+//     font-family: "satoshibold";
+//     font-size: 20px;
+//     line-height: 22px; /* 110% */
+//     text-transform: uppercase;
+//     &_total {
+//       color: #121212;
+//       /* Desktop/Text/Paragraphs/Regular */
+//       font-family: "satoshiregular";
+//       font-size: 16px;
+//       line-height: normal;
+//       text-transform: lowercase;
+//       &::first-letter {
+//         text-transform: uppercase;
+//       }
+//     }
+//     &_span {
+//     }
+//   }
+//   &__value {
+//     color: #121212;
+//     text-align: right;
+//     /* Desktop/Price/Small */
+//     font-family: "satoshibold";
+//     font-size: 24px;
+//     line-height: normal;
+//   }
+//   &__value_discount {
+//     color: #f33;
+//   }
 
-  &__total {
-  }
-}
+//   &__total {
+//   }
+// }
 .cart {
   padding-top: 46px;
   padding-bottom: 80px;

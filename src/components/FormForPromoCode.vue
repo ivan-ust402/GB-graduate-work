@@ -42,12 +42,13 @@ export default {
   flex-direction: row;
   align-items: center;
   gap: 12px;
-  flex: 1;
   &__input {
     flex: 1;
   }
   &__button {
     width: 119px;
+    font-size: 16px;
+    height: 48px;
   }
 }
 </style>
