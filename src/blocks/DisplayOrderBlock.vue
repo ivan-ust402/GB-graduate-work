@@ -14,7 +14,7 @@
         <div class="price__item">
           <h6 class="price__title">Discount</h6>
           <p class="price__value price__value_discount">
-            ${{ getCartProductsDiscount }}
+            -${{ getCartProductsDiscount }}
           </p>
         </div>
         <div class="price__item">
@@ -24,14 +24,16 @@
             >)
           </h6>
           <p class="price__value price__value_discount">
-            ${{ getPromoCodeDiscountValue }}
+            -${{ getPromoCodeDiscountValue }}
           </p>
         </div>
       </div>
       <div class="price__total">
         <div class="price__item">
           <h6 class="price__title price__title_total">Total</h6>
-          <p class="price__value">${{ getCartTotalPrice }}</p>
+          <p class="price__value price__value_total">
+            ${{ getCartTotalPrice }}
+          </p>
         </div>
       </div>
     </div>
@@ -55,11 +57,10 @@ export default {
   components: {
     CardProductForCart,
     FormForPromoCode,
-    ButtonSelectionColor
+    ButtonSelectionColor,
   },
   data() {
-    return {
-    }
+    return {}
   },
   computed: {
     ...mapGetters([
@@ -75,7 +76,7 @@ export default {
     ...mapActions([]),
     applyCart() {
       console.log("Cart is applyed!")
-    }
+    },
   },
 }
 </script>
@@ -158,8 +159,46 @@ export default {
   &__value_discount {
     color: #f33;
   }
+}
 
-  &__total {
+@media (max-width: 1239px) {
+  .order {
+    flex: 1;
+    padding: 20px;
+    gap: 16px;
+
+    &__title {
+      line-height: normal;
+      text-transform: capitalize;
+    }
+    &__promo {
+      width: 100%;
+    }
+    &__apply {
+      height: 54px;
+      font-size: 14px;
+      width: 100%;
+    }
   }
+  .price {
+    &__title {
+      font-size: 16px;
+      line-height: normal;
+      &_total {
+        font-family: "satoshibold";
+        font-size: 16px;
+        text-transform: uppercase;
+      }
+    }
+    &__value {
+      font-size: 16px;
+      &_total {
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
 }
 </style>

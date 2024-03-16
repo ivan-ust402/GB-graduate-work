@@ -51,4 +51,21 @@ export default {
     height: 48px;
   }
 }
+
+@media (max-width: 1239px) {
+  .promo {
+  &__input {
+    flex: 1;
+  }
+  &__button {
+    width: 88px;
+    font-size: 14px;
+    padding: 12px 16px;
+  }
+}
+}
+
+@media (max-width: 768px) {
+  
+}
 </style>

@@ -62,8 +62,15 @@ export default {
     width: 24px;
     height: 24px;
     cursor: pointer;
-    &:hover {
-      opacity: 0.8;
+    @media (hover: hover) {
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+    @media (hover: none) {
+      &:active {
+        opacity: 0.8;
+      }
     }
   }
   &__input {
@@ -83,5 +90,20 @@ export default {
       cursor: none;
     }
   }
+}
+@media (max-width: 1239px) {
+  .field {
+    gap: 10px;
+    &__label {
+      width: 20px;
+      height: 20px;
+    }
+    &__input {
+      font-size: 14px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
 }
 </style>

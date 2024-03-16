@@ -89,7 +89,7 @@ export default {
       }
     }
     @media (hover: none) {
-      &:hover {
+      &:active {
         box-sizing: border-box;
         background: #fff;
       }
@@ -113,5 +113,13 @@ export default {
     line-height: normal;
     align-self: center;
   }
+}
+
+@media (max-width: 1239px) {
+
+}
+
+@media (max-width: 768px) {
+  
 }
 </style>

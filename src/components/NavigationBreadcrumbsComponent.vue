@@ -1,7 +1,7 @@
 <template>
   <nav class="breadcrumbs">
-    <ul class="bredcrumbs__ul">
-      <li class="breadcrumbs__li" v-for="(crumb, index) in crumbs">
+    <ul class="breadcrumbs__ul">
+      <li class="breadcrumbs__li" v-for="(crumb, index) in crumbs" :key="index">
         <router-link :to="crumb.to">{{ crumb.name }}</router-link>
       </li>
     </ul>
@@ -21,8 +21,12 @@ export default {
   methods: {
     generateBreadcrumbs(route) {
       const breadcrumbs = []
+      breadcrumbs.push({
+        name: "Home",
+        to: "/",
+      })
       route.matched.forEach((record) => {
-        if (record.meta && record.meta.breadcrumbs) {
+        if (record.meta && record.meta.breadcrumb) {
           breadcrumbs.push({
             name: record.meta.breadcrumb,
             to: record.path,
@@ -39,11 +43,8 @@ export default {
 .breadcrumbs {
   &__ul {
     display: flex;
-    align-items: center;
+    flex-direction: row;
     gap: 12px;
-    &:last-child::after {
-      content: '';
-    }
   }
   &__li {
     color: #222;
@@ -53,9 +54,43 @@ export default {
     display: flex;
     gap: 4px;
     align-items: center;
+    transition: all 0.3s ease-in;
     &::after {
       content: url("@/assets/img/common/arrow-breadcrumb.svg");
+      align-self: center;
+    }
+    &:last-child::after {
+      content: "";
+    }
+    &:last-child a {
+      cursor: default;
+    }
+    &:last-child {
+      @media (hover: hover) {
+      &:hover {
+        opacity: 1;
+      }
+    }
+    }
+    @media (hover: hover) {
+      &:hover {
+        opacity: 0.6;
+      }
     }
   }
+}
+
+@media (max-width: 1239px) {
+  .breadcrumbs {
+    &__ul {
+      gap: 6px;
+    }
+    &__li {
+      font-size: 14px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
 }
 </style>

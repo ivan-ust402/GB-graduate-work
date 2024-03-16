@@ -6,6 +6,7 @@
         :src="require(`@/assets/img/products/${product.image}`)"
         :alt="product.type.name"
       />
+      <div class="card__img-box-hover"></div>
     </div>
     <div class="card__content">
       <div class="card__content-top">
@@ -51,7 +52,7 @@
           >{{ product.price }}
         </div>
         <QuantitySelector
-        class="card__quantity"
+          class="card__quantity"
           :quantity="product.quantity"
           @increase="addNewProduct(product.id)"
           @decrease="decreaseQuantityProduct(product.id)"
@@ -208,9 +209,12 @@ export default {
   display: flex;
   flex-direction: row;
   // min-width: 300px;
+  cursor: pointer;
   width: 100%;
   gap: 16px;
+  -webkit-tap-highlight-color: transparent;
   &__image-box {
+    position: relative;
     flex-shrink: 0;
     display: flex;
     justify-content: center;
@@ -228,11 +232,19 @@ export default {
     width: 124px;
     height: 124px;
   }
+  &__img-box-hover {
+    transition: all 0.3s ease-in;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #121212;
+    opacity: 0;
+    border-radius: 8.658px;
+  }
   &__content {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: auto;
     box-sizing: border-box;
     width: 100%;
     box-sizing: content-box;
@@ -312,9 +324,75 @@ export default {
   &__quantity {
     width: 125px;
   }
+  @media (hover: hover) {
+    &:hover .card__img-box-hover {
+      background-color: #121212;
+      opacity: 0.2;
+    }
+  }
+  // @media (hover: none) {
+  //   &:active .card__img-box-hover {
+  //     // position: absolute;
+  //     background-color: #121212;
+  //     opacity: 0.3;
+  //   }
+  // }
 }
 
 @media (max-width: 1239px) {
+  .card {
+    gap: 14px;
+    &__image-box {
+      width: 99px;
+      height: 99px;
+    }
+    &__image {
+      width: 99px;
+      height: 99px;
+    }
+    &__img-box-hover {
+    }
+    &__content {
+    }
+    &__content-top {
+    }
+    &__top-left {
+      gap: 1px;
+    }
+    &__top-right {
+    }
+    &__delete {
+      width: 20px;
+      height: 20px;
+    }
+    &__title {
+      height: auto;
+      font-family: "satoshiregular";
+      font-size: 14px;
+      text-transform: capitalize;
+      
+    }
+    &__params {
+      gap: 2px;
+    }
+    &__param {
+      font-family: "satoshiregular";
+      font-size: 12px;
+      line-height: 22px;
+      &_value {
+      }
+    }
+
+    &__content-bottom {
+    }
+    &__price {
+      font-size: 20px;
+      height: auto;
+    }
+    &__quantity {
+      width: 105px;
+    }
+  }
 }
 
 @media (max-width: 768px) {

@@ -219,7 +219,7 @@ export default {
     }
   }
   @media (hover: none) {
-    &:active {
+    &:active .card__img-box-hover{
       // position: absolute;
       background-color: #121212;
       opacity: 0.3;
