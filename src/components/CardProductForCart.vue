@@ -1,13 +1,18 @@
 <template>
   <div class="card">
-    <div class="card__image-box">
-      <img
-        class="card__image"
-        :src="require(`@/assets/img/products/${product.image}`)"
-        :alt="product.type.name"
-      />
-      <div class="card__img-box-hover"></div>
-    </div>
+    <router-link
+      :to="{ name: 'ProductDetailsPage', params: { id: product.id } }"
+      class="card__router-link"
+    >
+      <div class="card__image-box">
+        <img
+          class="card__image"
+          :src="require(`@/assets/img/products/${product.image}`)"
+          :alt="product.type.name"
+        />
+        <div class="card__img-box-hover"></div>
+      </div>
+    </router-link>
     <div class="card__content">
       <div class="card__content-top">
         <div class="card__top-left">
@@ -205,15 +210,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .card {
   display: flex;
   flex-direction: row;
   // min-width: 300px;
-  cursor: pointer;
   width: 100%;
   gap: 16px;
   -webkit-tap-highlight-color: transparent;
   &__image-box {
+    cursor: pointer;
     position: relative;
     flex-shrink: 0;
     display: flex;
@@ -325,7 +331,7 @@ export default {
     width: 125px;
   }
   @media (hover: hover) {
-    &:hover .card__img-box-hover {
+    &__image-box:hover .card__img-box-hover {
       background-color: #121212;
       opacity: 0.2;
     }
@@ -370,7 +376,6 @@ export default {
       font-family: "satoshiregular";
       font-size: 14px;
       text-transform: capitalize;
-      
     }
     &__params {
       gap: 2px;

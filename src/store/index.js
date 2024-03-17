@@ -3999,6 +3999,9 @@ export default createStore({
     newArrivalsProducts: [],
   },
   getters: {
+    getProductById: (state) => (id) => {
+        return state.products.find((product) => product.id === id)
+    },
     getGenders(state) {
       return state.genders
     },
@@ -4013,11 +4016,11 @@ export default createStore({
     },
     getFourNewArrivals(state) {
       const selectedProducts = []
-      const allNewArrivals = state.products.filter((product) => product.newArrivals)
+      const allNewArrivals = state.products.filter(
+        (product) => product.newArrivals
+      )
       while (selectedProducts.length < 4) {
-        const randomIndex = Math.floor(
-          Math.random() * allNewArrivals.length
-        )
+        const randomIndex = Math.floor(Math.random() * allNewArrivals.length)
         const randomProduct = allNewArrivals[randomIndex]
         if (
           selectedProducts.some((product) => product.id === randomProduct.id)
@@ -4091,6 +4094,6 @@ export default createStore({
   modules: {
     dropmenuStore,
     burgermenuStore,
-    cartStore
+    cartStore,
   },
 })

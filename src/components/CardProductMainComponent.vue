@@ -1,28 +1,37 @@
 <template>
-  <div class="card">
-    <div class="card__content">
-      <div class="card__img-box">
-        <img
-          :src="require(`@/assets/img/products/${product.image}`)"
-          :alt="product.title"
-          class="card__img"
-        />
-        <div class="card__img-box-hover"></div>
-      </div>
-      <div class="card__description">
-        <h6 class="card__title">
-          {{ product.title.toUpperCase() }}
-        </h6>
-        <RatingComponent class="card__rating" :grade="product.grade" />
-        <PriceComponent
-          class="card__price"
-          :price="product.price"
-          :discount="product.discount"
-          :currencyHTMLCode="product.currencyCode"
-        />
+  <router-link
+    :to="{
+      name: 'ProductDetailsPage',
+      params: {
+        id: product.id,
+      },
+    }"
+  >
+    <div class="card">
+      <div class="card__content">
+        <div class="card__img-box">
+          <img
+            :src="require(`@/assets/img/products/${product.image}`)"
+            :alt="product.title"
+            class="card__img"
+          />
+          <div class="card__img-box-hover"></div>
+        </div>
+        <div class="card__description">
+          <h6 class="card__title">
+            {{ product.title.toUpperCase() }}
+          </h6>
+          <RatingComponent class="card__rating" :grade="product.grade" />
+          <PriceComponent
+            class="card__price"
+            :price="product.price"
+            :discount="product.discount"
+            :currencyHTMLCode="product.currencyCode"
+          />
+        </div>
       </div>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script>
@@ -219,7 +228,7 @@ export default {
     }
   }
   @media (hover: none) {
-    &:active .card__img-box-hover{
+    &:active .card__img-box-hover {
       // position: absolute;
       background-color: #121212;
       opacity: 0.3;
