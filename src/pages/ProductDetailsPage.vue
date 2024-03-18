@@ -10,11 +10,11 @@
               <h3 class="params__title">{{ product.title }}</h3>
               <div class="params__about">
                 <div class="params__rating-price">
-                  <RatingComponent
+                  <RatingComponentForProductDetails
                     class="params__rating"
                     :grade="product.grade"
                   />
-                  <PriceComponent
+                  <PriceComponentForProductDetails
                     class="params__price"
                     :currencyHTMLCode="product.currencyHTMLCode"
                     :price="product.price"
@@ -39,8 +39,8 @@
 
 <script>
 import NavigationBreadcrumbsComponent from "@/components/NavigationBreadcrumbsComponent.vue"
-import PriceComponent from "@/components/PriceComponent.vue"
-import RatingComponent from "@/components/RatingComponent.vue"
+import PriceComponentForProductDetails from "@/components/PriceComponentForProductDetails.vue"
+import RatingComponentForProductDetails from "@/components/RatingComponentForProductDetails.vue"
 import SliderProductDetailsComponent from "@/components/SliderProductDetailsComponent.vue"
 import { mapGetters } from "vuex"
 
@@ -48,8 +48,8 @@ export default {
   components: {
     NavigationBreadcrumbsComponent,
     SliderProductDetailsComponent,
-    PriceComponent,
-    RatingComponent,
+    PriceComponentForProductDetails,
+    RatingComponentForProductDetails,
   },
   data() {
     return {
