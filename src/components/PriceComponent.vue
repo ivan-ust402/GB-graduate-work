@@ -41,7 +41,7 @@ export default {
 <style lang="scss" scoped>
 .price {
   display: flex;
-  font-display: row;
+  flex-direction: row;
   gap: 12px;
   &__price {
     color: #121212;

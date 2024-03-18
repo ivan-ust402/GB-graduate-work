@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <StarsComponent :grade="review.grade" class="card__stars" />
+    <StarsComponentForReview :grade="review.grade" class="card__stars" />
     <div class="card__info">
       <div class="card__title">
         <p class="card__username">
@@ -13,12 +13,15 @@
         />
       </div>
       <div class="card__text">"{{ review.text }}"</div>
+      <div v-if="withDate" class="card__date">
+        {{ formatDate(review.date) }}
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import StarsComponent from "@/components/StarsComponent.vue"
+import StarsComponentForReview from "./StarsComponentForReview.vue"
 
 export default {
   props: {
@@ -35,9 +38,20 @@ export default {
         }
       },
     },
+    withDate: {
+      type: Boolean,
+      default: false,
+    },
   },
   components: {
-    StarsComponent,
+    StarsComponentForReview,
+  },
+  methods: {
+    formatDate(inputDate) {
+      const date = new Date(inputDate)
+      const options = { month: "long", day: "numeric", year: "numeric" }
+      return date.toLocaleDateString("en-US", options)
+    },
   },
 }
 </script>
@@ -49,7 +63,7 @@ export default {
   flex-direction: column;
   gap: 16px;
   width: 400px;
-  height: 240px;
+  // height: 240px;
   padding: 28px 32px;
   align-items: flex-start;
   align-content: flex-start;
@@ -93,22 +107,30 @@ export default {
     // font-weight: 400;
     font-family: "satoshiregular";
   }
+  &__date {
+    padding-top: 12px;
+    color: #222;
+    font-family: "satoshimedium";
+    font-size: 16px;
+    line-height: normal;
+  }
 }
 @media (max-width: 1239px) {
   .card {
     gap: 12px;
     width: 340px;
-    height: 182px;
+    // height: 182px;
     padding: 24px;
     &__info {
       gap: 9px;
       justify-content: center;
     }
     &__title {
-      font-size: 14px;
+      font-size: 16px;
       font-family: "satoshimedium";
       // font-weight: 500;
       line-height: 18px;
+      text-transform: capitalize;
     }
     &__verify {
       height: 19px;
@@ -121,6 +143,11 @@ export default {
       // font-weight: 400;
       -webkit-line-clamp: 5;
       line-height: 110%;
+    }
+    &__date {
+      padding-top: 7px;
+      font-size: 14px;
+      line-height: 22px;
     }
   }
 }

@@ -32,39 +32,29 @@ export default {
 .stars {
   display: flex;
   flex-direction: row;
-  gap: 5px;
-  height: 19px;
+  gap: 7px;
+  height: 23px;
   &__item {
-    height: 19px;
+    height: 23px;
     & img {
-      height: 19px;
+      height: 23px;
     }
   }
 }
 
 @media (max-width: 1239px) {
   .stars {
-    gap: 4px;
-    height: 14px;
+    gap: 6px;
+    height: 19px;
     &__item {
-      height: 14px;
+      height: 19px;
       & img {
-        height: 14px;
+        height: 19px;
       }
     }
   } 
 }
 
 @media (max-width: 768px) {
-  .stars {
-    gap: 5px;
-    height: 16px;
-    &__item {
-      height: 16px;
-      & img {
-        height: 16px;
-      }
-    }
-  }  
 }
 </style>
