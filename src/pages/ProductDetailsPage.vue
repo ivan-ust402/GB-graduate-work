@@ -38,7 +38,13 @@
               <h6 class="param__title">Choose Size</h6>
               <SetOfSizeButtons :sizes="product.sizesInfo" />
             </div>
-            <div class="params__add-to-cart"></div>
+            <div class="params__add-to-cart">
+              <QuantitySelectorForDetails class="params__quantity" />
+              <ButtonSelectionColor
+                text="Add to Cart"
+                class="params__add-button"
+              />
+            </div>
           </div>
         </div>
         <div class="details__bottom"></div>
@@ -48,8 +54,10 @@
 </template>
 
 <script>
+import ButtonSelectionColor from "@/components/ButtonSelectionColor.vue"
 import NavigationBreadcrumbsComponent from "@/components/NavigationBreadcrumbsComponent.vue"
 import PriceComponentForProductDetails from "@/components/PriceComponentForProductDetails.vue"
+import QuantitySelectorForDetails from "@/components/QuantitySelectorForDetails.vue"
 import RatingComponentForProductDetails from "@/components/RatingComponentForProductDetails.vue"
 import SetOfColorButtons from "@/components/SetOfColorButtons.vue"
 import SetOfSizeButtons from "@/components/SetOfSizeButtons.vue"
@@ -64,6 +72,8 @@ export default {
     RatingComponentForProductDetails,
     SetOfColorButtons,
     SetOfSizeButtons,
+    QuantitySelectorForDetails,
+    ButtonSelectionColor,
   },
   data() {
     return {
@@ -150,12 +160,30 @@ export default {
     font-family: "satoshiregular";
     font-size: 16px;
   }
+  &__add-to-cart {
+    display: flex;
+    width: 100%;
+    gap: 20px;
+    align-items: center;
+    padding-top: 24px;
+  }
+  &__quantity {
+    width: 170px;
+  }
+  &__add-button {
+    width: 400px;
+  }
 }
 .details {
   padding-top: 46px;
   display: flex;
   flex-direction: column;
   gap: 36px;
+  &__display {
+    display: flex;
+    flex-direction: column;
+    gap: 68px;
+  }
   &__top {
     display: flex;
     flex-direction: row;
@@ -190,8 +218,20 @@ export default {
     &__short-description {
       font-size: 14px;
     }
+    &__add-to-cart {
+      gap: 16px;
+    }
+    &__quantity {
+      width: 104px;
+    }
+    &__add-button {
+      width: 224px;
+    }
   }
   .details {
+    &__display {
+      gap: 60px;
+    }
     &__top {
       gap: 16px;
       align-items: flex-start;
@@ -212,8 +252,20 @@ export default {
     &__about {
       gap: 10px;
     }
+    &__add-to-cart {
+      gap: 13px;
+    }
+    &__quantity {
+      width: 109px;
+    }
+    &__add-button {
+      width: 236px;
+    }
   }
   .details {
+    &__display {
+      gap: 50px;
+    }
     &__top {
       flex-direction: column;
       gap: 32px;
