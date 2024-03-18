@@ -26,9 +26,19 @@
                 </p>
               </div>
             </div>
-            <div class="params__colors">
-              <input type="radio" class="params__color" />
+            <div class="params__param param">
+              <h6 class="param__title">Select Colors</h6>
+              <SetOfColorButtons
+                class="param__content"
+                :choosenColor="product.color"
+                :colors="product.allColors"
+              />
             </div>
+            <div class="params__param param">
+              <h6 class="param__title">Choose Size</h6>
+              <SetOfSizeButtons :sizes="product.sizesInfo" />
+            </div>
+            <div class="params__add-to-cart"></div>
           </div>
         </div>
         <div class="details__bottom"></div>
@@ -41,6 +51,8 @@
 import NavigationBreadcrumbsComponent from "@/components/NavigationBreadcrumbsComponent.vue"
 import PriceComponentForProductDetails from "@/components/PriceComponentForProductDetails.vue"
 import RatingComponentForProductDetails from "@/components/RatingComponentForProductDetails.vue"
+import SetOfColorButtons from "@/components/SetOfColorButtons.vue"
+import SetOfSizeButtons from "@/components/SetOfSizeButtons.vue"
 import SliderProductDetailsComponent from "@/components/SliderProductDetailsComponent.vue"
 import { mapGetters } from "vuex"
 
@@ -50,6 +62,8 @@ export default {
     SliderProductDetailsComponent,
     PriceComponentForProductDetails,
     RatingComponentForProductDetails,
+    SetOfColorButtons,
+    SetOfSizeButtons,
   },
   data() {
     return {
@@ -57,16 +71,47 @@ export default {
     }
   },
   mounted() {
-    this.product = this.getProductById(this.$route.params.id)
+    // this.product = this.getProductById(this.$route.params.id)
+    this.product = this.changeProductForProductDetailPage(this.$route.params.id)
   },
   computed: {
-    ...mapGetters(["getProductById"]),
+    ...mapGetters(["getCartProductById", "getProductById"]),
   },
-  methods: {},
+  methods: {
+    changeProductForProductDetailPage(id) {
+      const productInCart = this.getCartProductById(id)
+      if (productInCart) {
+        return productInCart
+      } else {
+        const newProduct = this.getProductById(id)
+        const defaultSize = this.getFirstAvailableSize(newProduct.sizesInfo)
+        const inCart = false
+        return { ...newProduct, choosenSize: defaultSize, inCart }
+      }
+    },
+    getFirstAvailableSize(sizes) {
+      return sizes.find((size) => size.amount != 0)
+    },
+  },
 }
 </script>
 
 <style lang="scss" scoped>
+.param {
+  padding-top: 13px;
+  padding-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  border-bottom: 1px solid #e8e8e8;
+  &__title {
+    color: #222;
+    font-family: "satoshiregular";
+    font-size: 16px;
+    line-height: normal;
+  }
+}
 .params {
   display: flex;
   flex-direction: column;
@@ -111,10 +156,6 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 36px;
-  &__content {
-  }
-  &__display {
-  }
   &__top {
     display: flex;
     flex-direction: row;
@@ -124,8 +165,59 @@ export default {
 }
 
 @media (max-width: 1239px) {
+  .param {
+    padding-top: 12px;
+    padding-bottom: 15px;
+    &__title {
+      font-size: 14px;
+    }
+  }
+  .params {
+    &__info {
+      gap: 12px;
+      padding-bottom: 12px;
+    }
+    &__title {
+      font-size: 32px;
+      line-height: 100%;
+    }
+    &__about {
+      gap: 12px;
+    }
+    &__rating-price {
+      gap: 12px;
+    }
+    &__short-description {
+      font-size: 14px;
+    }
+  }
+  .details {
+    &__top {
+      gap: 16px;
+      align-items: flex-start;
+    }
+  }
 }
 
 @media (max-width: 768px) {
+  .param {
+    padding-top: 15px;
+    padding-bottom: 24px;
+  }
+  .params {
+    &__info {
+      gap: 16px;
+      padding-bottom: 36px;
+    }
+    &__about {
+      gap: 10px;
+    }
+  }
+  .details {
+    &__top {
+      flex-direction: column;
+      gap: 32px;
+    }
+  }
 }
 </style>

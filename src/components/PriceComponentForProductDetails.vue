@@ -53,7 +53,7 @@ export default {
     overflow: hidden;
     text-overflow: ellipsis;
     &_old {
-      color: rgba(0, 0, 0, 0.30);
+      color: #999;
       font-size: 32px;
       font-style: normal;
       line-height: normal;

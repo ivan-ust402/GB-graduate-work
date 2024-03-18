@@ -3,7 +3,7 @@
     <NavigationBreadcrumbsComponent class="card__breadcrumbs" />
     <div class="cart__content">
       <h3 class="cart__title">Your cart</h3>
-      <div class="cart__display">
+      <div class="cart__display" v-if="getCartProductsCount">
         <div class="cart__cards">
           <CardProductForCart
             class="cart__card"
@@ -16,12 +16,22 @@
         </div>
         <DisplayOrderBlock />
       </div>
+      <div class="cart__empty">
+        <p class="cart__empty-text">You haven't added anything to your cart</p>
+        <router-link to="/catalog/0" class="cart__empty-route">
+          <ButtonSelectionColor
+            text="Let's Go Shoping Now"
+            class="cart__empty-button"
+          />
+        </router-link>
+      </div>
     </div>
   </section>
 </template>
 
 <script>
 import DisplayOrderBlock from "@/blocks/DisplayOrderBlock.vue"
+import ButtonSelectionColor from "@/components/ButtonSelectionColor.vue"
 import CardProductForCart from "@/components/CardProductForCart.vue"
 import NavigationBreadcrumbsComponent from "@/components/NavigationBreadcrumbsComponent.vue"
 import { mapActions, mapGetters } from "vuex"
@@ -31,6 +41,7 @@ export default {
     CardProductForCart,
     NavigationBreadcrumbsComponent,
     DisplayOrderBlock,
+    ButtonSelectionColor,
   },
   data() {
     return {
@@ -542,7 +553,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["getCartProducts"]),
+    ...mapGetters(["getCartProducts", "getCartProductsCount"]),
   },
   methods: {
     ...mapActions([]),
@@ -614,6 +625,21 @@ export default {
     border-radius: 20px;
     border: 1px solid #e8e8e8;
   }
+  &__empty {
+    border-radius: 20px;
+    border: 1px solid #e8e8e8;
+    flex-shrink: 0;
+    padding: 20px 24px;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+  }
+  &__empty-text {
+    font-size: 24px;
+  }
 }
 @media (max-width: 1239px) {
   .cart {
@@ -627,7 +653,7 @@ export default {
     }
     &__display {
       flex-direction: column;
-      gap: 24px;
+      gap: 16px;
     }
     &__cards {
       width: auto;
@@ -643,6 +669,21 @@ export default {
       padding: 20px;
       gap: 16px;
     }
+    &__empty {
+      padding: 20px;
+      height: 60vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+    }
+    &__empty-text {
+      font-size: 16px;
+    }
+    &__empty-route {
+      width: 80%;
+    }
   }
 }
 
@@ -651,6 +692,9 @@ export default {
     padding-bottom: 80px;
     &__display {
       gap: 20px;
+    }
+    &__empty-route {
+      width: 100%;
     }
   }
 }

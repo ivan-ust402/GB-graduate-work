@@ -477,7 +477,16 @@ export default createStore({
           name: "grey",
           code: "#4D4A52",
         },
-        allColors: [],
+        allColors: [
+          {
+            productId: 0,
+            color: {
+              id: 1,
+              name: "grey",
+              code: "#4D4A52",
+            },
+          },
+        ],
         added: "2023-02-26T12:30:00.000-05:00",
         newArrivals: false,
         topSelling: false,
@@ -585,7 +594,16 @@ export default createStore({
           name: "blue",
           code: "#294FA4",
         },
-        allColors: [],
+        allColors: [
+          {
+            productId: 1,
+            color: {
+              id: 2,
+              name: "blue",
+              code: "#294FA4",
+            },
+          },
+        ],
         added: "2023-02-26T12:30:00.000-05:00",
         newArrivals: true,
         topSelling: true,
@@ -693,7 +711,16 @@ export default createStore({
           name: "light blue",
           code: "#7395AE",
         },
-        allColors: [],
+        allColors: [
+          {
+            productId: 2,
+            color: {
+              id: 6,
+              name: "light blue",
+              code: "#7395AE",
+            },
+          },
+        ],
         added: "2023-02-26T12:30:00.000-05:00",
         newArrivals: false,
         topSelling: true,
@@ -1621,7 +1648,16 @@ export default createStore({
           name: "black",
           code: "#141316",
         },
-        allColors: [],
+        allColors: [
+          {
+            productId: 73,
+            color: {
+              id: 5,
+              name: "black",
+              code: "#141316",
+            },
+          },
+        ],
         added: "2023-02-26T12:30:00.000-05:00",
         newArrivals: true,
         topSelling: false,
@@ -2021,7 +2057,16 @@ export default createStore({
           name: "light blue",
           code: "#7395AE",
         },
-        allColors: [],
+        allColors: [
+          {
+            productId: 88,
+            color: {
+              id: 6,
+              name: "light blue",
+              code: "#7395AE",
+            },
+          },
+        ],
         added: "2023-02-26T12:30:00.000-05:00",
         newArrivals: true,
         topSelling: true,
@@ -2130,7 +2175,16 @@ export default createStore({
           name: "black",
           code: "#141316",
         },
-        allColors: [],
+        allColors: [
+          {
+            productId: 92,
+            color: {
+              id: 5,
+              name: "black",
+              code: "#141316",
+            },
+          },
+        ],
         added: "2023-02-26T12:30:00.000-05:00",
         newArrivals: false,
         topSelling: true,
@@ -2822,7 +2876,16 @@ export default createStore({
           name: "silver",
           code: "#D1CFD0",
         },
-        allColors: [],
+        allColors: [
+          {
+            productId: 110,
+            color: {
+              id: 19,
+              name: "silver",
+              code: "#D1CFD0",
+            },
+          },
+        ],
         added: "2023-02-26T12:30:00.000-05:00",
         newArrivals: true,
         topSelling: false,
@@ -2945,7 +3008,16 @@ export default createStore({
           name: "grey",
           code: "#4D4A52",
         },
-        allColors: [],
+        allColors: [
+          {
+            productId: 117,
+            color: {
+              id: 1,
+              name: "grey",
+              code: "#4D4A52",
+            },
+          },
+        ],
         added: "2023-02-26T12:30:00.000-05:00",
         newArrivals: true,
         topSelling: true,
@@ -3337,7 +3409,16 @@ export default createStore({
           name: "light brown",
           code: "#CABCA3",
         },
-        allColors: [],
+        allColors: [
+          {
+            productId: 117,
+            color: {
+              id: 7,
+              name: "light brown",
+              code: "#CABCA3",
+            },
+          },
+        ],
         added: "2023-02-26T12:30:00.000-05:00",
         newArrivals: true,
         topSelling: true,
@@ -4000,7 +4081,7 @@ export default createStore({
   },
   getters: {
     getProductById: (state) => (id) => {
-        return state.products.find((product) => product.id === id)
+      return state.products.find((product) => product.id === id)
     },
     getGenders(state) {
       return state.genders

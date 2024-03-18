@@ -13,9 +13,9 @@ export default {
       return state.cartProducts
     },
     getCartProductsCount(state) {
-      return state.cartProducts.length
+      return state.cartProducts.reduce((acc, product) => acc += product.quantity, 0)
     },
-    getCartProductById(state, id) {
+    getCartProductById: (state) => id => {
       return state.cartProducts.find(product => product.id === id)
     },
     getPurchasedProducts(state) {

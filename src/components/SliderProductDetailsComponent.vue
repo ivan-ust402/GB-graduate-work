@@ -191,6 +191,9 @@ export default {
       axis: "Y",
     }
   },
+  // setup() {
+  //   const scrollContainer = ref(null)
+  // },
   mounted() {
     const updateOffsetParams = () => {
       if (window.innerWidth > 1239) {
@@ -201,12 +204,16 @@ export default {
         this.axis = "X"
       }
       this.activeDot = 0
+
     }
 
+    const updateOffsetParamsAndScrollToActiveIcon = () => {
+      updateOffsetParams()
+      // this.scrollToActiveIcon()
+    }
     updateOffsetParams()
 
-    window.addEventListener("resize", updateOffsetParams)
-    window.addEventListener("resize", this.scrollToActiveIcon)
+    window.addEventListener("resize", updateOffsetParamsAndScrollToActiveIcon)
   },
   methods: {
     clickIcon(index) {
