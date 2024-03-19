@@ -1,7 +1,11 @@
 <template>
   <div class="card">
     <router-link
-      :to="{ name: 'ProductDetailsPage', params: { id: product.id } }"
+      :to="{
+        name: 'ProductDetailsPage',
+        params: { id: product.id },
+        query: { sizeId: product.choosenSize.size.id },
+      }"
       class="card__router-link"
     >
       <div class="card__image-box">
@@ -23,7 +27,9 @@
             <p class="card__param">
               Size:
               <span class="card__param_value">
-                {{ product.choosenSize ? product.choosenSize : "Large" }}
+                {{
+                  product.choosenSize ? product.choosenSize.size.name : "Large"
+                }}
               </span>
             </p>
             <p class="card__param">
@@ -59,8 +65,8 @@
         <QuantitySelector
           class="card__quantity"
           :quantity="product.quantity"
-          @increase="addNewProduct(product.id)"
-          @decrease="decreaseQuantityProduct(product.id)"
+          @increase="addNewProduct"
+          @decrease="decreaseQuantityProduct"
         />
       </div>
     </div>
@@ -193,24 +199,20 @@ export default {
   },
   emits: ["increaseQuantity", "decreaseQuantity", "removeProduct"],
   methods: {
-    addNewProduct(id) {
-      console.log(id)
-      this.$emit("increaseQuantity", id)
+    addNewProduct() {
+      this.$emit("increaseQuantity")
     },
-    decreaseQuantityProduct(id) {
-      console.log(id)
-      this.$emit("decreaseQuantity", id)
+    decreaseQuantityProduct() {
+      this.$emit("decreaseQuantity")
     },
-    removeProduct(id) {
-      console.log("remove, id:", id)
-      this.$emit("removeProduct", id)
+    removeProduct() {
+      this.$emit("removeProduct")
     },
   },
 }
 </script>
 
 <style lang="scss" scoped>
-
 .card {
   display: flex;
   flex-direction: row;

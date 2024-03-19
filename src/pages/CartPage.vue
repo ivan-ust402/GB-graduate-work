@@ -7,21 +7,22 @@
         <div class="cart__cards">
           <CardProductForCart
             class="cart__card"
-            v-for="product in products"
+            v-for="product in getCartProducts"
             :product="product"
-            @increaseQuantity="increaseProductQuantity"
-            @decreaseQuantity="decreaseProductQuantity"
-            @removeProduct="removeProduct"
+            @increaseQuantity="increaseProductAmount(product)"
+            @decreaseQuantity="decreaseProductAmount(product)"
+            @removeProduct="removeProduct(product)"
           />
         </div>
         <DisplayOrderBlock />
       </div>
-      <div class="cart__empty">
+      <div v-else class="cart__empty">
         <p class="cart__empty-text">You haven't added anything to your cart</p>
         <router-link to="/catalog/0" class="cart__empty-route">
           <ButtonSelectionColor
             text="Let's Go Shoping Now"
             class="cart__empty-button"
+            @click="buyAllProducts"
           />
         </router-link>
       </div>
@@ -553,19 +554,23 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["getCartProducts", "getCartProductsCount"]),
+    ...mapGetters(["getCartProducts", "getCartProductsCount", "getCartProductByIdAndSize"]),
   },
   methods: {
-    ...mapActions([]),
+    ...mapActions(["addToCart", "decreaseProductQuantity", "removeFromCart", "buyAllProducts", "applyPromoCode"]),
 
-    increaseProductQuantity(id) {
-      console.log("increase in cart, id: ", id)
+    increaseProductAmount(product) {
+      this.addToCart(product)
+      console.log(this.getCartProductByIdAndSize(product))
     },
-    decreaseProductQuantity(id) {
-      console.log("decrease in cart, id: ", id)
+    decreaseProductAmount(product) {
+      this.decreaseProductQuantity(product)
+      console.log(this.getCartProductByIdAndSize(product))
+
     },
-    removeProduct(id) {
-      console.log("remove in cart, id: ", id)
+    removeProduct(product) {
+      this.removeFromCart(product)
+      console.log(this.getCartProductByIdAndSize(product))
     },
   },
 }

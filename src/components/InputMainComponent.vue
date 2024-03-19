@@ -10,6 +10,7 @@
       :placeholder="placeholderValue"
       v-model.lazy="message"
       @change.prevent="updateMessage"
+      :value="value"
     />
   </div>
 </template>
@@ -17,6 +18,10 @@
 <script>
 export default {
   props: {
+    value: {
+      type: String,
+      default: () => ""
+    },
     placeholderValue: {
       type: String,
       default: () => "SALESALE100",

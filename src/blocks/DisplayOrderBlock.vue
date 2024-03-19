@@ -37,11 +37,17 @@
         </div>
       </div>
     </div>
-    <FormForPromoCode class="order__promo" />
+    <FormForPromoCode
+      class="order__promo"
+      @getInputMessage="receivePromoMessage"
+    />
+    <!-- <FormForPromoCode 
+      class="order__promo" 
+    /> -->
     <ButtonSelectionColor
       class="order__apply"
       text="Go to Checkout"
-      needArrow="true"
+      :needArrow="true"
       @click.prevent="applyCart"
     />
   </div>
@@ -64,6 +70,7 @@ export default {
   },
   computed: {
     ...mapGetters([
+      "getCartProducts",
       "getCartSubtotalPrice",
       "getPromoCodeAmount",
       "getShippingCost",
@@ -72,10 +79,17 @@ export default {
       "getCartTotalPrice",
     ]),
   },
+  watch() {
+    getPromoCodeDiscountValue()
+  },
   methods: {
-    ...mapActions([]),
+    ...mapActions(["buyAllProducts", "applyPromoCode"]),
     applyCart() {
       console.log("Cart is applyed!")
+      this.buyAllProducts(this.getCartProducts)
+    },
+    receivePromoMessage(message) {
+      this.applyPromoCode(message)
     },
   },
 }
@@ -144,8 +158,6 @@ export default {
       &::first-letter {
         text-transform: uppercase;
       }
-    }
-    &_span {
     }
   }
   &__value {

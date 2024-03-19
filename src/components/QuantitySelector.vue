@@ -51,11 +51,9 @@ export default {
   emits: ["increase", "decrease"],
   methods: {
     decrease() {
-      console.log("decrease in quantity selector ")
       this.$emit("decrease")
     },
     increase() {
-      console.log("increase in quantity selector")
       this.$emit("increase")
     },
   },

@@ -40,6 +40,7 @@ export default {
   font-style: normal;
   line-height: normal;
   &_active {
+    border: 1px solid #121212;
     background: #121212;
     color: white;
   }

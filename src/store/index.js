@@ -609,7 +609,7 @@ export default createStore({
         topSelling: true,
         image: "1/card.jpg",
         images: ["1/slider-0.jpg", "1/slider-1.jpg", "1/slider-2.jpg"],
-        icons: ["0/icon-0.jpg", "1/icon-1.jpg", "1/icon-2.jpg"],
+        icons: ["1/icon-0.jpg", "1/icon-1.jpg", "1/icon-2.jpg"],
         availability: "true",
         shortDescription:
           "Bochetti jeans are ideal for those who like to combine casual and sporty styles and want to look stylish and fashionable in everyday life.",

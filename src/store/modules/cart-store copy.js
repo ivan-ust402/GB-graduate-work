@@ -22,17 +22,22 @@ export default {
       return state.cartProducts.find((product) => product.id === id)
     },
     getCartProductByIdAndSize: (state) => (product) => {
-      return state.cartProducts.find(
-        (el) => {
-          return (el.id === product.id && typeof product.choosenSize?.size?.id === "number" &&
-          el.choosenSize?.size?.id === product.choosenSize?.size?.id)
-        })
+      return state.cartProducts.find((el) => {
+        return (
+          el.id === product.id &&
+          typeof product.choosenSize?.size?.id === "number" &&
+          el.choosenSize?.size?.id === product.choosenSize?.size?.id
+        )
+      })
     },
     getCartProductByIdAndSizeId: (state) => (productId, sizeId) => {
-      return state.cartProducts.find(
-        (el) => {
-          return (el.id === productId && el.choosenSize.size.id === sizeId)
-        })
+      return state.cartProducts.find((el) => {
+        return (
+          el.id === productId &&
+          typeof sizeId === "number" &&
+          el.choosenSize?.size?.id === sizeId
+        )
+      })
     },
     getPurchasedProducts(state) {
       return state.purchasedProducts
@@ -105,22 +110,34 @@ export default {
     CLEAR_CART_PRODUCTS(state) {
       state.cartProducts = []
     },
+    // ADD_CART_PRODUCT(state, inputProduct) {
+    //   const existingItem = state.cartProducts.find(
+    //     (product) =>
+    //       product.id === inputProduct.id &&
+    //       product.choosenSize.size.id === inputProduct.choosenSize.size.id
+    //   )
+    //   if (existingItem) {
+    //     if (existingItem.quantity < 99) {
+    //       existingItem.quantity++
+    //       // existingItem.inCart = true
+    //     }
+    //   } else {
+    //     state.cartProducts.push({ ...inputProduct, inCart: true })
+    //   }
+    // },
     ADD_CART_PRODUCT(state, inputProduct) {
-      console.log(inputProduct)
-      const existingItem = state.cartProducts.find(
+      state.cartProducts.push(inputProduct)
+    },
+    UPDATE_CART_PRODUCT(state, changeProduct) {
+      const index = state.cartProducts.findIndex(
         (product) =>
-          product.id === inputProduct.id && 
-          product.choosenSize.size.id === inputProduct.choosenSize.size.id
+          product.id === changeProduct.id &&
+          product.choosenSize.size.id === changeProduct.choosenSize.size.id
       )
-      console.log(existingItem)
-      if (existingItem) {
-        if (existingItem.quantity < 99) {
-          existingItem.quantity++
-          // existingItem.inCart = true
-        }
-      } else {
-        state.cartProducts.push({ ...inputProduct, inCart: true })
-      }
+      state.cartProducts.splice(index, 1, {
+        ...state.cartProducts[index],
+        ...changeProduct,
+      })
     },
     APPLY_PROMO_CODE(state, promoCode) {
       if (promoCode === "DISCOUNT10") {
@@ -161,17 +178,33 @@ export default {
         1
       )
     },
-    SET_SHIPPING_COST(state, cost){
+    SET_SHIPPING_COST(state, cost) {
       state.shippingCost = cost
     },
     SET_INITIAL_PROMO_SETTINGS(state) {
       state.promoCodeApplied = false
       state.promocodeDiscount = 0
-    }
+    },
   },
   actions: {
     addToCart(context, product) {
-      context.commit("ADD_CART_PRODUCT", product)
+      // const existingItem = state.cartProducts.find(
+      //   (product) =>
+      //     product.id === inputProduct.id &&
+      //     product.choosenSize.size.id === inputProduct.choosenSize.size.id
+      // )
+      const existingItem = context.getters.getCartProductByIdAndSize(product)
+      if (existingItem) {
+        if (existingItem.quantity < 99) {
+          existingItem.quantity++
+          // existingItem.inCart = true
+          console.log(existingItem.quantity)
+          context.commit("UPDATE_CART_PRODUCT", existingItem)
+        }
+      } else {
+        console.log(product)
+        context.commit("ADD_CART_PRODUCT", { ...product, inCart: true })
+      }
     },
     removeFromCart(context, product) {
       context.commit("REMOVE_CART_PRODUCT", product)

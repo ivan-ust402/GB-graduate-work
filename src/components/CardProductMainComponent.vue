@@ -5,6 +5,9 @@
       params: {
         id: product.id,
       },
+      query: {
+        sizeId: product.sizesInfo.find(sizeInfo => Number(sizeInfo.amount) > 0).size.id
+      }
     }"
   >
     <div class="card">

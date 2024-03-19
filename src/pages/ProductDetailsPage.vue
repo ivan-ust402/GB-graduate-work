@@ -32,18 +32,44 @@
                 class="param__content"
                 :choosenColor="product.color"
                 :colors="product.allColors"
+                @getSelectedColor="setSelectedColor"
               />
             </div>
             <div class="params__param param">
               <h6 class="param__title">Choose Size</h6>
-              <SetOfSizeButtons :sizes="product.sizesInfo" />
+              <SetOfSizeButtons
+                :sizes="getAvailableSizes"
+                @getSelectedSize="setSelectedSize"
+                :selectedSize="getChoosenSize"
+              />
             </div>
-            <div class="params__add-to-cart">
-              <QuantitySelectorForDetails class="params__quantity" />
+            <div v-if="!isInCart" class="params__add-to-cart">
+              <QuantitySelectorForDetails
+                class="params__quantity"
+                :quantity="getChoosenQuantity"
+                @decrease="decreaseQuantity"
+                @increase="increaseQuantity"
+              />
               <ButtonSelectionColor
                 text="Add to Cart"
                 class="params__add-button"
+                @click.prevent="addProduct(product)"
+                :needArrow="false"
               />
+            </div>
+            <div v-else class="params__add-to-cart">
+              <QuantitySelectorForDetails
+                class="params__quantity"
+                :quantity="getChoosenQuantity"
+                @decrease="decreaseQuantityInCart(product)"
+                @increase="increaseQuantityInCart(product)"
+              />
+              <router-link to="/cart">
+                <ButtonSecondaryColor
+                  text="Go To Cart"
+                  class="params__add-button"
+                />
+              </router-link>
             </div>
           </div>
         </div>
@@ -54,6 +80,7 @@
 </template>
 
 <script>
+import ButtonSecondaryColor from "@/components/ButtonSecondaryColor.vue"
 import ButtonSelectionColor from "@/components/ButtonSelectionColor.vue"
 import NavigationBreadcrumbsComponent from "@/components/NavigationBreadcrumbsComponent.vue"
 import PriceComponentForProductDetails from "@/components/PriceComponentForProductDetails.vue"
@@ -62,7 +89,7 @@ import RatingComponentForProductDetails from "@/components/RatingComponentForPro
 import SetOfColorButtons from "@/components/SetOfColorButtons.vue"
 import SetOfSizeButtons from "@/components/SetOfSizeButtons.vue"
 import SliderProductDetailsComponent from "@/components/SliderProductDetailsComponent.vue"
-import { mapGetters } from "vuex"
+import { mapActions, mapGetters } from "vuex"
 
 export default {
   components: {
@@ -74,34 +101,194 @@ export default {
     SetOfSizeButtons,
     QuantitySelectorForDetails,
     ButtonSelectionColor,
+    ButtonSecondaryColor,
   },
   data() {
     return {
       product: {},
+      availableSizes: [],
+      choosenSize: {},
+      choosenColor: {},
+      choosenQuantity: 1,
+      isInCart: false,
     }
   },
   mounted() {
     // this.product = this.getProductById(this.$route.params.id)
-    this.product = this.changeProductForProductDetailPage(this.$route.params.id)
+    // this.product = this.changeProductForProductDetailPage(this.$route.params.id)
+    this.product = this.changeProductForProductDetailPage(
+      this.$route.params.id,
+      this.$route.query.sizeId
+    )
+    this.availableSizes = this.findAvailableSizes()
+    this.choosenSize = this.setInitialSize(this.$route.query.sizeId)
+    this.choosenColor = this.setInitialColor()
+    this.choosenQuantity = this.setInitialQuantity()
+    this.isInCart = this.setInitialIsInCart()
+    console.log("Init")
   },
   computed: {
-    ...mapGetters(["getCartProductById", "getProductById"]),
+    ...mapGetters([
+      "getCartProductById",
+      "getProductById",
+      "getCartProductByIdAndSize",
+      "getCartProducts",
+      "getCartProductByIdAndSizeId",
+    ]),
+    getAvailableSizes() {
+      return this.availableSizes
+    },
+    getChoosenSize() {
+      return this.choosenSize
+    },
+    getChoosenColor() {
+      return this.choosenColor
+    },
+    getChoosenQuantity() {
+      return this.choosenQuantity
+    },
+    getIsInCart() {
+      return this.isInCart
+    },
+  },
+  watch: {
+    $route() {
+      this.setActualStateForProductDetails()
+    },
   },
   methods: {
-    changeProductForProductDetailPage(id) {
-      const productInCart = this.getCartProductById(id)
-      if (productInCart) {
-        return productInCart
+    ...mapActions(["addToCart", "decreaseProductQuantity"]),
+    setActualStateForProductDetails() {
+      this.product = this.changeProductForProductDetailPage(
+        this.$route.params.id, this.$route.query.sizeId
+      )
+      this.isInCart = this.product.inCart
+      this.choosenSize = this.product.choosenSize
+      this.choosenQuantity = this.product.quantity
+    },
+    increaseQuantityInCart(product) {
+      const sendProduct = {
+        ...product,
+        choosenSize: this.getChoosenSize,
+        quantity: this.getChoosenQuantity,
+      }
+      this.addToCart(sendProduct)
+      this.setSelectedSize(this.getChoosenSize.size.id)
+      // this.setActualStateForProductDetails()
+    },
+    decreaseQuantityInCart(product) {
+      const sendProduct = {
+        ...product,
+        choosenSize: this.getChoosenSize,
+        quantity: this.getChoosenQuantity,
+      }
+      this.decreaseProductQuantity(sendProduct)
+      this.setSelectedSize(this.getChoosenSize.size.id)
+      // this.setActualStateForProductDetails()
+    },
+    addProduct(product) {
+      this.isInCart = true
+      const sendProduct = {
+        ...product,
+        choosenSize: this.getChoosenSize,
+        quantity: this.getChoosenQuantity,
+      }
+      this.addToCart(sendProduct)
+    },
+    increaseQuantity() {
+      if (this.getChoosenQuantity < 99) {
+        this.choosenQuantity += 1
       } else {
-        const newProduct = this.getProductById(id)
-        const defaultSize = this.getFirstAvailableSize(newProduct.sizesInfo)
-        const inCart = false
-        return { ...newProduct, choosenSize: defaultSize, inCart }
+        this.choosenQuantity = 1
       }
     },
-    getFirstAvailableSize(sizes) {
-      return sizes.find((size) => size.amount != 0)
+    decreaseQuantity() {
+      if (this.getChoosenQuantity > 1) {
+        this.choosenQuantity -= 1
+      } else {
+        this.choosenQuantity = 99
+      }
     },
+    setInitialIsInCart() {
+      return this.product.inCart
+    },
+    setInitialQuantity() {
+      return this.product.quantity
+    },
+    setInitialColor() {
+      return this.product.color
+    },
+    setSelectedColor(color) {
+      this.choosenColor = color
+    },
+    getSizeById(id) {
+      return this.availableSizes.find((size) => size.size.id === id)
+    },
+    setSelectedSize(id) {
+      const changedSize = this.getSizeById(id)
+      const currentProduct = { ...this.product, choosenSize: changedSize }
+      const existingProductInCart =
+        this.getCartProductByIdAndSize(currentProduct)
+      if (existingProductInCart) {
+        this.choosenQuantity = existingProductInCart.quantity
+        this.isInCart = true
+      } else {
+        this.isInCart = false
+        this.choosenQuantity = 1
+      }
+      this.choosenSize = changedSize
+      // this.$router.push({query: {sizeId: id}})
+    },
+    setInitialSize(sizeId) {
+      // if (typeof sizeId === "string") {
+      //   this.setSelectedSize(Number(sizeId))
+      // } else {
+      //   return this.availableSizes[0]
+      // }
+    
+      return this.availableSizes.find((size) => size.size.id === Number(sizeId))
+    },
+    findAvailableSizes() {
+      return this.product.sizesInfo.filter((size) => Number(size.amount) > 0)
+    },
+    changeProductForProductDetailPage(id, sizeId) {
+      const currentSizeId = Number(sizeId)
+      const productInCart = this.getCartProductByIdAndSizeId(id, currentSizeId)
+      if (productInCart) {
+        const cartProduct = { ...productInCart }
+        return cartProduct
+      } else {
+        const newProduct = this.getProductById(id)
+        const defaultSize = newProduct.sizesInfo.find(
+          (sizeInfo) => sizeInfo.size.id === currentSizeId
+        )
+        const inCart = false
+        const quantity = this.getChoosenQuantity
+        return { ...newProduct, choosenSize: defaultSize, inCart, quantity }
+      }
+    },
+    // changeProductForProductDetailPage(id) {
+    //   const productInCart = this.getCartProductById(id)
+    //   const tempProductInCart = {
+    //     ...productInCart,
+    //     choosenSize: this.choosenSize,
+    //     quantity: this.choosenQuantity,
+    //     inCart: true,
+    //   }
+
+    //   const productInCartEqualsSize =
+    //     this.getCartProductByIdAndSize(tempProductInCart)
+    //   if (productInCartEqualsSize) {
+    //     const cartProduct = { ...productInCartEqualsSize }
+    //     return cartProduct
+    //   } else {
+    //     const newProduct = this.getProductById(id)
+    //     const defaultSize = this.getChoosenSize
+    //     const inCart = false
+    //     const quantity = this.getChoosenQuantity
+    //     return { ...newProduct, choosenSize: defaultSize, inCart, quantity }
+    //   }
+    // },
   },
 }
 </script>

@@ -6,6 +6,7 @@
       labelSrc="cart/promo-icon.svg"
       labelAlt="promo icon"
       @update:message="updateInputMessage"
+      value=""
     />
     <ButtonSelectionColor class="promo__button" text="Apply" @click.prevent="click"/>
   </form>
@@ -25,12 +26,14 @@ export default {
       message: "",
     }
   },
+  emits: ['getInputMessage'],
   methods: {
     updateInputMessage(message) {
       this.message = message
     },
     click() {
-      console.log(this.message)
+      console.log("click", this.message)
+      this.$emit('getInputMessage', this.message)
     }
   },
 }

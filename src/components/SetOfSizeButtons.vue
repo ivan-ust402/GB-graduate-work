@@ -4,6 +4,8 @@
       v-for="(size, index) in sizes"
       :key="index"
       :text="size.size.name"
+      @click.prevent="size.size.id !== selectedSize.size.id ? chooseSize(size.size.id): noClick()"
+      :isActive="size.size.id === selectedSize.size.id"
     />
   </div>
 </template>
@@ -93,14 +95,36 @@ export default {
         },
       ],
     },
+    selectedSize: {
+      type: Object,
+      default: () => {
+        return {
+          size: {
+            id: 0,
+            name: "XX-Small",
+            shortName: "xxs",
+          },
+          amount: "10",
+        }
+      }
+    }
   },
-  data() {
-    return {}
+  emits: ['getSelectedSize'],
+  methods: {
+    chooseSize(selectedSizeId) {
+      this.$emit('getSelectedSize', selectedSizeId)
+    },
+    noClick() {
+      console.log("No click!")
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.hide {
+  display: none;
+}
 .sizes {
   display: flex;
   gap: 12px;
