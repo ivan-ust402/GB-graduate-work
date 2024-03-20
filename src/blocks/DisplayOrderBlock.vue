@@ -5,26 +5,26 @@
       <div class="price__checkout">
         <div class="price__item">
           <h6 class="price__title">Subtotal</h6>
-          <p class="price__value">${{ computedCartSubtotalPrice }}</p>
+          <p class="price__value">${{ getCartSubtotalPrice }}</p>
         </div>
         <div class="price__item">
           <h6 class="price__title">Delivery Fee</h6>
-          <p class="price__value">${{ computedShippingCost }}</p>
+          <p class="price__value">${{ getShippingCost }}</p>
         </div>
         <div class="price__item">
           <h6 class="price__title">Discount</h6>
           <p class="price__value price__value_discount">
-            -${{ computedCartProductsDiscount }}
+            -${{ getCartProductsDiscount }}
           </p>
         </div>
         <div class="price__item">
           <h6 class="price__title">
             Promocode (<span class="price__title_span"
-              >{{ computedPromoCodePercent }}%</span
+              >{{ getPromoCodePercent }}%</span
             >)
           </h6>
           <p class="price__value price__value_discount">
-            -${{ computedPromoCodeDiscountValue }}
+            -${{ getPromoCodeDiscountValue }}
           </p>
         </div>
       </div>
@@ -32,7 +32,7 @@
         <div class="price__item">
           <h6 class="price__title price__title_total">Total</h6>
           <p class="price__value price__value_total">
-            ${{ computedCartTotalPrice }}
+            ${{ getCartTotalPrice }}
           </p>
         </div>
       </div>
@@ -71,12 +71,12 @@ export default {
   computed: {
     ...mapGetters([
       "getCartProducts",
-      "computedCartSubtotalPrice",
-      "computedPromoCodePercent",
-      "computedShippingCost",
-      "computedCartProductsDiscount",
-      "computedPromoCodeDiscountValue",
-      "computedCartTotalPrice",
+      "getCartSubtotalPrice",
+      "getPromoCodePercent",
+      "getShippingCost",
+      "getCartProductsDiscount",
+      "getPromoCodeDiscountValue",
+      "getCartTotalPrice",
     ]),
   },
   watch() {

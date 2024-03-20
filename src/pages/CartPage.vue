@@ -18,7 +18,14 @@
       </div>
       <div v-else class="cart__empty">
         <p class="cart__empty-text">You haven't added anything to your cart</p>
-        <router-link to="/catalog/0" class="cart__empty-route">
+        <router-link 
+          :to="{
+            name: 'CatalogPage',
+            params: { page: 1 },
+            query: { show: 'all' }
+          }" 
+          class="cart__empty-route"
+        >
           <ButtonSelectionColor
             text="Let's Go Shoping Now"
             class="cart__empty-button"
@@ -27,7 +34,6 @@
         </router-link>
       </div>
     </div>
-    {{ getOrderSummary }}
   </section>
 </template>
 
@@ -555,7 +561,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["getCartProducts", "getCartProductsCount", "getCartProductByIdAndSize", "getOrderSummary"]),
+    ...mapGetters(["getCartProducts", "getCartProductsCount", "getCartProductByIdAndSize"]),
   },
   methods: {
     ...mapActions(["addToCart", "decreaseProductQuantity", "removeFromCart", "buyAllProducts", "applyPromoCode"]),

@@ -5,7 +5,14 @@
         {{ type.name }}
       </a> -->
       <router-link
-        :to="link"
+        :to="{
+          name: 'CatalogPage',
+          params: { page: 1 },
+          query: {
+            gender: `${String(parameters.name.split(' ')[1]).toLowerCase()}`,
+            type: `${String(item.name).toLowerCase()}`,
+          },
+        }"
         class="subdropdown__link"
         v-on:click="hideAllSubItems()"
       >
@@ -25,10 +32,6 @@ export default {
     parameters: {
       type: Object,
       default: () => {},
-    },
-    link: {
-      type: String,
-      default: () => "/notfound",
     },
   },
   emits: ["changeShowStatus"],

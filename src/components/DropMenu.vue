@@ -28,7 +28,6 @@
         v-if="gender.showClothesTypes"
         :parameters="gender"
         :items="gender.clothesTypes"
-        link="/catalog/0"
         @changeShowStatus="changeShowStatus"
       />
     </li>

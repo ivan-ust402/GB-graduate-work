@@ -3,42 +3,12 @@ export default {
     return {
       cartProducts: [],
       purchasedProducts: [],
-      orderSummary: {
-        subtotalPrice: 0,
-        deliveryFee: 15,
-        commonProductsDiscount: 0,
-        promocodePercent: 0,
-        promocodeValue: 0,
-        totalPrice: 0
-      },
       shippingCost: 15,
       promoCodeApplied: false,
       promoCodeDiscount: 0,
     }
   },
   getters: {
-    getOrderSummary(state) {
-      return state.orderSummary
-    },
-    getSubtotal(state) {
-      return state.orderSummary.subtotalPrice
-    },
-    getDeliveryFee(state) {
-      return state.orderSummary.deliveryFee
-    },
-    getCommonProductsDiscount(state) {
-      return state.orderSummary.commonProductsDiscount
-    },
-    getPromocodeRercent(state) {
-      return state.orderSummary.promocodePercent
-    },
-    getValue(state) {
-      return state.orderSummary.promocodeValue
-    },
-
-
-
-
     getCartProducts(state) {
       return state.cartProducts
     },
@@ -72,7 +42,7 @@ export default {
     },
 
 
-    computedCartSubtotalPrice(state) {
+    getCartSubtotalPrice(state) {
       return (
         Math.round(
           state.cartProducts.reduce((total, product) => {
@@ -81,13 +51,13 @@ export default {
         ) / 100
       )
     },
-    computedPromoCodePercent(state) {
+    getPromoCodePercent(state) {
       return state.promoCodeApplied ? state.promoCodeDiscount : 0
     },
-    computedShippingCost(state) {
+    getShippingCost(state) {
       return state.shippingCost
     },
-    computedCartProductsDiscount(state) {
+    getCartProductsDiscount(state) {
       return (
         Math.round(
           state.cartProducts.reduce((totalProductsDiscount, product) => {
@@ -99,34 +69,30 @@ export default {
         ) / 100
       )
     },
-    computedPromoCodeDiscountValue(state, getters) {
+    getPromoCodeDiscountValue(state, getters) {
       return (
         Math.round(
-          (((getters.computedCartSubtotalPrice - getters.computedCartProductsDiscount) *
-            getters.computedPromoCodePercent) /
+          (((getters.getCartSubtotalPrice - getters.getCartProductsDiscount) *
+            getters.getPromoCodePercent) /
             100) *
             100
         ) / 100
       )
     },
 
-    computedCartTotalPrice(state, getters) {
+    getCartTotalPrice(state, getters) {
       return (
         Math.round(
-          (getters.computedCartSubtotalPrice -
-            getters.computedCartProductsDiscount -
-            getters.computedPromoCodeDiscountValue +
-            getters.computedShippingCost) *
+          (getters.getCartSubtotalPrice -
+            getters.getCartProductsDiscount -
+            getters.getPromoCodeDiscountValue +
+            getters.getShippingCost) *
             100
         ) / 100
       )
     },
   },
   mutations: {
-    UPDATE_ORDER_SUMMARY(state, inputArray){
-      console.log(inputArray)
-      state.orderSummary = {...state.orderSummary, ...inputArray}
-    },
     SET_CART_PRODUCTS(state, inputArray) {
       if (inputArray) {
         const checkedArray = inputArray.map((el) => {
@@ -158,11 +124,11 @@ export default {
     },
     APPLY_PROMO_CODE(state, promoCode) {
       if (promoCode === "DISCOUNT10") {
-        console.log("IM HERE")
         state.promoCodeApplied = true
         state.promoCodeDiscount = 10
-        console.log(state.promoCodeApplied)
-        console.log(state.promoCodeDiscount)
+      } else if (promoCode === "SALESALE100") {
+        state.promoCodeApplied = true
+        state.promoCodeDiscount = 5
       }
     },
     REMOVE_CART_PRODUCT(state, product) {
@@ -207,33 +173,11 @@ export default {
     }
   },
   actions: {
-    setOrderSummary(context) {
-      let orderSummaryParams = {}
-      const subtotal = context.getters.computedCartSubtotalPrice
-      const deliveryFee = context.getters.computedShippingCost
-      const productsDiscount = context.getters.computedCartProductsDiscount
-      const promoPercent = context.getters.computedPromoCodePercent
-      const promoValue = context.getters.computedPromoCodeDiscountValue
-      const total = context.getters.computedCartTotalPrice
-      orderSummaryParams = {
-        ...orderSummaryParams, 
-        subtotalPrice: subtotal, 
-        deliveryFee: deliveryFee, 
-        commonProductsDiscount: productsDiscount, 
-        promocodePercent: promoPercent, 
-        promocodeValue: promoValue, 
-        totalPrice: total
-      }
-      context.commit('UPDATE_ORDER_SUMMARY', orderSummaryParams)
-    },
-
     addToCart(context, product) {
       context.commit("ADD_CART_PRODUCT", product)
-      context.dispatch("setOrderSummary")
     },
     removeFromCart(context, product) {
       context.commit("REMOVE_CART_PRODUCT", product)
-      context.dispatch("setOrderSummary")
     },
     decreaseProductQuantity(context, product) {
       const findProduct = context.getters.getCartProductByIdAndSize(product)
@@ -242,18 +186,15 @@ export default {
       } else if (findProduct.quantity <= 1) {
         context.commit("REMOVE_CART_PRODUCT", product)
       }
-      context.dispatch("setOrderSummary")
     },
     buyAllProducts(context, cartProducts) {
       context.commit("SET_PURCHASED_PRODUCTS", cartProducts)
       context.commit("CLEAR_CART_PRODUCTS")
       context.commit("SET_INITIAL_PROMO_SETTINGS")
-      context.dispatch("setOrderSummary")
     },
     
     applyPromoCode(context, promoCode) {
       context.commit("APPLY_PROMO_CODE", promoCode)
-      context.dispatch("setOrderSummary")
     },
   },
 }

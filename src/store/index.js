@@ -4186,6 +4186,20 @@ export default createStore({
         return batch
       }
     },
+
+    getProductByQuery: (state) => (query) => {
+      const { gender, type, color, size, style, priceMin, priceMax, show } = query
+      console.log(gender, type, color, size, style, priceMin, priceMax, show)
+
+      return state.products.filter(product => {
+        return (!show || product) && (!gender || product.gender.name.split('')[0] === gender.split('')[0]) &&
+        (!type || product.type.name.toLowerCase() === type) &&
+        (!color || product.color.name.toLowerCase() === color) &&
+        (!size || product.sizesInfo.find(sizeInfo => sizeInfo.size.name === size && sizeInfo.amount > 0)) &&
+        (!style || product.dressStyle.name.toLowerCase() === style) &&
+        (!priceMin || !priceMax || Number(product.price) > priceMin && Number(product.price) < priceMin) 
+      })
+    }
   },
   mutations: {},
   actions: {},

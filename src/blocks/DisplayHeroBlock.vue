@@ -12,7 +12,13 @@
             </p>
           </div>
 
-          <router-link to="/catalog">
+          <router-link
+            :to="{
+              name: 'CatalogPage',
+              params: { page: 1 },
+              query: { show: 'all' },
+            }"
+          >
             <ButtonSelectionColor text="Shop Now" />
           </router-link>
         </div>
@@ -192,7 +198,6 @@ export default {
     display: flex;
     flex-direction: column;
     gap: 16px;
-    
   }
   &__title {
     font-family: "satoshibold";
@@ -211,7 +216,6 @@ export default {
     font-style: normal;
     // font-weight: 400;
     line-height: normal;
-    
   }
 }
 
