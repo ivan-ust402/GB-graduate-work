@@ -4087,6 +4087,18 @@ export default createStore({
     getTypes(state) {
       return state.types
     },
+    getDressStyles(state) {
+      return state.dressStyles
+    },
+    getSizes(state) {
+      return state.sizes
+    },
+    getColors(state) {
+      return state.colors
+    },
+    getPriceRange(state) {
+      return state.priceRange
+    },
     getALLProducts(state) {
       return state.products
     },
