@@ -5,7 +5,7 @@
       class="center"
       id="new-arrivals"
       title="NEW ARRIVALs"
-      @getMoreProducts="downloadMoreProducts"
+      @getMoreProducts="downloadMoreNewArivals"
       :products="newArrivals"
     />
     <DisplayCategoryBlock
@@ -13,12 +13,17 @@
       id="top-sellings"
       title="Top Sellings"
       :borderBottom="false"
+      :products="topSellings"
+      @getMoreProducts="downloadMoreTopSellings"
     />
     <DisplayStyleTypesBlock
       class="center style-type"
       title="Browse by dress style"
     />
-    <DisplayReviewSliderBlock title="OUR HAPPY CUSTOMERS" />
+    <DisplayReviewSliderBlock 
+      title="OUR HAPPY CUSTOMERS" 
+      :reviews="shopReviews"
+    />
   </section>
 </template>
 
@@ -41,43 +46,62 @@ export default {
     return {
       countProductsPerBlock: 4,
       newArrivals: [],
+      extraNewArrivals: [],
+      topSellings: [],
+      extraTopSellings: [],
+      shopReviews: [],
     }
   },
   mounted() {
-    this.updateWidth() // Вызываем функцию для первоначального получения ширины и установки первоначальных знеаченний, зависящих от ширины 
+    this.updateWidth() // Вызываем функцию для первоначального получения ширины и установки первоначальных знеаченний, зависящих от ширины
     window.addEventListener("resize", this.updateWidth) // Слушаем событие изменения размера окна и обновляем ширину
   },
-  computed: {
-    
-    
-  },
+  computed: {},
   methods: {
-    ...mapGetters(["getReqieredAmountOfNewArivals"]),
+    ...mapGetters([
+      "getRequiredAmountOfNewArivals",
+      "getRequiredAmountOfTopSellings",
+      "getRequiredAmountShopReviews",
+    ]),
     getNewArrivals(step) {
-      const tempFunc = this.getReqieredAmountOfNewArivals()
+      const tempFunc = this.getRequiredAmountOfNewArivals()
       return tempFunc(step)
     },
-    setNewArrivals() {
-      this.newArrivals = this.getNewArrivals(this.countProductsPerBlock)
+    getTopSellings(step) {
+      const tempFunc = this.getRequiredAmountOfTopSellings()
+      return tempFunc(step)
+    },
+    getShopReviews(step) {
+      const tempFunc = this.getRequiredAmountShopReviews()
+      return tempFunc(step)
     },
     updateWidth() {
       if (window.innerWidth > 1239) {
-        this.countProductsPerBlock = 4 
+        this.countProductsPerBlock = 4
       } else if (window.innerWidth <= 1239 && window.innerWidth > 768) {
-        this.countProductsPerBlock = 3 
+        this.countProductsPerBlock = 3
       } else if (window.innerWidth <= 768) {
-        this.countProductsPerBlock = 2 
+        this.countProductsPerBlock = 2
       }
-      let temp = this.getNewArrivals(this.countProductsPerBlock, 1)
-      if (Array.isArray(temp)) {
-        this.newArrivals = temp
-      } else {
-        temp = this.getNewArrivals(this.countProductsPerBlock)
-        this.newArrivals = temp
-      }
-      
+      let tempNewArrivals = this.getNewArrivals(this.countProductsPerBlock)
+      let tempTopSellings = this.getTopSellings(this.countProductsPerBlock)
+      let tempShopReviews = this.getShopReviews(10)
+
+      this.newArrivals = Array.isArray(tempNewArrivals)
+        ? tempNewArrivals
+        : this.getNewArrivals(this.countProductsPerBlock)
+
+      this.topSellings = Array.isArray(tempTopSellings)
+        ? tempTopSellings
+        : this.getTopSellings(this.countProductsPerBlock)
+
+      this.shopReviews = Array.isArray(tempShopReviews)
+        ? tempShopReviews
+        : this.getShopReviews(10)
     },
-    downloadMoreProducts() {},
+    downloadMoreNewArivals() {
+
+    },
   },
 }
 </script>

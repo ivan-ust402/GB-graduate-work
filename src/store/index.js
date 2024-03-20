@@ -4090,25 +4090,68 @@ export default createStore({
     getALLProducts(state) {
       return state.products
     },
-    getReqieredAmountOfNewArivals: (state) => {
+    getRequiredAmountOfNewArivals: (state) => {
       let index = 0
-      const newArrivals = state.products.filter(product => product.newArrivals)
+      const newArrivals = state.products.filter(
+        (product) => product.newArrivals
+      )
       return (step, startIndex = index) => {
-        console.log(startIndex)
         const batch = newArrivals.slice(startIndex, startIndex + step)
-        if (batch.length === 0) {
+        if (batch.length < step || batch.length === 0) {
           index = 0
           return { message: "No more products available" }
         }
-        index = startIndex + step;
-        return batch;
+        index = startIndex + step
+        return batch
+      }
+    },
+    getRequiredAmountOfTopSellings: (state) => {
+      let index = 0
+      const topSellings = state.products.filter((product) => product.topSelling)
+      return (step, startIndex = index) => {
+        const batch = topSellings.slice(startIndex, startIndex + step)
+        if (batch.length < step || batch.length === 0) {
+          index = 0
+          return { message: "No more products available" }
+        }
+        index = startIndex + step
+        return batch
+      }
+    },
+    getRequiredAmountShopReviews: (state) => {
+      let index = 0
+      return (step, startIndex = index) => {
+        const batch = state.shopReviews.slice(startIndex, startIndex + step)
+
+        if (batch.length < step || batch.length === 0) {
+          index = 0
+          return { message: "No more reviews available" }
+        }
+        index = startIndex + step
+        return batch
+      }
+    },
+    getSimilarProducts: (state, typeName, styleName, genderName) => {
+      let index = 0
+      const offer = state.products.filter(
+        (product) =>
+          product.type.name === typeName &&
+          product.dressStyle.name === styleName &&
+          product.gender.name === genderName
+      )
+      return (step, startIndex = index) => {
+        const batch = offer.slice(startIndex, startIndex + step)
+        if (batch.length < step || batch.length === 0) {
+          index = 0
+          return { message: "No more products available" }
+        }
+        index = startIndex + step
+        return batch
       }
     },
   },
-  mutations: {
-  },
-  actions: {
-  },
+  mutations: {},
+  actions: {},
   modules: {
     dropmenuStore,
     burgermenuStore,
