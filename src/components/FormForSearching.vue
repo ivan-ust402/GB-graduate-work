@@ -1,9 +1,10 @@
 <template>
-  <form class="search">
+  <form class="search" @keyup.enter.prevent="() => console.log('Enter keyup from search form')" @click.prevent="inputFocus">
     <label for="search" class="search__label"
       ><img src="@/assets/img/header/loupe-icon.svg" alt=""
     /></label>
     <input
+      ref="searchInput"
       type="text"
       class="search__input"
       id="search"
@@ -13,7 +14,13 @@
 </template>
 
 <script>
-export default {}
+export default {
+  methods: {
+    inputFocus() {
+      this.$refs.searchInput.focus()
+    }
+  },
+}
 </script>
 
 <style lang="scss" scoped>
@@ -49,8 +56,12 @@ export default {}
     font-family: "satoshiregular";
     // font-weight: 400;
     line-height: normal;
+    width: 100%;
     &::placeholder {
       opacity: 0.4;
+    }
+    &:focus {
+      cursor: text;
     }
   }
 }

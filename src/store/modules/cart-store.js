@@ -106,13 +106,11 @@ export default {
       state.cartProducts = []
     },
     ADD_CART_PRODUCT(state, inputProduct) {
-      console.log(inputProduct)
       const existingItem = state.cartProducts.find(
         (product) =>
           product.id === inputProduct.id && 
           product.choosenSize.size.id === inputProduct.choosenSize.size.id
       )
-      console.log(existingItem)
       if (existingItem) {
         if (existingItem.quantity < 99) {
           existingItem.quantity++

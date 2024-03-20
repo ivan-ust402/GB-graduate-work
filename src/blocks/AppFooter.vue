@@ -20,7 +20,7 @@
           </h5>
         </div>
         <div class="subscribe__right">
-          <form action="#" class="subscribe__form">
+          <form action="#" class="subscribe__form" @keyup.enter.prevent="() => console.log('Enter keyup from footer form')">
             <label class="subscribe__label" for="subscribe_email_input">
               <svg
                 width="22"
@@ -42,7 +42,7 @@
                 placeholder="Enter your email address"
               />
             </label>
-            <button class="subscribe__button">Subscribe to Newsletter</button>
+            <button class="subscribe__button" @click.prevent="() => console.log('Click from footer form')">Subscribe to Newsletter</button>
           </form>
         </div>
       </div>

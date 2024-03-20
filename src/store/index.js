@@ -4076,8 +4076,6 @@ export default createStore({
         date: "2022-09-21T01:30:00.000-05:00",
       },
     ],
-    topSellingProducts: [],
-    newArrivalsProducts: [],
   },
   getters: {
     getProductById: (state) => (id) => {
@@ -4092,85 +4090,23 @@ export default createStore({
     getALLProducts(state) {
       return state.products
     },
-    getNewArrivals(state) {
-      return state.products.filter((product) => product.newArrivals)
-    },
-    getFourNewArrivals(state) {
-      const selectedProducts = []
-      const allNewArrivals = state.products.filter(
-        (product) => product.newArrivals
-      )
-      while (selectedProducts.length < 4) {
-        const randomIndex = Math.floor(Math.random() * allNewArrivals.length)
-        const randomProduct = allNewArrivals[randomIndex]
-        if (
-          selectedProducts.some((product) => product.id === randomProduct.id)
-        ) {
-          selectedProducts.push(product)
+    getReqieredAmountOfNewArivals: (state) => {
+      let index = 0
+      return (step, startIndex = index) => {
+        console.log(startIndex)
+        const batch = state.products.slice(startIndex, startIndex + step)
+        if (batch.length === 0) {
+          index = 0
+          return { message: "No more products available" }
         }
+        index = startIndex + step;
+        return batch;
       }
-      console.log(selectedProducts)
     },
-    // getFourRandomNewArrivals(state) {
-    //   if (state.newArrivalsProducts.length < 4) {
-    //     this.setNewArrivalsProductsArray()
-    //     if (state.newArrivalsProducts.length < 4) {
-    //       throw new Error("Недостаточно продуктов категории 'New Arrivals'")
-    //     }
-    //   }
-    //   const selectedProducts = [];
-
-    //   while (selectedProducts.length < 4) {
-    //     const randomIndex = Math.floor(Math.random() * state.newArrivalsProducts.length);
-    //     const randomProduct = state.newArrivalsProducts[randomIndex];
-
-    //     if (selectedProducts.some(product => product.id === randomProduct.id)) {
-    //       selectedProducts.push(product)
-    //     }
-    //   }
-    //   return selectedProducts;
-    // }
   },
   mutations: {
-    SET_TOP_SELLING(state, topSellingProducts) {
-      state.topSellingProducts = topSellingProducts
-    },
-    ADD_TOP_SELLING(state, product) {
-      state.topSellingProducts.push(product)
-    },
-    SET_NEW_ARRIVALS(state, newArrivalsProducts) {
-      state.newArrivalsProducts = newArrivalsProducts
-    },
-    ADD_NEW_ARRIVALS(state, product) {
-      state.newArrivalsProducts.push(product)
-    },
-    SET_OFFER_PRODUCTS(state, offerProducts) {
-      state.offerProducts = offerProducts
-    },
-    ADD_OFFER_PRODUCTS(state, product) {
-      state.offerProducts.push(product)
-    },
   },
   actions: {
-    // setTopSellingProductsArray(context, state) {
-    //   const tempArr = [];
-    //   console.log(state.products)
-    //   for (const product of state.products) {
-    //     if (product.topSelling === true) {
-    //       tempArr.push(product)
-    //     }
-    //   }
-    //   context.commit('SET_TOP_SELLING', tempArr);
-    // },
-    // setNewArrivalsProductsArray(context, state) {
-    //   const tempArr = [];
-    //   for (const product of state.products) {
-    //     if (product.newArrivals === true) {
-    //       tempArr.push(product)
-    //     }
-    //   }
-    //   context.commit('SET_NEW_ARRIVALS', tempArr);
-    // },
   },
   modules: {
     dropmenuStore,

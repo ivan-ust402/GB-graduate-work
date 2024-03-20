@@ -561,16 +561,16 @@ export default {
 
     increaseProductAmount(product) {
       this.addToCart(product)
-      console.log(this.getCartProductByIdAndSize(product))
+      // console.log(this.getCartProductByIdAndSize(product))
     },
     decreaseProductAmount(product) {
       this.decreaseProductQuantity(product)
-      console.log(this.getCartProductByIdAndSize(product))
+      // console.log(this.getCartProductByIdAndSize(product))
 
     },
     removeProduct(product) {
       this.removeFromCart(product)
-      console.log(this.getCartProductByIdAndSize(product))
+      // console.log(this.getCartProductByIdAndSize(product))
     },
   },
 }

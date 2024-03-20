@@ -358,16 +358,8 @@ export default {
       width: 99px;
       height: 99px;
     }
-    &__img-box-hover {
-    }
-    &__content {
-    }
-    &__content-top {
-    }
     &__top-left {
       gap: 1px;
-    }
-    &__top-right {
     }
     &__delete {
       width: 20px;
@@ -386,12 +378,8 @@ export default {
       font-family: "satoshiregular";
       font-size: 12px;
       line-height: 22px;
-      &_value {
-      }
     }
 
-    &__content-bottom {
-    }
     &__price {
       font-size: 20px;
       height: auto;

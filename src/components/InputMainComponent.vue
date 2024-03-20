@@ -1,9 +1,10 @@
 <template>
-  <div class="field">
+  <div class="field" @click="focusInput">
     <label for="field" class="field__label">
       <img :src="require(`@/assets/img/${labelSrc}`)" :alt="labelAlt" />
     </label>
     <input
+      ref="promoInput"
       type="text"
       class="field__input"
       id="field"
@@ -20,7 +21,7 @@ export default {
   props: {
     value: {
       type: String,
-      default: () => ""
+      default: () => "",
     },
     placeholderValue: {
       type: String,
@@ -44,6 +45,9 @@ export default {
   methods: {
     updateMessage() {
       this.$emit("update:message", this.message)
+    },
+    focusInput() {
+      this.$refs.promoInput.focus()
     },
   },
 }
@@ -88,11 +92,12 @@ export default {
     font-style: normal;
     font-family: "satoshiregular";
     line-height: normal;
+    width: 100%;
     &::placeholder {
       opacity: 0.4;
     }
     &:focus {
-      cursor: none;
+      cursor: text;
     }
   }
 }

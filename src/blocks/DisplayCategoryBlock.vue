@@ -7,7 +7,7 @@
       <h2 class="offer__title">{{ title.toUpperCase() }}</h2>
       <div 
         class="offer__cards"
-        :class="{ cards_padding_bottom: button, cards_padding_bottom_without_button: !button}"
+        :class="{ cards_padding_bottom: isButton, cards_padding_bottom_without_button: !isButton}"
       >
         <CardProductMainComponent
           class="offer__card"
@@ -16,17 +16,17 @@
           :product="product"
         />
       </div>
-      <div class="offer__more-cards" v-for="page in getExtraPages">
+      <div v-if="wasClicked" class="offer__more-cards" v-for="page in extraProducts">
         <CardProductMainComponent
           class="offer__card"
-          v-for="product in moreProducts"
+          v-for="product in page"
           :key="product.id"
           :product="product"
         />
       </div>
     </div>
     <ButtonSecondaryColor
-      v-if="button"
+      v-if="isButton"
       class="offer-with-button__button"
       text="View more"
       @click.prevent="downloadMoreProducts"
@@ -39,6 +39,7 @@ import ButtonSecondaryColor from "@/components/ButtonSecondaryColor.vue"
 import CardProductMainComponent from "@/components/CardProductMainComponent.vue"
 
 export default {
+  emits: ['getMoreProducts'],
   props: {
     title: {
       type: String,
@@ -551,19 +552,13 @@ export default {
       type: Boolean,
       default: () => true,
     },
-    button: {
+    isButton: {
       type: Boolean,
       default: () => true,
     },
-  },
-  components: {
-    CardProductMainComponent,
-    ButtonSecondaryColor,
-  },
-  data() {
-    return {
-      extraPages: 0,
-      moreProducts: [
+    extraProducts: {
+      type: Array,
+      default: () => [[
         {
           id: "95",
           sku: "933469103",
@@ -1128,7 +1123,16 @@ export default {
             composition: ["polyester 34%", "nylon 54%", "spandex 12%"],
           },
         },
-      ],
+      ]]
+    }
+  },
+  components: {
+    CardProductMainComponent,
+    ButtonSecondaryColor,
+  },
+  data() {
+    return {
+      wasClicked: false
     }
   },
   computed: {
@@ -1138,7 +1142,8 @@ export default {
   },
   methods: {
     downloadMoreProducts() {
-      this.extraPages += 1
+      this.wasClicked = true;
+      this.$emit('getMoreProducts')
     },
   },
 }

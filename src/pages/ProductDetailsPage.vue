@@ -126,7 +126,6 @@ export default {
     this.choosenColor = this.setInitialColor()
     this.choosenQuantity = this.setInitialQuantity()
     this.isInCart = this.setInitialIsInCart()
-    console.log("Init")
   },
   computed: {
     ...mapGetters([
@@ -155,7 +154,6 @@ export default {
   watch: {
     $route() {
       this.setActualStateForProductDetails()
-      console.log("111")
     },
   },
   methods: {
@@ -260,7 +258,6 @@ export default {
         const cartProduct = { ...productInCart }
         return cartProduct
       } else {
-        console.log("222")
         const newProduct = this.getProductById(id)
         const defaultSize = newProduct.sizesInfo.find(
           (sizeInfo) => sizeInfo.size.id === currentSizeId
