@@ -4092,9 +4092,10 @@ export default createStore({
     },
     getReqieredAmountOfNewArivals: (state) => {
       let index = 0
+      const newArrivals = state.products.filter(product => product.newArrivals)
       return (step, startIndex = index) => {
         console.log(startIndex)
-        const batch = state.products.slice(startIndex, startIndex + step)
+        const batch = newArrivals.slice(startIndex, startIndex + step)
         if (batch.length === 0) {
           index = 0
           return { message: "No more products available" }
