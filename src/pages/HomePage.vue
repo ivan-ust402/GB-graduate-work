@@ -7,6 +7,8 @@
       title="NEW ARRIVALs"
       @getMoreProducts="downloadMoreNewArivals"
       :products="newArrivals"
+      :isButton="moreExtraNewArrivals"
+      :extraProducts="extraNewArrivals"
     />
     <DisplayCategoryBlock
       class="center"
@@ -15,13 +17,15 @@
       :borderBottom="false"
       :products="topSellings"
       @getMoreProducts="downloadMoreTopSellings"
+      :isButton="moreExtraTopSellings"
+      :extraProducts="extraTopSellings"
     />
     <DisplayStyleTypesBlock
       class="center style-type"
       title="Browse by dress style"
     />
-    <DisplayReviewSliderBlock 
-      title="OUR HAPPY CUSTOMERS" 
+    <DisplayReviewSliderBlock
+      title="OUR HAPPY CUSTOMERS"
       :reviews="shopReviews"
     />
   </section>
@@ -45,16 +49,23 @@ export default {
   data() {
     return {
       countProductsPerBlock: 4,
+      countMoreProductsPerBlock: 4,
+      countShopReviews: 10,
       newArrivals: [],
       extraNewArrivals: [],
+      moreExtraNewArrivals: true,
+      extraNewArrivalsCounter: 1,
       topSellings: [],
       extraTopSellings: [],
+      moreExtraTopSellings: true,
+      extraTopSellingsCounter: 1,
       shopReviews: [],
     }
   },
   mounted() {
-    this.updateWidth() // Вызываем функцию для первоначального получения ширины и установки первоначальных знеаченний, зависящих от ширины
-    window.addEventListener("resize", this.updateWidth) // Слушаем событие изменения размера окна и обновляем ширину
+    // this.setInitial()
+    // window.addEventListener("resize", this.setInitial) 
+    this.setInitial()
   },
   computed: {},
   methods: {
@@ -62,45 +73,84 @@ export default {
       "getRequiredAmountOfNewArivals",
       "getRequiredAmountOfTopSellings",
       "getRequiredAmountShopReviews",
+      "getRequiredExtraAmountOfTopSellings",
+      "getRequiredExtraAmountOfNewArivals"
     ]),
-    getNewArrivals(step) {
-      const tempFunc = this.getRequiredAmountOfNewArivals()
-      return tempFunc(step)
+    getProductsSample(step, requiredGetter) {
+      let tempArray = []
+      const tempFunc = requiredGetter
+      tempArray = tempFunc(step)
+      return Array.isArray(tempArray) ? tempArray : tempFunc(step)
     },
-    getTopSellings(step) {
-      const tempFunc = this.getRequiredAmountOfTopSellings()
-      return tempFunc(step)
+    getExtraProductsSample(step, requiredGetter, offset = 0) {
+      let tempArray = []
+      const tempFunc = requiredGetter
+      tempArray = tempFunc(step, offset)
+      return tempArray
     },
-    getShopReviews(step) {
-      const tempFunc = this.getRequiredAmountShopReviews()
-      return tempFunc(step)
-    },
-    updateWidth() {
-      if (window.innerWidth > 1239) {
-        this.countProductsPerBlock = 4
-      } else if (window.innerWidth <= 1239 && window.innerWidth > 768) {
-        this.countProductsPerBlock = 3
-      } else if (window.innerWidth <= 768) {
-        this.countProductsPerBlock = 2
-      }
-      let tempNewArrivals = this.getNewArrivals(this.countProductsPerBlock)
-      let tempTopSellings = this.getTopSellings(this.countProductsPerBlock)
-      let tempShopReviews = this.getShopReviews(10)
+    setInitial() {
+      // if (window.innerWidth > 1239) {
+      //   this.countProductsPerBlock = 4
+      // } else if (window.innerWidth <= 1239 && window.innerWidth > 768) {
+      //   this.countProductsPerBlock = 3
+      // } else if (window.innerWidth <= 768) {
+      //   this.countProductsPerBlock = 2
+      // }
+      
+      this.countProductsPerBlock = 4
 
-      this.newArrivals = Array.isArray(tempNewArrivals)
-        ? tempNewArrivals
-        : this.getNewArrivals(this.countProductsPerBlock)
-
-      this.topSellings = Array.isArray(tempTopSellings)
-        ? tempTopSellings
-        : this.getTopSellings(this.countProductsPerBlock)
-
-      this.shopReviews = Array.isArray(tempShopReviews)
-        ? tempShopReviews
-        : this.getShopReviews(10)
+      this.newArrivals = this.getProductsSample(
+        this.countProductsPerBlock,
+        this.getRequiredAmountOfNewArivals()
+      )
+      this.topSellings = this.getProductsSample(
+        this.countProductsPerBlock,
+        this.getRequiredAmountOfTopSellings()
+      )
+      this.shopReviews = this.getProductsSample(
+        this.countShopReviews,
+        this.getRequiredAmountShopReviews()
+      )
     },
     downloadMoreNewArivals() {
-
+      let tempArray = this.getExtraProductsSample(
+        this.countMoreProductsPerBlock,
+          this.getRequiredExtraAmountOfNewArivals(),
+          this.countMoreProductsPerBlock * this.extraNewArrivalsCounter 
+        )
+      if (Array.isArray(tempArray)) {
+        this.extraNewArrivals.push(tempArray)
+        this.extraNewArrivalsCounter++
+      } 
+      tempArray = this.getExtraProductsSample(
+        this.countMoreProductsPerBlock,
+          this.getRequiredExtraAmountOfNewArivals(),
+          this.countMoreProductsPerBlock * this.extraNewArrivalsCounter 
+        )
+      if (!Array.isArray(tempArray)) {
+        this.moreExtraNewArrivals = false
+        this.extraNewArrivalsCounter = 1
+      }
+    },
+    downloadMoreTopSellings() {
+      let tempArray = this.getExtraProductsSample(
+          this.countMoreProductsPerBlock,
+          this.getRequiredExtraAmountOfTopSellings(),
+          this.countMoreProductsPerBlock * this.extraTopSellingsCounter 
+        )
+      if (Array.isArray(tempArray)) {
+        this.extraTopSellings.push(tempArray)
+        this.extraTopSellingsCounter++
+      } 
+      tempArray = this.getExtraProductsSample(
+        this.countMoreProductsPerBlock,
+          this.getRequiredExtraAmountOfTopSellings(),
+          this.countMoreProductsPerBlock * this.extraTopSellingsCounter 
+        )
+      if (!Array.isArray(tempArray)) {
+        this.moreExtraTopSellings = false
+        this.extraTopSellingsCounter = 1
+      }  
     },
   },
 }

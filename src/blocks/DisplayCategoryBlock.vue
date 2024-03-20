@@ -1192,7 +1192,7 @@ export default {
     padding-bottom: 36px;
     column-gap: 20px;
     row-gap: 36px;
-    justify-content: center;
+    justify-content: flex-start;
   }
 }
 

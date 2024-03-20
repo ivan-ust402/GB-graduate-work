@@ -12,7 +12,14 @@
             src="@/assets/img/homepage/casual-card-compressed.jpg"
             alt="casual"
           />
-          <routerLink to="/catalog/0" class="card__hover"></routerLink>
+          <routerLink
+            :to="{
+              name: 'CatalogPage',
+              params: { page: 1 },
+              query: { style: 'casual' },
+            }"
+            class="card__hover"
+          ></routerLink>
         </div>
         <div class="types__card card">
           <h4 class="card__title">Formal</h4>
@@ -21,7 +28,14 @@
             src="@/assets/img/homepage/formal-card-compressed.jpg"
             alt="formal"
           />
-          <router-link to="/catalog/0" class="card__hover"></router-link>
+          <router-link
+            :to="{
+              name: 'CatalogPage',
+              params: { page: 1 },
+              query: { style: 'formal' },
+            }"
+            class="card__hover"
+          ></router-link>
         </div>
         <div class="types__card card">
           <h4 class="card__title">Party</h4>
@@ -30,7 +44,14 @@
             src="@/assets/img/homepage/party-card-compressed.jpg"
             alt="party"
           />
-          <router-link to="/catalog/0" class="card__hover"></router-link>
+          <router-link
+            :to="{
+              name: 'CatalogPage',
+              params: { page: 1 },
+              query: { style: 'party' },
+            }"
+            class="card__hover"
+          ></router-link>
         </div>
 
         <div class="types__card card">
@@ -40,7 +61,14 @@
             src="@/assets/img/homepage/gym-card-compressed.jpg"
             alt="casual"
           />
-          <router-link to="/catalog/0" class="card__hover"></router-link>
+          <router-link
+            :to="{
+              name: 'CatalogPage',
+              params: { page: 1 },
+              query: { style: 'gym' },
+            }"
+            class="card__hover"
+          ></router-link>
         </div>
       </div>
     </div>

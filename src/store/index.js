@@ -4099,6 +4099,25 @@ export default createStore({
         const batch = newArrivals.slice(startIndex, startIndex + step)
         if (batch.length < step || batch.length === 0) {
           index = 0
+          if(startIndex === 0) {
+            return batch
+          }
+          return { message: "No more products available" }
+        }
+        index = startIndex + step
+        return batch
+      }
+    },
+    getRequiredExtraAmountOfNewArivals: (state) => {
+      let index = 0
+      const newArrivals = state.products.filter((product) => product.newArrivals)
+      return (step, startIndex = index) => {
+        const batch = newArrivals.slice(startIndex, startIndex + step)
+        if (batch.length === 0) {
+          index = 0
+          if(startIndex === 0) {
+            return batch
+          }
           return { message: "No more products available" }
         }
         index = startIndex + step
@@ -4110,7 +4129,21 @@ export default createStore({
       const topSellings = state.products.filter((product) => product.topSelling)
       return (step, startIndex = index) => {
         const batch = topSellings.slice(startIndex, startIndex + step)
+
         if (batch.length < step || batch.length === 0) {
+          index = 0
+          return { message: "No more products available" }
+        }
+        index = startIndex + step
+        return batch
+      }
+    },
+    getRequiredExtraAmountOfTopSellings: (state) => {
+      let index = 0
+      const topSellings = state.products.filter((product) => product.topSelling)
+      return (step, startIndex = index) => {
+        const batch = topSellings.slice(startIndex, startIndex + step)
+        if (batch.length === 0) {
           index = 0
           return { message: "No more products available" }
         }
@@ -4122,15 +4155,19 @@ export default createStore({
       let index = 0
       return (step, startIndex = index) => {
         const batch = state.shopReviews.slice(startIndex, startIndex + step)
-
         if (batch.length < step || batch.length === 0) {
           index = 0
+          if(startIndex === 0) {
+            return batch
+          }
           return { message: "No more reviews available" }
         }
         index = startIndex + step
         return batch
       }
     },
+
+
     getSimilarProducts: (state, typeName, styleName, genderName) => {
       let index = 0
       const offer = state.products.filter(
