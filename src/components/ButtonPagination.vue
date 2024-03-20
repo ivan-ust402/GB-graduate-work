@@ -54,6 +54,7 @@ export default {
 <style lang="scss" scoped>
 .pagination-btn {
   display: flex;
+  width: 110px;
   border-radius: 8px;
   padding: 8px 14px;
   justify-content: center;

@@ -310,8 +310,10 @@ export default {
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
   }
   &__pagination {
+    
   }
 }
 
@@ -422,14 +424,24 @@ export default {
 
 @media (max-width: 1239px) {
   .catalog {
+    position: relative;
     padding-bottom: 60px;
     gap: 12px;
+    z-index: 0;
     &__content {
       display: flex;
       flex-direction: row;
       gap: 21px;
     }
     &__filters {
+      position: absolute;
+      visibility: hidden;
+      background-color: #fff;
+      top: 0px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 2;
       width: 295px;
       border-radius: 20px;
       border: 1px solid #e8e8e8;
@@ -491,15 +503,192 @@ export default {
       font-size: 16px;
       line-height: normal;
     }
-    &__cards {
+    &__cards {      
+      column-gap: 16px;
+      row-gap: 24px;
+    }
+    &__pagination-box {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+    &__pagination {
+    }
+  }
+
+  .filters {
+    display: flex;
+    padding: 20px 24px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    &__title-box {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+    &__title {
+      align-self: center;
+      text-transform: capitalize;
+      color: #121212;
+      font-family: "satoshibold";
+      font-size: 20px;
+      line-height: normal;
+    }
+    &__icon {
+      width: 24px;
+      height: 24px;
+    }
+    &__display {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    &__filter-box {
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      &:last-child {
+        border: none;
+      }
+    }
+  }
+
+  .filter {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    &__title-box {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+    &__title {
+      color: var(--Black, #121212);
+      font-family: "satoshibold";
+      font-size: 20px;
+      line-height: 22px; /* 110% */
+      text-transform: uppercase;
+    }
+    &__content {
+      width: 100%;
+    }
+    &__set-third-color-buttons {
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
-      justify-content: flex-start;
+      gap: 8px;
+    }
+    &__color-btn {
+      display: flex;
+      flex-direction: row;
       align-items: center;
-      column-gap: 20px;
-      row-gap: 36px;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+    }
+    &__range {
       width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      // -webkit-appearance: none;
+      // -moz-appearance: none;
+      // appearance: none;
+    }
+    &__color-svg {
+      width: 36px;
+      height: 36px;
+    }
+  }
+}
+@media (max-width: 768px) {
+  .catalog {
+    position: relative;
+    padding-bottom: 60px;
+    gap: 12px;
+    z-index: 0;
+    &__content {
+      display: flex;
+      flex-direction: row;
+      gap: 21px;
+    }
+    &__filters {
+      position: absolute;
+      visibility: hidden;
+      background-color: #fff;
+      top: 0px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 2;
+      width: 295px;
+      border-radius: 20px;
+      border: 1px solid #e8e8e8;
+    }
+    &__display {
+      gap: 22px;
+    }
+    &__cards-box {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    &__cards-title-box {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    &__cards-title {
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+      color: #121212;
+      font-family: "satoshibold";
+      font-size: 32px;
+      line-height: normal;
+      text-transform: capitalize;
+    }
+    &__test {
+      display: flex;
+      flex-direction: row;
+    }
+    &__cards-right-display {
+      display: flex;
+      flex-direction: row;
+      gap: 12px;
+      align-items: center;
+    }
+    &__showing-cards {
+      color: #222;
+      font-family: "satoshiregular";
+      font-size: 16px;
+      line-height: normal;
+    }
+    &__sort {
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+      align-items: center;
+    }
+    &__sort-label {
+      color: rgba(0, 0, 0, 0.6);
+      font-family: "satoshiregular";
+      font-size: 16px;
+      line-height: normal;
+    }
+    &__sort-select {
+      color: var(--Black, #121212);
+      font-family: "satoshimedium";
+      font-size: 16px;
+      line-height: normal;
+    }
+    &__cards {      
+      column-gap: 16px;
+      row-gap: 24px;
     }
     &__pagination-box {
       display: flex;
