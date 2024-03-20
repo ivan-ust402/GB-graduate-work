@@ -9,6 +9,9 @@
         params: {
           id: color.productId,
         },
+        query: {
+          sizeId: product.sizesInfo.find(sizeInfo => Number(sizeInfo.amount) > 0).size.id
+        }
       }"
       @click.prevent="clickButton(color.color)"
     >
@@ -48,6 +51,19 @@ export default {
       type: Array,
       default: () => [],
     },
+    product: {
+      type: Object,
+      default: () => {
+        return {
+          sizeInfo: {
+            size: {
+              id: 0
+            },
+            amount: 0 
+          }
+        }
+      }
+    }
   },
   methods: {
     clickButton(color) {

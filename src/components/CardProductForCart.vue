@@ -41,7 +41,7 @@
           </div>
         </div>
         <div class="card__top-right">
-          <a href="#" class="card__delete" @click="removeProduct(product.id)">
+          <a href="#" class="card__delete" @click.prevent="removeProduct(product.id)">
             <svg
               width="24"
               height="24"

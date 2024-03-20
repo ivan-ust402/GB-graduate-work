@@ -30,6 +30,7 @@
               <h6 class="param__title">Select Colors</h6>
               <SetOfColorButtons
                 class="param__content"
+                :product="product"
                 :choosenColor="product.color"
                 :colors="product.allColors"
                 @getSelectedColor="setSelectedColor"
@@ -154,6 +155,7 @@ export default {
   watch: {
     $route() {
       this.setActualStateForProductDetails()
+      console.log("111")
     },
   },
   methods: {
@@ -258,12 +260,14 @@ export default {
         const cartProduct = { ...productInCart }
         return cartProduct
       } else {
+        console.log("222")
         const newProduct = this.getProductById(id)
         const defaultSize = newProduct.sizesInfo.find(
           (sizeInfo) => sizeInfo.size.id === currentSizeId
         )
         const inCart = false
-        const quantity = this.getChoosenQuantity
+        const quantity = 1
+        // const quantity = this.getChoosenQuantity
         return { ...newProduct, choosenSize: defaultSize, inCart, quantity }
       }
     },
