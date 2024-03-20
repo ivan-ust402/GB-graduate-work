@@ -27,6 +27,7 @@
         </router-link>
       </div>
     </div>
+    {{ getOrderSummary }}
   </section>
 </template>
 
@@ -554,7 +555,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["getCartProducts", "getCartProductsCount", "getCartProductByIdAndSize"]),
+    ...mapGetters(["getCartProducts", "getCartProductsCount", "getCartProductByIdAndSize", "getOrderSummary"]),
   },
   methods: {
     ...mapActions(["addToCart", "decreaseProductQuantity", "removeFromCart", "buyAllProducts", "applyPromoCode"]),

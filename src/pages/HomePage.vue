@@ -76,11 +76,11 @@ export default {
       "getRequiredExtraAmountOfTopSellings",
       "getRequiredExtraAmountOfNewArivals"
     ]),
-    getProductsSample(step, requiredGetter) {
+    getProductsSample(step, requiredGetter, offset = 0) {
       let tempArray = []
       const tempFunc = requiredGetter
-      tempArray = tempFunc(step)
-      return Array.isArray(tempArray) ? tempArray : tempFunc(step)
+      tempArray = tempFunc(step, offset)
+      return Array.isArray(tempArray) ? tempArray : tempFunc(step, offset)
     },
     getExtraProductsSample(step, requiredGetter, offset = 0) {
       let tempArray = []
@@ -96,7 +96,7 @@ export default {
       // } else if (window.innerWidth <= 768) {
       //   this.countProductsPerBlock = 2
       // }
-      
+
       this.countProductsPerBlock = 4
 
       this.newArrivals = this.getProductsSample(

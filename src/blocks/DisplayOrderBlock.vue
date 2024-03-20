@@ -5,26 +5,26 @@
       <div class="price__checkout">
         <div class="price__item">
           <h6 class="price__title">Subtotal</h6>
-          <p class="price__value">${{ getCartSubtotalPrice }}</p>
+          <p class="price__value">${{ computedCartSubtotalPrice }}</p>
         </div>
         <div class="price__item">
           <h6 class="price__title">Delivery Fee</h6>
-          <p class="price__value">${{ getShippingCost }}</p>
+          <p class="price__value">${{ computedShippingCost }}</p>
         </div>
         <div class="price__item">
           <h6 class="price__title">Discount</h6>
           <p class="price__value price__value_discount">
-            -${{ getCartProductsDiscount }}
+            -${{ computedCartProductsDiscount }}
           </p>
         </div>
         <div class="price__item">
           <h6 class="price__title">
             Promocode (<span class="price__title_span"
-              >{{ getPromoCodeAmount }}%</span
+              >{{ computedPromoCodePercent }}%</span
             >)
           </h6>
           <p class="price__value price__value_discount">
-            -${{ getPromoCodeDiscountValue }}
+            -${{ computedPromoCodeDiscountValue }}
           </p>
         </div>
       </div>
@@ -32,7 +32,7 @@
         <div class="price__item">
           <h6 class="price__title price__title_total">Total</h6>
           <p class="price__value price__value_total">
-            ${{ getCartTotalPrice }}
+            ${{ computedCartTotalPrice }}
           </p>
         </div>
       </div>
@@ -71,12 +71,12 @@ export default {
   computed: {
     ...mapGetters([
       "getCartProducts",
-      "getCartSubtotalPrice",
-      "getPromoCodeAmount",
-      "getShippingCost",
-      "getCartProductsDiscount",
-      "getPromoCodeDiscountValue",
-      "getCartTotalPrice",
+      "computedCartSubtotalPrice",
+      "computedPromoCodePercent",
+      "computedShippingCost",
+      "computedCartProductsDiscount",
+      "computedPromoCodeDiscountValue",
+      "computedCartTotalPrice",
     ]),
   },
   watch() {

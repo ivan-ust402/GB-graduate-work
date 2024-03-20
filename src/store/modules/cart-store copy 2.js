@@ -81,7 +81,7 @@ export default {
         ) / 100
       )
     },
-    computedPromoCodePercent(state) {
+    computedPromocodePercent(state) {
       return state.promoCodeApplied ? state.promoCodeDiscount : 0
     },
     computedShippingCost(state) {
@@ -103,7 +103,7 @@ export default {
       return (
         Math.round(
           (((getters.computedCartSubtotalPrice - getters.computedCartProductsDiscount) *
-            getters.computedPromoCodePercent) /
+            getters.computedPromocodePercent) /
             100) *
             100
         ) / 100
@@ -212,7 +212,7 @@ export default {
       const subtotal = context.getters.computedCartSubtotalPrice
       const deliveryFee = context.getters.computedShippingCost
       const productsDiscount = context.getters.computedCartProductsDiscount
-      const promoPercent = context.getters.computedPromoCodePercent
+      const promoPercent = context.getters.computedPromocodePercent
       const promoValue = context.getters.computedPromoCodeDiscountValue
       const total = context.getters.computedCartTotalPrice
       orderSummaryParams = {
