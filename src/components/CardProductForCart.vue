@@ -309,6 +309,7 @@ export default {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    height: fit-content;
   }
   &__price {
     align-self: center;
@@ -316,7 +317,7 @@ export default {
     font-family: "satoshibold";
     font-size: 24px;
     line-height: normal;
-    height: 20px;
+    height: 32px;
     word-break: break-all;
     flex: 1;
 

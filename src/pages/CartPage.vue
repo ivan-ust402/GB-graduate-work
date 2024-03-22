@@ -628,7 +628,8 @@ export default {
   &__order {
     display: flex;
     width: 505px;
-    height: 458px;
+    // height: 458px;
+    height: fit-content;
     padding: 20px 24px;
     flex-direction: column;
     align-items: flex-start;
