@@ -52,27 +52,27 @@
     </div>
     <div class="payments footer__box-4">
       <img
-        src="@/assets/img/footer/Badge-0.svg"
+        src="@/assets/img/footer/badge-0.svg"
         alt="visa"
         class="footer__badge"
       />
       <img
-        src="@/assets/img/footer/Badge-1.svg"
+        src="@/assets/img/footer/badge-1.svg"
         alt="mastercard"
         class="footer__badge"
       />
       <img
-        src="@/assets/img/footer/Badge-2.svg"
+        src="@/assets/img/footer/badge-2.svg"
         alt="paypal"
         class="footer__badge"
       />
       <img
-        src="@/assets/img/footer/Badge-3.svg"
+        src="@/assets/img/footer/badge-3.svg"
         alt="apple pay"
         class="footer__badge"
       />
       <img
-        src="@/assets/img/footer/Badge-4.svg"
+        src="@/assets/img/footer/badge-4.svg"
         alt="google pay"
         class="footer__badge"
       />

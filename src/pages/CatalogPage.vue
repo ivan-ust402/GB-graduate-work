@@ -687,7 +687,7 @@ export default {
       line-height: normal;
     }
     &__cards {      
-      column-gap: 16px;
+      column-gap: 10px;
       row-gap: 24px;
     }
     &__pagination-box {

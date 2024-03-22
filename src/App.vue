@@ -4,15 +4,6 @@
     :class="{ mainOverlay_active: getBurgerMenuIsActive }"
   >
     <AppHeader class="test" />
-    <!-- <nav class="center">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/login">Login</router-link> |
-    <router-link to="/register">Registration</router-link> |
-    <router-link to="/product-details/0">Product Details</router-link> |
-    <router-link to="/catalog/0">Catalog</router-link> |
-    <router-link to="/cart">Cart</router-link> |
-    <router-link to="/notfound">404</router-link>&nbsp;|
-  </nav> -->
     <router-view />
     <ButtonTopOfPage :class="{ hideButtonToUp: getBurgerMenuIsActive }" />
     <AppFooter />
@@ -78,9 +69,6 @@ export default {
   // font-size: 14px;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0.2);
 }
-// .main-wrapper {
-//   min-height: 50vh;
-// }
 
 body {
   font-family: "satoshiregular", Arial, Helvetica, sans-serif;
