@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer center" >
+  <footer class="footer center">
     <div class="footer__box-1">
       <div class="footer__description">
         <router-link class="footer__logo" to="/">
@@ -20,7 +20,13 @@
           </h5>
         </div>
         <div class="subscribe__right">
-          <form action="#" class="subscribe__form" @keyup.enter.prevent="() => console.log('Enter keyup from footer form')">
+          <form
+            action="#"
+            class="subscribe__form"
+            @keyup.enter.prevent="
+              () => console.log('Enter keyup from footer form')
+            "
+          >
             <label class="subscribe__label" for="subscribe_email_input">
               <svg
                 width="22"
@@ -42,7 +48,12 @@
                 placeholder="Enter your email address"
               />
             </label>
-            <button class="subscribe__button" @click.prevent="() => console.log('Click from footer form')">Subscribe to Newsletter</button>
+            <button
+              class="subscribe__button"
+              @click.prevent="() => console.log('Click from footer form')"
+            >
+              Subscribe to Newsletter
+            </button>
           </form>
         </div>
       </div>
@@ -52,27 +63,27 @@
     </div>
     <div class="payments footer__box-4">
       <img
-        src="@/assets/img/footer/badge-0.svg"
+        :src="`${require('@/assets/img/footer/badge-0.svg')}`"
         alt="visa"
         class="footer__badge"
       />
       <img
-        src="@/assets/img/footer/badge-1.svg"
+        :src="`${require('@/assets/img/footer/badge-1.svg')}`"
         alt="mastercard"
         class="footer__badge"
       />
       <img
-        src="@/assets/img/footer/badge-2.svg"
+        :src="`${require('@/assets/img/footer/badge-2.svg')}`"
         alt="paypal"
         class="footer__badge"
       />
       <img
-        src="@/assets/img/footer/badge-3.svg"
+        :src="`${require('@/assets/img/footer/badge-3.svg')}`"
         alt="apple pay"
         class="footer__badge"
       />
       <img
-        src="@/assets/img/footer/badge-4.svg"
+        :src="`${require('@/assets/img/footer/badge-4.svg')}`"
         alt="google pay"
         class="footer__badge"
       />
@@ -86,8 +97,7 @@ export default {
   components: {
     AppFooterSocialMedia,
   },
-  computed: {
-  },
+  computed: {},
 }
 </script>
 
@@ -199,7 +209,6 @@ export default {
     border: none;
     width: 100%;
     &::placeholder {
-      
       opacity: 0.4;
     }
   }
