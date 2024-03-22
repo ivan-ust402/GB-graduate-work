@@ -117,6 +117,8 @@ export default {
         if (existingItem.quantity < 99) {
           existingItem.quantity++
           // existingItem.inCart = true
+        } else {
+          existingItem.quantity = 1
         }
       } else {
         state.cartProducts.push({ ...inputProduct, inCart: true })
