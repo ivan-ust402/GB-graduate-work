@@ -311,6 +311,7 @@ export default {
     align-items: center;
   }
   &__price {
+    align-self: center;
     color: #121212;
     font-family: "satoshibold";
     font-size: 24px;
