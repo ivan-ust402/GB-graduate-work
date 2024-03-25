@@ -13,16 +13,18 @@
 </template>
 
 <script>
-import useHead from '@unhead/vue'
+import { useHead } from "@unhead/vue"
 
 export default {
   setup() {
     useHead({
       title: "404",
-      meta: [{
-        name: '404',
-        content: 'Not found page'
-      }]
+      meta: [
+        {
+          name: "404",
+          content: "Not found page",
+        },
+      ],
     })
   },
 }
@@ -72,7 +74,7 @@ export default {
     font-style: normal;
     // font-weight: 500;
     line-height: normal;
-    transition: all .3s ease-in;
+    transition: all 0.3s ease-in;
     &:hover {
       opacity: 0.8;
     }
@@ -80,24 +82,23 @@ export default {
 }
 @media (max-width: 1239px) {
   .notfound {
-  padding-top: 80px;
-  padding-bottom: 60px;
-  &__description {
-    gap: 24px;
+    padding-top: 80px;
+    padding-bottom: 60px;
+    &__description {
+      gap: 24px;
+    }
+    &__title {
+      font-size: 36px;
+    }
+    &__text {
+      font-size: 14px;
+    }
+    &__button {
+      width: 100%;
+    }
   }
-  &__title {
-    font-size: 36px;
-  }
-  &__text {
-    font-size: 14px;
-  }
-  &__button {
-    width: 100%;
-  }
-}
 }
 
 @media (max-width: 768px) {
-
 }
 </style>
