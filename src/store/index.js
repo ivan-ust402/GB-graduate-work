@@ -9,6 +9,7 @@ export default createStore({
       {
         id: 0,
         name: "For men",
+        shortName: "man",
         showClothesTypes: false,
         clothesTypes: [
           {
@@ -52,6 +53,7 @@ export default createStore({
       {
         id: 1,
         name: "For women",
+        shortName: "woman",
         showClothesTypes: false,
         clothesTypes: [
           {
@@ -163,10 +165,10 @@ export default createStore({
         name: "Blouses",
       },
     ],
-    priceRange: {
+    priceRange: [{
       start: 0,
       end: 100000,
-    },
+    }],
     colors: [
       {
         id: 0,
