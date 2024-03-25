@@ -91,6 +91,7 @@ import SetOfColorButtons from "@/components/SetOfColorButtons.vue"
 import SetOfSizeButtons from "@/components/SetOfSizeButtons.vue"
 import SliderProductDetailsComponent from "@/components/SliderProductDetailsComponent.vue"
 import { mapActions, mapGetters } from "vuex"
+import { useHead } from '@unhead/vue'
 
 export default {
   components: {
@@ -103,6 +104,15 @@ export default {
     QuantitySelectorForDetails,
     ButtonSelectionColor,
     ButtonSecondaryColor,
+  },
+  setup() {
+    useHead({
+      title: "Details",
+      meta: [{
+        name: 'Product details Page',
+        content: 'There is a shop product details page'
+      }]
+    })
   },
   data() {
     return {

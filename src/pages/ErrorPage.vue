@@ -13,7 +13,19 @@
 </template>
 
 <script>
-export default {}
+import useHead from '@unhead/vue'
+
+export default {
+  setup() {
+    useHead({
+      title: "404",
+      meta: [{
+        name: '404',
+        content: 'Not found page'
+      }]
+    })
+  },
+}
 </script>
 
 <style lang="scss" scoped>
