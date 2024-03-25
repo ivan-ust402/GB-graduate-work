@@ -304,8 +304,8 @@ export default {
     gap: 0;
     padding-top: 34px;
     padding-top: 34px;
-    padding-left: 32px;
-    padding-right: 32px;
+    padding-left: 0px;
+    padding-right: 0px;
     justify-content: space-between;
     &__item {
       height: 23px;
@@ -341,6 +341,7 @@ export default {
       height: auto;
       display: flex;
       justify-content: center;
+      overflow: hidden;
     }
 
     &__image {

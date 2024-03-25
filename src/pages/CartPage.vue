@@ -43,6 +43,7 @@ import ButtonSelectionColor from "@/components/ButtonSelectionColor.vue"
 import CardProductForCart from "@/components/CardProductForCart.vue"
 import NavigationBreadcrumbsComponent from "@/components/NavigationBreadcrumbsComponent.vue"
 import { mapActions, mapGetters } from "vuex"
+import { useHead } from "@unhead/vue"
 
 export default {
   components: {
@@ -50,6 +51,15 @@ export default {
     NavigationBreadcrumbsComponent,
     DisplayOrderBlock,
     ButtonSelectionColor,
+  },
+  setup() {
+    useHead({
+      title: "Cart",
+      meta: [{
+        name: 'Cart',
+        content: 'There is a shop cart'
+      }]
+    })
   },
   data() {
     return {

@@ -175,6 +175,7 @@ import ButtonThirdColor from "@/components/ButtonThirdColor.vue"
 import CardProductMainComponent from "@/components/CardProductMainComponent.vue"
 import NavigationBreadcrumbsComponent from "@/components/NavigationBreadcrumbsComponent.vue"
 import { mapGetters } from "vuex"
+import { useHead } from '@unhead/vue'
 
 export default {
   components: {
@@ -183,6 +184,15 @@ export default {
     ButtonThirdColor,
     ButtonPagination,
     ButtonSelectionColor
+  },
+  setup() {
+    useHead({
+      title: "Catalog",
+      meta: [{
+        name: 'Catalog',
+        content: 'There is a shop catalog'
+      }]
+    })
   },
   data() {
     return {

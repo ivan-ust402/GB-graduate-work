@@ -37,6 +37,7 @@ import DisplayHeroBlock from "@/blocks/DisplayHeroBlock.vue"
 import DisplayReviewSliderBlock from "@/blocks/DisplayReviewSliderBlock.vue"
 import DisplayStyleTypesBlock from "@/blocks/DisplayStyleTypesBlock.vue"
 import { mapGetters } from "vuex"
+import { useHead } from '@unhead/vue'
 
 export default {
   components: {
@@ -45,7 +46,15 @@ export default {
     DisplayStyleTypesBlock,
     DisplayReviewSliderBlock,
   },
-
+  setup() {
+    useHead({
+      title: "Home",
+      meta: [{
+        name: 'Homepage',
+        content: 'There is a homepage'
+      }]
+    })
+  }, 
   data() {
     return {
       countProductsPerBlock: 4,
