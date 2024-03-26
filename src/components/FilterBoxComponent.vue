@@ -21,6 +21,7 @@
         class="filter__button"
         v-for="gender in paramsOfButtons"
         :text="gender.name"
+        @click="selectActiveGender"
       />
     </div>
     <div
@@ -33,13 +34,19 @@
         class="filter__range" 
         :min="range.start" 
         :max="range.end" 
-        step="5" />
+        step="5" 
+        @change="selectActiveRange"
+        />
     </div>
     <div
       v-else-if="kindOfButtons === 'colors'"
       class="filter__content filter__colors"
     >
-      <a href="#" class="filter__color" v-for="color in paramsOfButtons">
+      <a 
+        href="#" class="filter__color" 
+        v-for="color in paramsOfButtons"
+        @click="selectActiveColor"
+      >
         <svg
           class="filter__color-svg"
           width="37"
@@ -71,6 +78,7 @@
         href="#"
         class="filter__link"
         v-for="style in paramsOfButtons"
+        @click="selectActiveLink"
       >
         {{ style.name }}
       </a>

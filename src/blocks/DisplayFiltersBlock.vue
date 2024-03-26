@@ -10,39 +10,21 @@
     </div>
     <div class="filters__display-box">
       <div class="filters__display">
-        <div class="filters__filter-box filter">
-          <div class="filter__title-box">
-            <h6 class="filter__title">Gender</h6>
-            <img
-              :src="`${require('@/assets/img/common/dropup-arrow.svg')}`"
-              alt="dropup arrow"
-            />
-          </div>
-          <div class="filter__content filter__set-third-color-buttons">
-            <ButtonThirdColor
-              class="filter__button"
-              v-for="gender in getGenders"
-              :text="gender.name"
-            />
-          </div>
-        </div>
-        <div class="filters__filter-box filter">
-          <div class="filter__title-box">
-            <h6 class="filter__title">TYPE</h6>
-            <img
-              :src="`${require('@/assets/img/common/dropup-arrow.svg')}`"
-              alt="dropup arrow"
-            />
-          </div>
-          <div class="filter__content filter__set-third-color-buttons">
-            <ButtonThirdColor
-              class="filter__button"
-              v-for="typeItem in getTypes"
-              :text="typeItem.name"
-            />
-          </div>
-        </div>
-        <div class="filters__filter-box filter">
+        <FilterBoxComponentWithThirdColorButtons
+          class="filters__filter-box"
+          filterTitle="Gender"
+          :paramsOfButtons="getGenders"
+          :activeParamId="getActiveGender"
+          @getActiveParamId="setActiveGender"
+        />
+        <FilterBoxComponentWithThirdColorButtons
+          class="filters__filter-box"
+          filterTitle="Type"
+          :paramsOfButtons="getTypes"
+          :activeParamId="getActiveType"
+          @getActiveParamId="setActiveType"
+        />
+        <!-- <div class="filters__filter-box filter">
           <div class="filter__title-box">
             <h6 class="filter__title">Price</h6>
             <img
@@ -93,24 +75,15 @@
               </svg>
             </a>
           </div>
-        </div>
-        <div class="filters__filter-box filter">
-          <div class="filter__title-box">
-            <h6 class="filter__title">Size</h6>
-            <img
-              :src="`${require('@/assets/img/common/dropup-arrow.svg')}`"
-              alt="dropup arrow"
-            />
-          </div>
-          <div class="filter__content filter__set-third-color-buttons">
-            <ButtonThirdColor
-              class="filter__button"
-              v-for="gender in getSizes"
-              :text="gender.name"
-            />
-          </div>
-        </div>
-        <div class="filters__filter-box filter">
+        </div> -->
+        <FilterBoxComponentWithThirdColorButtons
+          class="filters__filter-box"
+          filterTitle="Size"
+          :paramsOfButtons="getSizes"
+          :activeParamId="getActiveSize"
+          @getActiveParamId="setActiveSize"
+        />
+        <!-- <div class="filters__filter-box filter">
           <div class="filter__title-box">
             <h6 class="filter__title">Dress Style</h6>
             <img
@@ -127,7 +100,7 @@
               {{ style.name }}
             </a>
           </div>
-        </div>
+        </div> -->
       </div>
       <ButtonSelectionColor
         class="filters__apply-btn"
@@ -141,6 +114,7 @@
 <script>
 import ButtonSelectionColor from "@/components/ButtonSelectionColor.vue"
 import ButtonThirdColor from "@/components/ButtonThirdColor.vue"
+import FilterBoxComponentWithThirdColorButtons from "@/components/FilterBoxComponentWithThirdColorButtons.vue"
 import { mapGetters } from "vuex"
 
 export default {
@@ -163,6 +137,7 @@ export default {
   components: {
     ButtonThirdColor,
     ButtonSelectionColor,
+    FilterBoxComponentWithThirdColorButtons,
   },
   data() {
     return {
@@ -186,8 +161,26 @@ export default {
       "getColors",
       "getPriceRange",
     ]),
+    getActiveGender() {
+      return this.filtersState.gender
+    },
+    getActiveType() {
+      return this.filtersState.type
+    },
+    getActiveSize() {
+      return this.filtersState.size
+    },
   },
   methods: {
+    setActiveGender(id) {
+      this.filtersState.gender = id
+    },
+    setActiveType(id) {
+      this.filtersState.type = id
+    },
+    setActiveSize(id) {
+      this.filtersState.size = id
+    },
     applyFilter() {
       console.log("applyFilters")
       this.$emit("getActualFiltersState", this.filtersState)
