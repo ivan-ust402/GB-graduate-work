@@ -106,6 +106,7 @@ export default {
     border: 1px solid #e8e8e8;
   }
   &__display {
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     gap: 22px;
