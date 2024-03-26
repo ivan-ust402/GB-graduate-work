@@ -4144,8 +4144,10 @@ export default createStore({
       })
     },
   },
-  mutations: {},
-  actions: {},
+  mutations: {
+  },
+  actions: {
+  },
   modules: {
     dropmenuStore,
     burgermenuStore,
