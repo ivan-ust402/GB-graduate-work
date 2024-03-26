@@ -74,6 +74,13 @@
             </a>
           </div>
         </div> -->
+        <FilterBoxComponentWithLinks
+          class="filters__filter-box"
+          filterTitle="Dress style"
+          :paramsOfButtons="getDressStyles"
+          :activeParamId="getActiveDressStyle"
+          @getActiveParamId="setActiveDressStyle"
+        />
       </div>
       <ButtonSelectionColor
         class="filters__apply-btn"
@@ -89,6 +96,7 @@ import ButtonSelectionColor from "@/components/ButtonSelectionColor.vue"
 import ButtonThirdColor from "@/components/ButtonThirdColor.vue"
 import FilterBoxComponentWithButtonsForColors from "@/components/FilterBoxComponentWithButtonsForColors.vue"
 import FilterBoxComponentWithThirdColorButtons from "@/components/FilterBoxComponentWithThirdColorButtons.vue"
+import FilterBoxComponentWithLinks from "@/components/FilterBoxComponentWithLinks.vue"
 import { mapGetters } from "vuex"
 
 export default {
@@ -112,7 +120,8 @@ export default {
     ButtonThirdColor,
     ButtonSelectionColor,
     FilterBoxComponentWithThirdColorButtons,
-    FilterBoxComponentWithButtonsForColors
+    FilterBoxComponentWithButtonsForColors,
+    FilterBoxComponentWithLinks
   },
   data() {
     return {
@@ -148,6 +157,9 @@ export default {
     getActiveColor() {
       return this.filtersState.color
     },
+    getActiveDressStyle() {
+      return this.filtersState.dressStyle
+    },
   },
   methods: {
     setActiveGender(id) {
@@ -161,6 +173,9 @@ export default {
     },
     setActiveColor(id) {
       this.filtersState.color = id
+    },
+    setActiveDressStyle(id) {
+      this.filtersState.dressStyle = id
     },
     applyFilter() {
       console.log("applyFilters")
