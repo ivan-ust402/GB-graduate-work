@@ -39,7 +39,7 @@ import ButtonPagination from "@/components/ButtonPagination.vue"
 import CardProductMainComponent from "@/components/CardProductMainComponent.vue"
 import NavigationBreadcrumbsComponent from "@/components/NavigationBreadcrumbsComponent.vue"
 import { mapGetters } from "vuex"
-import { useHead } from '@unhead/vue'
+import { useHead } from "@unhead/vue"
 import DisplayFiltersBlock from "@/blocks/DisplayFiltersBlock.vue"
 
 export default {
@@ -47,15 +47,17 @@ export default {
     CardProductMainComponent,
     NavigationBreadcrumbsComponent,
     ButtonPagination,
-    DisplayFiltersBlock
+    DisplayFiltersBlock,
   },
   setup() {
     useHead({
       title: "Catalog",
-      meta: [{
-        name: 'Catalog',
-        content: 'There is a shop catalog'
-      }]
+      meta: [
+        {
+          name: "Catalog",
+          content: "There is a shop catalog",
+        },
+      ],
     })
   },
   data() {
@@ -69,9 +71,7 @@ export default {
     this.query = this.$route.query
   },
   computed: {
-    ...mapGetters([
-      "getProductByQuery",
-    ]),
+    ...mapGetters(["getProductByQuery"]),
     getQuery() {
       return this.query
     },
@@ -179,10 +179,8 @@ export default {
     justify-content: space-between;
   }
   &__pagination {
-    
   }
 }
-
 
 @media (max-width: 1239px) {
   .catalog {
@@ -265,7 +263,7 @@ export default {
       font-size: 16px;
       line-height: normal;
     }
-    &__cards {      
+    &__cards {
       column-gap: 16px;
       row-gap: 24px;
     }
@@ -359,7 +357,7 @@ export default {
       font-size: 16px;
       line-height: normal;
     }
-    &__cards {      
+    &__cards {
       column-gap: 10px;
       row-gap: 24px;
     }
@@ -371,6 +369,5 @@ export default {
     &__pagination {
     }
   }
-
 }
 </style>
