@@ -3,64 +3,81 @@
     <div class="filter__title-box" @click="toggleIsOpen">
       <h6 class="filter__title">{{ filterTitle }}</h6>
       <img
-        :class="{ filter__arrow_close: !isOpen }"
+        :class="{ filter__arrow_close: isOpen }"
         class="filter__arrow"
         :src="`${require('@/assets/img/common/dropup-arrow.svg')}`"
         alt="dropup arrow"
       />
       <img
-        :class="{ filter__arrow_close: isOpen }"
+        :class="{ filter__arrow_close: !isOpen }"
         class="filter__arrow"
         :src="`${require('@/assets/img/common/dropdown-arrow.svg')}`"
         alt="dropup arrow"
       />
     </div>
     <div
-      :class="{ filter__content_close: !isOpen }"
+      :class="{ filter__content_close: isOpen }"
       class="filter__content filter__set-third-color-buttons"
     >
-      <ButtonThirdColor
-        class="filter__button"
-        v-for="param in paramsOfButtons"
-        :text="param.name"
-        :isActive="param.id === activeParamId"
-        @click.prevent="selectActiveParam(param.id)"
+      
+      <RangeComponent
+        :priceStart="priceStart"
+        :priceEnd="priceEnd"
+        :priceMin="priceMin"
+        :priceMax="priceMax"
+        @getActivePriceMinFromRange="setActivePriceMin"
+        @getActivePriceMaxFromRange="setActivePriceMax"
       />
+      <RangeNoUISliderComponent />
     </div>
   </div>
 </template>
 
 <script>
-import ButtonThirdColor from "./ButtonThirdColor.vue"
+import RangeComponent from "./RangeComponent.vue"
+import RangeNoUISliderComponent from "./RangeNoUISliderComponent.vue"
 
 export default {
   components: {
-    ButtonThirdColor,
+    RangeComponent,
+    RangeNoUISliderComponent,
   },
+  emits: ['getActivePriceMinFromChild','getActivePriceMaxFromChild'],
   props: {
     filterTitle: "Some Kind Filter",
-    paramsOfButtons: {
-      type: Array,
-      default: () => [],
-    },
-    activeParamId: {
+    priceMin: {
       type: Number,
-      default: () => -1,
+      default: () => 0,
     },
+    priceMax: {
+      type: Number,
+      default: () => 100,
+    },
+    priceStart: {
+      type: Number,
+      default: () => 0,
+    },
+    priceEnd: {
+      type: Number,
+      default: () => 100,
+    },
+    
   },
-  emits: ['getActiveParamId'],
   data() {
     return {
       isOpen: false,
     }
   },
   methods: {
-    selectActiveParam(id) {
-      this.$emit('getActiveParamId', id)
-    },
     toggleIsOpen() {
       this.isOpen = !this.isOpen
     },
+    setActivePriceMin(value) {
+      this.$emit('getActivePriceMinFromChild', value)
+    },    
+    setActivePriceMax(value) {
+      this.$emit('getActivePriceMaxFromChild', value)
+    }
   },
 }
 </script>
@@ -100,21 +117,25 @@ export default {
   &__content {
     width: 100%;
     opacity: 1;
-    transition: all .3s ease-in;
+    transition: all 0.3s ease-in;
     position: static;
     &_close {
       opacity: 0;
       position: absolute;
       top: 0;
       right: 9999px;
-      transition: all .3s ease-in;
+      transition: all 0.3s ease-in;
     }
   }
-  &__set-third-color-buttons {
+  &__range {
+    width: 100%;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    // -webkit-appearance: none;
+    // -moz-appearance: none;
+    // appearance: none;
   }
 }
 @media (max-width: 1239px) {
@@ -122,6 +143,7 @@ export default {
   }
 }
 @media (max-width: 768px) {
-  .filter {}
+  .filter {
+  }
 }
 </style>

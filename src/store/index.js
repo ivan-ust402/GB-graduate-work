@@ -165,10 +165,10 @@ export default createStore({
         name: "Blouses",
       },
     ],
-    priceRange: [{
+    priceRanges: {
       start: 0,
-      end: 100000,
-    }],
+      end: 1000,
+    },
     colors: [
       {
         id: 0,
@@ -4018,7 +4018,7 @@ export default createStore({
       return state.colors
     },
     getPriceRange(state) {
-      return state.priceRange
+      return state.priceRanges
     },
     getALLProducts(state) {
       return state.products

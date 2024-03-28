@@ -24,24 +24,16 @@
           :activeParamId="getActiveType"
           @getActiveParamId="setActiveType"
         />
-        <!-- <div class="filters__filter-box filter">
-          <div class="filter__title-box">
-            <h6 class="filter__title">Price</h6>
-            <img
-              :src="`${require('@/assets/img/common/dropup-arrow.svg')}`"
-              alt="dropup arrow"
-            />
-          </div>
-          <div class="filter__content filter__set-third-color-buttons">
-            <input
-              type="range"
-              class="filter__range"
-              min="0"
-              max="100"
-              step="5"
-            />
-          </div>
-        </div> -->
+        <FilterBoxComponentWithRange
+          class="filters__filter-box"
+          filterTitle="Price"
+          :priceStart="getPriceRange.start"
+          :priceEnd="getPriceRange.end"
+          :priceMin="getActivePriceMin"
+          :priceMax="getActivePriceMax"
+          @getActivePriceMinFromChild="setActivePriceMin"
+          @getActivePriceMaxFromChild="setActivePriceMax"
+        />
         <FilterBoxComponentWithButtonsForColors
           class="filters__filter-box"
           filterTitle="Colors"
@@ -56,24 +48,6 @@
           :activeParamId="getActiveSize"
           @getActiveParamId="setActiveSize"
         />
-        <!-- <div class="filters__filter-box filter">
-          <div class="filter__title-box">
-            <h6 class="filter__title">Dress Style</h6>
-            <img
-              :src="`${require('@/assets/img/common/dropup-arrow.svg')}`"
-              alt="dropup arrow"
-            />
-          </div>
-          <div class="filter__content filter__style-box">
-            <a
-              href="#"
-              class="filter__without-border"
-              v-for="style in getDressStyles"
-            >
-              {{ style.name }}
-            </a>
-          </div>
-        </div> -->
         <FilterBoxComponentWithLinks
           class="filters__filter-box"
           filterTitle="Dress style"
@@ -97,6 +71,7 @@ import ButtonThirdColor from "@/components/ButtonThirdColor.vue"
 import FilterBoxComponentWithButtonsForColors from "@/components/FilterBoxComponentWithButtonsForColors.vue"
 import FilterBoxComponentWithThirdColorButtons from "@/components/FilterBoxComponentWithThirdColorButtons.vue"
 import FilterBoxComponentWithLinks from "@/components/FilterBoxComponentWithLinks.vue"
+import FilterBoxComponentWithRange from "@/components/FilterBoxComponentWithRange.vue"
 import { mapGetters } from "vuex"
 
 export default {
@@ -107,7 +82,10 @@ export default {
         return {
           gender: null,
           type: null,
-          price: null,
+          priceStart: 0,
+          priceEnd: 100,
+          priceMin: 0,
+          priceMax: 100,
           colors: null,
           size: null,
           dressStyle: null,
@@ -121,14 +99,18 @@ export default {
     ButtonSelectionColor,
     FilterBoxComponentWithThirdColorButtons,
     FilterBoxComponentWithButtonsForColors,
-    FilterBoxComponentWithLinks
+    FilterBoxComponentWithLinks,
+    FilterBoxComponentWithRange,
   },
   data() {
     return {
       filtersState: {
         gender: null,
         type: null,
-        price: null,
+        priceStart: 0,
+        priceEnd: 1000,
+        priceMin: 0,
+        priceMax: 1000,
         color: null,
         size: null,
         dressStyle: null,
@@ -151,6 +133,18 @@ export default {
     getActiveType() {
       return this.filtersState.type
     },
+    getActivePriceStart() {
+      return this.filtersState.priceStart
+    },
+    getActivePriceEnd() {
+      return this.filtersState.priceEnd
+    },
+    getActivePriceMin() {
+      return this.filtersState.priceMin
+    },
+    getActivePriceMax() {
+      return this.filtersState.priceMax
+    },
     getActiveSize() {
       return this.filtersState.size
     },
@@ -167,6 +161,22 @@ export default {
     },
     setActiveType(id) {
       this.filtersState.type = id
+    },
+    setActivePriceStart(start) {
+      // console.log("start: ", start)
+      this.filtersState.priceStart = start
+    },
+    setActivePriceEnd(end) {
+      // console.log("end: ", end)
+      this.filtersState.priceEnd = end
+    },
+    setActivePriceMin(min) {
+      // console.log("min: ", min)
+      this.filtersState.priceMin = min
+    },
+    setActivePriceMax(max) {
+      // console.log("max: ", max)
+      this.filtersState.priceMax = max
     },
     setActiveSize(id) {
       this.filtersState.size = id

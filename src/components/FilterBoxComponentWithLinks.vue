@@ -94,7 +94,7 @@ export default {
   flex-direction: column;
   gap: 20px;
   position: relative;
-
+  user-select: none;
   &__title-box {
     cursor: pointer;
     display: flex;
@@ -109,7 +109,6 @@ export default {
     font-size: 20px;
     line-height: 22px; /* 110% */
     text-transform: uppercase;
-    user-select: none;
   }
   &__arrow {
     opacity: 1;
