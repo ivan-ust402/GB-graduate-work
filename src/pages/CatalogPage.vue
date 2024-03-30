@@ -2,23 +2,13 @@
   <section class="catalog center">
     <NavigationBreadcrumbsComponent class="catalog__breadcrumbs" />
     <div class="catalog__content">
-      <DisplayFiltersBlock @closeFiltersMenu="closeFiltersWindow"/>
-      <!-- <div class="catalog__display">
+      <!-- <DisplayFiltersBlock @closeFiltersMenu="closeFiltersWindow"/> -->
+      <div class="catalog__display">
         <div class="catalog__cards-box">
-          <div class="catalog__cards-title-box">
-            <h4 class="catalog__cards-title">
-              <p class="catalog__test" v-for="query of getQuery">{{ query }}</p>
-            </h4>
-            <div class="catalog__cards-right-display">
-              <p class="catalog__showing-cards">Showing 1-10 of 100 Products</p>
-              <div class="catalog__sort">
-                <p class="catalog__sort-label">Sort by:</p>
-                <p class="catalog__sort-select">Most Popular</p>
-              </div>
-            </div>
-          </div>
+          <CatalogTitleBlock :titleValue = getQuery />
           <div class="catalog__cards">
             <CardProductMainComponent
+              class="catalog__card"
               v-for="product in getProductByQuery(query)"
               :product="product"
             />
@@ -29,7 +19,7 @@
           <div class="catalog__pagination"></div>
           <ButtonPagination text="Next" arrow="right" />
         </div>
-      </div> -->
+      </div>
     </div>
   </section>
 </template>
@@ -41,6 +31,7 @@ import NavigationBreadcrumbsComponent from "@/components/NavigationBreadcrumbsCo
 import { mapGetters } from "vuex"
 import { useHead } from "@unhead/vue"
 import DisplayFiltersBlock from "@/blocks/DisplayFiltersBlock.vue"
+import CatalogTitleBlock from "@/blocks/CatalogTitleBlock.vue"
 
 export default {
   components: {
@@ -48,6 +39,7 @@ export default {
     NavigationBreadcrumbsComponent,
     ButtonPagination,
     DisplayFiltersBlock,
+    CatalogTitleBlock
   },
   setup() {
     useHead({
@@ -88,8 +80,8 @@ export default {
   methods: {
     closeFiltersWindow(value) {
       console.log(value)
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -121,55 +113,6 @@ export default {
     display: flex;
     flex-direction: column;
     gap: 16px;
-  }
-  &__cards-title-box {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-  &__cards-title {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    color: #121212;
-    font-family: "satoshibold";
-    font-size: 32px;
-    line-height: normal;
-    text-transform: capitalize;
-  }
-  &__test {
-    display: flex;
-    flex-direction: row;
-  }
-  &__cards-right-display {
-    display: flex;
-    flex-direction: row;
-    gap: 12px;
-    align-items: center;
-  }
-  &__showing-cards {
-    color: #222;
-    font-family: "satoshiregular";
-    font-size: 16px;
-    line-height: normal;
-  }
-  &__sort {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    align-items: center;
-  }
-  &__sort-label {
-    color: rgba(0, 0, 0, 0.6);
-    font-family: "satoshiregular";
-    font-size: 16px;
-    line-height: normal;
-  }
-  &__sort-select {
-    color: var(--Black, #121212);
-    font-family: "satoshimedium";
-    font-size: 16px;
-    line-height: normal;
   }
   &__cards {
     display: grid;
@@ -216,62 +159,15 @@ export default {
       gap: 22px;
     }
     &__cards-box {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    &__cards-title-box {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-    }
-    &__cards-title {
-      display: flex;
-      flex-direction: row;
-      gap: 10px;
-      color: #121212;
-      font-family: "satoshibold";
-      font-size: 32px;
-      line-height: normal;
-      text-transform: capitalize;
-    }
-    &__test {
-      display: flex;
-      flex-direction: row;
-    }
-    &__cards-right-display {
-      display: flex;
-      flex-direction: row;
-      gap: 12px;
-      align-items: center;
-    }
-    &__showing-cards {
-      color: #222;
-      font-family: "satoshiregular";
-      font-size: 16px;
-      line-height: normal;
-    }
-    &__sort {
-      display: flex;
-      flex-direction: row;
-      gap: 10px;
-      align-items: center;
-    }
-    &__sort-label {
-      color: rgba(0, 0, 0, 0.6);
-      font-family: "satoshiregular";
-      font-size: 16px;
-      line-height: normal;
-    }
-    &__sort-select {
-      color: var(--Black, #121212);
-      font-family: "satoshimedium";
-      font-size: 16px;
-      line-height: normal;
+      gap: 24px;
     }
     &__cards {
+      grid-template-columns: 224px 224px 224px;
       column-gap: 16px;
       row-gap: 24px;
+    }
+    &__card {
+      width: 100%;
     }
     &__pagination-box {
       display: flex;
@@ -306,65 +202,20 @@ export default {
       border: 1px solid #e8e8e8;
     }
     &__display {
-      gap: 22px;
+      gap: 20px;
     }
     &__cards-box {
       display: flex;
       flex-direction: column;
       gap: 16px;
     }
-    &__cards-title-box {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-    }
-    &__cards-title {
-      display: flex;
-      flex-direction: row;
-      gap: 10px;
-      color: #121212;
-      font-family: "satoshibold";
-      font-size: 32px;
-      line-height: normal;
-      text-transform: capitalize;
-    }
-    &__test {
-      display: flex;
-      flex-direction: row;
-    }
-    &__cards-right-display {
-      display: flex;
-      flex-direction: row;
-      gap: 12px;
-      align-items: center;
-    }
-    &__showing-cards {
-      color: #222;
-      font-family: "satoshiregular";
-      font-size: 16px;
-      line-height: normal;
-    }
-    &__sort {
-      display: flex;
-      flex-direction: row;
-      gap: 10px;
-      align-items: center;
-    }
-    &__sort-label {
-      color: rgba(0, 0, 0, 0.6);
-      font-family: "satoshiregular";
-      font-size: 16px;
-      line-height: normal;
-    }
-    &__sort-select {
-      color: var(--Black, #121212);
-      font-family: "satoshimedium";
-      font-size: 16px;
-      line-height: normal;
-    }
     &__cards {
+      grid-template-columns: 172px 172px;
       column-gap: 10px;
       row-gap: 24px;
+    }
+    &__card {
+      width: 100%;
     }
     &__pagination-box {
       display: flex;
