@@ -48,7 +48,7 @@ export default {
       default: () => -1,
     },
   },
-  emits: ['getActiveParamId'],
+  emits: ["getActiveParamId"],
   data() {
     return {
       isOpen: false,
@@ -56,7 +56,7 @@ export default {
   },
   methods: {
     selectActiveParam(id) {
-      this.$emit('getActiveParamId', id)
+      this.$emit("getActiveParamId", id)
     },
     toggleIsOpen() {
       this.isOpen = !this.isOpen
@@ -81,7 +81,7 @@ export default {
     position: relative;
   }
   &__title {
-    color: var(--Black, #121212);
+    color: #121212;
     font-family: "satoshibold";
     font-size: 20px;
     line-height: 22px; /* 110% */
@@ -100,14 +100,14 @@ export default {
   &__content {
     width: 100%;
     opacity: 1;
-    transition: all .3s ease-in;
+    transition: all 0.3s ease-in;
     position: static;
     &_close {
       opacity: 0;
       position: absolute;
       top: 0;
       right: 9999px;
-      transition: all .3s ease-in;
+      transition: all 0.3s ease-in;
     }
   }
   &__set-third-color-buttons {
@@ -119,9 +119,13 @@ export default {
 }
 @media (max-width: 1239px) {
   .filter {
+    gap: 16px;
+    &__title {
+      text-transform: capitalize;
+    }
+    &__set-third-color-buttons {
+      gap: 8px;
+    }
   }
-}
-@media (max-width: 768px) {
-  .filter {}
 }
 </style>
