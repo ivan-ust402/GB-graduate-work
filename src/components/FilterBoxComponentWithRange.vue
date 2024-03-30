@@ -3,20 +3,20 @@
     <div class="filter__title-box" @click="toggleIsOpen">
       <h6 class="filter__title">{{ filterTitle }}</h6>
       <img
-        :class="{ filter__arrow_close: isOpen }"
+        :class="{ filter__arrow_close: !isOpen }"
         class="filter__arrow"
         :src="`${require('@/assets/img/common/dropup-arrow.svg')}`"
         alt="dropup arrow"
       />
       <img
-        :class="{ filter__arrow_close: !isOpen }"
+        :class="{ filter__arrow_close: isOpen }"
         class="filter__arrow"
         :src="`${require('@/assets/img/common/dropdown-arrow.svg')}`"
         alt="dropup arrow"
       />
     </div>
     <div
-      :class="{ filter__content_close: isOpen }"
+      :class="{ filter__content_close: !isOpen }"
       class="filter__content filter__set-third-color-buttons"
     >
       
@@ -28,19 +28,19 @@
         @getActivePriceMinFromRange="setActivePriceMin"
         @getActivePriceMaxFromRange="setActivePriceMax"
       />
-      <RangeNoUISliderComponent />
+      <RangeVue3SliderComponent />
     </div>
   </div>
 </template>
 
 <script>
 import RangeComponent from "./RangeComponent.vue"
-import RangeNoUISliderComponent from "./RangeNoUISliderComponent.vue"
+import RangeVue3SliderComponent from "./RangeVue3SliderComponent.vue"
 
 export default {
   components: {
     RangeComponent,
-    RangeNoUISliderComponent,
+    RangeVue3SliderComponent,
   },
   emits: ['getActivePriceMinFromChild','getActivePriceMaxFromChild'],
   props: {
