@@ -19,8 +19,9 @@
       :class="{ filter__content_close: !isOpen }"
       class="filter__content filter__buttons-set"
     >
-      <a 
-        href="#" class="filter__color-btn" 
+      <a
+        href="#"
+        class="filter__color-btn"
         v-for="param in paramsOfButtons"
         @click.prevent="selectActiveParam(param.id)"
       >
@@ -97,7 +98,7 @@ export default {
     position: relative;
   }
   &__title {
-    color: var(--Black, #121212);
+    color: #121212;
     font-family: "satoshibold";
     font-size: 20px;
     line-height: 22px; /* 110% */
@@ -151,10 +152,14 @@ export default {
 }
 @media (max-width: 1239px) {
   .filter {
-  }
-}
-@media (max-width: 768px) {
-  .filter {
+    gap: 16px;
+    &__buttons-set {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      row-gap: 16px;
+      column-gap: 13px;
+    }
   }
 }
 </style>
