@@ -272,8 +272,8 @@ export default {
   .filters {
     display: flex;
     padding: 20px 32px;
-    margin-left: -32px;
-    margin-right: -32px;
+    // margin-left: -32px;
+    // margin-right: -32px;
     width: 1239px;
     border-radius: 20px 20px 0px 0px;
     border: 1px solid #ccc;
@@ -287,8 +287,8 @@ export default {
 @media (max-width: 768px) {
   .filters {
     padding: 20px 16px;
-    margin-left: -16px;
-    margin-right: -16px;
+    // margin-left: -16px;
+    // margin-right: -16px;
     width: 768px;
   }
 }
