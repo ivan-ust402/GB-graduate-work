@@ -28,19 +28,19 @@
         @getActivePriceMinFromRange="setActivePriceMin"
         @getActivePriceMaxFromRange="setActivePriceMax"
       />
-      <RangeVue3SliderComponent />
+      <!-- <RangeVue3SliderComponent /> -->
     </div>
   </div>
 </template>
 
 <script>
 import RangeComponent from "./RangeComponent.vue"
-import RangeVue3SliderComponent from "./RangeVue3SliderComponent.vue"
+// import RangeVue3SliderComponent from "./RangeVue3SliderComponent.vue"
 
 export default {
   components: {
     RangeComponent,
-    RangeVue3SliderComponent,
+    // RangeVue3SliderComponent,
   },
   emits: ['getActivePriceMinFromChild','getActivePriceMaxFromChild'],
   props: {

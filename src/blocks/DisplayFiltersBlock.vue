@@ -1,12 +1,20 @@
 <template>
-  <div class="catalog__filters filters">
+  <div class="filters">
     <div class="filters__title-box">
       <h6 class="filters__title">Filters</h6>
       <img
-        class="filters__icon"
+        v-if="!useCloseIcon"
+        class="filters__icon filters__icon_filter"
         :src="`${require('@/assets/img/common/sort-icon.svg')}`"
-        alt=""
+        alt="filter icon"
       />
+      <a v-else href="#" class="filters__close-btn" @click="closeFilters">
+        <img
+          class="filters__icon filters__icon_close"
+          src="@/assets/img/common/close-icon-grey.svg"
+          alt="close icon"
+        />
+      </a>
     </div>
     <div class="filters__display-box">
       <div class="filters__display">
@@ -93,7 +101,7 @@ export default {
       },
     },
   },
-  emits: ["getActualFiltersState"],
+  emits: ["getActualFiltersState", "closeFiltersMenu"],
   components: {
     ButtonThirdColor,
     ButtonSelectionColor,
@@ -115,7 +123,12 @@ export default {
         size: null,
         dressStyle: null,
       },
+      useCloseIcon: false,
     }
+  },
+  mounted() {
+    this.setInitial()
+    window.addEventListener("resize", this.setInitial)
   },
   computed: {
     ...mapGetters([
@@ -156,6 +169,18 @@ export default {
     },
   },
   methods: {
+    closeFilters() {
+      this.$emit("closeFiltersMenu", true)
+    },
+    setInitial() {
+      if (window.innerWidth > 1239) {
+        this.useCloseIcon = false
+      } else if (window.innerWidth <= 1239 && window.innerWidth > 768) {
+        this.useCloseIcon = true
+      } else if (window.innerWidth <= 768) {
+        this.useCloseIcon = true
+      }
+    },
     setActiveGender(id) {
       this.filtersState.gender = id
     },
@@ -163,19 +188,15 @@ export default {
       this.filtersState.type = id
     },
     setActivePriceStart(start) {
-      // console.log("start: ", start)
       this.filtersState.priceStart = start
     },
     setActivePriceEnd(end) {
-      // console.log("end: ", end)
       this.filtersState.priceEnd = end
     },
     setActivePriceMin(min) {
-      // console.log("min: ", min)
       this.filtersState.priceMin = min
     },
     setActivePriceMax(max) {
-      // console.log("max: ", max)
       this.filtersState.priceMax = max
     },
     setActiveSize(id) {
@@ -247,243 +268,28 @@ export default {
   }
 }
 
-.filter {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  &__title-box {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-  &__title {
-    color: var(--Black, #121212);
-    font-family: "satoshibold";
-    font-size: 20px;
-    line-height: 22px; /* 110% */
-    text-transform: uppercase;
-  }
-  &__content {
-    width: 100%;
-  }
-  &__set-third-color-buttons {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  &__color-btn {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width: 38px;
-    height: 38px;
-  }
-  &__range {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    // -webkit-appearance: none;
-    // -moz-appearance: none;
-    // appearance: none;
-  }
-  &__color-svg {
-    width: 36px;
-    height: 36px;
-  }
-  &__style-box {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  &__without-border {
-    color: #222;
-    font-family: "satoshiregular";
-    font-size: 16px;
-    line-height: normal;
-  }
-}
-
 @media (max-width: 1239px) {
   .filters {
     display: flex;
-    padding: 20px 24px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 24px;
+    padding: 20px 32px;
+    margin-left: -32px;
+    margin-right: -32px;
+    width: 1239px;
+    border-radius: 20px 20px 0px 0px;
+    border: 1px solid #ccc;
+    background: #fff;
     &__title-box {
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-    }
-    &__title {
-      align-self: center;
-      text-transform: capitalize;
-      color: #121212;
-      font-family: "satoshibold";
-      font-size: 20px;
-      line-height: normal;
-    }
-    &__icon {
-      width: 24px;
-      height: 24px;
-    }
-    &__display {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-    &__filter-box {
-      padding-bottom: 24px;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-      &:last-child {
-        border: none;
-      }
-    }
+    width: 100%;
   }
-
-  .filter {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    &__title-box {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-    }
-    &__title {
-      color: var(--Black, #121212);
-      font-family: "satoshibold";
-      font-size: 20px;
-      line-height: 22px; /* 110% */
-      text-transform: uppercase;
-    }
-    &__content {
-      width: 100%;
-    }
-    &__set-third-color-buttons {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    &__color-btn {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      width: 38px;
-      height: 38px;
-    }
-    &__range {
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      // -webkit-appearance: none;
-      // -moz-appearance: none;
-      // appearance: none;
-    }
-    &__color-svg {
-      width: 36px;
-      height: 36px;
-    }
   }
 }
 
 @media (max-width: 768px) {
   .filters {
-    display: flex;
-    padding: 20px 24px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 24px;
-    &__title-box {
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-    }
-    &__title {
-      align-self: center;
-      text-transform: capitalize;
-      color: #121212;
-      font-family: "satoshibold";
-      font-size: 20px;
-      line-height: normal;
-    }
-    &__icon {
-      width: 24px;
-      height: 24px;
-    }
-    &__display {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-    &__filter-box {
-      padding-bottom: 24px;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-      &:last-child {
-        border: none;
-      }
-    }
-  }
-
-  .filter {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    &__title-box {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-    }
-    &__title {
-      color: var(--Black, #121212);
-      font-family: "satoshibold";
-      font-size: 20px;
-      line-height: 22px; /* 110% */
-      text-transform: uppercase;
-    }
-    &__content {
-      width: 100%;
-    }
-    &__set-third-color-buttons {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    &__color-btn {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      width: 38px;
-      height: 38px;
-    }
-    &__range {
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-    }
-    &__color-svg {
-      width: 36px;
-      height: 36px;
-    }
+    padding: 20px 16px;
+    margin-left: -16px;
+    margin-right: -16px;
+    width: 768px;
   }
 }
 </style>

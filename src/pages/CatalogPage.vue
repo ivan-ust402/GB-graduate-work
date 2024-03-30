@@ -2,8 +2,8 @@
   <section class="catalog center">
     <NavigationBreadcrumbsComponent class="catalog__breadcrumbs" />
     <div class="catalog__content">
-      <DisplayFiltersBlock />
-      <div class="catalog__display">
+      <DisplayFiltersBlock @closeFiltersMenu="closeFiltersWindow"/>
+      <!-- <div class="catalog__display">
         <div class="catalog__cards-box">
           <div class="catalog__cards-title-box">
             <h4 class="catalog__cards-title">
@@ -29,7 +29,7 @@
           <div class="catalog__pagination"></div>
           <ButtonPagination text="Next" arrow="right" />
         </div>
-      </div>
+      </div> -->
     </div>
   </section>
 </template>
@@ -85,6 +85,11 @@ export default {
       this.query = this.$route.query
     },
   },
+  methods: {
+    closeFiltersWindow(value) {
+      console.log(value)
+    }
+  }
 }
 </script>
 
@@ -190,8 +195,9 @@ export default {
     z-index: 0;
     &__content {
       display: flex;
-      flex-direction: row;
-      gap: 21px;
+      // flex-wrap: wrap;
+      // width: 100%;
+      // gap: 0;
     }
     &__filters {
       // position: absolute;
@@ -285,7 +291,6 @@ export default {
     &__content {
       display: flex;
       flex-direction: row;
-      gap: 21px;
     }
     &__filters {
       position: absolute;
