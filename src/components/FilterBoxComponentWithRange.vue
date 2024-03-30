@@ -19,7 +19,6 @@
       :class="{ filter__content_close: !isOpen }"
       class="filter__content filter__set-third-color-buttons"
     >
-      
       <RangeComponent
         :priceStart="priceStart"
         :priceEnd="priceEnd"
@@ -42,7 +41,7 @@ export default {
     RangeComponent,
     // RangeVue3SliderComponent,
   },
-  emits: ['getActivePriceMinFromChild','getActivePriceMaxFromChild'],
+  emits: ["getActivePriceMinFromChild", "getActivePriceMaxFromChild"],
   props: {
     filterTitle: "Some Kind Filter",
     priceMin: {
@@ -61,7 +60,6 @@ export default {
       type: Number,
       default: () => 100,
     },
-    
   },
   data() {
     return {
@@ -73,11 +71,11 @@ export default {
       this.isOpen = !this.isOpen
     },
     setActivePriceMin(value) {
-      this.$emit('getActivePriceMinFromChild', value)
-    },    
+      this.$emit("getActivePriceMinFromChild", value)
+    },
     setActivePriceMax(value) {
-      this.$emit('getActivePriceMaxFromChild', value)
-    }
+      this.$emit("getActivePriceMaxFromChild", value)
+    },
   },
 }
 </script>
@@ -98,7 +96,7 @@ export default {
     position: relative;
   }
   &__title {
-    color: var(--Black, #121212);
+    color: #121212;
     font-family: "satoshibold";
     font-size: 20px;
     line-height: 22px; /* 110% */
@@ -140,10 +138,10 @@ export default {
 }
 @media (max-width: 1239px) {
   .filter {
-  }
-}
-@media (max-width: 768px) {
-  .filter {
+    gap: 16px;
+    &__title {
+      text-transform: capitalize;
+    }
   }
 }
 </style>
