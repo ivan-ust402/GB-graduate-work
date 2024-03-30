@@ -65,7 +65,6 @@ export default {
   margin: 0;
   padding: 0;
   scroll-behavior: smooth;
-  color: #121212;
   // font-size: 14px;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0.2);
 }
@@ -116,6 +115,7 @@ a,
 button {
   font-family: "satoshimedium", Arial, Helvetica, sans-serif;
   text-decoration: none;
+  color: #121212;
 }
 
 a:hover,
