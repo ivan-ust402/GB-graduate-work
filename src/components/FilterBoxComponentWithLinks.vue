@@ -104,7 +104,7 @@ export default {
     position: relative;
   }
   &__title {
-    color: var(--Black, #121212);
+    color:#121212;
     font-family: "satoshibold";
     font-size: 20px;
     line-height: 22px; /* 110% */
@@ -150,10 +150,15 @@ export default {
 }
 @media (max-width: 1239px) {
   .filter {
+  gap: 16px;
+  position: relative;
+  &__title {
+    text-transform: capitalize;
+  }
+  &__style-box {
+    flex-direction: row;
+    gap: 8px;
   }
 }
-@media (max-width: 768px) {
-  .filter {
-  }
 }
 </style>

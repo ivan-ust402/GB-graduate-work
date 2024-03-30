@@ -153,6 +153,9 @@ export default {
 @media (max-width: 1239px) {
   .filter {
     gap: 16px;
+    &__title {
+      text-transform: capitalize;
+    }
     &__buttons-set {
       display: flex;
       flex-direction: row;
