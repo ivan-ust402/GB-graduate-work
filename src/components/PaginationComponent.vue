@@ -50,6 +50,7 @@
 import ButtonPaginationItem from "./ButtonPaginationItem.vue"
 import ButtonPagination from "./ButtonPagination.vue"
 
+
 export default {
   components: {
     ButtonPaginationItem,
@@ -129,6 +130,7 @@ export default {
     changePage(pageNumber) {
       this.currentPage = pageNumber
       this.$emit("page-changed", pageNumber)
+
     },
     nextPage() {
       this.currentPage = this.numberOfPage

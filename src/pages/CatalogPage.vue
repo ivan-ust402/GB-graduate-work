@@ -34,6 +34,7 @@ import { useHead } from "@unhead/vue"
 import DisplayFiltersBlock from "@/blocks/DisplayFiltersBlock.vue"
 import CatalogTitleBlock from "@/blocks/CatalogTitleBlock.vue"
 import PaginationComponent from "@/components/PaginationComponent.vue"
+import { useRouter } from 'vue-router';
 
 export default {
   components: {
@@ -97,16 +98,25 @@ export default {
   methods: {
     ...mapActions(["setCurrentProductsArray"]),
     setPage(currentPage) {
+      const router = useRouter();
+      console.log(router);
       this.page = currentPage
       window.scrollTo(0, 0)
     },
     setSettings() {
       if (window.innerWidth > 1239) {
-        this.countCardsPerPage = 9
+        // сравнивать значение с предыдущим и менять, если изменение есть
+        if (this.countCardsPerPage !== 9) {
+          this.countCardsPerPage = 9
+        }
       } else if (window.innerWidth <= 1239 && window.innerWidth > 768) {
-        this.countCardsPerPage = 6
+        if (this.countCardsPerPage !== 6) {
+          this.countCardsPerPage = 6
+        }
       } else if (window.innerWidth <= 768) {
-        this.countCardsPerPage = 6
+        if (this.countCardsPerPage !== 6) {
+          this.countCardsPerPage = 6
+        }
       }
     },
     closeFiltersWindow(value) {
