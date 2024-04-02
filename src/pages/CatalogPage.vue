@@ -5,20 +5,21 @@
       <!-- <DisplayFiltersBlock @closeFiltersMenu="closeFiltersWindow"/> -->
       <div class="catalog__display">
         <div class="catalog__cards-box">
-          <CatalogTitleBlock :titleValue = getQuery />
+          <CatalogTitleBlock :titleValue="getQuery" />
           <div class="catalog__cards">
             <CardProductMainComponent
               class="catalog__card"
-              v-for="product in getProductByQuery(query)"
+              v-for="product in getPageCards(page, countCardsPerPage)"
               :product="product"
             />
           </div>
         </div>
-        <div class="catalog__pagination-box">
-          <ButtonPagination text="Previous" arrow="left" />
-          <div class="catalog__pagination"></div>
-          <ButtonPagination text="Next" arrow="right" />
-        </div>
+        <PaginationComponent
+          :total="getTotalCards"
+          :numberOfPage="getPage"
+          :quantityElPerPage="getQuantityElPerPage"
+          @page-changed="setPage"
+        />
       </div>
     </div>
   </section>
@@ -28,10 +29,11 @@
 import ButtonPagination from "@/components/ButtonPagination.vue"
 import CardProductMainComponent from "@/components/CardProductMainComponent.vue"
 import NavigationBreadcrumbsComponent from "@/components/NavigationBreadcrumbsComponent.vue"
-import { mapGetters } from "vuex"
+import { mapActions, mapGetters } from "vuex"
 import { useHead } from "@unhead/vue"
 import DisplayFiltersBlock from "@/blocks/DisplayFiltersBlock.vue"
 import CatalogTitleBlock from "@/blocks/CatalogTitleBlock.vue"
+import PaginationComponent from "@/components/PaginationComponent.vue"
 
 export default {
   components: {
@@ -39,7 +41,8 @@ export default {
     NavigationBreadcrumbsComponent,
     ButtonPagination,
     DisplayFiltersBlock,
-    CatalogTitleBlock
+    CatalogTitleBlock,
+    PaginationComponent,
   },
   setup() {
     useHead({
@@ -55,29 +58,57 @@ export default {
   data() {
     return {
       query: {},
+      sort: { field: "price", order: "asc" },
       page: 1,
+      countCardsPerPage: 0,
+      totalCards: 0,
     }
   },
   mounted() {
     this.page = this.$route.params.page
     this.query = this.$route.query
+    this.setCurrentProductsArray(this.getProductByQuery(this.query, this.sort))
+    this.totalCards = this.getTotalCards
+    this.setSettings()
+    window.addEventListener("resize", this.setSettings)
   },
   computed: {
-    ...mapGetters(["getProductByQuery"]),
+    ...mapGetters(["getProductByQuery", "getTotalCards", "getPageCards"]),
     getQuery() {
       return this.query
     },
     getPage() {
-      return this.page
+      return Number(this.page)
+    },
+    getQuantityElPerPage() {
+      return this.countCardsPerPage
     },
   },
   watch: {
     $route() {
       this.page = this.$route.params.page
       this.query = this.$route.query
+      this.setCurrentProductsArray(
+        this.getProductByQuery(this.query, this.sort)
+      )
+      this.totalCards = this.getTotalCards
     },
   },
   methods: {
+    ...mapActions(["setCurrentProductsArray"]),
+    setPage(currentPage) {
+      this.page = currentPage
+      window.scrollTo(0, 0)
+    },
+    setSettings() {
+      if (window.innerWidth > 1239) {
+        this.countCardsPerPage = 9
+      } else if (window.innerWidth <= 1239 && window.innerWidth > 768) {
+        this.countCardsPerPage = 6
+      } else if (window.innerWidth <= 768) {
+        this.countCardsPerPage = 6
+      }
+    },
     closeFiltersWindow(value) {
       console.log(value)
     },

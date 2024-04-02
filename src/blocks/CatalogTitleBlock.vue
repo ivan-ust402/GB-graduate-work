@@ -1,7 +1,9 @@
 <template>
   <div class="title-box">
     <h4 class="title-box__cards-title">
-      <p class="title-box__test" v-for="value of titleValue">{{ value }}</p>
+      <p class="title-box__test" v-for="value in titleValue">
+        {{ value }}
+      </p>
     </h4>
     <div class="title-box__cards-right-display">
       <p class="title-box__showing-cards">Showing 1-10 of 100 Products</p>
@@ -17,10 +19,10 @@
 export default {
   props: {
     titleValue: {
-      type: Array,
-      default: () => ['Loremka']
-    }
-  }
+      type: Object,
+      default: () => {},
+    },
+  },
 }
 </script>
 
