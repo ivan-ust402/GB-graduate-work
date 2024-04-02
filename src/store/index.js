@@ -2,6 +2,7 @@ import { createStore } from "vuex"
 import dropmenuStore from "./modules/dropmenu-store"
 import burgermenuStore from "./modules/burgermenu-store"
 import cartStore from "./modules/cart-store"
+import catalogStore from "./modules/catalog-store"
 
 export default createStore({
   state: {
@@ -401,18 +402,23 @@ export default createStore({
         dressStyle: { id: 0, name: "Casual" },
         gender: { id: 0, name: "man" },
         sizesInfo: [
-          {size: {id: 0, name: "XX-Small", shortName: "xxs",}, amount: "0",},
-          {size: {id: 1, name: "X-Small", shortName: "xs",}, amount: "0",},
-          {size: {id: 2, name: "Small", shortName: "s",}, amount: "2",},
-          {size: {id: 3, name: "Medium", shortName: "m",}, amount: "1",},
-          {size: {id: 4, name: "Large", shortName: "l",}, amount: "4",},
-          {size: {id: 5, name: "X-Large", shortName: "xxs",}, amount: "4",},
-          {size: {id: 6, name: "XX-Large", shortName: "xxl",}, amount: "0",},
-          {size: {id: 7, name: "3X-Large", shortName: "xxxl",}, amount: "0",},
-          {size: {id: 8, name: "4X-Large", shortName: "xxxxl",}, amount: "0",},
+          { size: { id: 0, name: "XX-Small", shortName: "xxs" }, amount: "0" },
+          { size: { id: 1, name: "X-Small", shortName: "xs" }, amount: "0" },
+          { size: { id: 2, name: "Small", shortName: "s" }, amount: "2" },
+          { size: { id: 3, name: "Medium", shortName: "m" }, amount: "1" },
+          { size: { id: 4, name: "Large", shortName: "l" }, amount: "4" },
+          { size: { id: 5, name: "X-Large", shortName: "xxs" }, amount: "4" },
+          { size: { id: 6, name: "XX-Large", shortName: "xxl" }, amount: "0" },
+          { size: { id: 7, name: "3X-Large", shortName: "xxxl" }, amount: "0" },
+          {
+            size: { id: 8, name: "4X-Large", shortName: "xxxxl" },
+            amount: "0",
+          },
         ],
-        color: {id: 1, name: "grey", code: "#4D4A52",},
-        allColors: [{productId: 0, color: {id: 1, name: "grey", code: "#4D4A52",},},],
+        color: { id: 1, name: "grey", code: "#4D4A52" },
+        allColors: [
+          { productId: 0, color: { id: 1, name: "grey", code: "#4D4A52" } },
+        ],
         added: "2023-02-26T12:30:00.000-05:00",
         newArrivals: false,
         topSelling: false,
@@ -420,8 +426,13 @@ export default createStore({
         images: ["0/slider-0.jpg", "0/slider-1.jpg", "0/slider-2.jpg"],
         icons: ["0/icon-0.jpg", "0/icon-1.jpg", "0/icon-2.jpg"],
         availability: "true",
-        shortDescription:"Men's banana jeans, like classic ones, are a basic item in any man's wardrobe.",
-        details: {description: "Men's banana jeans, like classic ones, are a basic item in any man's wardrobe. The trousers are wide, slightly tapered at the bottom, it is possible to roll up the bottom of the legs. The jeans are NOT insulated, NOT with elastic, NOT with laces, the model has a zipper and a button on the front, and there are belt loops on the waistband. There are comfortable deep welt pockets at the front and patch pockets at the back. A high rise, unlike low or mid rise pants, is versatile and will look like stylish pants in any situation. Straight-fit trousers are made of 100% cotton. Standard denim pants are suitable for men, boys, youth, boys and teenagers of any shape and height.", composition: ["cotton 90%", "elastane 10%"],},
+        shortDescription:
+          "Men's banana jeans, like classic ones, are a basic item in any man's wardrobe.",
+        details: {
+          description:
+            "Men's banana jeans, like classic ones, are a basic item in any man's wardrobe. The trousers are wide, slightly tapered at the bottom, it is possible to roll up the bottom of the legs. The jeans are NOT insulated, NOT with elastic, NOT with laces, the model has a zipper and a button on the front, and there are belt loops on the waistband. There are comfortable deep welt pockets at the front and patch pockets at the back. A high rise, unlike low or mid rise pants, is versatile and will look like stylish pants in any situation. Straight-fit trousers are made of 100% cotton. Standard denim pants are suitable for men, boys, youth, boys and teenagers of any shape and height.",
+          composition: ["cotton 90%", "elastane 10%"],
+        },
       },
       {
         id: "1",
@@ -4119,38 +4130,65 @@ export default createStore({
         return batch
       }
     },
-    getProductByQuery: (state) => (query) => {
-      const { gender, type, color, size, style, priceMin, priceMax, show } =
-        query
-      console.log(gender, type, color, size, style, priceMin, priceMax, show)
+    getProductByQuery:
+      (state) =>
+      (query, sort = {}) => {
+        const { gender, type, color, size, style, priceMin, priceMax, show } =
+          query
 
-      return state.products.filter((product) => {
-        return (
-          (!show || product) &&
-          (!gender ||
-            product.gender.name.split("")[0] === gender.split("")[0]) &&
-          (!type || product.type.name.toLowerCase() === type) &&
-          (!color || product.color.name.toLowerCase() === color) &&
-          (!size ||
-            product.sizesInfo.find(
-              (sizeInfo) => sizeInfo.size.name === size && sizeInfo.amount > 0
-            )) &&
-          (!style || product.dressStyle.name.toLowerCase() === style) &&
-          (!priceMin ||
-            !priceMax ||
-            (Number(product.price) > priceMin &&
-              Number(product.price) < priceMin))
-        )
-      })
-    },
+        // Фильтрация продуктов по параметрам query запроса
+        const targetArray = state.products.filter((product) => {
+          return (
+            (!show || product) &&
+            (!gender ||
+              product.gender.name.split("")[0] === gender.split("")[0]) &&
+            (!type || product.type.name.toLowerCase() === type) &&
+            (!color || product.color.name.toLowerCase() === color) &&
+            (!size ||
+              product.sizesInfo.find(
+                (sizeInfo) => sizeInfo.size.name === size && sizeInfo.amount > 0
+              )) &&
+            (!style || product.dressStyle.name.toLowerCase() === style) &&
+            (!priceMin ||
+              !priceMax ||
+              (Number(product.price) > priceMin &&
+                Number(product.price) < priceMin))
+          )
+        })
+
+        // Сортировка продуктов по условию
+        if (Object.keys(sort).length !== 0) {
+          if (sort.field === "price") {
+            targetArray.sort((a, b) =>
+              sort.order === "asc"
+                ? (a.price -
+                  Math.round(((a.price * a.discount) / 100) * 100) / 100) -
+                  (b.price -
+                  Math.round(((b.price * b.discount) / 100) * 100) / 100)
+                : (b.price -
+                  Math.round(((b.price * b.discount) / 100) * 100) / 100) -
+                  (a.price -
+                    Math.round(((a.price * a.discount) / 100) * 100) / 100)
+            )
+          }
+          if (sort.field === "rating") {
+            targetArray.sort((a, b) =>
+              sort.order === "asc"
+                ? a.grade - b.grade
+                : b.grade - a.grade
+            )
+          }
+        }
+        return targetArray;
+      },
   },
-  mutations: {
-  },
+  mutations: {},
   actions: {
   },
   modules: {
     dropmenuStore,
     burgermenuStore,
     cartStore,
+    catalogStore,
   },
 })

@@ -53,15 +53,49 @@ export default {
 
 <style lang="scss" scoped>
 .pagination-btn {
+  box-sizing: border-box;
   display: flex;
-  width: 110px;
+  // width: 110px;
+  height: 36px;
   border-radius: 8px;
   padding: 8px 14px;
   justify-content: center;
-  align-items: center;
   gap: 8px;
   border: 1px solid #e8e8e8;
   background: #fff;
   text-transform: capitalize;
+  color: #121212;
+  font-family: "satoshimedium";
+  font-size: 14px;
+  line-height: 20px;
+  transition: all 0.3s ease-in-out;
+  & svg {
+    width: 20px;
+    height: 20px;
+    align-self: center;
+  }
+  @media (hover: hover) {
+    &:hover {
+      border: 1px solid #000;
+    }
+  }
+  @media (hover: none) {
+    &_active {
+      border: 1px solid #000;
+    }
+  }
+}
+@media (max-width: 1239px) {
+  .pagination-btn {
+    // width: 90px;
+    height: 38px;
+    font-family: "satoshiregular";
+    font-size: 12px;
+    line-height: 22px;
+    & svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
 }
 </style>

@@ -172,6 +172,7 @@ export default {
   box-sizing: border-box;
   display: flex;
   width: 295px;
+  height: 408px;
   flex-direction: column;
   position: relative;
   transition: all 0.3s ease-in;
