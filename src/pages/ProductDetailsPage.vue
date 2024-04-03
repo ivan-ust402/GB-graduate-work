@@ -91,9 +91,10 @@ import SetOfColorButtons from "@/components/SetOfColorButtons.vue"
 import SetOfSizeButtons from "@/components/SetOfSizeButtons.vue"
 import SliderProductDetailsComponent from "@/components/SliderProductDetailsComponent.vue"
 import { mapActions, mapGetters } from "vuex"
-import { useHead } from '@unhead/vue'
+import { useHead } from "@unhead/vue"
 
 export default {
+  // Решить проблему с отображением актуальных размеров продукта
   components: {
     NavigationBreadcrumbsComponent,
     SliderProductDetailsComponent,
@@ -108,10 +109,12 @@ export default {
   setup() {
     useHead({
       title: "Details",
-      meta: [{
-        name: 'Product details Page',
-        content: 'There is a shop product details page'
-      }]
+      meta: [
+        {
+          name: "Product details Page",
+          content: "There is a shop product details page",
+        },
+      ],
     })
   },
   data() {
@@ -170,7 +173,8 @@ export default {
     ...mapActions(["addToCart", "decreaseProductQuantity"]),
     setActualStateForProductDetails() {
       this.product = this.changeProductForProductDetailPage(
-        this.$route.params.id, this.$route.query.sizeId
+        this.$route.params.id,
+        this.$route.query.sizeId
       )
       this.isInCart = this.product.inCart
       this.choosenSize = this.product.choosenSize
@@ -255,7 +259,7 @@ export default {
       // } else {
       //   return this.availableSizes[0]
       // }
-    
+
       return this.availableSizes.find((size) => size.size.id === Number(sizeId))
     },
     findAvailableSizes() {
