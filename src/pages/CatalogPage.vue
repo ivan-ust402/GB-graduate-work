@@ -34,7 +34,6 @@ import { useHead } from "@unhead/vue"
 import DisplayFiltersBlock from "@/blocks/DisplayFiltersBlock.vue"
 import CatalogTitleBlock from "@/blocks/CatalogTitleBlock.vue"
 import PaginationComponent from "@/components/PaginationComponent.vue"
-import { useRouter } from 'vue-router';
 
 export default {
   components: {
@@ -98,10 +97,7 @@ export default {
   methods: {
     ...mapActions(["setCurrentProductsArray"]),
     setPage(currentPage) {
-      const router = useRouter();
-      console.log(router);
       this.page = currentPage
-      window.scrollTo(0, 0)
     },
     setSettings() {
       if (window.innerWidth > 1239) {

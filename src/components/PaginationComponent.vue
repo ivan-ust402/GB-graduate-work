@@ -1,18 +1,31 @@
 <template>
   <div class="pagination" v-if="calculateCountOfPages > 1">
+    <!-- <router-link
+      @click.prevent="previousPage"
+      :to="{
+        name: 'CatalogPage',
+        params: { page: currentPage },
+        query: { ...paramQuery },
+      }"
+    >
+      <ButtonPagination
+        class="pagination__button"
+        text="Previous"
+        arrow="left"
+      />
+    </router-link> -->
     <ButtonPagination
+      @click.prevent="previousPage"
       class="pagination__button"
       text="Previous"
       arrow="left"
-      @click.prevent="previousPage"
     />
-
     <div class="pagination__items">
       <ButtonPaginationItem
-        v-for="(page, index) in getPagesArray"
-        :key="index"
         :value="page"
         :isActive="page === numberOfPage"
+        v-for="(page, index) in getPagesArray"
+        :key="index"
         @click.prevent="changePage(page)"
       />
     </div>
@@ -42,14 +55,13 @@
       arrow="right"
       @click.prevent="nextPage"
     />
-    {{ }}
   </div>
 </template>
 
 <script>
 import ButtonPaginationItem from "./ButtonPaginationItem.vue"
 import ButtonPagination from "./ButtonPagination.vue"
-
+import router from "@/router"
 
 export default {
   components: {
@@ -73,14 +85,17 @@ export default {
   emits: ["page-changed"],
   data() {
     return {
-      currentPage: 1,
       pagesArray: [],
       leftPagesArray: [],
       rightPagesArray: [],
+      paramPage: 1,
+      paramQuery: {show: 'all'},
     }
   },
   mounted() {
     // this.setPages()
+    this.paramPage = this.$route.params.page
+    this.paramQuery = this.$route.query
   },
   computed: {
     getPagesArray() {
@@ -97,65 +112,64 @@ export default {
       return Math.ceil(this.total / this.quantityElPerPage)
     },
 
+    // getPages() {
+    //   return this.pagesArray
+    // },
+    // getLeftPagesArray() {
+    //   let leftPages = []
 
-    getPages() {
-      return this.pagesArray
-    },
-    getLeftPagesArray() {
-      let leftPages = []
-
-      leftPages.push(this.getPages[0])
-      leftPages.push(this.getPages[1])
-      leftPages.push(this.getPages[2])
-      return leftPages
-    },
-    getLeftPages() {
-      return this.leftPagesArray
-    },
-    getRightPagesArray() {
-      let rightPages = []
-      rightPages.push(this.getPages[this.getPages.length - 3])
-      rightPages.push(this.getPages[this.getPages.length - 2])
-      rightPages.push(this.getPages[this.getPages.length - 1])
-      return rightPages
-    },
-    getRightPages() {
-      return this.rigthPagesArray
-    },
-    getCurrentPage() {
-      return this.currentPage
-    },
+    //   leftPages.push(this.getPages[0])
+    //   leftPages.push(this.getPages[1])
+    //   leftPages.push(this.getPages[2])
+    //   return leftPages
+    // },
+    // getLeftPages() {
+    //   return this.leftPagesArray
+    // },
+    // getRightPagesArray() {
+    //   let rightPages = []
+    //   rightPages.push(this.getPages[this.getPages.length - 3])
+    //   rightPages.push(this.getPages[this.getPages.length - 2])
+    //   rightPages.push(this.getPages[this.getPages.length - 1])
+    //   return rightPages
+    // },
+    // getRightPages() {
+    //   return this.rigthPagesArray
+    // },
   },
   methods: {
     changePage(pageNumber) {
-      this.currentPage = pageNumber
-      this.$emit("page-changed", pageNumber)
-
+      if (this.numberOfPage !== pageNumber) {
+        router.push({
+          name: "CatalogPage",
+          params: { page: pageNumber },
+          query: { ...this.paramQuery },
+        })
+        this.$emit("page-changed", pageNumber)
+      }
     },
     nextPage() {
-      this.currentPage = this.numberOfPage
-      if (this.currentPage < this.getPagesArray.length) {
-        this.currentPage += 1
-        this.changePage(this.currentPage)
+      if (this.numberOfPage < this.getPagesArray.length) {
+        let page = this.numberOfPage
+        page += 1
+        this.changePage(page)
       }
     },
     previousPage() {
-      this.currentPage = this.numberOfPage
-      if (this.currentPage > 1) {
-        this.currentPage -= 1
-        this.changePage(this.currentPage)
+      if (this.numberOfPage > 1) {
+        let page = this.numberOfPage
+        page -= 1
+        this.changePage(page)
       }
     },
 
-
-
-    setPages() {
-      this.pagesArray = this.getPagesArray
-      if (this.pagesArray.length > 7) {
-        this.leftPagesArray = this.getLeftPagesArray
-        this.rightPagesArray = this.getRightPagesArray
-      }
-    },
+    // setPages() {
+    //   this.pagesArray = this.getPagesArray
+    //   if (this.pagesArray.length > 7) {
+    //     this.leftPagesArray = this.getLeftPagesArray
+    //     this.rightPagesArray = this.getRightPagesArray
+    //   }
+    // },
   },
 }
 </script>
