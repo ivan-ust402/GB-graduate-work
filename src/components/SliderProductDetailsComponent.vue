@@ -195,27 +195,38 @@ export default {
   //   const scrollContainer = ref(null)
   // },
   mounted() {
-    const updateOffsetParams = () => {
-      if (window.innerWidth > 1239) {
-        this.axis = "Y"
-      } else if (window.innerWidth <= 1239 && window.innerWidth > 768) {
-        this.axis = "X"
-      } else if (window.innerWidth <= 768) {
-        this.axis = "X"
-      }
-      this.activeDot = 0
-
-    }
-
-    const updateOffsetParamsAndScrollToActiveIcon = () => {
-      updateOffsetParams()
-      // this.scrollToActiveIcon()
-    }
-    updateOffsetParams()
-
-    window.addEventListener("resize", updateOffsetParamsAndScrollToActiveIcon)
+    this.updateOffsetParams()
+    window.addEventListener(
+      "resize",
+      this.updateOffsetParamsAndScrollToActiveIcon
+    )
+  },
+  watch: {
+    $route() {
+      this.updateOffsetParamsAndScrollToActiveIcon()
+    },
   },
   methods: {
+    updateOffsetParamsAndScrollToActiveIcon() {
+      this.updateOffsetParams()
+      this.scrollToActiveIcon()
+    },
+    updateOffsetParams() {
+      if (window.innerWidth > 1239) {
+        if (this.axis !== "Y") {
+          this.axis = "Y"
+        }
+      } else if (window.innerWidth <= 1239 && window.innerWidth > 768) {
+        if (this.axis !== "X") {
+          this.axis = "X"
+        }
+      } else if (window.innerWidth <= 768) {
+        if (this.axis !== "X") {
+          this.axis = "X"
+        }
+      }
+      this.activeDot = 0
+    },
     clickIcon(index) {
       this.activeDot = index
       this.scrollToActiveIcon()
