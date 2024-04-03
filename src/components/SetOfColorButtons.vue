@@ -87,13 +87,15 @@ export default {
   &__link {
     border-radius: 50%;
     height: 38px;
+    width: 38px;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 1px;
   }
   &__svg {
-    height: 36px;
-    width: 36px;
+    height: 35px;
+    width: 35px;
   }
 }
 </style>

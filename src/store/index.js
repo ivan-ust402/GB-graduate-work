@@ -4130,9 +4130,7 @@ export default createStore({
         return batch
       }
     },
-    getProductByQuery:
-      (state) =>
-      (query, sort = {}) => {
+    getProductByQuery: (state) => (query, sort = {}) => {
         const { gender, type, color, size, style, priceMin, priceMax, show } =
           query
 
@@ -4180,7 +4178,7 @@ export default createStore({
           }
         }
         return targetArray;
-      },
+    },
   },
   mutations: {},
   actions: {

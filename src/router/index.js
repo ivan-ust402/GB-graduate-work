@@ -7,17 +7,39 @@ import CatalogPage from "@/pages/CatalogPage"
 import CartPage from "@/pages/CartPage"
 
 const routes = [
-  { path: "/", name: "Homepage", component: HomePage, meta: { breadcrumb: "Home", },},
-  { path: "/login", name: "LoginPage", component: LoginPage, },
-  { path: "/register", name: "RegistrationPage", component: RegistrationPage,},
-  { path: "/product-details/:id(\\d+)", name: "ProductDetailsPage", component: ProductDetailsPage, meta: {breadcrumb: "Product details",},},
-  { path: "/catalog/:page(\\d+)", name: "CatalogPage", component: CatalogPage, meta: { breadcrumb: "Catalog",},},
-  { path: "/cart", name: "CartPage", component: CartPage, meta: { breadcrumb: "Cart",},},
-  { path: "/404", name: "NotfoundPage", 
-    // Динамический путь (подгрузка страницы с сервера) 
+  {
+    path: "/",
+    name: "Homepage",
+    component: HomePage,
+    meta: { breadcrumb: "Home" },
+  },
+  { path: "/login", name: "LoginPage", component: LoginPage },
+  { path: "/register", name: "RegistrationPage", component: RegistrationPage },
+  {
+    path: "/product-details/:id(\\d+)",
+    name: "ProductDetailsPage",
+    component: ProductDetailsPage,
+    meta: { breadcrumb: "Product details" },
+  },
+  {
+    path: "/catalog/:page(\\d+)",
+    name: "CatalogPage",
+    component: CatalogPage,
+    meta: { breadcrumb: "Catalog" },
+  },
+  {
+    path: "/cart",
+    name: "CartPage",
+    component: CartPage,
+    meta: { breadcrumb: "Cart" },
+  },
+  {
+    path: "/404",
+    name: "NotfoundPage",
+    // Динамический путь (подгрузка страницы с сервера)
     component: () => import("@/pages/ErrorPage"),
   },
-  { path: "/:CatchAll(.*)", redirect: "/404",},
+  { path: "/:CatchAll(.*)", redirect: "/404" },
 ]
 
 const router = createRouter({
@@ -37,12 +59,11 @@ const router = createRouter({
 
 export default router
 
-
-  // {
-  //   path: '/about',
-  //   name: 'about',
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  // }
+// {
+//   path: '/about',
+//   name: 'about',
+//   // route level code-splitting
+//   // this generates a separate chunk (about.[hash].js) for this route
+//   // which is lazy-loaded when the route is visited.
+//   component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+// }

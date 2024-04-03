@@ -3,7 +3,7 @@
     href="#"
     class="topOfPageButton"
     v-if="showScrollToTopBtn"
-    @click="scrollToTop"
+    @click.prevent="scrollToTop"
     id="scrollToTopBtn"
   >
     <svg

@@ -172,7 +172,7 @@ export default {
   box-sizing: border-box;
   display: flex;
   width: 295px;
-  height: 408px;
+  min-height: 408px;
   flex-direction: column;
   position: relative;
   transition: all 0.3s ease-in;
@@ -243,6 +243,7 @@ export default {
 @media (max-width: 1239px) {
   .card {
     width: 224px;
+    min-height: 319px;
     &__content {
       gap: 12px;
     }
@@ -272,7 +273,7 @@ export default {
 @media (max-width: 768px) {
   .card {
     width: 173px;
-    height: 309px;
+    min-height: 297px;
     &__img-box {
       border-radius: 12px;
     }
