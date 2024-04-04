@@ -30,7 +30,6 @@
               <h6 class="param__title">Select Colors</h6>
               <SetOfColorButtons
                 class="param__content"
-                :product="product"
                 :choosenColor="product.color"
                 :colors="product.allColors"
                 @getSelectedColor="setSelectedColor"
@@ -94,7 +93,7 @@ import { mapActions, mapGetters } from "vuex"
 import { useHead } from "@unhead/vue"
 
 export default {
-  // Решить проблему с отображением актуальных размеров продукта
+  // Решить проблему с отображением актуальных размеров
   components: {
     NavigationBreadcrumbsComponent,
     SliderProductDetailsComponent,
@@ -128,17 +127,7 @@ export default {
     }
   },
   mounted() {
-    // this.product = this.getProductById(this.$route.params.id)
-    // this.product = this.changeProductForProductDetailPage(this.$route.params.id)
-    this.product = this.changeProductForProductDetailPage(
-      this.$route.params.id,
-      this.$route.query.sizeId
-    )
-    this.availableSizes = this.findAvailableSizes()
-    this.choosenSize = this.setInitialSize(this.$route.query.sizeId)
-    this.choosenColor = this.setInitialColor()
-    this.choosenQuantity = this.setInitialQuantity()
-    this.isInCart = this.setInitialIsInCart()
+    this.setActualStateForProductDetails()
   },
   computed: {
     ...mapGetters([
@@ -176,9 +165,21 @@ export default {
         this.$route.params.id,
         this.$route.query.sizeId
       )
-      this.isInCart = this.product.inCart
-      this.choosenSize = this.product.choosenSize
-      this.choosenQuantity = this.product.quantity
+      this.availableSizes = this.findAvailableSizes()
+
+      // Этот блок на случай, если в query запросе будет использован несуществующий в объекте sizeId, в случае, если это произойдет, то будет установлен размер из первых доступных, в будущем нужно отрефакторить данный код, чтобы в случае не корректности query запроса происходил редирект на NotFoundPage
+      let findQuerySize = this.availableSizes.find(size => Number(size.size.id) === Number(this.$route.query.sizeId) && Number(size.amount) !== 0)
+      if (findQuerySize) {
+        this.choosenSize = this.getInitialSize(this.$route.query.sizeId)
+      }
+      else {
+        const defaultSize = this.product.sizesInfo.find(sizeInfo => Number(sizeInfo.amount) > 0).size.id
+        this.choosenSize = this.getInitialSize(defaultSize)
+      }
+      
+      this.choosenColor = this.getInitialColor()
+      this.choosenQuantity = this.getInitialQuantity()
+      this.isInCart = this.getInitialIsInCart()
     },
     increaseQuantityInCart(product) {
       const sendProduct = {
@@ -188,7 +189,6 @@ export default {
       }
       this.addToCart(sendProduct)
       this.setSelectedSize(this.getChoosenSize.size.id)
-      // this.setActualStateForProductDetails()
     },
     decreaseQuantityInCart(product) {
       const sendProduct = {
@@ -198,7 +198,6 @@ export default {
       }
       this.decreaseProductQuantity(sendProduct)
       this.setSelectedSize(this.getChoosenSize.size.id)
-      // this.setActualStateForProductDetails()
     },
     addProduct(product) {
       this.isInCart = true
@@ -223,13 +222,13 @@ export default {
         this.choosenQuantity = 99
       }
     },
-    setInitialIsInCart() {
+    getInitialIsInCart() {
       return this.product.inCart
     },
-    setInitialQuantity() {
+    getInitialQuantity() {
       return this.product.quantity
     },
-    setInitialColor() {
+    getInitialColor() {
       return this.product.color
     },
     setSelectedColor(color) {
@@ -251,15 +250,8 @@ export default {
         this.choosenQuantity = 1
       }
       this.choosenSize = changedSize
-      // this.$router.push({query: {sizeId: id}})
     },
-    setInitialSize(sizeId) {
-      // if (typeof sizeId === "string") {
-      //   this.setSelectedSize(Number(sizeId))
-      // } else {
-      //   return this.availableSizes[0]
-      // }
-
+    getInitialSize(sizeId) {
       return this.availableSizes.find((size) => size.size.id === Number(sizeId))
     },
     findAvailableSizes() {
@@ -278,32 +270,9 @@ export default {
         )
         const inCart = false
         const quantity = 1
-        // const quantity = this.getChoosenQuantity
         return { ...newProduct, choosenSize: defaultSize, inCart, quantity }
       }
     },
-    // changeProductForProductDetailPage(id) {
-    //   const productInCart = this.getCartProductById(id)
-    //   const tempProductInCart = {
-    //     ...productInCart,
-    //     choosenSize: this.choosenSize,
-    //     quantity: this.choosenQuantity,
-    //     inCart: true,
-    //   }
-
-    //   const productInCartEqualsSize =
-    //     this.getCartProductByIdAndSize(tempProductInCart)
-    //   if (productInCartEqualsSize) {
-    //     const cartProduct = { ...productInCartEqualsSize }
-    //     return cartProduct
-    //   } else {
-    //     const newProduct = this.getProductById(id)
-    //     const defaultSize = this.getChoosenSize
-    //     const inCart = false
-    //     const quantity = this.getChoosenQuantity
-    //     return { ...newProduct, choosenSize: defaultSize, inCart, quantity }
-    //   }
-    // },
   },
 }
 </script>

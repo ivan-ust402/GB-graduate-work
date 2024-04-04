@@ -1,19 +1,10 @@
 <template>
   <div class="colors">
-    <router-link
+    <a
       class="colors__link"
       v-for="(color, index) in colors"
       :key="index"
-      :to="{
-        name: 'ProductDetailsPage',
-        params: {
-          id: color.productId,
-        },
-        query: {
-          sizeId: product.sizesInfo.find(sizeInfo => Number(sizeInfo.amount) > 0).size.id
-        }
-      }"
-      @click.prevent="clickButton(color.color)"
+      @click.prevent="clickButton(color)"
     >
       <svg
         class="colors__svg"
@@ -30,12 +21,14 @@
           fill="white"
         />
       </svg>
-    </router-link>
+    </a>
   </div>
 </template>
 
 <script>
+import router from "@/router"
 import ButtonCircle from "./ButtonCircle.vue"
+import { mapGetters } from "vuex"
 
 export default {
   emits: ["getSelectedColor"],
@@ -51,27 +44,28 @@ export default {
       type: Array,
       default: () => [],
     },
-    product: {
-      type: Object,
-      default: () => {
-        return {
-          sizeInfo: {
-            size: {
-              id: 0
-            },
-            amount: 0 
-          }
-        }
-      }
-    }
+  },
+  computed: {
+    ...mapGetters(["getProductById"]),
   },
   methods: {
     clickButton(color) {
-      this.$emit('getSelectedColor', color)
+      if (Number(this.choosenColor.id) !== Number(color.color.id)) {
+        this.$emit("getSelectedColor", color.color)
+        const changeProduct = this.getProductById(color.productId)
+        router.push({
+          name: "ProductDetailsPage",
+          params: {
+            id: color.productId,
+          },
+          query: {
+            sizeId: changeProduct.sizesInfo.find(
+              (sizeInfo) => Number(sizeInfo.amount) > 0
+            ).size.id,
+          },
+        })
+      }
     },
-    notClick() {
-      console.log("Not click!!!")
-    }
   },
 }
 </script>
