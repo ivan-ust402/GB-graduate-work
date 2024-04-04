@@ -7240,16 +7240,8 @@ export default createStore({
         newArrivals: true,
         topSelling: true,
         image: "200/card.jpg",
-        images: [
-          "200/slider-0.jpg",
-          "200/slider-1.jpg",
-          "200/slider-2.jpg",
-        ],
-        icons: [
-          "200/icon-0.jpg",
-          "200/icon-1.jpg",
-          "200/icon-2.jpg",
-        ],
+        images: ["200/slider-0.jpg", "200/slider-1.jpg", "200/slider-2.jpg"],
+        icons: ["200/icon-0.jpg", "200/icon-1.jpg", "200/icon-2.jpg"],
         availability: "true",
         shortDescription:
           "MAXADORRE straight midi denim skirt with a slit at the back Spring - Summer trend 2023, presented in plain blue, black and gray.",
@@ -7324,16 +7316,8 @@ export default createStore({
         newArrivals: true,
         topSelling: true,
         image: "201/card.jpg",
-        images: [
-          "201/slider-0.jpg",
-          "201/slider-1.jpg",
-          "201/slider-2.jpg",
-        ],
-        icons: [
-          "201/icon-0.jpg",
-          "201/icon-1.jpg",
-          "201/icon-2.jpg",
-        ],
+        images: ["201/slider-0.jpg", "201/slider-1.jpg", "201/slider-2.jpg"],
+        icons: ["201/icon-0.jpg", "201/icon-1.jpg", "201/icon-2.jpg"],
         availability: "true",
         shortDescription:
           "MAXADORRE straight midi denim skirt with a slit at the back Spring - Summer trend 2023, presented in plain blue, black and gray.",
@@ -7408,16 +7392,8 @@ export default createStore({
         newArrivals: true,
         topSelling: true,
         image: "202/card.jpg",
-        images: [
-          "202/slider-0.jpg",
-          "202/slider-1.jpg",
-          "202/slider-2.jpg",
-        ],
-        icons: [
-          "202/icon-0.jpg",
-          "202/icon-1.jpg",
-          "202/icon-2.jpg",
-        ],
+        images: ["202/slider-0.jpg", "202/slider-1.jpg", "202/slider-2.jpg"],
+        icons: ["202/icon-0.jpg", "202/icon-1.jpg", "202/icon-2.jpg"],
         availability: "true",
         shortDescription:
           "MAXADORRE straight midi denim skirt with a slit at the back Spring - Summer trend 2023, presented in plain blue, black and gray.",
@@ -7796,16 +7772,8 @@ export default createStore({
         newArrivals: false,
         topSelling: true,
         image: "207/card.jpg",
-        images: [
-          "207/slider-0.jpg",
-          "207/slider-1.jpg",
-          "207/slider-2.jpg",
-        ],
-        icons: [
-          "207/icon-0.jpg",
-          "207/icon-1.jpg",
-          "207/icon-2.jpg",
-        ],
+        images: ["207/slider-0.jpg", "207/slider-1.jpg", "207/slider-2.jpg"],
+        icons: ["207/icon-0.jpg", "207/icon-1.jpg", "207/icon-2.jpg"],
         availability: "true",
         shortDescription:
           "Sensual Chic is a Russian brand that, with great love, produces beautiful women's clothing in which every woman will feel sensual and chic.",
@@ -7819,7 +7787,7 @@ export default createStore({
         id: "208",
         sku: "964537696",
         title: "Sensual Chic Dress",
-        price: 19.10,
+        price: 19.1,
         currency: "USD",
         currencyCode: "&#36;",
         grade: 5,
@@ -7880,16 +7848,8 @@ export default createStore({
         newArrivals: false,
         topSelling: true,
         image: "208/card.jpg",
-        images: [
-          "208/slider-0.jpg",
-          "208/slider-1.jpg",
-          "208/slider-2.jpg",
-        ],
-        icons: [
-          "208/icon-0.jpg",
-          "208/icon-1.jpg",
-          "208/icon-2.jpg",
-        ],
+        images: ["208/slider-0.jpg", "208/slider-1.jpg", "208/slider-2.jpg"],
+        icons: ["208/icon-0.jpg", "208/icon-1.jpg", "208/icon-2.jpg"],
         availability: "true",
         shortDescription:
           "Sensual Chic is a Russian brand that, with great love, produces beautiful women's clothing in which every woman will feel sensual and chic.",
@@ -7964,16 +7924,8 @@ export default createStore({
         newArrivals: false,
         topSelling: true,
         image: "209/card.jpg",
-        images: [
-          "209/slider-0.jpg",
-          "209/slider-1.jpg",
-          "209/slider-2.jpg",
-        ],
-        icons: [
-          "209/icon-0.jpg",
-          "209/icon-1.jpg",
-          "209/icon-2.jpg",
-        ],
+        images: ["209/slider-0.jpg", "209/slider-1.jpg", "209/slider-2.jpg"],
+        icons: ["209/icon-0.jpg", "209/icon-1.jpg", "209/icon-2.jpg"],
         availability: "true",
         shortDescription:
           "Sensual Chic is a Russian brand that, with great love, produces beautiful women's clothing in which every woman will feel sensual and chic.",
@@ -8052,7 +8004,7 @@ export default createStore({
           "210/icon-1.jpg",
           "210/icon-2.jpg",
           "210/icon-3.jpg",
-          "210/icon-4.jpg"
+          "210/icon-4.jpg",
         ],
         availability: "true",
         shortDescription:
@@ -8132,7 +8084,7 @@ export default createStore({
           "211/icon-1.jpg",
           "211/icon-2.jpg",
           "211/icon-3.jpg",
-          "211/icon-4.jpg"
+          "211/icon-4.jpg",
         ],
         availability: "true",
         shortDescription:
@@ -8204,7 +8156,7 @@ export default createStore({
           "212/icon-1.jpg",
           "212/icon-2.jpg",
           "212/icon-3.jpg",
-          "212/icon-4.jpg"
+          "212/icon-4.jpg",
         ],
         availability: "true",
         shortDescription:
@@ -8347,11 +8299,9 @@ export default createStore({
           "214/icon-3.jpg",
         ],
         availability: "true",
-        shortDescription:
-          "Bona Fide is not just clothes, it is a way of life.",
+        shortDescription: "Bona Fide is not just clothes, it is a way of life.",
         details: {
-          description:
-            "Bona Fide is not just clothes, it is a way of life.",
+          description: "Bona Fide is not just clothes, it is a way of life.",
           composition: ["polyester 92%", "elastane 8%"],
         },
       },
@@ -8807,7 +8757,7 @@ export default createStore({
         dressStyle: { id: 2, name: "Party" },
         gender: { id: 1, name: "woman" },
         sizesInfo: [
-          { size: { id: 0, name: "XX-Small", shortName: "xxs" }, amount: "0" },
+          { size: { id: 0, name: "XX-Small", shortName: "xxs" }, amount: "10" },
           { size: { id: 1, name: "X-Small", shortName: "xs" }, amount: "10" },
           { size: { id: 2, name: "Small", shortName: "s" }, amount: "2" },
           { size: { id: 3, name: "Medium", shortName: "m" }, amount: "1" },
@@ -9383,7 +9333,7 @@ export default createStore({
   },
   getters: {
     getProductById: (state) => (id) => {
-      return state.products.find((product) => product.id === id)
+      return state.products.find((product) => Number(product.id) === Number(id))
     },
     getGenders(state) {
       return state.genders
