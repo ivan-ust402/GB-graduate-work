@@ -191,9 +191,6 @@ export default {
       axis: "Y",
     }
   },
-  // setup() {
-  //   const scrollContainer = ref(null)
-  // },
   mounted() {
     this.updateOffsetParams()
     window.addEventListener(
@@ -215,17 +212,21 @@ export default {
       if (window.innerWidth > 1239) {
         if (this.axis !== "Y") {
           this.axis = "Y"
+          this.activeDot = 0
         }
       } else if (window.innerWidth <= 1239 && window.innerWidth > 768) {
         if (this.axis !== "X") {
           this.axis = "X"
+          this.activeDot = 0
         }
       } else if (window.innerWidth <= 768) {
+        if(this.activeDot !== 0) {
+          this.activeDot = 0
+        }
         if (this.axis !== "X") {
           this.axis = "X"
         }
       }
-      this.activeDot = 0
     },
     clickIcon(index) {
       this.activeDot = index
@@ -264,12 +265,14 @@ export default {
 
 <style lang="scss" scoped>
 .slider {
+  box-sizing: border-box;
   display: flex;
   flex-direction: row;
   gap: 14px;
   align-items: flex-start;
   position: relative;
   &__dots {
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     gap: 14px;
@@ -283,6 +286,7 @@ export default {
   }
   &__dot-box {
     cursor: pointer;
+    box-sizing: border-box;
     box-sizing: border-box;
     position: relative;
     width: 152px;
@@ -323,12 +327,10 @@ export default {
     }
   }
   &__dot {
+    box-sizing: border-box;
     width: 152px;
     height: 167px;
     flex-shrink: 0;
-    // border-radius: 20px;
-    // border: 1px solid transparent;
-    // background: lightgray 50% / cover no-repeat;
   }
 
   &__slides {
@@ -362,13 +364,6 @@ export default {
     width: 100%;
     height: 100%;
     object-fit: cover;
-
-    // flex-shrink: 0;
-    // width: 444px;
-    // height: 530px;
-    // border-radius: 20px;
-    // border: 1px solid transparent;
-    // background: lightgray 50% / cover no-repeat;
   }
 }
 @media (max-width: 1239px) {
@@ -383,7 +378,7 @@ export default {
       overflow: auto;
     }
     &__dot-box {
-      width: 104px;
+      width: 100px;
       height: 104px;
       &_active {
         border: 1px solid #121212;
