@@ -63,9 +63,10 @@ export default {
 }
 @media (max-width: 768px) {
   .button {
+    box-sizing: border-box;
     display: flex;
-    width: 36px;
-    padding: 12px;
+    width: 33px;
+    padding: 10px;
     justify-content: center;
     align-items: center;
     flex-shrink: 0;

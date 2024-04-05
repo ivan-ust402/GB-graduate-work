@@ -10,32 +10,27 @@
       <ButtonPaginationItem
         v-if="visiblePages[0] > 1"
         :value="1"
-        :isActive="page === numberOfPage"
+        :isActive="1 === numberOfPage"
         @click.prevent="changePage(1)"
       />
+      <span class="pagination__ellipsis" v-if="visiblePages[0] > 1">...</span>
       <ButtonPaginationItem
-        v-if="visiblePages[0] > 1"
-        :value="`...`"
-        :isActive="page === numberOfPage"
-      />
-      <ButtonPaginationItem
+        v-for="(page, index) in visiblePages"
         :value="page"
         :isActive="page === numberOfPage"
-        v-for="(page, index) in visiblePages"
         :key="page"
         @click.prevent="changePage(page)"
       />
-      <ButtonPaginationItem
+      <span
+        class="pagination__ellipsis"
         v-if="visiblePages[visiblePages.length - 1] < calculateCountOfPages - 1"
-        :value="`...`"
-        :isActive="page === numberOfPage"
-        
-      />
+        >...</span
+      >
       <ButtonPaginationItem
-      v-if="visiblePages[visiblePages.length - 1] < calculateCountOfPages"
+        v-if="visiblePages[visiblePages.length - 1] < calculateCountOfPages"
         :value="calculateCountOfPages"
         @click.prevent="changePage(calculateCountOfPages)"
-        :isActive="page === numberOfPage"
+        :isActive="calculateCountOfPages === numberOfPage"
       />
     </div>
     <ButtonPagination
@@ -74,9 +69,6 @@ export default {
   emits: ["page-changed"],
   data() {
     return {
-      pagesArray: [],
-      leftPagesArray: [],
-      rightPagesArray: [],
       paramPage: 1,
       paramQuery: { show: "all" },
     }
@@ -85,17 +77,13 @@ export default {
     this.paramPage = this.$route.params.page
     this.paramQuery = this.$route.query
   },
-  computed: {
-    getPagesArray() {
-      if (this.quantityElPerPage) {
-        const count = this.calculateCountOfPages
-        const tempArray = []
-        for (let index = 0; index < count; index++) {
-          tempArray.push(index + 1)
-        }
-        return tempArray
-      }
+  watch: {
+    $route() {
+      this.paramPage = this.$route.params.page
+      this.paramQuery = this.$route.query
     },
+  },
+  computed: {
     calculateCountOfPages() {
       return Math.ceil(this.total / this.quantityElPerPage)
     },
@@ -131,6 +119,8 @@ export default {
   methods: {
     changePage(pageNumber) {
       if (this.numberOfPage !== pageNumber) {
+        console.log("query", this.paramQuery)
+        console.log("page", this.paramPage)
         router.push({
           name: "CatalogPage",
           params: { page: pageNumber },
@@ -138,14 +128,14 @@ export default {
         })
         this.$emit("page-changed", pageNumber)
       }
-      // if (pageNumber >= 1 && pageNumber <= this.getPagesArray.length) {
-      //   if (pageNumber === 2 || pageNumber === this.getPagesArray.length - 1) {
-      //     this.$forceUpdate()
-      //   }
-      // }
+      if (pageNumber >= 1 && pageNumber <= this.calculateCountOfPages) {
+        if (pageNumber === 2 || pageNumber === this.calculateCountOfPages - 1) {
+          this.$forceUpdate()
+        }
+      }
     },
     nextPage() {
-      if (this.numberOfPage < this.getPagesArray.length) {
+      if (this.numberOfPage < this.calculateCountOfPages) {
         let page = this.numberOfPage
         page += 1
         this.changePage(page)
@@ -172,6 +162,10 @@ export default {
     display: flex;
     flex-direction: row;
     gap: 2px;
+  }
+  &__ellipsis {
+    display: flex;
+    align-items: center;
   }
 }
 
