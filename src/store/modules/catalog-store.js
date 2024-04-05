@@ -14,7 +14,7 @@ export default ({
         const endIndex = startIndex + countCardPerPage;
         const paginatedArray = state.currentProducts.slice(startIndex, endIndex);
         return paginatedArray
-    }
+    },
   },
   mutations: {
     SET_CURRENT_PRODUCTS(state, array) {

@@ -6,21 +6,88 @@
       </p>
     </h4>
     <div class="title-box__cards-right-display">
-      <p class="title-box__showing-cards">Showing 1-10 of 100 Products</p>
+      <p class="title-box__showing-cards">
+        Showing {{ getSerialNumbers[0] }}-{{ getSerialNumbers[1] }} of
+        {{ totalCards }} Products
+      </p>
       <div class="title-box__sort">
         <p class="title-box__sort-label">Sort by:</p>
-        <p class="title-box__sort-select">Most Popular</p>
+        <p class="title-box__sort-select">{{ sortParam.sortName }}</p>
+        <SortMenu @getSortParam="getSortParam" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import SortMenu from "@/components/SortMenu.vue"
+
 export default {
+  components: {
+    SortMenu,
+  },
+  emits: [""],
   props: {
     titleValue: {
       type: Object,
       default: () => {},
+    },
+    totalCards: {
+      type: Number,
+      default: () => 10,
+    },
+    countPerPage: {
+      type: Number,
+      default: () => 9,
+    },
+    currentPage: {
+      type: Number,
+      default: () => 1,
+    },
+    currentQuery: {
+      type: Object,
+      default: () => {},
+    },
+    sortParam: {
+      type: Object,
+      default: () => {
+        return {
+          sortName: "Lowest price",
+          field: "price",
+          order: "asc",
+        }
+      },
+    },
+  },
+  data() {
+    return {
+      sortParam: {
+        sortName: "Lowest price",
+        field: "price",
+        order: "asc",
+      },
+    }
+  },
+  computed: {
+    getSerialNumbers() {
+      if (this.countPerPage !== 0) {
+        const pages = Number(Math.ceil(this.totalCards / this.countPerPage))
+        let startCard = (this.currentPage - 1) * this.countPerPage + 1
+        let endCard = startCard + this.countPerPage - 1
+        if ((this.currentPage === pages && pages !== 0) || pages === 1) {
+          endCard = this.totalCards
+        } else if (pages === 0) {
+          startCard = 0
+          endCard = this.totalCards
+        }
+        return [startCard, endCard]
+      }
+      return [0, 0]
+    },
+  },
+  methods: {
+    getSortParam(param) {
+      this.sortParam = param
     },
   },
 }
@@ -80,5 +147,12 @@ export default {
 @media (max-width: 1239px) {
 }
 @media (max-width: 768px) {
+  .title-box {
+    align-items: flex-end;
+    &__cards-title {
+      flex-direction: column;
+      gap: 2px;
+    }
+  }
 }
 </style>

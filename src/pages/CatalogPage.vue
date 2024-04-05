@@ -5,7 +5,13 @@
       <!-- <DisplayFiltersBlock @closeFiltersMenu="closeFiltersWindow"/> -->
       <div class="catalog__display">
         <div class="catalog__cards-box">
-          <CatalogTitleBlock :titleValue="getQuery" />
+          <CatalogTitleBlock 
+            :titleValue="getQuery" 
+            :totalCards="getTotalCards"
+            :countPerPage="countCardsPerPage"
+            :currentPage="Number(page)"
+            :currentQuery="query"
+          />
           <div class="catalog__cards">
             <CardProductMainComponent
               class="catalog__card"
@@ -21,6 +27,7 @@
           @page-changed="setPage"
         /> -->
         <PaginationComponentForALotOfPages
+          class="catalog__pagination"
           :total="getTotalCards"
           :numberOfPage="getPage"
           :quantityElPerPage="getQuantityElPerPage"
@@ -68,7 +75,7 @@ export default {
       query: {},
       sort: { field: "price", order: "asc" },
       page: 1,
-      countCardsPerPage: 0,
+      countCardsPerPage: 12,
       totalCards: 0,
     }
   },
@@ -77,8 +84,8 @@ export default {
     this.query = this.$route.query
     this.setCurrentProductsArray(this.getProductByQuery(this.query, this.sort))
     this.totalCards = this.getTotalCards
-    this.setSettings()
-    window.addEventListener("resize", this.setSettings)
+    // this.setSettings()
+    // window.addEventListener("resize", this.setSettings)
   },
   computed: {
     ...mapGetters(["getProductByQuery", "getTotalCards", "getPageCards"]),
@@ -106,24 +113,24 @@ export default {
     ...mapActions(["setCurrentProductsArray"]),
     setPage(currentPage) {
       this.page = currentPage
-      // window.scrollTo(0, 0)
     },
-    setSettings() {
-      if (window.innerWidth > 1239) {
-        // сравнивать значение с предыдущим и менять, если изменение есть
-        if (this.countCardsPerPage !== 9) {
-          this.countCardsPerPage = 9
-        }
-      } else if (window.innerWidth <= 1239 && window.innerWidth > 768) {
-        if (this.countCardsPerPage !== 6) {
-          this.countCardsPerPage = 6
-        }
-      } else if (window.innerWidth <= 768) {
-        if (this.countCardsPerPage !== 6) {
-          this.countCardsPerPage = 6
-        }
-      }
-    },
+    // setSettings() {
+      
+    //   if (window.innerWidth > 1239) {
+    //     // сравнивать значение с предыдущим и менять, если изменение есть
+    //     if (this.countCardsPerPage !== 9) {
+    //       this.countCardsPerPage = 9
+    //     }
+    //   } else if (window.innerWidth <= 1239 && window.innerWidth > 768) {
+    //     if (this.countCardsPerPage !== 6) {
+    //       this.countCardsPerPage = 6
+    //     }
+    //   } else if (window.innerWidth <= 768) {
+    //     if (this.countCardsPerPage !== 6) {
+    //       this.countCardsPerPage = 6
+    //     }
+    //   }
+    // },
     closeFiltersWindow(value) {
       console.log(value)
     },
