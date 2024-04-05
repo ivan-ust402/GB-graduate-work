@@ -14,12 +14,12 @@
             />
           </div>
         </div>
-        <PaginationComponent
+        <!-- <PaginationComponent
           :total="getTotalCards"
           :numberOfPage="getPage"
           :quantityElPerPage="getQuantityElPerPage"
           @page-changed="setPage"
-        />
+        /> -->
         <PaginationComponentForALotOfPages
           :total="getTotalCards"
           :numberOfPage="getPage"
@@ -106,7 +106,7 @@ export default {
     ...mapActions(["setCurrentProductsArray"]),
     setPage(currentPage) {
       this.page = currentPage
-      window.scrollTo(0, 0)
+      // window.scrollTo(0, 0)
     },
     setSettings() {
       if (window.innerWidth > 1239) {

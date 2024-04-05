@@ -87,8 +87,10 @@ export default {
 }
 @media (max-width: 1239px) {
   .pagination-btn {
-    // width: 90px;
+    box-sizing: border-box;
+    max-width: 90px;
     height: 38px;
+    padding: 8px 8px;
     font-family: "satoshiregular";
     font-size: 12px;
     line-height: 22px;
