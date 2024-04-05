@@ -168,6 +168,7 @@ export default {
       this.availableSizes = this.findAvailableSizes()
 
       // Этот блок на случай, если в query запросе будет использован несуществующий в объекте sizeId, в случае, если это произойдет, то будет установлен размер из первых доступных, в будущем нужно отрефакторить данный код, чтобы в случае не корректности query запроса происходил редирект на NotFoundPage
+      
       let findQuerySize = this.availableSizes.find(size => Number(size.size.id) === Number(this.$route.query.sizeId) && Number(size.amount) !== 0)
       if (findQuerySize) {
         this.choosenSize = this.getInitialSize(this.$route.query.sizeId)

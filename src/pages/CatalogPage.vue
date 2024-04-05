@@ -20,6 +20,12 @@
           :quantityElPerPage="getQuantityElPerPage"
           @page-changed="setPage"
         />
+        <PaginationComponentForALotOfPages
+          :total="getTotalCards"
+          :numberOfPage="getPage"
+          :quantityElPerPage="getQuantityElPerPage"
+          @page-changed="setPage"
+        />
       </div>
     </div>
   </section>
@@ -34,6 +40,7 @@ import { useHead } from "@unhead/vue"
 import DisplayFiltersBlock from "@/blocks/DisplayFiltersBlock.vue"
 import CatalogTitleBlock from "@/blocks/CatalogTitleBlock.vue"
 import PaginationComponent from "@/components/PaginationComponent.vue"
+import PaginationComponentForALotOfPages from "@/components/PaginationComponentForALotOfPages.vue"
 
 export default {
   components: {
@@ -43,6 +50,7 @@ export default {
     DisplayFiltersBlock,
     CatalogTitleBlock,
     PaginationComponent,
+    PaginationComponentForALotOfPages,
   },
   setup() {
     useHead({
@@ -98,6 +106,7 @@ export default {
     ...mapActions(["setCurrentProductsArray"]),
     setPage(currentPage) {
       this.page = currentPage
+      window.scrollTo(0, 0)
     },
     setSettings() {
       if (window.innerWidth > 1239) {
