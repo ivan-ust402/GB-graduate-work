@@ -119,8 +119,6 @@ export default {
   methods: {
     changePage(pageNumber) {
       if (this.numberOfPage !== pageNumber) {
-        console.log("query", this.paramQuery)
-        console.log("page", this.paramPage)
         router.push({
           name: "CatalogPage",
           params: { page: pageNumber },
