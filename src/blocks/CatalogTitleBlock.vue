@@ -1,38 +1,68 @@
 <template>
   <div class="title-box">
-    <h4 class="title-box__cards-title">
+    <div class="title-box__info">
+      <h4 class="title-box__cards-title">
       <p class="title-box__test" v-for="value in titleValue">
         {{ value }}
       </p>
     </h4>
+    <div class="title-box__showing-cards">
+      Showing {{ getSerialNumbers[0] }}-{{ getSerialNumbers[1] }} of
+      {{ totalCards }} Products
+    </div>
+    </div>
     <div class="title-box__cards-right-display">
-      <p class="title-box__showing-cards">
-        Showing {{ getSerialNumbers[0] }}-{{ getSerialNumbers[1] }} of
-        {{ totalCards }} Products
-      </p>
-      <div class="title-box__sort">
-        <div class="title-box__sort-label">Sort by:</div>
-        <a href="#" class="title-box__sort-select" @click.prevent="toggleMenu">
-          <div class="title-box__sort-param">
-            {{ sortParam.sortName }}
-            <img
-              v-if="menuState"
-              :src="`${require('@/assets/img/common/dropup-arrow.svg')}`"
-              alt="dropup icon"
-            />
-            <img
-              v-else
-              :src="`${require('@/assets/img/common/dropdown-arrow.svg')}`"
-              alt="dropdown icon"
-            />
+      <div class="title-box__controls">
+        <div class="title-box__sort">
+          <div class="title-box__sort-label" v-if="desktopDisplayMode">
+            Sort by:
           </div>
+          <a
+            v-if="desktopDisplayMode"
+            href="#"
+            class="title-box__sort-select"
+            @click.prevent="toggleMenu"
+          >
+            <div class="title-box__sort-param">
+              {{ sortParam.sortName }}
+              <img
+                v-if="menuState"
+                :src="`${require('@/assets/img/common/dropup-arrow.svg')}`"
+                alt="dropup icon"
+              />
+              <img
+                v-else
+                :src="`${require('@/assets/img/common/dropdown-arrow.svg')}`"
+                alt="dropdown icon"
+              />
+            </div>
+          </a>
+          <a
+            v-else
+            href="#"
+            class="title-box__sort-select-icon"
+            @click.prevent="toggleMenu"
+          >
+            <img
+              :src="`${require('@/assets/img/common/sort-icon.svg')}`"
+              alt=""
+              class="title-box__sort-icon"
+            />
+          </a>
+          <SortMenu
+            v-if="menuState"
+            class="title-box__sort-menu"
+            @getSortParam="getSortParam"
+            :activeSortParam="sortParam"
+          />
+        </div>
+        <a v-if="!desktopDisplayMode" href="#" class="title-box__filter">
+          <img
+            :src="`${require('@/assets/img/common/filter-icon.svg')}`"
+            alt="filter icon"
+            class="title-box__filter_icon"
+          />
         </a>
-        <SortMenu
-          v-if="menuState"
-          class="title-box__sort-menu"
-          @getSortParam="getSortParam"
-          :activeSortParam="sortParam"
-        />
       </div>
     </div>
   </div>
@@ -81,14 +111,16 @@ export default {
   data() {
     return {
       menuState: false,
+      desktopDisplayMode: true,
     }
   },
   mounted() {
-    window.addEventListener("resize", this.hideMenu)
+    this.setSettings()
+    window.addEventListener("resize", this.setSettings)
     document.addEventListener("click", this.checkClickAreaOutOfMenu)
   },
   unmounted() {
-    window.removeEventListener("resize", this.hideMenu)
+    window.removeEventListener("resize", this.setSettings)
     document.removeEventListener("click", this.checkClickAreaOutOfMenu)
   },
   computed: {
@@ -113,6 +145,7 @@ export default {
       this.menuState = !this.menuState
     },
     getSortParam(param) {
+      this.hideMenu()
       this.$emit("getSort", param)
     },
     checkClickAreaOutOfMenu(e) {
@@ -125,6 +158,19 @@ export default {
         this.hideMenu()
       }
     },
+    setSettings() {
+      this.hideMenu()
+      if (window.innerWidth > 1239) {
+        // сравнивать значение с предыдущим и менять, если изменение есть
+        if (this.desktopDisplayMode === false) {
+          this.desktopDisplayMode = true
+        }
+      } else if (window.innerWidth <= 1239) {
+        if (this.desktopDisplayMode === true) {
+          this.desktopDisplayMode = false
+        }
+      }
+    },
     hideMenu() {
       this.menuState = false
     },
@@ -135,8 +181,14 @@ export default {
 <style lang="scss" scoped>
 .title-box {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  width: 100%;
+  gap: 12px;
+  &__info {
+    display: flex;
+    width: 100%;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
   &__cards-title {
     display: flex;
     flex-direction: row;
@@ -155,7 +207,7 @@ export default {
     display: flex;
     flex-direction: row;
     gap: 12px;
-    align-items: center;
+    align-items: flex-end;
   }
   &__showing-cards {
     color: #222;
@@ -163,13 +215,17 @@ export default {
     font-size: 16px;
     line-height: normal;
   }
+  &__controls {
+    position: relative;
+    z-index: 1;
+  }
   &__sort {
     display: flex;
+    width: 200px;
     flex-direction: row;
     gap: 10px;
     align-items: center;
-    position: relative;
-    z-index: 1;
+    
   }
   &__sort-label {
     color: rgba(0, 0, 0, 0.6);
@@ -210,13 +266,99 @@ export default {
 }
 
 @media (max-width: 1239px) {
+  .title-box {
+    gap: 10px;
+    &__info {
+      justify-content: flex-start;
+      gap: 10px;
+    }
+    &__cards-title {
+      font-size: 24px;
+      line-height: 80%;
+    }
+    &__cards-right-display {
+      justify-content: space-between;
+    }
+    &__showing-cards {
+      font-size: 14px;
+    }
+    &__controls {
+      display: flex;
+      justify-self: flex-end;
+      gap: 24px;
+      justify-content: flex-end;
+    }
+    &__sort {
+      width: 32px;
+      gap: 0;
+    }
+    &__sort-select-icon {
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #F0F0F0;
+      border: 1px solid #F0F0F0;
+      transition: all 0.3s ease-in;
+      @media (hover: hover) {
+        &:hover {
+          border: 1px solid #121212;
+        }
+      }
+      @media (hover: none) {
+        &:active {
+          border: 1px solid #121212;
+        }
+      }
+    }
+    &__sort-param {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    &__sort-menu {
+      top: 40px;
+    }
+    &__filter {
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #F0F0F0;
+      border: 1px solid #F0F0F0;
+      transition: all 0.3s ease-in;
+      @media (hover: hover) {
+        &:hover {
+          border: 1px solid #121212;
+        }
+      }
+      @media (hover: none) {
+        &:active {
+          border: 1px solid #121212;
+        }
+      }
+    }
+  }
 }
 @media (max-width: 768px) {
   .title-box {
-    align-items: flex-end;
     &__cards-title {
       flex-direction: column;
       gap: 2px;
+      font-size: 24px;
+      line-height: 80%;
+    }
+    &__showing-cards {
+      font-size: 12px;
+    }
+    &__sort-menu {
+      right: 5px;
     }
   }
 }
