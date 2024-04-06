@@ -11,9 +11,28 @@
         {{ totalCards }} Products
       </p>
       <div class="title-box__sort">
-        <p class="title-box__sort-label">Sort by:</p>
-        <p class="title-box__sort-select">{{ sortParam.sortName }}</p>
-        <SortMenu @getSortParam="getSortParam" />
+        <div class="title-box__sort-label">Sort by:</div>
+        <a href="#" class="title-box__sort-select" @click.prevent="toggleMenu">
+          <div class="title-box__sort-param">
+            {{ sortParam.sortName }}
+            <img
+              v-if="menuState"
+              :src="`${require('@/assets/img/common/dropup-arrow.svg')}`"
+              alt="dropup icon"
+            />
+            <img
+              v-else
+              :src="`${require('@/assets/img/common/dropdown-arrow.svg')}`"
+              alt="dropdown icon"
+            />
+          </div>
+        </a>
+        <SortMenu
+          v-if="menuState"
+          class="title-box__sort-menu"
+          @getSortParam="getSortParam"
+          :activeSortParam="sortParam"
+        />
       </div>
     </div>
   </div>
@@ -26,7 +45,7 @@ export default {
   components: {
     SortMenu,
   },
-  emits: [""],
+  emits: ["getSort"],
   props: {
     titleValue: {
       type: Object,
@@ -61,12 +80,16 @@ export default {
   },
   data() {
     return {
-      sortParam: {
-        sortName: "Lowest price",
-        field: "price",
-        order: "asc",
-      },
+      menuState: false,
     }
+  },
+  mounted() {
+    window.addEventListener("resize", this.hideMenu)
+    document.addEventListener("click", this.checkClickAreaOutOfMenu)
+  },
+  unmounted() {
+    window.removeEventListener("resize", this.hideMenu)
+    document.removeEventListener("click", this.checkClickAreaOutOfMenu)
   },
   computed: {
     getSerialNumbers() {
@@ -86,8 +109,24 @@ export default {
     },
   },
   methods: {
+    toggleMenu() {
+      this.menuState = !this.menuState
+    },
     getSortParam(param) {
-      this.sortParam = param
+      this.$emit("getSort", param)
+    },
+    checkClickAreaOutOfMenu(e) {
+      const tempArr = e.target
+      const sort = document.querySelector(".title-box__sort")
+      console.log(sort)
+      console.log(tempArr)
+      console.log(sort.contains(tempArr))
+      if (!sort.contains(tempArr)) {
+        this.hideMenu()
+      }
+    },
+    hideMenu() {
+      this.menuState = false
     },
   },
 }
@@ -129,6 +168,8 @@ export default {
     flex-direction: row;
     gap: 10px;
     align-items: center;
+    position: relative;
+    z-index: 1;
   }
   &__sort-label {
     color: rgba(0, 0, 0, 0.6);
@@ -137,10 +178,34 @@ export default {
     line-height: normal;
   }
   &__sort-select {
-    color: var(--Black, #121212);
+    width: 130px;
+    color: #121212;
     font-family: "satoshimedium";
     font-size: 16px;
     line-height: normal;
+    transition: all 0.3s ease-in;
+    @media (hover: hover) {
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+    @media (hover: none) {
+      &:active {
+        opacity: 0.8;
+      }
+    }
+  }
+  &__sort-param {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__sort-menu {
+    box-sizing: border-box;
+    position: absolute;
+    z-index: 2;
+    top: 16px;
+    right: 0;
   }
 }
 

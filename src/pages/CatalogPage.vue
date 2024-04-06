@@ -11,6 +11,8 @@
             :countPerPage="countCardsPerPage"
             :currentPage="Number(page)"
             :currentQuery="query"
+            :sortParam="this.sort"
+            @getSort="rerenderPage"
           />
           <div class="catalog__cards">
             <CardProductMainComponent
@@ -73,7 +75,7 @@ export default {
   data() {
     return {
       query: {},
-      sort: { field: "price", order: "asc" },
+      sort: { sortName:"Lowest price",field: "price", order: "asc" },
       page: 1,
       countCardsPerPage: 12,
       totalCards: 0,
@@ -113,6 +115,9 @@ export default {
     ...mapActions(["setCurrentProductsArray"]),
     setPage(currentPage) {
       this.page = currentPage
+    },
+    rerenderPage(sortParam) {
+      this.sort = sortParam
     },
     // setSettings() {
       
@@ -170,7 +175,7 @@ export default {
   &__cards {
     display: grid;
     grid-template-columns: 295px 295px 295px;
-    column-gap: 20px;
+    column-gap: 18px;
     row-gap: 36px;
   }
   &__pagination-box {
