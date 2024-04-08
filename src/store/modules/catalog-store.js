@@ -1,7 +1,8 @@
 export default ({
   state() {
     return {
-      currentProducts: []
+      currentProducts: [],
+      filerMenuIsActive: false,
     }
   },
   getters: {
@@ -15,16 +16,27 @@ export default ({
         const paginatedArray = state.currentProducts.slice(startIndex, endIndex);
         return paginatedArray
     },
+    getFilterMenuStatus(state) {
+      return state.filerMenuIsActive
+    },
+    getFilterState(state) {
+      return state.filterState
+    }
   },
   mutations: {
     SET_CURRENT_PRODUCTS(state, array) {
       state.currentProducts = array
-    }
-
+    },
+    SET_FILTER_MENU_STATUS(state, value) {
+      state.filerMenuIsActive = value
+    },
   },
   actions: {
     setCurrentProductsArray(context, array) {
       context.commit('SET_CURRENT_PRODUCTS', array)
-    }
+    },
+    setFilterMenuStatus(context, value) {
+      context.commit('SET_FILTER_MENU_STATUS', value)
+    },
   }
 });

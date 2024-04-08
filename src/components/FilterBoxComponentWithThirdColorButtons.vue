@@ -3,27 +3,27 @@
     <div class="filter__title-box" @click="toggleIsOpen">
       <h6 class="filter__title">{{ filterTitle }}</h6>
       <img
-        :class="{ filter__arrow_close: !isOpen }"
+        :class="{ filter__arrow_close: isOpen }"
         class="filter__arrow"
         :src="`${require('@/assets/img/common/dropup-arrow.svg')}`"
         alt="dropup arrow"
       />
       <img
-        :class="{ filter__arrow_close: isOpen }"
+        :class="{ filter__arrow_close: !isOpen }"
         class="filter__arrow"
         :src="`${require('@/assets/img/common/dropdown-arrow.svg')}`"
         alt="dropup arrow"
       />
     </div>
     <div
-      :class="{ filter__content_close: !isOpen }"
+      :class="{ filter__content_close: isOpen }"
       class="filter__content filter__set-third-color-buttons"
     >
       <ButtonThirdColor
         class="filter__button"
         v-for="param in paramsOfButtons"
         :text="param.name"
-        :isActive="param.id === activeParamId"
+        :isActive="Number(param.id) === Number(activeParamId)"
         @click.prevent="selectActiveParam(param.id)"
       />
     </div>
@@ -56,7 +56,11 @@ export default {
   },
   methods: {
     selectActiveParam(id) {
-      this.$emit("getActiveParamId", id)
+      if(id === this.activeParamId) {
+        this.$emit("getActiveParamId", -1)
+      } else {
+        this.$emit("getActiveParamId", id)
+      }
     },
     toggleIsOpen() {
       this.isOpen = !this.isOpen

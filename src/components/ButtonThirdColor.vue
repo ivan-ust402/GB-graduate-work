@@ -34,12 +34,13 @@ export default {
   align-items: center;
   flex-shrink: 0;
   border-radius: 62px;
-
+  transition: all .3s ease-in;
   font-size: 16px;
   font-family: "satoshiregular";
   font-style: normal;
   line-height: normal;
   &_active {
+    transition: all .3s ease-in;
     border: 1px solid #121212;
     background: #121212;
     color: white;

@@ -1,6 +1,6 @@
 <template>
   <div class="dropmenu">
-    <a href="#" class="dropmenu__button" @click="toggleDropMenuIsActive()">
+    <a href="#" class="dropmenu__button" @click.prevent="toggleDropMenuIsActive()">
       Shop
       <svg
         class="dropmenu__arrow-right"
@@ -45,7 +45,13 @@ import DropMenu from "@/components/DropMenu.vue"
 import { mapActions, mapGetters } from "vuex"
 
 export default {
+  data() {
+    return {
+      resizes: false,
+    }
+  },
   mounted() {
+    this.resizes = window.innerWidth
     window.addEventListener("resize", this.closeDropMenu)
     document.addEventListener("click", this.checkClickAreaOutOfDropMenu)
   },
@@ -70,6 +76,9 @@ export default {
       }
     },
     closeDropMenu() {
+      const resizeWidth = window.innerWidth
+      if (this.resizes == resizeWidth) { return; }
+      this.resizes = resizeWidth
       this.changeDropMenuIsActive(false)
     },
   },
@@ -122,9 +131,6 @@ export default {
   }
   &__arrow-right {
     display: none;
-  }
-
-  &__arrow-down {
   }
 }
 

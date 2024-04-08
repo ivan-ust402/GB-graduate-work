@@ -189,6 +189,7 @@ export default {
     return {
       activeDot: 0,
       axis: "Y",
+      resizes: false,
     }
   },
   mounted() {
@@ -197,6 +198,7 @@ export default {
       "resize",
       this.updateOffsetParamsAndScrollToActiveIcon
     )
+    this.resizes = window.innerWidth
   },
   watch: {
     $route() {
@@ -205,6 +207,11 @@ export default {
   },
   methods: {
     updateOffsetParamsAndScrollToActiveIcon() {
+      const resizeWidth = window.innerWidth
+      if (this.resizes == resizeWidth) {
+        return
+      }
+      this.resizes = resizeWidth
       this.updateOffsetParams()
       this.scrollToActiveIcon()
     },

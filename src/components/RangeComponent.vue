@@ -85,6 +85,22 @@ export default {
   mounted() {
     this.setInputMinMaxValue()
   },
+  watch: {
+    priceMin(newValue) {
+      this.minValue = newValue
+      this.leftProgressIndent = this.calculateProgressLineLeftIndent(
+        this.minValue,
+        this.priceEnd
+      )
+    },
+    priceMax(newValue) {
+      this.maxValue = newValue
+      this.rightProgressIndent = this.calculateProgressLineRightIndent(
+        this.maxValue,
+        this.priceEnd
+      )
+    },
+  },
   computed: {
     getMaxValue() {
       return this.maxValue

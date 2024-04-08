@@ -2,41 +2,49 @@
   <div class="title-box">
     <div class="title-box__info">
       <h4 class="title-box__cards-title">
-      <p class="title-box__test" v-for="value in titleValue">
-        {{ value }}
-      </p>
-    </h4>
-    <div class="title-box__showing-cards">
-      Showing {{ getSerialNumbers[0] }}-{{ getSerialNumbers[1] }} of
-      {{ totalCards }} Products
-    </div>
+        <p class="title-box__test" v-if="titleValue.show">
+          {{ titleValue.show }}
+        </p>
+        <p class="title-box__test" v-if="titleValue.gender">
+          {{ titleValue.gender }}
+        </p>
+        <p class="title-box__test" v-if="titleValue.style">
+          {{ titleValue.style }}
+        </p>
+        <p class="title-box__test" v-if="titleValue.type">
+          {{ titleValue.type }}
+        </p>
+      </h4>
+      <div class="title-box__showing-cards">
+        Showing {{ getSerialNumbers[0] }}-{{ getSerialNumbers[1] }} of
+        {{ totalCards }} Products
+      </div>
     </div>
     <div class="title-box__cards-right-display">
       <div class="title-box__controls">
         <div class="title-box__sort">
-          <div class="title-box__sort-label" v-if="desktopDisplayMode">
-            Sort by:
+          <div class="title-box__desktop-sort" v-if="desktopDisplayMode">
+            <div class="title-box__sort-label">Sort by:</div>
+            <a
+              href="#"
+              class="title-box__sort-select"
+              @click.prevent="toggleMenu"
+            >
+              <div class="title-box__sort-param">
+                {{ sortParam.sortName }}
+                <img
+                  v-if="menuState"
+                  :src="`${require('@/assets/img/common/dropup-arrow.svg')}`"
+                  alt="dropup icon"
+                />
+                <img
+                  v-else
+                  :src="`${require('@/assets/img/common/dropdown-arrow.svg')}`"
+                  alt="dropdown icon"
+                />
+              </div>
+            </a>
           </div>
-          <a
-            v-if="desktopDisplayMode"
-            href="#"
-            class="title-box__sort-select"
-            @click.prevent="toggleMenu"
-          >
-            <div class="title-box__sort-param">
-              {{ sortParam.sortName }}
-              <img
-                v-if="menuState"
-                :src="`${require('@/assets/img/common/dropup-arrow.svg')}`"
-                alt="dropup icon"
-              />
-              <img
-                v-else
-                :src="`${require('@/assets/img/common/dropdown-arrow.svg')}`"
-                alt="dropdown icon"
-              />
-            </div>
-          </a>
           <a
             v-else
             href="#"
@@ -56,7 +64,12 @@
             :activeSortParam="sortParam"
           />
         </div>
-        <a v-if="!desktopDisplayMode" href="#" class="title-box__filter">
+        <a
+          v-if="!desktopDisplayMode"
+          href="#"
+          class="title-box__filter"
+          @click.prevent="openFilterMenu"
+        >
           <img
             :src="`${require('@/assets/img/common/filter-icon.svg')}`"
             alt="filter icon"
@@ -75,7 +88,7 @@ export default {
   components: {
     SortMenu,
   },
-  emits: ["getSort"],
+  emits: ["getSort", "openFilterMenu"],
   props: {
     titleValue: {
       type: Object,
@@ -112,10 +125,12 @@ export default {
     return {
       menuState: false,
       desktopDisplayMode: true,
+      resizes: false,
     }
   },
   mounted() {
     this.setSettings()
+    this.resizes = window.innerWidth
     window.addEventListener("resize", this.setSettings)
     document.addEventListener("click", this.checkClickAreaOutOfMenu)
   },
@@ -141,6 +156,9 @@ export default {
     },
   },
   methods: {
+    openFilterMenu() {
+      this.$emit("openFilterMenu", true)
+    },
     toggleMenu() {
       this.menuState = !this.menuState
     },
@@ -151,14 +169,16 @@ export default {
     checkClickAreaOutOfMenu(e) {
       const tempArr = e.target
       const sort = document.querySelector(".title-box__sort")
-      console.log(sort)
-      console.log(tempArr)
-      console.log(sort.contains(tempArr))
       if (!sort.contains(tempArr)) {
         this.hideMenu()
       }
     },
     setSettings() {
+      const resizeWidth = window.innerWidth
+      if (this.resizes == resizeWidth) {
+        return
+      }
+      this.resizes = resizeWidth
       this.hideMenu()
       if (window.innerWidth > 1239) {
         // сравнивать значение с предыдущим и менять, если изменение есть
@@ -217,15 +237,13 @@ export default {
   }
   &__controls {
     position: relative;
-    z-index: 1;
   }
-  &__sort {
+  &__desktop-sort {
     display: flex;
     width: 200px;
     flex-direction: row;
     gap: 10px;
     align-items: center;
-    
   }
   &__sort-label {
     color: rgba(0, 0, 0, 0.6);
@@ -288,6 +306,13 @@ export default {
       gap: 24px;
       justify-content: flex-end;
     }
+    &__desktop-sort {
+    display: none;
+    width: 0px;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+  }
     &__sort {
       width: 32px;
       gap: 0;
@@ -300,8 +325,8 @@ export default {
       width: 32px;
       height: 32px;
       border-radius: 50%;
-      background: #F0F0F0;
-      border: 1px solid #F0F0F0;
+      background: #f0f0f0;
+      border: 1px solid #f0f0f0;
       transition: all 0.3s ease-in;
       @media (hover: hover) {
         &:hover {
@@ -330,8 +355,8 @@ export default {
       width: 32px;
       height: 32px;
       border-radius: 50%;
-      background: #F0F0F0;
-      border: 1px solid #F0F0F0;
+      background: #f0f0f0;
+      border: 1px solid #f0f0f0;
       transition: all 0.3s ease-in;
       @media (hover: hover) {
         &:hover {
@@ -356,6 +381,10 @@ export default {
     }
     &__showing-cards {
       font-size: 12px;
+    }
+    &__controls {
+      gap: 14px;
+      padding-right: 10px;
     }
     &__sort-menu {
       right: 5px;

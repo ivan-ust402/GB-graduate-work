@@ -36,9 +36,12 @@ export default {
   },
   emits: ["changeShowStatus"],
   data() {
-    return {}
+    return {
+      resizes: false,
+    }
   },
   mounted() {
+    this.resizes = window.innerWidth
     window.addEventListener("resize", this.hideAllSubItems)
     document.addEventListener("click", this.checkClickAreaOutOfDropSubmenu)
   },
@@ -58,8 +61,18 @@ export default {
       ) {
         this.hideAllSubItems()
       }
+      // const targetEl = e.target
+      // const dropSubmenuEl = document.querySelector('.subdropdown')
+      // console.log("dropSubmenuEl", dropSubmenuEl);
+      // console.log("targetEl",targetEl);
+      // if (!dropSubmenuEl.contains(targetEl)) {
+      //   this.hideAllSubItems()
+      // }
     },
     hideAllSubItems() {
+      const resizeWidth = window.innerWidth
+      if (this.resizes == resizeWidth) { return; }
+      this.resizes = resizeWidth
       this.$emit("changeShowStatus")
     },
   },
