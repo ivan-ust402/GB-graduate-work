@@ -3,27 +3,27 @@
     <div class="filter__title-box" @click="toggleIsOpen">
       <h6 class="filter__title">{{ filterTitle }}</h6>
       <img
-        :class="{ filter__arrow_close: !isOpen }"
+        :class="{ filter__arrow_close: isOpen }"
         class="filter__arrow"
         :src="`${require('@/assets/img/common/dropup-arrow.svg')}`"
         alt="dropup arrow"
       />
       <img
-        :class="{ filter__arrow_close: isOpen }"
+        :class="{ filter__arrow_close: !isOpen }"
         class="filter__arrow"
         :src="`${require('@/assets/img/common/dropdown-arrow.svg')}`"
         alt="dropup arrow"
       />
     </div>
     <div
-      :class="{ filter__content_close: !isOpen }"
+      :class="{ filter__content_close: isOpen }"
       class="filter__content filter__style-box"
     >
       <a
         v-if="desktopFlag"
         v-for="param in paramsOfButtons"
         href="#"
-        :class="{'filter__without-border_active': param.id === activeParamId}"
+        :class="{ 'filter__without-border_active': param.id === activeParamId }"
         class="filter__without-border"
         @click.prevent="selectActiveParam(param.id)"
       >
@@ -63,27 +63,42 @@ export default {
   data() {
     return {
       isOpen: false,
-      desktopFlag: true
+      desktopFlag: true,
+      resizes: false,
     }
   },
   mounted() {
     this.updateDesktopFlag()
-    window.addEventListener("resize", this.updateDesktopFlag) 
+    this.resizes = window.innerWidth
+    window.addEventListener("resize", this.updateDesktopFlag)
   },
   methods: {
     selectActiveParam(id) {
-      this.$emit("getActiveParamId", id)
+      if(id === this.activeParamId) {
+        this.$emit("getActiveParamId", -1)
+      } else {
+        this.$emit("getActiveParamId", id)
+      }
     },
     toggleIsOpen() {
       this.isOpen = !this.isOpen
     },
     updateDesktopFlag() {
-      if (window.innerWidth > 1239) {
-        this.desktopFlag = true
-      } else if (window.innerWidth <= 1239) {
-        this.desktopFlag = false
+      const resizeWidth = window.innerWidth
+      if (this.resizes == resizeWidth) {
+        return
       }
-    }
+      this.resizes = resizeWidth
+      if (window.innerWidth > 1239) {
+        if (this.desktopFlag !== true) {
+          this.desktopFlag = true
+        }
+      } else if (window.innerWidth <= 1239) {
+        if (this.desktopFlag !== false) {
+          this.desktopFlag = false
+        }
+      }
+    },
   },
 }
 </script>
@@ -104,7 +119,7 @@ export default {
     position: relative;
   }
   &__title {
-    color:#121212;
+    color: #121212;
     font-family: "satoshibold";
     font-size: 20px;
     line-height: 22px; /* 110% */
@@ -121,10 +136,11 @@ export default {
     }
   }
   &__content {
-    width: 100%;
+    width: 100px;
     opacity: 1;
     transition: all 0.3s ease-in;
     position: static;
+    padding-right: 10px;
     &_close {
       opacity: 0;
       position: absolute;
@@ -150,15 +166,21 @@ export default {
 }
 @media (max-width: 1239px) {
   .filter {
-  gap: 16px;
-  position: relative;
-  &__title {
-    text-transform: capitalize;
+    gap: 16px;
+    position: relative;
+    &__title {
+      text-transform: capitalize;
+    }
+    &__content {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      width: 100%;
+    }
+    &__style-box {
+      flex-direction: row;
+      gap: 8px;
+    }
   }
-  &__style-box {
-    flex-direction: row;
-    gap: 8px;
-  }
-}
 }
 </style>

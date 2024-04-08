@@ -1,8 +1,13 @@
 <template>
-  <div
-    class="mainOverlay"
-    :class="{ mainOverlay_active: getBurgerMenuIsActive }"
-  >
+  <div>
+    <div
+      class="burger-overlay"
+      :class="{ 'burger-overlay_active': getBurgerMenuIsActive }"
+    ></div>
+    <div 
+      class="filter-overlay"
+      :class="{ 'filter-overlay_active': getFilterMenuStatus }"
+    ></div>
     <AppHeader class="test" />
     <router-view />
     <ButtonTopOfPage :class="{ hideButtonToUp: getBurgerMenuIsActive }" />
@@ -23,10 +28,13 @@ export default {
     ButtonTopOfPage,
   },
   computed: {
-    ...mapGetters(["getBurgerMenuIsActive"]),
+    ...mapGetters(["getBurgerMenuIsActive", "getFilterMenuStatus"]),
   },
   methods: {
-    ...mapActions(["setTopSellingProductsArray", "setNewArrivalsProductsArray"])
+    ...mapActions([
+      "setTopSellingProductsArray",
+      "setNewArrivalsProductsArray",
+    ]),
   },
 }
 </script>
@@ -44,7 +52,20 @@ export default {
 // gilroyregular - 400
 
 
-.mainOverlay {
+.filter-overlay {
+  position: relative;
+  &_active::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 101;
+  }
+}
+.burger-overlay {
   position: relative;
   &_active::before {
     content: "";
@@ -66,7 +87,7 @@ export default {
   padding: 0;
   scroll-behavior: smooth;
   // font-size: 14px;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.2);
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 body {
@@ -143,6 +164,7 @@ svg {
 
 a svg {
   pointer-events: none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0); -webkit-tap-highlight-color: transparent;
 }
 
 // nav {

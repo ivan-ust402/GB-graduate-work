@@ -8,7 +8,7 @@
         :src="`${require('@/assets/img/common/sort-icon.svg')}`"
         alt="filter icon"
       />
-      <a v-else href="#" class="filters__close-btn" @click="closeFilters">
+      <a v-else href="#" class="filters__close-btn" @click.prevent="closeFilters">
         <img
           class="filters__icon filters__icon_close"
           src="@/assets/img/common/close-icon-grey.svg"
@@ -35,8 +35,8 @@
         <FilterBoxComponentWithRange
           class="filters__filter-box"
           filterTitle="Price"
-          :priceStart="getPriceRange.start"
-          :priceEnd="getPriceRange.end"
+          :priceStart="getActivePriceStart"
+          :priceEnd="getActivePriceEnd"
           :priceMin="getActivePriceMin"
           :priceMax="getActivePriceMax"
           @getActivePriceMinFromChild="setActivePriceMin"
@@ -81,23 +81,14 @@ import FilterBoxComponentWithThirdColorButtons from "@/components/FilterBoxCompo
 import FilterBoxComponentWithLinks from "@/components/FilterBoxComponentWithLinks.vue"
 import FilterBoxComponentWithRange from "@/components/FilterBoxComponentWithRange.vue"
 import { mapGetters } from "vuex"
+import router from "@/router"
 
 export default {
   props: {
     filtersSettings: {
       type: Object,
       default: () => {
-        return {
-          gender: null,
-          type: null,
-          priceStart: 0,
-          priceEnd: 100,
-          priceMin: 0,
-          priceMax: 100,
-          colors: null,
-          size: null,
-          dressStyle: null,
-        }
+        return
       },
     },
   },
@@ -113,31 +104,53 @@ export default {
   data() {
     return {
       filtersState: {
-        gender: null,
-        type: null,
+        gender: -1,
+        type: -1,
         priceStart: 0,
         priceEnd: 1000,
         priceMin: 0,
         priceMax: 1000,
-        color: null,
-        size: null,
-        dressStyle: null,
+        color: -1,
+        size: -1,
+        dressStyle: -1,
       },
       useCloseIcon: false,
+      query: {},
+      resizes: false,
     }
   },
   mounted() {
+    this.query = this.$route.query
     this.setInitial()
+    this.resizes = window.innerWidth
     window.addEventListener("resize", this.setInitial)
+    this.filtersState = this.setSettingsForFilter(this.query)
+  },
+  unmounted() {
+    window.removeEventListener("resize", this.setInitial)
+  },
+  watch: {
+    $route() {
+      this.query = this.$route.query
+    },
   },
   computed: {
     ...mapGetters([
-      "getProductByQuery",
       "getGenders",
       "getTypes",
       "getDressStyles",
       "getSizes",
       "getColors",
+      "getGenderById",
+      "getGenderByShortName",
+      "getTypeById",
+      "getTypeByName",
+      "getDressStyleById",
+      "getDressStyleByName",
+      "getSizeById",
+      "getSizeByShortName",
+      "getColorById",
+      "getColorByName",
       "getPriceRange",
     ]),
     getActiveGender() {
@@ -173,13 +186,121 @@ export default {
       this.$emit("closeFiltersMenu", true)
     },
     setInitial() {
-      if (window.innerWidth > 1239) {
-        this.useCloseIcon = false
-      } else if (window.innerWidth <= 1239 && window.innerWidth > 768) {
-        this.useCloseIcon = true
-      } else if (window.innerWidth <= 768) {
-        this.useCloseIcon = true
+      const resizeWidth = window.innerWidth
+      if (this.resizes == resizeWidth) {
+        return
       }
+      this.resizes = resizeWidth
+      if (window.innerWidth > 1239) {
+        if (this.useCloseIcon !== false) {
+          this.useCloseIcon = false
+        }
+      } else if (window.innerWidth <= 1239) {
+        if (this.useCloseIcon !== true) {
+          this.useCloseIcon = true
+        }
+      }
+    },
+    setSettingsForFilter(query) {
+      const { gender, type, color, size, style, pricemin, pricemax, show } =
+        query
+      const currentPriceEnd = this.getPriceRange.end
+      const currentPriceStart = this.getPriceRange.start
+      if (show && show === "all") {
+        return {
+          gender: -1,
+          type: -1,
+          priceStart: currentPriceStart,
+          priceEnd: currentPriceEnd,
+          priceMin: currentPriceStart,
+          priceMax: currentPriceEnd,
+          color: -1,
+          size: -1,
+          dressStyle: -1,
+        }
+      }
+
+      const currentGender = gender ? this.getGenderByShortName(gender).id : -1
+      const currentType = type ? this.getTypeByName(type).id : -1
+      const currentPriceMin = pricemin ? Number(pricemin) : currentPriceStart
+      const currentPriceMax = pricemax ? Number(pricemax) : currentPriceEnd
+      const currentColor = color ? this.getColorByName(color).id : -1
+      const currentSize = size ? this.getSizeByShortName(size).id : -1
+      const currentDressStyle = style ? this.getDressStyleByName(style).id : -1
+      return {
+        gender: currentGender,
+        type: currentType,
+        priceStart: currentPriceStart,
+        priceEnd: currentPriceEnd,
+        priceMin: currentPriceMin,
+        priceMax: currentPriceMax,
+        color: currentColor,
+        size: currentSize,
+        dressStyle: currentDressStyle,
+      }
+    },
+    generateQueryRequest(inputState) {
+      let { gender, type, color, size, dressStyle, priceMin, priceMax } = inputState
+      const currentPriceEnd = this.getPriceRange.end
+      const currentPriceStart = this.getPriceRange.start
+      const queryObj = {}
+
+      const currentGenderName = Number(gender) !== -1
+        ? this.getGenderById(gender).name.trim().toLowerCase().split(" ")[1]
+        : null
+      const currentTypeName = Number(type) !== -1
+        ? this.getTypeById(type).name.trim().toLowerCase()
+        : null
+      const currentPriceMin =
+        Number(priceMin) !== currentPriceStart ? Number(priceMin) : null
+      const currentPriceMax =
+        Number(priceMax) !== currentPriceEnd ? Number(priceMax) : null
+      const currentColorName = Number(color) !== -1
+        ? this.getColorById(color).name.trim().toLowerCase()
+        : null
+      const currentSizeName = Number(size) !== -1
+        ? this.getSizeById(size).shortName.trim().toLowerCase()
+        : null
+      const currentDressStyleName = Number(dressStyle) !== -1
+        ? this.getDressStyleById(dressStyle).name.trim().toLowerCase()
+        : null
+      if (
+        currentGenderName === null &&
+        currentTypeName === null &&
+        currentPriceMin === null &&
+        currentPriceMax === null &&
+        currentColorName === null &&
+        currentSizeName === null &&
+        currentDressStyleName === null
+      ) {
+        return {
+          show: "all"
+        }
+      }
+
+      if (currentGenderName !== null) {
+        queryObj.gender = currentGenderName
+      } 
+      if (currentTypeName !== null) {
+        queryObj.type = currentTypeName
+      } 
+      if (currentPriceMin !== null) {
+        queryObj.pricemin = currentPriceMin
+      } 
+      if (currentPriceMax !== null) {
+        queryObj.pricemax = currentPriceMax
+      }
+      if (currentColorName !== null) {
+        queryObj.color = currentColorName
+      }
+      if (currentSizeName !== null) {
+        queryObj.size = currentSizeName
+      }
+      if (currentDressStyleName !== null) {
+        queryObj.style = currentDressStyleName
+      }
+      return queryObj;
+  
     },
     setActiveGender(id) {
       this.filtersState.gender = id
@@ -209,7 +330,13 @@ export default {
       this.filtersState.dressStyle = id
     },
     applyFilter() {
-      console.log("applyFilters")
+      const query = this.generateQueryRequest(this.filtersState)
+      router.push({
+          name: "CatalogPage",
+          params: { page: 1 },
+          query,
+        })
+
       this.$emit("getActualFiltersState", this.filtersState)
     },
   },
@@ -223,7 +350,12 @@ export default {
   padding: 20px 24px;
   flex-direction: column;
   align-items: flex-start;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border: 1px solid #e8e8e8;
   width: 295px;
+  height: 100%;
+  background-color: #fff;
   gap: 24px;
   &__title-box {
     width: 247px;
@@ -271,25 +403,21 @@ export default {
 @media (max-width: 1239px) {
   .filters {
     display: flex;
-    padding: 20px 32px;
-    // margin-left: -32px;
-    // margin-right: -32px;
-    width: 1239px;
+    height: fit-content;
+    width: 100%;
+    padding: 20px 32px 40px;
     border-radius: 20px 20px 0px 0px;
     border: 1px solid #ccc;
     background: #fff;
     &__title-box {
-    width: 100%;
-  }
+      width: 100%;
+    }
   }
 }
 
 @media (max-width: 768px) {
   .filters {
     padding: 20px 16px;
-    // margin-left: -16px;
-    // margin-right: -16px;
-    width: 768px;
   }
 }
 </style>

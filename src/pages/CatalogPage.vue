@@ -2,17 +2,23 @@
   <section class="catalog center">
     <NavigationBreadcrumbsComponent class="catalog__breadcrumbs" />
     <div class="catalog__content">
-      <!-- <DisplayFiltersBlock @closeFiltersMenu="closeFiltersWindow"/> -->
+      <DisplayFiltersBlock
+        v-if="filterMenuState"
+        class="catalog__filters"
+        @closeFiltersMenu="closeFiltersWindow"
+        @getActualFiltersState="closeFiltersWindow"
+      />
       <div class="catalog__display">
         <div class="catalog__cards-box">
-          <CatalogTitleBlock 
-            :titleValue="getQuery" 
+          <CatalogTitleBlock
+            :titleValue="getQuery"
             :totalCards="getTotalCards"
             :countPerPage="countCardsPerPage"
             :currentPage="Number(page)"
             :currentQuery="query"
             :sortParam="this.sort"
             @getSort="rerenderPage"
+            @openFilterMenu="setStateFilterMenu"
           />
           <div class="catalog__cards">
             <CardProductMainComponent
@@ -22,12 +28,6 @@
             />
           </div>
         </div>
-        <!-- <PaginationComponent
-          :total="getTotalCards"
-          :numberOfPage="getPage"
-          :quantityElPerPage="getQuantityElPerPage"
-          @page-changed="setPage"
-        /> -->
         <PaginationComponentForALotOfPages
           class="catalog__pagination"
           :total="getTotalCards"
@@ -50,6 +50,7 @@ import DisplayFiltersBlock from "@/blocks/DisplayFiltersBlock.vue"
 import CatalogTitleBlock from "@/blocks/CatalogTitleBlock.vue"
 import PaginationComponent from "@/components/PaginationComponent.vue"
 import PaginationComponentForALotOfPages from "@/components/PaginationComponentForALotOfPages.vue"
+import router from "@/router"
 
 export default {
   components: {
@@ -75,22 +76,45 @@ export default {
   data() {
     return {
       query: {},
-      sort: { sortName:"Lowest price",field: "price", order: "asc" },
+      sort: { sortName: "Lowest price", field: "price", order: "asc" },
+      settingsForFilterMenu: {},
       page: 1,
       countCardsPerPage: 12,
       totalCards: 0,
+      filterMenuState: true,
+      dektopMode: true,
+      resizes: false,
     }
   },
   mounted() {
     this.page = this.$route.params.page
     this.query = this.$route.query
+    if (!this.query.sort && !this.query.sortfield && !this.query.sortorder) {
+      this.sort.field = "price"
+      this.sort.order = "asc"
+      this.sort.sortName = "Lowest price"
+    } else {
+      this.sort.field = this.query.sortfield
+      this.sort.order = this.query.sortorder
+      this.sort.sortName = this.query.sort
+    }
     this.setCurrentProductsArray(this.getProductByQuery(this.query, this.sort))
     this.totalCards = this.getTotalCards
-    // this.setSettings()
-    // window.addEventListener("resize", this.setSettings)
+    this.setSettings()
+    this.resizes = window.innerWidth
+    window.addEventListener("resize", this.setSettings)
+  },
+  unmounted() {
+    window.removeEventListener("resize", this.setSettings)
+    document.removeEventListener("click", this.checkClickAreaOutOfMenu)
   },
   computed: {
-    ...mapGetters(["getProductByQuery", "getTotalCards", "getPageCards"]),
+    ...mapGetters([
+      "getProductByQuery",
+      "getTotalCards",
+      "getPageCards",
+      "getFilterMenuStatus",
+    ]),
     getQuery() {
       return this.query
     },
@@ -100,11 +124,23 @@ export default {
     getQuantityElPerPage() {
       return this.countCardsPerPage
     },
+    getSettingsForFilter() {
+      return this.settingsForFilterMenu
+    },
   },
   watch: {
     $route() {
       this.page = this.$route.params.page
       this.query = this.$route.query
+      if (!this.query.sort && !this.query.sortfield && !this.query.sortorder) {
+        this.sort.field = "price"
+        this.sort.order = "asc"
+        this.sort.sortName = "Lowest price"
+      } else {
+        this.sort.field = this.query.sortfield
+        this.sort.order = this.query.sortorder
+        this.sort.sortName = this.query.sort
+      }
       this.setCurrentProductsArray(
         this.getProductByQuery(this.query, this.sort)
       )
@@ -112,32 +148,58 @@ export default {
     },
   },
   methods: {
-    ...mapActions(["setCurrentProductsArray"]),
+    ...mapActions(["setCurrentProductsArray", "setFilterMenuStatus"]),
     setPage(currentPage) {
       this.page = currentPage
     },
     rerenderPage(sortParam) {
       this.sort = sortParam
+      const sortQuery = {}
+      sortQuery.sortfield = sortParam.field
+      sortQuery.sortorder = sortParam.order
+      sortQuery.sort = sortParam.sortName
+      router.push({
+        name: "CatalogPage",
+        params: { page: 1 },
+        query: { ...this.query, ...sortQuery },
+      })
     },
-    // setSettings() {
-      
-    //   if (window.innerWidth > 1239) {
-    //     // сравнивать значение с предыдущим и менять, если изменение есть
-    //     if (this.countCardsPerPage !== 9) {
-    //       this.countCardsPerPage = 9
-    //     }
-    //   } else if (window.innerWidth <= 1239 && window.innerWidth > 768) {
-    //     if (this.countCardsPerPage !== 6) {
-    //       this.countCardsPerPage = 6
-    //     }
-    //   } else if (window.innerWidth <= 768) {
-    //     if (this.countCardsPerPage !== 6) {
-    //       this.countCardsPerPage = 6
-    //     }
-    //   }
-    // },
+    setStateFilterMenu(param) {
+      this.filterMenuState = param
+      this.setFilterMenuStatus(true)
+    },
     closeFiltersWindow(value) {
-      console.log(value)
+      if (this.desktopMode !== true) {
+        this.filterMenuState = !value
+        this.setFilterMenuStatus(this.filterMenuState)
+      }
+    },
+    setSettings() {
+      const resizeWidth = window.innerWidth
+      if (this.resizes == resizeWidth) {
+        return
+      }
+      this.resizes = resizeWidth
+      if (resizeWidth > 1239) {
+        // сравнивать значение с предыдущим и менять, если изменение есть
+        if (this.getFilterMenuStatus !== false) {
+          this.setFilterMenuStatus(false)
+        }
+        if (this.filterMenuState !== true) {
+          this.filterMenuState = true
+        }
+        if (this.desktopMode != true) {
+          this.desktopMode = true
+        }
+      } else if (resizeWidth <= 1239) {
+        if (this.filterMenuState !== false) {
+          this.filterMenuState = false
+          this.setFilterMenuStatus(false)
+        }
+        if (this.desktopMode != false) {
+          this.desktopMode = false
+        }
+      }
     },
   },
 }
@@ -154,11 +216,6 @@ export default {
     display: flex;
     flex-direction: row;
     gap: 21px;
-  }
-  &__filters {
-    width: 295px;
-    border-radius: 20px;
-    border: 1px solid #e8e8e8;
   }
   &__display {
     box-sizing: border-box;
@@ -184,34 +241,24 @@ export default {
     align-items: center;
     justify-content: space-between;
   }
-  &__pagination {
-  }
 }
 
 @media (max-width: 1239px) {
   .catalog {
-    position: relative;
     padding-bottom: 60px;
     gap: 12px;
     z-index: 0;
     &__content {
       display: flex;
-      // flex-wrap: wrap;
-      // width: 100%;
-      // gap: 0;
+      position: relative;
     }
     &__filters {
-      // position: absolute;
-      // visibility: hidden;
-      background-color: #fff;
+      position: absolute;
       top: 0px;
       bottom: 0;
       left: 0;
       right: 0;
-      z-index: 2;
-      width: 295px;
-      border-radius: 20px;
-      border: 1px solid #e8e8e8;
+      z-index: 102;
     }
     &__display {
       gap: 22px;
@@ -232,13 +279,10 @@ export default {
       flex-direction: row;
       align-items: center;
     }
-    &__pagination {
-    }
   }
 }
 @media (max-width: 768px) {
   .catalog {
-    position: relative;
     padding-bottom: 60px;
     gap: 12px;
     z-index: 0;
@@ -246,21 +290,16 @@ export default {
       display: flex;
       flex-direction: row;
     }
+    &__display {
+      gap: 20px;
+    }
     &__filters {
       position: absolute;
-      visibility: hidden;
-      background-color: #fff;
       top: 0px;
       bottom: 0;
       left: 0;
       right: 0;
-      z-index: 2;
-      width: 295px;
-      border-radius: 20px;
-      border: 1px solid #e8e8e8;
-    }
-    &__display {
-      gap: 20px;
+      z-index: 200;
     }
     &__cards-box {
       display: flex;
@@ -268,8 +307,8 @@ export default {
       gap: 16px;
     }
     &__cards {
-      grid-template-columns: 172px 172px;
-      column-gap: 10px;
+      grid-template-columns: 175px 175px;
+      column-gap: 6px;
       row-gap: 24px;
     }
     &__card {
@@ -279,8 +318,6 @@ export default {
       display: flex;
       flex-direction: row;
       align-items: center;
-    }
-    &__pagination {
     }
   }
 }

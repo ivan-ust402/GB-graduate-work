@@ -6,6 +6,7 @@
       </li>
       <li class="nav__item">
         <router-link
+          @click="clickByNavLink"
           class="nav__link"
           :to="{ path: '/', hash: '#top-sellings' }"
           >Top Sellings</router-link
@@ -13,14 +14,18 @@
       </li>
       <li class="nav__item">
         <router-link
+          @click="clickByNavLink"
           class="nav__link"
           :to="{ path: '/', hash: '#new-arrivals' }"
           >New Arrivals</router-link
         >
       </li>
       <li class="nav__item">
-        <router-link class="nav__link" :to="{ path: '/', hash: '#brands' }"
-          >Brands</router-link
+        <router-link 
+          class="nav__link" 
+          :to="{ path: '/', hash: '#brands' }"
+          @click="clickByNavLink"
+        >Brands</router-link
         >
       </li>
     </ul>
@@ -28,10 +33,16 @@
 </template>
 
 <script>
-import AppHeaderDropMenu from '@/blocks/AppHeaderDropMenu.vue'
+import AppHeaderDropMenu from "@/blocks/AppHeaderDropMenu.vue"
 export default {
   components: {
-    AppHeaderDropMenu
+    AppHeaderDropMenu,
+  },
+  emits: ["clickByNavLink"],
+  methods: {
+    clickByNavLink() {
+      this.$emit("clickByNavLink", false)
+    }
   }
 }
 </script>
@@ -62,7 +73,6 @@ export default {
     }
   }
 }
-
 
 @media (max-width: 1239px) {
   .nav {

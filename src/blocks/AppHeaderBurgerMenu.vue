@@ -1,34 +1,6 @@
 <template>
   <div class="burgermenu">
-    <!-- <div class="burgermenu__button" @click="toggleBurgerMenuIsActive()">
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M20 6L4 6"
-          stroke="#121212"
-          stroke-width="1.5"
-          stroke-linecap="round"
-        />
-        <path
-          d="M20 12L4 12"
-          stroke="#121212"
-          stroke-width="1.5"
-          stroke-linecap="round"
-        />
-        <path
-          d="M20 18H4"
-          stroke="#121212"
-          stroke-width="1.5"
-          stroke-linecap="round"
-        />
-      </svg>
-    </div> -->
-    <a href="#" class="burgermenu__button" @click="toggleBurgerMenuIsActive()">
+    <a href="#" class="burgermenu__button" @click.prevent="toggleBurgerMenuIsActive()">
       <svg
         width="24"
         height="24"
@@ -57,7 +29,10 @@
       </svg>
     </a>
     <div class="burgermenu__window" :class="{ active: getBurgerMenuIsActive }">
-      <AppHeaderNavigation class="burgermenu__navigation" />
+      <AppHeaderNavigation 
+        class="burgermenu__navigation"
+        @clickByNavLink="changeBurgerMenuIsActive" 
+      />
       <a href="#" class="control burgermenu__user">
         <img src="@/assets\img\header\user-icon.svg" alt="personal area" />
         DOE SMITH
@@ -76,7 +51,13 @@ export default {
   components: {
     AppHeaderNavigation,
   },
+  data() {
+    return {
+      resizes: false,
+    }
+  },
   mounted() {
+    this.resizes = window.innerWidth
     window.addEventListener("resize", this.closeBurgerMenu)
     document.addEventListener("click", this.checkClickAreaOutOfBurgerMenu)
   },
@@ -90,25 +71,16 @@ export default {
   methods: {
     ...mapActions(["toggleBurgerMenuIsActive", "changeBurgerMenuIsActive"]),
     checkClickAreaOutOfBurgerMenu(e) {
-      const tempArray = e.target.classList
-      if (
-        !(
-          tempArray.contains("burgermenu__item") ||
-          tempArray.contains("burgermenu__button") ||
-          tempArray.contains("dropmenu__button") ||
-          tempArray.contains("dropdown__info") ||
-          tempArray.contains("burgermenu__window") ||
-          tempArray.contains("nav") ||
-          tempArray.contains("dropmenu__window") ||
-          tempArray.contains("subdropdown") ||
-          tempArray.contains("burgermenu__window-overlay")||
-          tempArray.contains("topOfPageButton")
-        )
-      ) {
+      const targetEl = e.target
+      const burgerMenuEl = document.querySelector('.burgermenu')
+      if (!burgerMenuEl.contains(targetEl)) {
         this.changeBurgerMenuIsActive(false)
       }
     },
     closeBurgerMenu() {
+      const resizeWidth = window.innerWidth
+      if (this.resizes == resizeWidth) { return; }
+      this.resizes = resizeWidth
       this.changeBurgerMenuIsActive(false)
     },
   },
@@ -175,14 +147,6 @@ export default {
       height: 100%;
       background: #f0eeed;
     }
-    // &__overlay {
-    //   position: absolute;
-    //   left: 0;
-    //   top: 68px;
-    //   bottom: 0;
-    //   right: 0;
-    //   background: rgba(18, 18, 18, 0.5);
-    // }
     &__navigation {
       box-sizing: border-box;
       border-bottom: 1px solid white;
@@ -207,17 +171,6 @@ export default {
         }
       }
     }
-    // &__logout-btn {
-    // }
-    // &__overlay-for-wrapper {
-    //   position: absolute;
-    //   display: flex;
-    //   top: 0;
-    //   left: -200px;
-    //   width: 100%;
-    //   height: 100%;
-    //   background: #f0eeed;
-    // }
   }
 }
 @media (max-width: 768px) {

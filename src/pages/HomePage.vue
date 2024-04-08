@@ -69,11 +69,13 @@ export default {
       moreExtraTopSellings: true,
       extraTopSellingsCounter: 1,
       shopReviews: [],
+      resizes: false,
     }
   },
   mounted() {
     // this.setInitial()
     // window.addEventListener("resize", this.setInitial) 
+    this.resizes = window.innerWidth
     this.setInitial()
   },
   computed: {},

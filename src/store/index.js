@@ -168,7 +168,7 @@ export default createStore({
     ],
     priceRanges: {
       start: 0,
-      end: 1000,
+      end: 200,
     },
     colors: [
       {
@@ -9338,17 +9338,47 @@ export default createStore({
     getGenders(state) {
       return state.genders
     },
+    getGenderById: (state) => (id) => {
+      return state.genders.find((gender) => Number(gender.id) === Number(id))
+    },
+    getGenderByShortName: (state) => (name) => {
+      return state.genders.find((gender) => gender.name.trim().toLowerCase().split(' ')[1] === name.trim().toLowerCase())
+    },
     getTypes(state) {
       return state.types
+    },
+    getTypeById: (state) => (id) => {
+      return state.types.find((type) => Number(type.id) === Number(id))
+    },
+    getTypeByName: (state) => (name) => {
+      return state.types.find((type) => type.name.trim().toLowerCase() === name.trim().toLowerCase())
     },
     getDressStyles(state) {
       return state.dressStyles
     },
+    getDressStyleById: (state) => (id) => {
+      return state.dressStyles.find((style) => Number(style.id) === Number(id))
+    },
+    getDressStyleByName: (state) => (name) => {
+      return state.dressStyles.find((style) => style.name.trim().toLowerCase() === name.trim().toLowerCase())
+    },
     getSizes(state) {
       return state.sizes
     },
+    getSizeById: (state) => (id) => {
+      return state.sizes.find((size) => Number(size.id) === Number(id))
+    },
+    getSizeByShortName: (state) => (shortName) => {
+      return state.sizes.find((size) => size.shortName.trim().toLowerCase() === shortName.trim().toLowerCase())
+    },
     getColors(state) {
       return state.colors
+    },
+    getColorById: (state) => (id) => {
+      return state.colors.find((color) => Number(color.id) === Number(id))
+    },
+    getColorByName: (state) => (name) => {
+      return state.colors.find((color) => color.name.trim().toLowerCase() === name.trim().toLowerCase())
     },
     getPriceRange(state) {
       return state.priceRanges
@@ -9455,7 +9485,7 @@ export default createStore({
     getProductByQuery:
       (state) =>
       (query, sort = {}) => {
-        const { gender, type, color, size, style, priceMin, priceMax, show } =
+        const { gender, type, color, size, style, pricemin, pricemax, show } =
           query
 
         // Фильтрация продуктов по параметрам query запроса
@@ -9465,16 +9495,16 @@ export default createStore({
             (!gender ||
               product.gender.name.split("")[0] === gender.split("")[0]) &&
             (!type || product.type.name.toLowerCase() === type) &&
-            (!color || product.color.name.toLowerCase() === color) &&
+            (!color || product.color.name.toLowerCase().trim() === color.split('%20').join(' ')) &&
             (!size ||
               product.sizesInfo.find(
-                (sizeInfo) => sizeInfo.size.name === size && sizeInfo.amount > 0
+                (sizeInfo) => sizeInfo.size.shortName === size && sizeInfo.amount > 0
               )) &&
             (!style || product.dressStyle.name.toLowerCase() === style) &&
-            (!priceMin ||
-              !priceMax ||
-              (Number(product.price) > priceMin &&
-                Number(product.price) < priceMin))
+            (!pricemin ||
+              !pricemax ||
+              (Number(product.price - Math.round(product.price * product.discount) / 100)  > pricemin &&
+                Number(product.price - Math.round(product.price * product.discount) / 100) < pricemax))
           )
         })
 

@@ -47,13 +47,13 @@ export default {
         },
         {
           sortName: "Lowest rating",
-          field: "price",
+          field: "rating",
           order: "asc",
         },
         {
           sortName: "Highest rating",
-          field: "price",
-          order: "asc",
+          field: "reting",
+          order: "desc",
         },
       ],
     }
@@ -61,7 +61,6 @@ export default {
   
   methods: {
     chooseSortParam(sortParam) {
-      // console.log(sortParam)
       this.$emit("getSortParam", sortParam)
     },
   },

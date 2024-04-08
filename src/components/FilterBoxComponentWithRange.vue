@@ -3,20 +3,20 @@
     <div class="filter__title-box" @click="toggleIsOpen">
       <h6 class="filter__title">{{ filterTitle }}</h6>
       <img
-        :class="{ filter__arrow_close: !isOpen }"
+        :class="{ filter__arrow_close: isOpen }"
         class="filter__arrow"
         :src="`${require('@/assets/img/common/dropup-arrow.svg')}`"
         alt="dropup arrow"
       />
       <img
-        :class="{ filter__arrow_close: isOpen }"
+        :class="{ filter__arrow_close: !isOpen }"
         class="filter__arrow"
         :src="`${require('@/assets/img/common/dropdown-arrow.svg')}`"
         alt="dropup arrow"
       />
     </div>
     <div
-      :class="{ filter__content_close: !isOpen }"
+      :class="{ filter__content_close: isOpen }"
       class="filter__content filter__set-third-color-buttons"
     >
       <RangeComponent
