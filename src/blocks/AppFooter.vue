@@ -236,10 +236,19 @@ export default {
     border-radius: 62px;
     background: #fff;
     transition: all 0.3s ease-in;
-    &:hover {
-      background-color: #f0f0f0;
-      // color: #777;
-      opacity: 0.8;
+    @media (hover: hover) {
+      &:hover {
+        background-color: #f0f0f0;
+        // color: #777;
+        opacity: 0.8;
+      }
+    }
+    @media (hover: none) {
+      &:active {
+        background-color: #f0f0f0;
+        // color: #777;
+        opacity: 0.8;
+      }
     }
   }
 }
@@ -374,6 +383,7 @@ export default {
     padding-top: 30px;
     padding-bottom: 30px;
     min-width: 330px;
+    height: fit-content;
     &__form {
       gap: 12px;
     }
