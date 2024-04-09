@@ -2,7 +2,8 @@
   <nav class="breadcrumbs">
     <ul class="breadcrumbs__ul">
       <li class="breadcrumbs__li" v-for="(crumb, index) in crumbs" :key="index">
-        <router-link :to="crumb.to">{{ crumb.name }}</router-link>
+        <router-link v-if="index < crumbs.length - 1" :to="crumb.to">{{ crumb.name }}</router-link>
+        <p class="breadcrumbs__last" v-else>{{ crumb.name }}</p>
       </li>
     </ul>
   </nav>
@@ -26,12 +27,7 @@ export default {
         to: "/",
       })
       route.matched.forEach((record, index, array) => {
-        if(record.meta && record.meta.breadcrumb && index + 1 === array.length){
-          breadcrumbs.push({
-            name: record.meta.breadcrumb,
-            to: this.$route
-          })
-        } else if (record.meta && record.meta.breadcrumb) {
+        if (record.meta && record.meta.breadcrumb) {
           breadcrumbs.push({
             name: record.meta.breadcrumb,
             to: record.path,
@@ -82,6 +78,16 @@ export default {
         opacity: 0.6;
       }
     }
+  }
+  &__last {
+    color: #222;
+    font-family: "satoshiregular";
+    font-size: 16px;
+    line-height: normal;
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    transition: all 0.3s ease-in;
   }
 }
 
