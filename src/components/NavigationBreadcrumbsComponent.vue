@@ -25,8 +25,13 @@ export default {
         name: "Home",
         to: "/",
       })
-      route.matched.forEach((record) => {
-        if (record.meta && record.meta.breadcrumb) {
+      route.matched.forEach((record, index, array) => {
+        if(record.meta && record.meta.breadcrumb && index + 1 === array.length){
+          breadcrumbs.push({
+            name: record.meta.breadcrumb,
+            to: this.$route
+          })
+        } else if (record.meta && record.meta.breadcrumb) {
           breadcrumbs.push({
             name: record.meta.breadcrumb,
             to: record.path,
