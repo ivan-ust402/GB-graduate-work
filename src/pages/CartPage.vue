@@ -35,7 +35,6 @@
           <ButtonSelectionColor
             text="Let's Go Shoping Now"
             class="cart__empty-button"
-            @click="buyAllProducts"
           />
         </router-link>
       </div>

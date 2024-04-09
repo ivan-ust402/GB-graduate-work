@@ -86,6 +86,11 @@ export default {
     ...mapActions(["buyAllProducts", "applyPromoCode"]),
     applyCart() {
       console.log("Cart is applyed!")
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      })
       this.buyAllProducts(this.getCartProducts)
     },
     receivePromoMessage(message) {
