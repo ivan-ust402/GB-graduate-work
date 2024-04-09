@@ -52,7 +52,7 @@ export default {
         },
         {
           sortName: "Highest rating",
-          field: "reting",
+          field: "rating",
           order: "desc",
         },
       ],
