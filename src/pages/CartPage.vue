@@ -17,13 +17,19 @@
         <DisplayOrderBlock />
       </div>
       <div v-else class="cart__empty">
-        <p class="cart__empty-text">You haven't added anything to your cart</p>
-        <router-link 
+        <p v-if="getPaymentState" class="cart__payment">
+          Thank you for your purchase! Rushing to package the goods and send
+          them to you
+        </p>
+        <p v-else class="cart__empty-text">
+          You haven't added anything to your cart
+        </p>
+        <router-link
           :to="{
             name: 'CatalogPage',
             params: { page: 1 },
-            query: { show: 'all' }
-          }" 
+            query: { show: 'all' },
+          }"
           class="cart__empty-route"
         >
           <ButtonSelectionColor
@@ -55,10 +61,12 @@ export default {
   setup() {
     useHead({
       title: "Cart",
-      meta: [{
-        name: 'Cart',
-        content: 'There is a shop cart'
-      }]
+      meta: [
+        {
+          name: "Cart",
+          content: "There is a shop cart",
+        },
+      ],
     })
   },
   data() {
@@ -570,11 +578,26 @@ export default {
       ],
     }
   },
+  mounted() {
+    this.setPaymentState(false)
+  },
   computed: {
-    ...mapGetters(["getCartProducts", "getCartProductsCount", "getCartProductByIdAndSize"]),
+    ...mapGetters([
+      "getCartProducts",
+      "getCartProductsCount",
+      "getCartProductByIdAndSize",
+      "getPaymentState",
+    ]),
   },
   methods: {
-    ...mapActions(["addToCart", "decreaseProductQuantity", "removeFromCart", "buyAllProducts", "applyPromoCode"]),
+    ...mapActions([
+      "addToCart",
+      "decreaseProductQuantity",
+      "removeFromCart",
+      "buyAllProducts",
+      "applyPromoCode",
+      "setPaymentState",
+    ]),
 
     increaseProductAmount(product) {
       this.addToCart(product)
@@ -583,7 +606,6 @@ export default {
     decreaseProductAmount(product) {
       this.decreaseProductQuantity(product)
       // console.log(this.getCartProductByIdAndSize(product))
-
     },
     removeProduct(product) {
       this.removeFromCart(product)
@@ -663,6 +685,10 @@ export default {
   &__empty-text {
     font-size: 24px;
   }
+  &__payment {
+    text-align: center;
+    font-size: 48px;
+  }
 }
 @media (max-width: 1239px) {
   .cart {
@@ -707,6 +733,9 @@ export default {
     &__empty-route {
       width: 80%;
     }
+    &__payment {
+      font-size: 32px;
+    }
   }
 }
 
@@ -718,6 +747,9 @@ export default {
     }
     &__empty-route {
       width: 100%;
+    }
+    &__payment {
+      font-size: 24px;
     }
   }
 }

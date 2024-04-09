@@ -6,9 +6,13 @@ export default {
       shippingCost: 15,
       promoCodeApplied: false,
       promoCodeDiscount: 0,
+      paymentState: false,
     }
   },
   getters: {
+    getPaymentState(state) {
+      return state.paymentState
+    },
     getCartProducts(state) {
       return state.cartProducts
     },
@@ -93,6 +97,9 @@ export default {
     },
   },
   mutations: {
+    SET_PAYMENT_STATE(state, value) {
+      state.paymentState = value
+    },
     SET_CART_PRODUCTS(state, inputArray) {
       if (inputArray) {
         const checkedArray = inputArray.map((el) => {
@@ -190,13 +197,16 @@ export default {
       }
     },
     buyAllProducts(context, cartProducts) {
+      context.commit("SET_PAYMENT_STATE", true)
       context.commit("SET_PURCHASED_PRODUCTS", cartProducts)
       context.commit("CLEAR_CART_PRODUCTS")
       context.commit("SET_INITIAL_PROMO_SETTINGS")
     },
-    
     applyPromoCode(context, promoCode) {
       context.commit("APPLY_PROMO_CODE", promoCode)
     },
+    setPaymentState(context, value) {
+      context.commit("SET_PAYMENT_STATE", value)
+    }
   },
 }
